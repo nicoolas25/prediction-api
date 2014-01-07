@@ -46,18 +46,20 @@ schemas:
           }
         }
       }
-  - predictions: |
+  - questions: |
       {
         "$schema": "http://json-schema.org/schema",
         "type": "object",
+        "title": "Question",
         "properties": {
           "entries": {
             "required": true,
             "type": "array",
             "items": {
               "type": "object",
+              "title": "Question",
               "properties": {
-                "predictionId": {
+                "questionId": {
                   "type": "string",
                   "required": true
                 },
@@ -70,13 +72,13 @@ schemas:
           }
         }
       }
-  - prediction: |
+  - question: |
       {
         "$schema": "http://json-schema.org/schema",
         "type": "object",
-        "title": "Prediction",
+        "title": "Question",
         "properties": {
-          "predictionId": {
+          "questionId": {
             "type": "string",
             "required": true
           },
@@ -130,7 +132,7 @@ schemas:
       {
         "$schema": "http://json-schema.org/schema",
         "type": "object",
-        "title": "Prediction being created",
+        "title": "Question being created",
         "properties": {
           "label": {
             "type": "string",
@@ -314,36 +316,36 @@ traits:
         tag:
           description: Filtre le classement pour ne prendre en compte qu'un tag.
           type: string
-/predictions:
+/questions:
   is: [ secured ]
   post:
     description: |
-      Créé une nouvelle prédiction.
+      Créé une nouvelle question.
       
       Dans un premier temps seuls les administrateurs ne seront autorisés à créer
-      des prédictions.
+      des questions.
     body:
       application/json:
         schema: newPrediction
-  /{predictionId}:
+  /{questionId}:
     is: [ secured ]
-    type: { member: { elementName: "Prédiction" } }
+    type: { member: { elementName: "Question" } }
     uriParameters:
-      predictionId:
-        description: Seléctionne une prédiction en particulier.
+      questionId:
+        description: L'identifiant d'une question en particulier.
         type: string
   /{scope}:
     is: [ secured ]
-    type: { collection: { elementName: "Prédictions" } }
+    type: { collection: { elementName: "Questions" } }
     uriParameters:
       scope:
-        description: Filtre les prédictions pour n'afficher que les amis.
+        description: Filtre les questions pour n'afficher que les amis.
         type: string
         pattern: friends|global|userId
     /{tag}:
       is: [ secured ]
-      type: { collection: { elementName: "Prédictions" } }
+      type: { collection: { elementName: "Question" } }
       uriParameters:
         tag:
-          description: Filtre les prédictions pour n'afficher qu'un certain tag.
+          description: Filtre les questions pour n'afficher qu'un certain tag.
           type: string
