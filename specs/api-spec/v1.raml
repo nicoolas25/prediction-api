@@ -1,9 +1,24 @@
 #%RAML 0.8
-# vim: syntax=yaml
+#vim syntax:yaml
 title: Prédiction
 version: 1.0
 baseUri: https://api.prediction.com/{version}
 schemas:
+  - user: |
+      {
+        "$schema": "http://json-schema.org/draft-03/schema",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "require": true
+          },
+          "nickname": {
+            "type": "string",
+            "require": true
+          }
+        }
+      }
   - ladders: |
       {
         "$schema": "http://json-schema.org/draft-03/schema",
@@ -39,6 +54,14 @@ resourceTypes:
             body:
               application/json:
                 schema: <<resourcePathName>>
+  - user:
+      description: Un utilisateur.
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                schema: user
 traits:
   - authenticable:
       usage: Appliquer sur les méthodes qui permettent de s'identifier.
@@ -56,21 +79,64 @@ traits:
               description: Token d'identification Google+
             tokenTwitter:
               description: Token d'identification Twitter
+      responses:
+        401:
+          description: Les identifiants fournis sont invalides.
+        200:
+          description: |
+            L'utilisateur est maintenant identifié.
+            
+            Il est possible d'utiliser les informations contenue dans cette
+            réponse pour utiliser le reste de l'API.
+          body:
+            application/json:
+              example: TODO
   - secured:
       usage: Appliquer sur chaque méthode qui nécessite d'être identifié
       description: Certaines requêtes nécessites d'être identifié
       responses:
         401:
-          description: L'authentification de l'utilisateur a échoué.
+          description: L'identité de l'utilisateur n'a pas pu être établie.
 /registrations:
   post:
+    is: [ authenticable ]
     description: |
       L'appel à cette URL créé un nouvel utilisateur.
       
       L'utilisateur peut utiliser soit un couple email / password soit un réseau
       social de son choix. Par la suite il pourra associer à son compte d'autres
       réseaux sociaux.
-    is: [ authenticable ]
+      
+      Lors de le création de compte le choix d'un pseudonyme unique est obligatoire.
+    body:
+      application/x-www-form-urlencoded:
+        formParameters:
+          nickname:
+            description: Pseudonyme du nouveau joueur
+            required: true
+    responses:
+      409:
+        description: |
+          Code retourné lorsqu'il y a un conflit.
+          
+          Dans le corps de la réponse figurent plus de détails sur l'origine
+          de ce conflit. Ça peut être un email déjà utilisé ou bien un compte de
+          réseau social déjà lié ou encore un pseudo déjà utilisé.
+        body:
+          application/json:
+            example: |
+              {
+                "errors": [
+                  {
+                    "field": "facebookToken",
+                    "reason": "is invalid"
+                  },
+                  {
+                    "field": "nickname",
+                    "reason": "is already taken"
+                  }
+                ]
+              }
 /sessions:
   post:
     description: |
@@ -81,12 +147,14 @@ traits:
     is: [ authenticable ]
 /users:
   /me:
+    is: [ secured ]
+    type: user
     get:
-      is: [ secured ]
       description: Retourne les informations de l'utilisateur identifié.
   /{userId}:
+    is: [ secured ]
+    type: user
     get:
-      is: [ secured ]
       description: |
         Retourne les informations d'un autre utilisateur.
         
