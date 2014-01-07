@@ -106,6 +106,17 @@ schemas:
             "title": "L'utilisateur courant a-t-il prédit quelque chose",
             "required": true
           },
+          "prediction": {
+            "type": "object",
+            "title": "Une référence vers la prédiction faite par l'utilisateur",
+            "required": false,
+            "properties": {
+              "predictionId": {
+                "type": "string",
+                "required": true
+              }
+            }
+          },
           "components": {
             "type": "array",
             "title": "Liste des composants de la question",
@@ -140,10 +151,16 @@ schemas:
                       },
                       "predictions": {
                         "type": "integer",
+                        "title": "Le nombre de prédictions contenant ce choix",
                         "required": false
                       }
                     }
                   }
+                },
+                "userPrediction": {
+                  "type": "string",
+                  "title": "La prédiction faite à ce composant de la question",
+                  "required": false
                 }
               }
             }
@@ -416,7 +433,13 @@ traits:
         schema: newPrediction
     responses:
       200:
-        description: La prédiction a bien été prise en compte.
+        description: |
+          La prédiction a bien été prise en compte.
+          
+          L'identifiant de la prédiction est retourné dans le corps de la réponse.
+        body:
+          application/json:
+            example: '{ predictionId: "1234567890abcdef" }'
       403:
         body:
           application/json:
@@ -427,3 +450,21 @@ traits:
                   "reason": "must provide at least 2 choices"
                 }
               ]
+/shares/{via}/{predictionId}:
+  is: [ secured ]
+  uriParameters:
+    via:
+      description: Le réseau social à utiliser.
+      type: string
+      pattern: facebook|googleplus|twitter
+    predictionId:
+      description: L'identifiant de la prédiction à partager
+      type: string
+  post:
+    is: [ exigent ]
+    queryParameters:
+      customMessage:
+        description: Un message personnalisé en plus du message par défaut 
+        type: string
+    responses:
+      200:
