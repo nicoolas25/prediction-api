@@ -1,0 +1,41 @@
+#%RAML 0.8
+title: Prédiction
+version: 1.0
+baseUri: https://api.prediction.com/{version}
+traits:
+  - authenticable:
+      usage: Appliquer sur les méthodes qui permettent de s'identifier
+      description: Permet d'ouvrir un nouveau compte ou d'utiliser un compte existant
+      body:
+        application/x-www-form-urlencoded:
+          formParameters:
+            email:
+              description: Email à inscrire
+            password:
+              description: Mot de passe à associer à l'email
+            tokenFacebook:
+              description: Token d'identification Facebook
+            tokenGooglePlus:
+              description: Token d'identification Google+
+            tokenTwitter:
+              description: Token d'identification Twitter
+  - secured:
+      usage: Appliquer sur chaque méthode qui nécessite d'être identifié
+      description: Certaines requêtes nécessites d'être identifié
+/registrations:
+  post:
+    description: |
+      L'appel à cette URL créé un nouvel utilisateur.
+      
+      L'utilisateur peut utiliser soit un couple email / password soit un réseau
+      social de son choix. Par la suite il pourra associer à son compte d'autres
+      réseaux sociaux.
+    is: [ authenticable ]
+/sessions:
+  post:
+    description: |
+      Permet de s'identifier auprès de l'API.
+      
+      L'utilisateur peut utiliser soit son couple email / password soit un des
+      réseaux sociaux liés à son compte.
+    is: [ authenticable ]
