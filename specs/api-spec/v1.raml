@@ -8,7 +8,7 @@ schemas:
       {
         "$schema": "http://json-schema.org/schema",
         "type": "object",
-        "title": "User",
+        "title": "Détails d'un utilisateur",
         "properties": {
           "id": {
             "type": "string",
@@ -20,28 +20,22 @@ schemas:
           }
         }
       }
-  - ladders: |
+  - ladder: |
       {
         "$schema": "http://json-schema.org/schema",
-        "type": "object",
-        "title": "Ladder list",
-        "properties": {
-          "entries": {
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "object",
-              "title": "Ladder entry",
-              "properties": {
-                "userId": {
-                  "type": "string",
-                  "required": true
-                },
-                "score": {
-                  "type": "integer",
-                  "required": true
-                }
-              }
+        "type": "array",
+        "title": "Classement",
+        "items": {
+          "type": "object",
+          "title": "Entrée du classement",
+          "properties": {
+            "userId": {
+              "type": "string",
+              "required": true
+            },
+            "score": {
+              "type": "integer",
+              "required": true
             }
           }
         }
@@ -49,25 +43,19 @@ schemas:
   - questions: |
       {
         "$schema": "http://json-schema.org/schema",
-        "type": "object",
-        "title": "Question",
-        "properties": {
-          "entries": {
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "object",
-              "title": "Question",
-              "properties": {
-                "questionId": {
-                  "type": "string",
-                  "required": true
-                },
-                "label": {
-                  "type": "string",
-                  "required": true
-                }
-              }
+        "type": "array",
+        "title": "Liste des questions",
+        "items": {
+          "type": "object",
+          "title": "Question",
+          "properties": {
+            "questionId": {
+              "type": "string",
+              "required": true
+            },
+            "label": {
+              "type": "string",
+              "required": true
             }
           }
         }
@@ -76,7 +64,7 @@ schemas:
       {
         "$schema": "http://json-schema.org/schema",
         "type": "object",
-        "title": "Question",
+        "title": "Détails d'une question",
         "properties": {
           "questionId": {
             "type": "string",
@@ -88,10 +76,11 @@ schemas:
           },
           "components": {
             "type": "array",
+            "title": "Liste des composants de la question",
             "required": false,
             "items": {
               "type": "object",
-              "title": "Component",
+              "title": "Composant de la question",
               "properties": {
                 "label": {
                   "type": "string",
@@ -103,10 +92,11 @@ schemas:
                 },
                 "choices": {
                   "type": "array",
+                  "title": "Possibilités de réponse pour un composant à choix",
                   "required": false,
                   "items": {
                     "type": "object",
-                    "title": "Choice",
+                    "title": "Choix",
                     "properties": {
                       "label": {
                         "type": "string",
@@ -128,11 +118,11 @@ schemas:
           }
         }
       }
-  - newPrediction: |
+  - newQuestion: |
       {
         "$schema": "http://json-schema.org/schema",
         "type": "object",
-        "title": "Question being created",
+        "title": "Nouvelle question",
         "properties": {
           "label": {
             "type": "string",
@@ -143,7 +133,7 @@ schemas:
             "required": true,
             "items": {
               "type": "object",
-              "title": "Component being created",
+              "title": "Composants de la nouvelle question",
               "properties": {
                 "label": {
                   "type": "string",
@@ -155,10 +145,11 @@ schemas:
                 },
                 "choices": {
                   "type": "array",
+                  "title": "Proposition pour un composant à choix",
                   "required": false,
                   "items": {
                     "type": "object",
-                    "title": "Choice",
+                    "title": "Choix",
                     "properties": {
                       "label": {
                         "type": "string",
@@ -168,6 +159,26 @@ schemas:
                   }
                 }
               }
+            }
+          }
+        }
+      }
+  - newPrediction: |
+      {
+        "$schema": "http://json-schema.org/schema",
+        "type": "array",
+        "title": "Liste des composants d'une nouvelle prédiction",
+        "items": {
+          "type": "object",
+          "title": "Réponse à un composant",
+          "properties": {
+            "componentId": {
+              "type": "string",
+              "require": true
+            },
+            "answerValue": {
+              "type": "string",
+              "require": true
             }
           }
         }
@@ -303,7 +314,7 @@ traits:
 /ladders:
   /{scope}:
     is: [ secured ]
-    type: { collection: { elementName: "Entrée au classement" } }
+    type: { member: { elementName: "Classement" } }
     uriParameters:
       scope:
         description: Filtre le classement pour n'afficher que les amis.
@@ -311,7 +322,7 @@ traits:
         pattern: friends|global
     /{tag}:
       is: [ secured ]
-      type: { collection: { elementName: "Entrée au classement" } }
+      type: { member: { elementName: "Classement" } }
       uriParameters:
         tag:
           description: Filtre le classement pour ne prendre en compte qu'un tag.
@@ -326,7 +337,7 @@ traits:
       des questions.
     body:
       application/json:
-        schema: newPrediction
+        schema: newQuestion
   /{questionId}:
     is: [ secured ]
     type: { member: { elementName: "Question" } }
@@ -349,3 +360,18 @@ traits:
         tag:
           description: Filtre les questions pour n'afficher qu'un certain tag.
           type: string
+/predictions/{questionId}:
+  is: [ secured ]
+  uriParameters:
+    questionId:
+      description: L'identifiant d'une question en particulier.
+      type: string
+  post:
+    description: Créé une prédiction pour une question donnée.
+    body:
+      application/json:
+        schema: newPrediction
+    responses:
+      200:
+        description: La prédiction a bien été prise en compte.
+    
