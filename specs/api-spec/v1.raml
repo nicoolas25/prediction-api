@@ -134,6 +134,7 @@ resourceTypes:
         description: Retourne les <<elementName>>
         responses:
           200:
+            description: Les éléments demandés sont disponibles dans le corps de la réponse.
             body:
               application/json:
                 schema: <<resourcePathName>>
@@ -143,6 +144,7 @@ resourceTypes:
       get:
         responses:
           200:
+            description: L'élément demandé est accessible dans le corps de la réponse.
             body:
               application/json:
                 schema: <<resourcePathName | !singularize >>
