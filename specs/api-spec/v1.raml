@@ -56,6 +56,11 @@ schemas:
             "label": {
               "type": "string",
               "required": true
+            },
+            "madePrediction": {
+              "type": "boolean",
+              "title": "L'utilisateur courant a-t-il prédit quelque chose",
+              "required": true
             }
           }
         }
@@ -72,6 +77,11 @@ schemas:
           },
           "label": {
             "type": "string",
+            "required": true
+          },
+          "madePrediction": {
+            "type": "boolean",
+            "title": "L'utilisateur courant a-t-il prédit quelque chose",
             "required": true
           },
           "components": {
