@@ -6,8 +6,9 @@ baseUri: https://api.prediction.com/{version}
 schemas:
   - user: |
       {
-        "$schema": "http://json-schema.org/draft-03/schema",
+        "$schema": "http://json-schema.org/schema",
         "type": "object",
+        "title": "User",
         "properties": {
           "id": {
             "type": "string",
@@ -21,14 +22,16 @@ schemas:
       }
   - ladders: |
       {
-        "$schema": "http://json-schema.org/draft-03/schema",
+        "$schema": "http://json-schema.org/schema",
         "type": "object",
+        "title": "Ladder list",
         "properties": {
           "entries": {
             "required": true,
             "type": "array",
             "items": {
               "type": "object",
+              "title": "Ladder entry",
               "properties": {
                 "userId": {
                   "type": "string",
@@ -37,6 +40,86 @@ schemas:
                 "score": {
                   "type": "integer",
                   "required": true
+                }
+              }
+            }
+          }
+        }
+      }
+  - predictions: |
+      {
+        "$schema": "http://json-schema.org/schema",
+        "type": "object",
+        "properties": {
+          "entries": {
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "predictionId": {
+                  "type": "string",
+                  "required": true
+                },
+                "label": {
+                  "type": "string",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      }
+  - prediction: |
+      {
+        "$schema": "http://json-schema.org/schema",
+        "type": "object",
+        "title": "Prediction",
+        "properties": {
+          "predictionId": {
+            "type": "string",
+            "required": true
+          },
+          "label": {
+            "type": "string",
+            "required": true
+          },
+          "components": {
+            "type": "array",
+            "required": false,
+            "items": {
+              "type": "object",
+              "title": "Component",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "required": true
+                },
+                "componentType": {
+                  "type": "string",
+                  "required": true
+                },
+                "choices": {
+                  "type": "array",
+                  "required": false,
+                  "items": {
+                    "type": "object",
+                    "title": "Choice",
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "required": "true"
+                      },
+                      "choiceId": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "predictions": {
+                        "type": "integer",
+                        "required": false
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -54,6 +137,15 @@ resourceTypes:
             body:
               application/json:
                 schema: <<resourcePathName>>
+  - member:
+      usage: Détails d'un élément.
+      description: Accède à un membre de type <<elementName>>.
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                schema: <<resourcePathName | !singularize >>
   - user:
       description: Un utilisateur.
       get:
@@ -175,4 +267,27 @@ traits:
       uriParameters:
         tag:
           description: Filtre le classement pour ne prendre en compte qu'un tag.
+          type: string
+/predictions:
+  /{predictionId}:
+    is: [ secured ]
+    type: { member: { elementName: "Prédiction" } }
+    uriParameters:
+      predictionId:
+        description: Seléctionne une prédiction en particulier.
+        type: string
+  /{scope}:
+    is: [ secured ]
+    type: { collection: { elementName: "Prédictions" } }
+    uriParameters:
+      scope:
+        description: Filtre les prédictions pour n'afficher que les amis.
+        type: string
+        pattern: friends|global|userId
+    /{tag}:
+      is: [ secured ]
+      type: { collection: { elementName: "Prédictions" } }
+      uriParameters:
+        tag:
+          description: Filtre les prédictions pour n'afficher qu'un certain tag.
           type: string
