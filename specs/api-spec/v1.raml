@@ -4,6 +4,28 @@ title: Prédiction
 version: 1.0
 baseUri: https://api.prediction.com/{version}
 schemas:
+  - errorReport: |
+      {
+        "$schema": "http://json-schema.org/schema",
+        "type": "array",
+        "title": "Liste d'erreurs",
+        "items": {
+          "type": "object",
+          "title": "Détail de l'erreur",
+          "properties": {
+            "field": {
+              "type": "string",
+              "title": "Origine de l'erreur",
+              "require": true
+            },
+            "reason": {
+              "type": "string",
+              "title": "Motif de l'erreur",
+              "require": true
+            }
+          }
+        }
+      }
   - user: |
       {
         "$schema": "http://json-schema.org/schema",
@@ -258,9 +280,19 @@ traits:
       responses:
         401:
           description: L'identité de l'utilisateur n'a pas pu être établie.
+  - exigent:
+      responses:
+        403:
+          description: |
+            Des données incomplètes ou malformés ont été soumises.
+            
+            Des détails peuvent être dans le corps de la réponse.
+          body:
+            application/json:
+              schema: errorReport
 /registrations:
   post:
-    is: [ authenticable ]
+    is: [ authenticable, exigent ]
     description: |
       L'appel à cette URL créé un nouvel utilisateur.
       
@@ -276,9 +308,10 @@ traits:
             description: Pseudonyme du nouveau joueur
             required: true
     responses:
-      409:
+      403:
         description: |
-          Code retourné lorsqu'il y a un conflit.
+          Code retourné lorsque les données d'entrée ne permettent pas de créer
+          un utilisateur.
           
           Dans le corps de la réponse figurent plus de détails sur l'origine
           de ce conflit. Ça peut être un email déjà utilisé ou bien un compte de
@@ -286,26 +319,24 @@ traits:
         body:
           application/json:
             example: |
-              {
-                "errors": [
-                  {
-                    "field": "facebookToken",
-                    "reason": "is invalid"
-                  },
-                  {
-                    "field": "nickname",
-                    "reason": "is already taken"
-                  }
-                ]
-              }
+              [
+                {
+                  "field": "facebookToken",
+                  "reason": "is invalid"
+                },
+                {
+                  "field": "nickname",
+                  "reason": "is already taken"
+                }
+              ]
 /sessions:
   post:
+    is: [ authenticable ]
     description: |
       Permet de s'identifier auprès de l'API.
       
       L'utilisateur peut utiliser soit son couple email / password soit un des
       réseaux sociaux liés à son compte.
-    is: [ authenticable ]
 /users:
   /me:
     is: [ secured ]
@@ -340,6 +371,7 @@ traits:
 /questions:
   is: [ secured ]
   post:
+    is: [ exigent ]
     description: |
       Créé une nouvelle question.
       
@@ -377,6 +409,7 @@ traits:
       description: L'identifiant d'une question en particulier.
       type: string
   post:
+    is: [ exigent ]
     description: Créé une prédiction pour une question donnée.
     body:
       application/json:
@@ -384,4 +417,13 @@ traits:
     responses:
       200:
         description: La prédiction a bien été prise en compte.
-    
+      403:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "field": "prediction__component__0",
+                  "reason": "must provide at least 2 choices"
+                }
+              ]
