@@ -126,6 +126,50 @@ schemas:
           }
         }
       }
+  - newPrediction: |
+      {
+        "$schema": "http://json-schema.org/schema",
+        "type": "object",
+        "title": "Prediction being created",
+        "properties": {
+          "label": {
+            "type": "string",
+            "required": true
+          },
+          "components": {
+            "type": "array",
+            "required": true,
+            "items": {
+              "type": "object",
+              "title": "Component being created",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "required": true
+                },
+                "componentType": {
+                  "type": "string",
+                  "required": true
+                },
+                "choices": {
+                  "type": "array",
+                  "required": false,
+                  "items": {
+                    "type": "object",
+                    "title": "Choice",
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "required": "true"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
 resourceTypes:
   - collection:
       usage: Liste d'éléments.
@@ -271,6 +315,16 @@ traits:
           description: Filtre le classement pour ne prendre en compte qu'un tag.
           type: string
 /predictions:
+  is: [ secured ]
+  post:
+    description: |
+      Créé une nouvelle prédiction.
+      
+      Dans un premier temps seuls les administrateurs ne seront autorisés à créer
+      des prédictions.
+    body:
+      application/json:
+        schema: newPrediction
   /{predictionId}:
     is: [ secured ]
     type: { member: { elementName: "Prédiction" } }
