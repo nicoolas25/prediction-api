@@ -34,11 +34,106 @@ schemas:
         "properties": {
           "id": {
             "type": "string",
-            "require": true
+            "required": true
           },
           "nickname": {
             "type": "string",
-            "require": true
+            "required": true
+          },
+          "avatar": {
+            "type": "array",
+            "required": true,
+            "normal": {
+              "type": "string",
+              "required": true
+            },
+            "mini": {
+              "type": "string",
+              "required": true
+            }
+          },
+          "social": {
+            "type": "array",
+            "required": false,
+            "items": {
+              "type": "string",
+              "title": "Nom du réseau social lié au compte de l'utilisateur"
+            }
+          },
+          "statistics": {
+            "type": "array",
+            "required": true,
+            "items": {
+              "type": "object",
+              "properties": {
+                "cristal": {
+                  "type": "integer",
+                  "required": false
+                },
+                "predictions": {
+                  "type": "integer",
+                  "required": true
+                },
+                "questions": {
+                  "type": "integer",
+                  "required": true
+                },
+                "friends": {
+                  "type": "integer",
+                  "required": true
+                }
+              }
+            }
+          },
+          "firstname": {
+            "type": "string",
+            "required": false
+          },
+          "lastname": {
+            "type": "string",
+            "required": false
+          },
+          "email": {
+            "type": "string",
+            "required": false
+          },
+          "country": {
+            "type": "string",
+            "required": false
+          }
+        }
+      }
+  - users: |
+      {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "title": "Utilisateur",
+          "properties": {
+            "id": {
+              "type": "string",
+              "required": true
+            },
+            "nickname": {
+              "type": "string",
+              "required": true
+            },
+            "avatar": {
+              "type": "array",
+              "required": true,
+              "normal": {
+                "type": "string",
+                "required": true
+              },
+              "mini": {
+                "type": "string",
+                "required": true
+              }
+            },
+            "country": {
+              "type": "string",
+              "required": false
+            }
           }
         }
       }
@@ -75,6 +170,24 @@ schemas:
               "type": "string",
               "required": true
             },
+            "author": {
+              "type": "object",
+              "required": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "required": true 
+                },
+                "nickname": {
+                  "type": "string",
+                  "required": true 
+                }
+              }
+            },
+            "expiration": {
+              "type": "datetime",
+              "required": true
+            },
             "label": {
               "type": "string",
               "required": true
@@ -83,6 +196,30 @@ schemas:
               "type": "boolean",
               "title": "L'utilisateur courant a-t-il prédit quelque chose",
               "required": true
+            },
+            "statistics": {
+              "type": "array",
+              "required": true,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "cristals": {
+                    "type": "integer",
+                    "title": "Nombre de cristaux maximum à gagner",
+                    "required": false
+                  },
+                  "predictions": {
+                    "type": "integer",
+                    "title": "Nombre d'utilisateurs ayant déjà répondu",
+                    "required": true
+                  },
+                  "friends": {
+                    "type": "integer",
+                    "title": "Nombre d'utilisateurs dans les amis ayant déjà répondu",
+                    "required": true
+                  }
+                }
+              }
             }
           }
         }
@@ -97,6 +234,15 @@ schemas:
             "type": "string",
             "required": true
           },
+          "kind": {
+            "type": "string",
+            "title": "Type de la question (publique ou privée)",
+            "required": true
+          },
+          "expiration": {
+            "type": "datetime",
+            "required": true
+          },
           "label": {
             "type": "string",
             "required": true
@@ -105,6 +251,20 @@ schemas:
             "type": "boolean",
             "title": "L'utilisateur courant a-t-il prédit quelque chose",
             "required": true
+          },
+          "author": {
+            "type": "object",
+            "required": true,
+            "properties": {
+              "id": {
+                "type": "string",
+                "required": true 
+              },
+              "nickname": {
+                "type": "string",
+                "required": true 
+              }
+            }
           },
           "prediction": {
             "type": "object",
@@ -273,12 +433,11 @@ traits:
               description: Email à inscrire
             password:
               description: Mot de passe à associer à l'email
-            tokenFacebook:
-              description: Token d'identification Facebook
-            tokenGooglePlus:
-              description: Token d'identification Google+
-            tokenTwitter:
-              description: Token d'identification Twitter
+            oauth2Token:
+              description: Token d'identification OAuth2
+            oauth2Provider:
+              description: Provider OAuth2 utilisé
+              pattern: facebook|googleplus|twitter
       responses:
         401:
           description: Les identifiants fournis sont invalides.
@@ -290,10 +449,17 @@ traits:
             réponse pour utiliser le reste de l'API.
           body:
             application/json:
-              example: TODO
+              schema: TODO
+              example: |
+                {
+                  "authenticationToken": "abcdef01234567890",
+                  "validUntil": "2014-01-08 19:38:53 +0100"
+                }
   - secured:
       usage: Appliquer sur chaque méthode qui nécessite d'être identifié
       description: Certaines requêtes nécessites d'être identifié
+      headers:
+        Authentication-Token:
       responses:
         401:
           description: L'identité de l'utilisateur n'a pas pu être établie.
@@ -346,6 +512,16 @@ traits:
                   "reason": "is already taken"
                 }
               ]
+  patch:
+    is: [ secured ]
+    description: Permet d'ajouter un nouveau réseau social à son compte.
+    body:
+      application/x-www-form-urlencoded:
+        formParameters:
+          oauth2Token:
+          oauth2Provider:
+    responses:
+      200:
 /sessions:
   post:
     is: [ authenticable ]
@@ -355,20 +531,23 @@ traits:
       L'utilisateur peut utiliser soit son couple email / password soit un des
       réseaux sociaux liés à son compte.
 /users:
-  /me:
-    is: [ secured ]
+  /{who}:
+    is: [ secured, exigent ]
     type: user
-    get:
-      description: Retourne les informations de l'utilisateur identifié.
-  /{userId}:
-    is: [ secured ]
-    type: user
+    uriParameters:
+      who:
+        description: Selectionne l'utilisateur
+        type: string
+        pattern: me|userId
     get:
       description: |
-        Retourne les informations d'un autre utilisateur.
-        
-        En fonction de la relation entre les deux utilisateurs, les
-        informations retournées ne seront pas les mêmes.
+        Retourne les informations de l'utilisateur identifié par le paramètre who.
+      
+        En fonction de la relation entre l'utilisateur identifié et l'utilisateur
+        selectionné, les informations retournées ne seront pas les mêmes.
+    /friends:
+      is: [ secured ]
+      type: { collection: { elementName: "Amis" } }
 /ladders:
   /{scope}:
     is: [ secured ]
@@ -425,6 +604,13 @@ traits:
     questionId:
       description: L'identifiant d'une question en particulier.
       type: string
+  get:
+    description: Liste des utilisateurs ayant fait une prédiction sur une question donnée.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: users
   post:
     is: [ exigent ]
     description: Créé une prédiction pour une question donnée.
@@ -451,7 +637,7 @@ traits:
                 }
               ]
 /shares/{via}/{predictionId}:
-  is: [ secured ]
+  is: [ secured, authenticable ]
   uriParameters:
     via:
       description: Le réseau social à utiliser.
@@ -462,9 +648,13 @@ traits:
       type: string
   post:
     is: [ exigent ]
-    queryParameters:
-      customMessage:
-        description: Un message personnalisé en plus du message par défaut 
-        type: string
+    body:
+      application/x-www-form-urlencoded:
+        formParameters:
+          customMessage:
+            description: Un message personnalisé en plus du message par défaut 
+            type: string
+          oauth2Token:
+          oauth2Provider:
     responses:
       200:
