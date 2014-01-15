@@ -13,7 +13,7 @@ require 'mina/chruby'
 # Target configuration
 set :domain,       '146.185.138.74'
 set :deploy_to,    '/var/www/api'
-set :shared_paths, ['log', 'pids']
+set :shared_paths, ['log', 'pids', 'config/database.yml']
 
 # Repository configuration
 set :repository,   'git@bitbucket:n25/pr-dictions.git'
@@ -21,7 +21,7 @@ set :branch,       'master'
 set :subdirectory, 'api'
 
 # Username and port to SSH.
-set :user, 'n25'
+set :user, 'prediction'
 set :port, '25022'
 
 #
@@ -46,6 +46,13 @@ task :deploy => :environment do
     invoke :'subdir:select'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
+
+    to :launch do
+      queue %[
+        echo "-----> Restarting puma" &&
+        #{echo_cmd %[kill -USR2 `cat #{deploy_to}/shared/pids/puma.pid`]}
+      ]
+    end
   end
 end
 
@@ -56,8 +63,10 @@ end
 # When the deployment environment is created, some shared
 # resources must be created.
 task :setup => :environment do
-  %w(log pids sockets).each do |dir|
+  %w(log pids sockets config).each do |dir|
     queue! %[mkdir -p "#{deploy_to}/shared/#{dir}"]
     queue! %[chmod g+rwx,u+rwx "#{deploy_to}/shared/#{dir}"]
   end
+
+  queue! %[touch #{deploy_to}/shared/config/database.yml]
 end

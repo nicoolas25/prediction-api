@@ -96,8 +96,8 @@ bind "unix://#{SHRD_PATH}/sockets/puma.sock"
 # Command to use to restart puma. This should be just how to
 # load puma itself (ie. 'ruby -Ilib bin/puma'), not the arguments
 # to puma, as those are the same as the original process.
-
-restart_command '/etc/init.d/puma restart prediction'
+#
+# restart_command '/etc/init.d/puma restart prediction'
 
 # === Cluster mode ===
 
@@ -131,4 +131,4 @@ restart_command '/etc/init.d/puma restart prediction'
 # activate_control_app 'unix:///var/run/pumactl.sock', { auth_token: '12345' }
 # activate_control_app 'unix:///var/run/pumactl.sock', { no_token: true }
 
-activate_control_app "unix://#{SHRD_PATH}/sockets/pumactl.sock"
+bind "unix://#{SHRD_PATH}/sockets/pumactl.sock"

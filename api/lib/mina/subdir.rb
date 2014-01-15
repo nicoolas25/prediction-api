@@ -15,10 +15,12 @@ namespace :subdir do
         echo "-----> The directory #{deploy_to}/$build_path/#{subdirectory!} hasn't been found." &&
         exit 1
       else
-        #{echo_cmd %[mv #{subdirectory!} #{deploy_to}/tmp/subdirectory]} &&
+        #{echo_cmd %[shopt -s dotglob]} &&
+        #{echo_cmd %[mv ./#{subdirectory!} #{deploy_to}/tmp/subdirectory]} &&
         #{echo_cmd %[rm -fr ./*]} &&
         #{echo_cmd %[mv #{deploy_to}/tmp/subdirectory/* ./]} &&
-        #{echo_cmd %[rmdir #{deploy_to}/tmp/subdirectory]}
+        #{echo_cmd %[rmdir #{deploy_to}/tmp/subdirectory]} &&
+        #{echo_cmd %[shopt -u dotglob]}
       fi
     ]
 
