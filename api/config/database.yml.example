@@ -1,0 +1,5 @@
+config:
+  user: prediction
+  name: prediction
+  host: localhost
+  port: 5433
