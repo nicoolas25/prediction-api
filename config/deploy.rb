@@ -3,7 +3,6 @@ $:.unshift(path) unless $:.include?(path)
 
 require 'mina/bundler'
 require 'mina/git'
-require 'mina/subdir'
 require 'mina/chruby'
 
 #
@@ -18,7 +17,6 @@ set :shared_paths, ['log', 'pids', 'config/database.yml']
 # Repository configuration
 set :repository,   'git@bitbucket:n25/pr-dictions.git'
 set :branch,       'master'
-set :subdirectory, 'api'
 
 # Username and port to SSH.
 set :user, 'prediction'
@@ -43,7 +41,6 @@ desc "Deploys the current version to the server."
 task :deploy => :environment do
   deploy do
     invoke :'git:clone'
-    invoke :'subdir:select'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
 
