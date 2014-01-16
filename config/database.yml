@@ -1,0 +1,5 @@
+config:
+  name: prediction
+  host: localhost
+  port: 5433
+  user: postgres
