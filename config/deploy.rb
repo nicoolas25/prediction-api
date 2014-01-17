@@ -46,8 +46,13 @@ task :deploy => :environment do
 
     to :launch do
       queue %[
-        echo "-----> Restarting puma" &&
-        #{echo_cmd %[kill -USR2 `cat #{deploy_to}/shared/pids/puma.pid`]}
+        if [ -e #{deploy_to}/shared/pids/puma.pid ] ; then
+          echo "-----> Restarting puma" &&
+          #{echo_cmd %[kill -USR2 `cat #{deploy_to}/shared/pids/puma.pid`]}
+        else
+          echo "-----> Starting puma" &&
+          #{echo_cmd %[bundle exec puma -C ./config/puma.rb]}
+        fi
       ]
     end
   end
