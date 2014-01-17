@@ -9,7 +9,7 @@ class RankingService
     questions = tag ? Questions.tagged_with(tag) : Questions.all
     questions.each do |question|
       question.participations.each do |p|
-        if @player == p.player || @player.friends.include?(p.player)
+        if @player.nil? || @player == p.player || @player.friends.include?(p.player)
           accumulate!(p.player, p.earnings)
         end
       end

@@ -13,6 +13,10 @@ gem 'pg'
 # Framework
 gem 'grape'
 
-group :deployment do
+group :development do
   gem 'mina', github: 'nadarei/mina', branch: 'master'
+end
+
+group :test do
+  gem 'rspec', '~> 3.0.0.beta1'
 end
