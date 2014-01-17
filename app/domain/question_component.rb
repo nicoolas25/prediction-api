@@ -1,30 +1,29 @@
-class QuestionComponent
-  include Virtus.model
+module Domain
+  class QuestionComponent
+    include Common
 
-  attribute :answers, PredictionAnswer
-
-  attribute :valid_answer
-end
-
-class QuestionComponentChoice < QuestionComponent
-  attribute :choices, Set[String]
-
-  def confirms?(answer)
-    answer.value == valid_answer
+    attr_accessor :answers, :valid_answer
   end
-end
 
-class QuestionComponentExact < QuestionComponent
-  def confirms?(answer)
-    answer.value == valid_answer
+  class QuestionComponentChoice < QuestionComponent
+    attr_accessor :choices
+
+    def confirms?(answer)
+      answer.value == valid_answer
+    end
   end
-end
 
-class QuestionComponentClosest < QuestionComponent
-  def confirms?(answer)
-    answers.all? do |a|
-      answer == a || answer.diff <= a.diff
+  class QuestionComponentClosest < QuestionComponent
+    def confirms?(answer)
+      answers.all? do |a|
+        answer == a || answer.diff <= a.diff
+      end
+    end
+  end
+
+  class QuestionComponentExact < QuestionComponent
+    def confirms?(answer)
+      answer.value == valid_answer
     end
   end
 end
-

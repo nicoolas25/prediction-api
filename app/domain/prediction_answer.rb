@@ -1,21 +1,23 @@
-class PredictionAnswer
-  include Virtus.model
+module Domain
+  class PredictionAnswer
+    include Common
 
-  attribute :target, QuestionComponent
-end
+    attr_accessor :target, :value
 
-class PredictionAnswerChoice < PredictionAnswer
-  attribute :value, String
-end
+    def right?
+      target.confirms?(self)
+    end
+  end
 
-class PredictionAnswerExact < PredictionAnswer
-  attribute :value, Float
-end
+  class PredictionAnswerChoice < PredictionAnswer
+  end
 
-class PredictionAnswerClosest < PredictionAnswer
-  attribute :value, Float
+  class PredictionAnswerClosest < PredictionAnswer
+    def diff
+      @diff ||= (target.answer - value).abs
+    end
+  end
 
-  def diff
-    @diff ||= (target.answer - value).abs
+  class PredictionAnswerExact < PredictionAnswer
   end
 end

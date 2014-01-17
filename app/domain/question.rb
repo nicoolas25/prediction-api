@@ -1,20 +1,7 @@
-class Question
-  include Virtus.model
+module Domain
+  class Question
+    include Common
 
-  attribute :author, Player
-
-  attribute :tags, Set[String]
-
-  attribute :components, Array[QuestionComponent]
-
-  attribute :participations, Set[Participation]
-
-  def confirms?(prediction)
-    components.each_with_index do |component, index|
-      answer = prediction.answers[index]
-      return false unless component.right?(answer)
-    end
-
-    true
+    attr_accessor :author, :tags, :components, :participations
   end
 end

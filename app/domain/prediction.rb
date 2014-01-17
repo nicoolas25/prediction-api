@@ -1,9 +1,15 @@
-class Prediction
-  include Virtus.model
+module Domain
+  class Prediction
+    include Common
 
-  attribute :author, Player
+    attr_accessor :author, :participation, :answers
 
-  attribute :participation, Participation
+    def initialize(attributes={})
+      attributes.each{ |key, value| __send__("#{key}=", value) }
+    end
 
-  attribute :answers, Array[PredictionAnswer]
+    def right?
+      answers.all?(&:right?)
+    end
+  end
 end

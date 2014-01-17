@@ -1,9 +1,7 @@
-class Participation
-  include Virtus.model
+module Domain
+  class Participation
+    include Common
 
-  attribute :player, Player
-
-  attribute :prediction, Prediction
-
-  attribute :earnings, Integer
+    attr_accessor :player, :prediction, :earnings
+  end
 end

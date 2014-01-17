@@ -1,5 +1,7 @@
-class Player
-  include Virtus.model
+module Domain
+  class Player
+    include Common
 
-  attribute :friends, Set[Player]
+    attr_accessor :friends
+  end
 end
