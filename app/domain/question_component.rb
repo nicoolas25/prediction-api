@@ -15,10 +15,17 @@ module Domain
 
   class QuestionComponentClosest < QuestionComponent
     def confirms?(answer)
-      answers.all? do |a|
-        answer == a || answer.diff <= a.diff
-      end
+      confirmed_answers.include?(answer)
     end
+
+    protected
+
+      def confirmed_answers
+        sorted_answers = answers.sort_by(&:diff)
+        answer = sorted_answers.first
+        diff_min = answer && answer.diff
+        sorted_answers.take_while{ |answer| answer.diff <= diff_min }
+      end
   end
 
   class QuestionComponentExact < QuestionComponent

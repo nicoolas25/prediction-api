@@ -14,7 +14,7 @@ module Domain
 
   class PredictionAnswerClosest < PredictionAnswer
     def diff
-      @diff ||= (target.answer - value).abs
+      @diff ||= (target.valid_answer - value).abs
     end
   end
 

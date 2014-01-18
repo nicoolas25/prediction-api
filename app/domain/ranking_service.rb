@@ -1,5 +1,7 @@
 module Domain
   class RankingService
+    attr_reader :scores
+
     def initialize(tag=nil, friends_of=nil)
       @tag    = tag
       @player = friends_of
@@ -15,6 +17,8 @@ module Domain
           end
         end
       end
+
+      self
     end
 
     private
