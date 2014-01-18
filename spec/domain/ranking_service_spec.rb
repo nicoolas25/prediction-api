@@ -9,6 +9,7 @@ describe Domain::RankingService do
 
     before do
       @klass = double(
+        all: participations,
         tagged_with: participations,
         around_player: participations,
         around_player_and_tagged_with: participations)
@@ -46,6 +47,19 @@ describe Domain::RankingService do
 
       it "uses the Collections::Participations#around_player as reference" do
         expect(@klass).to receive(:around_player_and_tagged_with).with('player_0', 'foo')
+        subject
+      end
+
+      it "returns a Hash with players as keys and total earnings" do
+        expect(subject).to eql(expected_result)
+      end
+    end
+
+    describe "with no options" do
+      let(:ranking_service){ Domain::RankingService.new }
+
+      it "uses the Collections::Participations#around_player as reference" do
+        expect(@klass).to receive(:all)
         subject
       end
 
