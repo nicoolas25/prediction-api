@@ -1,4 +1,4 @@
-require './app/domain'
+require './spec/spec_helper'
 
 describe Domain::QuestionComponentChoice do
   describe "#confirms?(answer)" do
