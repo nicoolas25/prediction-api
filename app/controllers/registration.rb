@@ -15,7 +15,7 @@ module Controllers
         params[:oauth2Token],
         params[:nickname])
       if err
-        error! err, 403
+        error! err.join(', '), 403
       else
         present player, with: Entities::Player, token: true
       end
