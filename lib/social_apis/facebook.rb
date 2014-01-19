@@ -2,15 +2,15 @@ require 'httparty'
 
 module SocialAPI
   class Facebook < Base
-    GRAPH_HOST = 'https://graph.facebook.com'
+    include HTTParty
 
-    def initialize(provider, token)
-      super
-    end
+    base_uri 'https://graph.facebook.com'
+    format :json
 
     def social_id
       return @social_id if @social_id
-      response = HTTParty.get("#{GRAPH_HOST}/me", query: {access_token: @token})
+
+      response = self.class.get('/me', query: {access_token: @token})
       return nil unless response.code == 200
       @social_id = response.parsed_response['id']
     end
