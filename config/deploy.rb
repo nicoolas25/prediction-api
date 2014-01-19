@@ -65,7 +65,7 @@ namespace :db do
   task :migrate => :environment do
     queue %{
       echo "-----> Migrating database" &&
-      #{echo_cmd %[rake db:migrate]}
+      #{echo_cmd %[bundle exec rake db:migrate]}
     }
   end
 end
