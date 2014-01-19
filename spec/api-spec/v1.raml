@@ -56,8 +56,13 @@ schemas:
             "type": "array",
             "required": false,
             "items": {
-              "type": "string",
-              "title": "Nom du réseau social lié au compte de l'utilisateur"
+              "type": "object",
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "title": "Nom du réseau social lié au compte de l'utilisateur"
+                }
+              }
             }
           },
           "statistics": {
@@ -475,7 +480,7 @@ traits:
               schema: errorReport
 /registrations:
   post:
-    is: [ authenticable, exigent ]
+    is: [ exigent ]
     description: |
       L'appel à cette URL créé un nouvel utilisateur.
       
@@ -490,7 +495,19 @@ traits:
           nickname:
             description: Pseudonyme du nouveau joueur
             required: true
+          oauth2Token:
+            description: Token d'identification OAuth2
+            required: true
+          oauth2Provider:
+            description: Provider OAuth2 utilisé
+            pattern: facebook|googleplus|twitter
+            required: true
     responses:
+      201:
+        description: Le joueur a été créé.
+        body:
+          application/json:
+            schema: user
       403:
         description: |
           Code retourné lorsque les données d'entrée ne permettent pas de créer
@@ -502,16 +519,7 @@ traits:
         body:
           application/json:
             example: |
-              [
-                {
-                  "field": "facebookToken",
-                  "reason": "is invalid"
-                },
-                {
-                  "field": "nickname",
-                  "reason": "is already taken"
-                }
-              ]
+              { error: "nickname is already taken" }
   patch:
     is: [ secured ]
     description: Permet d'ajouter un nouveau réseau social à son compte.

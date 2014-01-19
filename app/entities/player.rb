@@ -7,6 +7,6 @@ module Entities
 
     expose :nickname
 
-    expose :social_associations, using: SocialAssociation
+    expose :social_associations, using: SocialAssociation, as: :social
   end
 end
