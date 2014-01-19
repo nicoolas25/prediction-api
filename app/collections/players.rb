@@ -25,7 +25,7 @@ module Collections
 
         if errors.empty?
           player.id = DB[:players].insert(nickname: nickname)
-          DB[:social_associations].insert(provider: api.provider_id, :player_id: player.id, id: social.id, token: token)
+          DB[:social_associations].insert(provider: api.provider_id, player_id: player.id, id: social.id, token: token)
         end
       end
 
@@ -35,13 +35,15 @@ module Collections
       # Authenticate the player
       DB.transaction(retry_on: [Sequel::ConstraintViolation], num_retries: 30) do
         player.regenerate_token!
-        DB[:players].where(id: player_id).update(token: player.token, token_expiration: player.token_expiration)
+        DB[:players].where(id: player.id).update(token: player.token, token_expiration: player.token_expiration)
       end
 
       [player, nil]
     rescue
       LOGGER.error "User creation (#{nickname}) failed with the #{$!.class} - #{$!.message}"
-      [nil, errors << {field: 'unknown', reason: 'the database transaction failed'}]
+      $!.backtrace.each{ |line| LOGGER.error line }
+
+      [nil, {field: 'unknown', reason: $!.message}]
     end
   end
 end

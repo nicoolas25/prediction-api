@@ -3,8 +3,8 @@ Sequel.migration do
     create_table(:players) do
       primary_key :id, type: Bignum
       String :nickname, null: false, size: 30, unique: true
-      String :token, null: false, size: 30
-      DateTime :token_expiration, null: false
+      String :token, null: true
+      DateTime :token_expiration, null: true
 
       index :token, unique: true
     end

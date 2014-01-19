@@ -10,7 +10,7 @@ module SocialAPI
     end
 
     def valid?
-      !!get_social_id
+      !!social_id
     end
   end
 end

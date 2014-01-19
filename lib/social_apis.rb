@@ -7,11 +7,11 @@ module SocialAPI
   autoload :GooglePlus, './lib/social_apis/google_plus'
   autoload :Twitter,    './lib/social_apis/twitter'
 
-  def for(provider, token)
+  def self.for(provider, token)
     case provider
-    when 'facebook'   then Facebook.new(token)
-    when 'googleplus' then GooglePlus.new(token)
-    when 'twitter'    then Twitter.new(token)
+    when 'facebook'   then Facebook.new(provider, token)
+    when 'googleplus' then GooglePlus.new(provider, token)
+    when 'twitter'    then Twitter.new(provider, token)
     else nil
     end
   end

@@ -1,5 +1,7 @@
 module Domain
   class SocialAssociation
-    attr_accessor :provider, :player_id, :social_id, :token
+    include Common
+
+    attr_accessor :provider, :player, :id, :token
   end
 end
