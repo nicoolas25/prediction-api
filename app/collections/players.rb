@@ -3,10 +3,9 @@ require './lib/social_apis'
 module Collections
   module Players
     def self.create(provider, token, nickname)
-      api = SocialAPI.for(provider, token)
+      api, err = find_api(provider, token)
 
-      return [nil, ['oauth2Provider is invalid']] unless api
-      return [nil, ['oauth2Token is invalid']] unless api.valid?
+      return [nil, err] if err
 
       social = Domain::SocialAssociation.new(provider: provider, id: api.social_id, token: token)
       social.player = player = Domain::Player.new(nickname: nickname, social_associations: [social])
@@ -26,7 +25,42 @@ module Collections
       [nil, ["exception raised: #{$!.message}"]]
     end
 
+    def self.find_by_social(provider, token)
+      api, err = find_api(provider, token)
+
+      return [nil, err] if err
+
+      attrs = DB[:players].
+        select_all(:players).
+        join(:social_associations, player_id: :id).
+        where(social_associations__provider: api.provider_id, social_associations__id: api.social_id).
+        first
+
+      return [nil, ["oauth2Token can't lead to an existing user"]] unless attrs
+
+      player = Domain::Player.new(attrs)
+      Collections::SocialAssociations.fill(player)
+
+      [player, nil]
+    end
+
+    def self.authenticate!(player)
+      DB.transaction(retry_on: [Sequel::ConstraintViolation], num_retries: 30) do
+        player.regenerate_token!
+        DB[:players].where(id: player.id).update(token: player.token, token_expiration: player.token_expiration)
+      end
+    end
+
     private
+
+    def self.find_api(provider, token)
+      api = SocialAPI.for(provider, token)
+
+      return [nil, ['oauth2Provider is invalid']] unless api
+      return [nil, ['oauth2Token is invalid']]    unless api.valid?
+
+      [api, nil]
+    end
 
     def self.validate(player, api)
       errors = []
@@ -43,13 +77,6 @@ module Collections
     def self.insert(api, player, social)
       player.id = DB[:players].insert(nickname: player.nickname)
       DB[:social_associations].insert(provider: api.provider_id, player_id: player.id, id: social.id, token: social.token)
-    end
-
-    def self.authenticate!(player)
-      DB.transaction(retry_on: [Sequel::ConstraintViolation], num_retries: 30) do
-        player.regenerate_token!
-        DB[:players].where(id: player.id).update(token: player.token, token_expiration: player.token_expiration)
-      end
     end
   end
 end

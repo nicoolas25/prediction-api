@@ -15,4 +15,8 @@ module SocialAPI
     else nil
     end
   end
+
+  def self.provider(integer)
+    PROVIDERS[integer]
+  end
 end
