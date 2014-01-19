@@ -10,7 +10,7 @@ module SocialAPI
     def social_id
       return @social_id if @social_id
 
-      response = self.class.get('/me', query: {access_token: @token})
+      response = self.class.get('/me', query: {access_token: @token, fields: 'id'})
       return nil unless response.code == 200
       @social_id = response.parsed_response['id']
     end
