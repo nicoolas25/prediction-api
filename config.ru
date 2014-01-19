@@ -1,22 +1,12 @@
-ROOT_PATH = File.dirname(__FILE__)
-$:.unshift(ROOT_PATH) unless $:.include?(ROOT_PATH)
-
 require 'grape'
-require 'db/connect'
+
+require './config/log'
+require './db/connect'
+require './app/controllers'
 
 module Prediction
   class API < Grape::API
-    version 'v1'
-    format :json
-
-    desc "Greet the user."
-    params do
-      requires :name, type: String, desc: "The user's name."
-    end
-    get '/hello/:name' do
-      { hello: params[:name] }
-    end
-
+    mount Controllers::Registration
   end
 end
 

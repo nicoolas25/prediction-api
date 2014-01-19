@@ -1,11 +1,11 @@
 require 'yaml'
 require 'sequel'
 
-database_file = File.join(ROOT_PATH, 'config', 'database.yml')
-database = YAML.load_file(database_file)['config']
+database = YAML.load_file('./config/database.yml')['config']
 host = database['host']
-port = database['post']
+port = database['port']
 name = database['name']
 user = database['user']
+url = "postgres://#{host}:#{port}/#{name}?user=#{user}"
 
-DB = Sequel.connect("postgres://#{host}:#{port}/#{name}?user=#{user}")
+DB = Sequel.connect(url)

@@ -18,4 +18,5 @@ module Domain
   autoload :QuestionComponentClosest, './app/domain/question_component'
   autoload :QuestionComponentExact,   './app/domain/question_component'
   autoload :RankingService,           './app/domain/ranking_service'
+  autoload :SocialAssociation,        './app/domain/social_association'
 end

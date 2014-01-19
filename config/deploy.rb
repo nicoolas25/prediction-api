@@ -1,6 +1,3 @@
-path = File.join(File.dirname(__FILE__), '..', 'lib')
-$:.unshift(path) unless $:.include?(path)
-
 require 'mina/bundler'
 require 'mina/git'
 require 'mina/chruby'
@@ -43,6 +40,7 @@ task :deploy => :environment do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
+    invoke :'db:migrate'
 
     to :launch do
       queue %[
@@ -55,6 +53,20 @@ task :deploy => :environment do
         fi
       ]
     end
+  end
+end
+
+#
+# Database
+#
+
+namespace :db do
+  desc "Migrate the database."
+  task :migrate => :environment do
+    queue %{
+      echo "-----> Migrating database" &&
+      #{echo_cmd %[rake db:migrate]}
+    }
   end
 end
 

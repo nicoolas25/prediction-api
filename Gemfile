@@ -12,6 +12,10 @@ gem 'pg'
 
 # Framework
 gem 'grape'
+gem 'grape-entity'
+
+# HTTP
+gem 'httparty'
 
 group :development do
   gem 'mina', github: 'nadarei/mina', branch: 'master'
