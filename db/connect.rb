@@ -12,3 +12,5 @@ url = "postgres://#{host}:#{port}/#{name}?user=#{user}"
 url += "&password=#{pass}" if pass
 
 DB = Sequel.connect(url)
+
+DB.loggers << LOGGER if defined?(LOGGER)
