@@ -1,0 +1,58 @@
+Pour faire tourner le serveur en local
+======================================
+
+Installer les logiciels suivants
+--------------------------------
+
+* Ruby - 2.1.0 de préférence
+* Postgresql - version 9.1 ou supérieure
+* Les paquets de développement de Postgresql (postgresql-server-dev-9.1 sur Ubuntu)
+
+Préparer la base de donnée
+--------------------------
+
+Commandes à effectuer pour créer un utilisateur, une base de données puis
+attribuer un mot de passe à ce nouvel utilisateur.
+
+          user $ sudo su postgres
+    postgresql $ createuser prediction
+    postgresql $ createdb -E utf8 -O prediction -W prediction
+    postgresql $ psql
+           sql #=> ALTER ROLE prediction WITH PASSWORD 'password';
+
+Cette manipulation peut aussi se faire depuis une interface graphique comme pgadmin.
+
+Configurer la base dans l'application
+-------------------------------------
+
+Dans le fichier de `config/database.yml` :
+
+    config:
+      user: prediction
+      pass: password
+      name: prediction
+      host: localhost
+      port: 5433
+
+Installer les dépendances
+-------------------------
+
+Bundler se charge d'installer les dépendances du projet pour vous... Encore faut-il avoir Bundler.
+
+    gem install bundler
+
+Une fois que Bundler est disponible il faudra lancer depuis le répertoire racine du projet :
+
+    bundle install
+
+Mettre en place le schema de la base
+------------------------------------
+
+Créer les tables nécessaire au fonctionnement de l'application se fait grace à la commande :
+
+    bundle exec rake db:migrate
+
+Lancer l'application
+--------------------
+
+    bundle exec puma
