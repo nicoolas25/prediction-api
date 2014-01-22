@@ -5,6 +5,8 @@ module Domain
     end
   end
 
+  autoload :Badges,                   './app/domain/badges'
+  autoload :EarningService,           './app/domain/earning_service'
   autoload :Participation,            './app/domain/participation'
   autoload :Player,                   './app/domain/player'
   autoload :Prediction,               './app/domain/prediction'

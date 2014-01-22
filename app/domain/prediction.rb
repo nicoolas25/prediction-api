@@ -2,7 +2,7 @@ module Domain
   class Prediction
     include Common
 
-    attr_accessor :author, :participation, :answers
+    attr_accessor :hash, :answers, :question
 
     def right?
       answers.all?(&:right?)
