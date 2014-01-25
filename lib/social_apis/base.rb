@@ -1,8 +1,9 @@
 module SocialAPI
   class Base
-    def initialize(provider, token)
-      @provider = provider
-      @token = token
+    def initialize(provider, token, social_id)
+      @provider  = provider
+      @token     = token
+      @social_id = social_id
     end
 
     def provider_id

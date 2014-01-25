@@ -57,13 +57,19 @@ schemas:
               }
             }
           },
-          "avatarBigUrl": {
-            "type": "string",
-            "required": true
-          },
-          "avatarSmallUrl": {
-            "type": "string",
-            "required": true
+          "avatars": {
+            "type": "object",
+            "required": true,
+            "properties": {
+              "big": {
+                "type": "string",
+                "required": true
+              },
+              "small": {
+                "type": "string",
+                "required": true
+              }
+            }
           },
           "statistics": {
             "type": "array",
@@ -133,13 +139,19 @@ schemas:
               "type": "string",
               "required": true
             },
-            "avatarBigUrl": {
-              "type": "string",
-              "required": true
-            },
-            "avatarSmallUrl": {
-              "type": "string",
-              "required": true
+            "avatars": {
+              "type": "object",
+              "required": true,
+              "properties": {
+                "big": {
+                  "type": "string",
+                  "required": true
+                },
+                "small": {
+                  "type": "string",
+                  "required": true
+                }
+              }
             },
             "country": {
               "type": "string",
