@@ -15,7 +15,8 @@ gem 'grape'
 gem 'grape-entity'
 
 # Web interface
-gem 'sinatra'
+gem 'sinatra', '~> 1.4.4'
+gem 'tilt', '~> 1.3.7'
 
 # Templating languages for the web ui
 gem 'slim'

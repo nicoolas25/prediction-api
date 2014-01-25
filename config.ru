@@ -1,4 +1,5 @@
 require 'active_support'
+require 'active_support/deprecation'
 require 'active_support/core_ext'
 
 # All the application depends on the log
