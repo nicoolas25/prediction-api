@@ -7,8 +7,15 @@ module Collections
 
       return [nil, err] if err
 
-      social = Domain::SocialAssociation.new(provider: provider, id: api.social_id, token: token)
-      social.player = player = Domain::Player.new(nickname: nickname, social_associations: [social])
+      social = Domain::SocialAssociation.new(
+        provider: provider,
+        id: api.social_id,
+        token: token)
+      social.player = player = Domain::Player.new(
+        nickname: nickname,
+        first_name: api.first_name,
+        last_name: api.last_name,
+        social_associations: [social])
 
       DB.transaction(isolation: :repeatable, retry_on: [Sequel::SerializationFailure]) do
         errors = validate(player, api)
@@ -75,8 +82,16 @@ module Collections
     end
 
     def self.insert(api, player, social)
-      player.id = DB[:players].insert(nickname: player.nickname)
-      DB[:social_associations].insert(provider: api.provider_id, player_id: player.id, id: social.id, token: social.token)
+      player.id = DB[:players].insert(
+        nickname: player.nickname,
+        first_name: player.first_name,
+        last_name: player.last_name)
+
+      DB[:social_associations].insert(
+        provider: api.provider_id,
+        player_id: player.id,
+        id: social.id,
+        token: social.token)
     end
   end
 end
