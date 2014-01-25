@@ -4,8 +4,8 @@ module SocialAPI
   class Facebook < Base
     include HTTParty
 
-    SMALL_PATTERN = "graph.facebook.com/%s/picture?height=100&width=100"
-    BIG_PATTERN   = "graph.facebook.com/%s/picture?height=300&width=300"
+    SMALL_PATTERN = "http://graph.facebook.com/%s/picture?height=100&width=100"
+    BIG_PATTERN   = "http://graph.facebook.com/%s/picture?height=300&width=300"
 
     base_uri 'https://graph.facebook.com'
     format :json
