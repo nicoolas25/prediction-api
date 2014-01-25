@@ -1,0 +1,60 @@
+doctype html
+html
+  head
+    title Predictio
+    script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
+    script src="/scripts.js"
+    style
+      | div.label, div.component, div.choice { margin: 10px 0px; border-bottom: 1px solid black; padding: 5px; }
+      | div.add { margin: 10px 0px; padding: 5px; }
+      | fieldset { margin: 10px 0px; }
+  body
+    h1 Ajouter une question
+
+    form
+      fieldset
+        legend Labels
+        .label
+          select.locale
+            option value="fr" Français
+            option value="en" Anglais
+          input.label placeholder="Label"
+          .remove
+            button Supprimer le label
+        .add
+          button Ajouter un autre label
+
+      fieldset
+        legend Composants
+        .component
+          select.kind
+            option value="choices" Choix
+            option value="numeric" Numerique
+          fieldset
+            legend Labels
+            .label
+              select.locale
+                option value="fr" Français
+                option value="en" Anglais
+              input.label placeholder="Label"
+              .remove
+                button Supprimer le label
+            .add
+              button Ajouter un nouveau label
+          fieldset
+            legend Choix
+            .choice
+              select.locale
+                option value="fr" Français
+                option value="en" Anglais
+              input.choice placeholder="Choix 1, Choix 2"
+              .remove
+                button Supprimer le choix
+            .add
+              button Ajouter un nouveau choix
+          .remove
+            button Supprimer le composant
+        .add
+          button Ajouter un nouveau composant
+
+      input type="submit" value="Ajouter"
