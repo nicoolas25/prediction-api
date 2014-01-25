@@ -1,9 +1,13 @@
+require 'active_support'
+require 'active_support/deprecation'
+require 'active_support/core_ext'
+
+require './config/log'
+require './db/connect'
+require './lib/social_apis'
+
 module Domain
-  module Common
-    def initialize(attributes={})
-      attributes.each{ |k, v| __send__("#{k}=", v) }
-    end
-  end
+  class Error < StandardError ; end
 
   autoload :Badges,                   './app/domain/badges'
   autoload :EarningService,           './app/domain/earning_service'
@@ -21,4 +25,7 @@ module Domain
   autoload :QuestionComponentExact,   './app/domain/question_component'
   autoload :RankingService,           './app/domain/ranking_service'
   autoload :SocialAssociation,        './app/domain/social_association'
+
+  autoload :I18nLabels,               './app/domain/concerns/i18n_labels'
+  autoload :I18nChoices,              './app/domain/concerns/i18n_choices'
 end

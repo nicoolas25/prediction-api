@@ -1,0 +1,25 @@
+module Domain
+  module I18nChoices
+    LOCALES = %w(fr en).freeze
+
+    # Helper to access the choices
+    def choices
+      hash = {}.with_indifferent_access
+      LOCALES.each_with_object(hash) do |locale, ls|
+        if (val = self[:"choices_#{locale}"]).present?
+          ls[locale] = val.split(',')
+        end
+      end
+    end
+
+    # Helper to define the choices
+    def choices=(hash)
+      hash = hash.with_indifferent_access
+      LOCALES.each do |locale|
+        if (val = hash[:"choices_#{locale}"]).present?
+          self.__send__(:"choices_#{locale}=", val.map(&:strip).join(','))
+        end
+      end
+    end
+  end
+end

@@ -30,7 +30,7 @@ $ ->
       $component = $(component)
       componentHash.kind = $component.find('select.kind').val()
       insertLocales($component, componentHash.labels)
-      if componentHash.kind is 'choices'
+      if componentHash.kind is '0' # choices
         componentHash.choices = {}
         insertLocales($component, componentHash.choices, 'choice')
       params.components.push(componentHash)

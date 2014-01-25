@@ -1,48 +1,31 @@
 module Domain
-  class QuestionComponent
-    include Common
+  class QuestionComponent < ::Sequel::Model
+    KINDS = %w(choices exact closest).freeze
 
-    attr_accessor :labels, :answers, :valid_answer, :kind
-  end
+    set_dataset :components
 
-  class QuestionComponentChoice < QuestionComponent
-    attr_accessor :choices
+    many_to_one :question
+
+    include I18nLabels
+    include I18nChoices
 
     def confirms?(answer)
-      answer.value == valid_answer
-    end
-
-    def kind
-      0
-    end
-  end
-
-  class QuestionComponentClosest < QuestionComponent
-    def confirms?(answer)
-      confirmed_answers.include?(answer)
-    end
-
-    def kind
-      1
-    end
-
-    protected
-
-      def confirmed_answers
-        sorted_answers = answers.sort_by(&:diff)
-        answer = sorted_answers.first
-        diff_min = answer && answer.diff
-        sorted_answers.take_while{ |answer| answer.diff <= diff_min }
+      case kind
+      when 0, 1 then answer.value == valid_answer
+      when 2    then confirmed_answers.include?(answer)
       end
-  end
-
-  class QuestionComponentExact < QuestionComponent
-    def confirms?(answer)
-      answer.value == valid_answer
     end
 
-    def kind
-      2
+    def have_choices?
+      kind == 0
+    end
+  protected
+
+    def confirmed_answers
+      sorted_answers = answers.sort_by(&:diff)
+      answer = sorted_answers.first
+      diff_min = answer && answer.diff
+      sorted_answers.take_while{ |answer| answer.diff <= diff_min }
     end
   end
 end

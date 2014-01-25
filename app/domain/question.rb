@@ -1,9 +1,10 @@
 module Domain
-  class Question
-    LOCALES = %w(fr en).freeze
+  class Question < ::Sequel::Model
+    unrestrict_primary_key
 
-    include Common
+    many_to_one :author, class: '::Domain::Player'
+    one_to_many :components, class: '::Domain::QuestionComponent'
 
-    attr_accessor :id, :author, :labels, :tags, :components, :participations
+    include I18nLabels
   end
 end

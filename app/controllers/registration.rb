@@ -12,14 +12,12 @@ module Controllers
       requires :oauth2Token, type: String, desc: "The oauth2 token for the provider."
     end
     post '/registrations' do
-      player, err = Collections::Players.create(
-        params[:oauth2Provider],
-        params[:oauth2Token],
-        params[:nickname])
-      if err
-        fail! err, 403
-      else
+      begin
+        player = Domain::Player.register(params[:oauth2Provider], params[:oauth2Token], params[:nickname])
+        player.authenticate!
         present player, with: Entities::Player, token: true
+      rescue Domain::Error
+        fail! $!, 403
       end
     end
   end

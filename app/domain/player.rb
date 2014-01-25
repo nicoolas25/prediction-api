@@ -1,15 +1,80 @@
 require 'securerandom'
-require 'active_support/core_ext/numeric'
+
+require './lib/social_apis'
 
 module Domain
-  class Player
-    include Common
+  class RegistrationError < Error ; end
+  class SessionError < Error ; end
+  class SocialAPIError < Error ; end
 
-    attr_accessor :id, :nickname, :first_name, :last_name, :social_associations, :friends, :token, :token_expiration
+  class Player < ::Sequel::Model
+    unrestrict_primary_key
+
+    one_to_many :social_associations
+
+    def validate
+      super
+      errors.add(:nickname, 'is already taken') if new? && Player.where(nickname: nickname).count > 0
+    end
 
     def regenerate_token!
       self.token = SecureRandom.hex
       self.token_expiration = Time.now + 2.days
+    end
+
+    def authenticate!
+      DB.transaction(retry_on: [Sequel::ConstraintViolation], num_retries: 30) do
+        regenerate_token!
+        save
+      end
+    end
+
+    class << self
+      def find_by_social_infos(provider_name, token)
+        api = social_api(provider_name, token)
+        player = join(:social_associations).where(social_associations__provider: api.provider_id, social_associations__id: api.social_id).first
+        raise SessionError.new(:social_account_unknown) unless player
+        player
+      end
+
+      def register(provider_name, token, nickname)
+        api = social_api(provider_name, token)
+        player = new(nickname: nickname, first_name: api.first_name, last_name: api.last_name)
+        socass = SocialAssociation.new(provider: api.provider_id, id: api.social_id, token: token)
+
+        DB.transaction(isolation: :repeatable, retry_on: [Sequel::SerializationFailure]) do
+          if player.valid?
+            if socass.valid?
+              player.save
+              player.add_social_association(socass)
+            else
+              raise RegistrationError.new(:social_account_taken)
+            end
+          else
+            raise RegistrationError.new(:nickname_taken)
+          end
+        end
+
+        player
+      end
+
+      def find_by_social_infos(provider_name, token)
+        api = social_api(provider_name, token)
+        player = join(:social_associations).where(social_associations__provider: api.provider_id, social_associations__id: api.social_id).first
+        raise SessionError.new(:social_account_unknown) unless player
+        player
+      end
+
+      def social_api(provider_name, token)
+        api = SocialAPI.for(provider_name, token)
+        raise SocialAPIError.new(:invalid_oauth2_provider) unless api
+        raise SocialAPIError.new(:invalid_oauth2_token)    unless api.valid?
+        api
+      end
+
+      def root
+        where(nickname: 'nicoolas25').first
+      end
     end
   end
 end

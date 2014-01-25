@@ -11,14 +11,12 @@ module Controllers
       requires :oauth2Token, type: String, desc: "The oauth2 token for the provider."
     end
     post '/sessions' do
-      player, err = Collections::Players.find_by_social(
-        params[:oauth2Provider],
-        params[:oauth2Token])
-      if err
-        fail! err, 401
-      else
-        Collections::Players.authenticate!(player)
+      begin
+        player = Domain::Players.find_by_social_infos(params[:oauth2Provider], params[:oauth2Token])
+        player.authenticate!
         present player, with: Entities::Player, token: true
+      rescue
+        fail! $!, 401
       end
     end
   end

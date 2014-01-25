@@ -2,10 +2,10 @@ require './app/entities'
 
 module Controllers
   class Failure < StandardError
-    attr_reader :errors, :status
+    attr_reader :code, :status
 
-    def initialize(errors, status)
-      @errors = errors
+    def initialize(error, status)
+      @code   = error.message
       @status = status
     end
   end
@@ -14,11 +14,13 @@ module Controllers
     extend ActiveSupport::Concern
 
     included do
-      rescue_from Grape::Exceptions::ValidationErrors, ::Controllers::Failure do |e|
-        errors = e.errors.each_with_object([]) do |(field, reason), errors|
-          errors << { field: field, reason: Array.wrap(reason) }
-        end
-        Rack::Response.new(errors.to_json, e.status)
+      rescue_from Grape::Exceptions::ValidationErrors do |e|
+        errors = e.errors.each_with_object([]) { |(f, r), es| es << { field: f, reason: Array.wrap(r) } }
+        Rack::Response.new({code: 'bad_parameters', details: errors}.to_json, e.status)
+      end
+
+      rescue_from ::Controllers::Failure do |e|
+        Rack::Response.new({code: e.code}.to_json, e.status)
       end
 
       helpers Helpers

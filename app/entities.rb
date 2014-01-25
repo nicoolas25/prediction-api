@@ -1,5 +1,5 @@
 require 'grape-entity'
-require './app/collections'
+require './app/domain'
 
 module Entities
   autoload :Player,            './app/entities/player'
