@@ -1,5 +1,7 @@
 module Controllers
   class Registration < Grape::API
+    include Common
+
     version 'v1'
     format :json
 
@@ -15,7 +17,7 @@ module Controllers
         params[:oauth2Token],
         params[:nickname])
       if err
-        error! err.join(', '), 403
+        fail! err, 403
       else
         present player, with: Entities::Player, token: true
       end

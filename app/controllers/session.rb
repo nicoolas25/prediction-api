@@ -1,5 +1,7 @@
 module Controllers
   class Session < Grape::API
+    include Common
+
     version 'v1'
     format :json
 
@@ -13,7 +15,7 @@ module Controllers
         params[:oauth2Provider],
         params[:oauth2Token])
       if err
-        error! err.join(', '), 401
+        fail! err, 401
       else
         Collections::Players.authenticate!(player)
         present player, with: Entities::Player, token: true

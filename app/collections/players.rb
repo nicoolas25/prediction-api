@@ -18,8 +18,8 @@ module Collections
         social_associations: [social])
 
       DB.transaction(isolation: :repeatable, retry_on: [Sequel::SerializationFailure]) do
-        errors = validate(player, api)
-        return [nil, errors] if errors.any?
+        err = validate(player, api)
+        return [nil, err] if err.any?
         insert(api, player, social)
       end
 
@@ -29,7 +29,7 @@ module Collections
       LOGGER.error "User creation (#{nickname}) failed with the #{$!.class} - #{$!.message}"
       $!.backtrace[0..10].each{ |line| LOGGER.error line }
 
-      [nil, ["exception raised: #{$!.message}"]]
+      [nil, {unexpected_error: $!.message}]
     end
 
     def self.find_by_social(provider, token)
@@ -43,7 +43,7 @@ module Collections
         where(social_associations__provider: api.provider_id, social_associations__id: api.social_id).
         first
 
-      return [nil, ["oauth2Token can't lead to an existing user"]] unless attrs
+      return [nil, {oauth2Token: "can't lead to an existing user"}] unless attrs
 
       player = Domain::Player.new(attrs)
       Collections::SocialAssociations.fill(player)
@@ -58,27 +58,27 @@ module Collections
       end
     end
 
-    private
+  private
 
     def self.find_api(provider, token)
       api = SocialAPI.for(provider, token)
 
-      return [nil, ['oauth2Provider is invalid']] unless api
-      return [nil, ['oauth2Token is invalid']]    unless api.valid?
+      return [nil, {oauth2Provider: 'is invalid'}] unless api
+      return [nil, {oauth2Token: 'is invalid'}]    unless api.valid?
 
       [api, nil]
     end
 
     def self.validate(player, api)
-      errors = []
+      err = {}
 
       same_nickname = DB[:players].where(nickname: player.nickname).count > 0
       social_assocs = DB[:social_associations].where(provider: api.provider_id, id: api.social_id).count > 0
 
-      errors << 'nickname is already taken' if same_nickname
-      errors << 'oauth2Token is already taken' if social_assocs
+      err[:nickname]    = 'is already taken' if same_nickname
+      err[:oauth2Token] = 'is already taken' if social_assocs
 
-      errors
+      err
     end
 
     def self.insert(api, player, social)
