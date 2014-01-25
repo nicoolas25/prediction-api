@@ -92,12 +92,12 @@ schemas:
           },
           "token": {
             "type": "string",
-            "title": "Le token à envoyer dans les requêtes à l'API"
+            "title": "Le token à envoyer dans les requêtes à l'API",
             "required": false
           },
           "token_expiration": {
             "type": "timestamp",
-            "title": "Le timestamp indiquant la fin de validité du token"
+            "title": "Le timestamp indiquant la fin de validité du token",
             "required": false
           },
           "firstname": {
@@ -616,7 +616,7 @@ traits:
         tag:
           description: Filtre les questions pour n'afficher qu'un certain tag.
           type: string
-/predictions/{questionId}:
+/participations/{questionId}:
   is: [ secured ]
   uriParameters:
     questionId:
@@ -631,19 +631,19 @@ traits:
             schema: users
   post:
     is: [ exigent ]
-    description: Créé une prédiction pour une question donnée.
+    description: Créé une participation pour une question donnée.
     body:
       application/json:
         schema: newPrediction
     responses:
       200:
         description: |
-          La prédiction a bien été prise en compte.
+          La participation a bien été prise en compte.
           
-          L'identifiant de la prédiction est retourné dans le corps de la réponse.
+          L'identifiant de la participation est retourné dans le corps de la réponse.
         body:
           application/json:
-            example: '{ predictionId: "1234567890abcdef" }'
+            example: '{ participationId: "1234567890abcdef" }'
       403:
         body:
           application/json:
