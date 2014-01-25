@@ -1,16 +1,14 @@
-require 'grape'
 require 'active_support'
 require 'active_support/core_ext'
 
+# All the application depends on the log
 require './config/log'
+
+# All the application depends on the database connection
 require './db/connect'
-require './app/controllers'
 
-module Prediction
-  class API < Grape::API
-    mount Controllers::Registration
-    mount Controllers::Session
-  end
-end
+# Requires both the api and the web components
+require './api'
+require './web'
 
-run Prediction::API
+run Rack::Cascade.new [Prediction::API, Prediction::Web]

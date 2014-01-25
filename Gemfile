@@ -14,6 +14,13 @@ gem 'pg'
 gem 'grape'
 gem 'grape-entity'
 
+# Web interface
+gem 'sinatra'
+
+# Templating languages for the web ui
+gem 'slim'
+gem 'coffee-script'
+
 # HTTP
 gem 'httparty'
 
