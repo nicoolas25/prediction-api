@@ -29,8 +29,12 @@ namespace :db do
   desc "Cleanup the database of all of its data"
   task :clean do
     puts "Trucate players..."
-    DB[:players].truncate
+    DB[:players].truncate(cascade: true)
     puts "Trucate social associations..."
-    DB[:social_associations].truncate
+    DB[:social_associations].truncate(cascade: true)
+    puts "Truncate questions..."
+    DB[:questions].truncate(cascade: true)
+    puts "Truncate components..."
+    DB[:components].truncate(cascade: true)
   end
 end

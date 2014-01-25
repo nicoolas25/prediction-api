@@ -2,7 +2,7 @@ module Domain
   class QuestionComponent
     include Common
 
-    attr_accessor :answers, :valid_answer
+    attr_accessor :labels, :answers, :valid_answer, :kind
   end
 
   class QuestionComponentChoice < QuestionComponent
@@ -11,11 +11,19 @@ module Domain
     def confirms?(answer)
       answer.value == valid_answer
     end
+
+    def kind
+      0
+    end
   end
 
   class QuestionComponentClosest < QuestionComponent
     def confirms?(answer)
       confirmed_answers.include?(answer)
+    end
+
+    def kind
+      1
     end
 
     protected
@@ -31,6 +39,10 @@ module Domain
   class QuestionComponentExact < QuestionComponent
     def confirms?(answer)
       answer.value == valid_answer
+    end
+
+    def kind
+      2
     end
   end
 end

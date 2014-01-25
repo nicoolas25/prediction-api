@@ -6,14 +6,14 @@ insertLocales = ($root, hash, type='label') ->
     hash[lang] = text
 
 $ ->
-  $(document).on 'click', 'div.add button', ->
+  $(document).on 'click', 'div.add a', ->
     $el = $(@).closest('.add')
     $bk = $el.prev()
     $cl = $bk.clone()
     $cl.find('input, select').val(null)
     $cl.insertAfter($bk)
 
-  $(document).on 'click', 'div.remove button', ->
+  $(document).on 'click', 'div.remove a', ->
     $el = $(@).closest('div.remove').parent()
     if $el.prev().is('div.label, div.component, div.choice')
       $el.remove()
@@ -21,10 +21,10 @@ $ ->
       alert('Dernier de son genre...')
 
   $(document).on 'submit', 'form', (e) ->
+    e.preventDefault()
     params = {labels: {}, components: []}
     $form = $(@)
     insertLocales($form, params.labels)
-
     $form.find('> fieldset > div.component').each (_, component) ->
       componentHash = {labels: {}}
       $component = $(component)
@@ -35,5 +35,8 @@ $ ->
         insertLocales($component, componentHash.choices, 'choice')
       params.components.push(componentHash)
 
-    console.log params
-    e.preventDefault()
+    $.ajax '/questions',
+      type: 'POST'
+      data:
+        token: $form.find('input.token').val()
+        question: params

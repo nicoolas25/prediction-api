@@ -1,16 +1,14 @@
 doctype html
 html
   head
-    title Predictio
+    title Predictio - Ajouter une question
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
     script src="/scripts.js"
     style
-      | div.label, div.component, div.choice { margin: 10px 0px; border-bottom: 1px solid black; padding: 5px; }
-      | div.add { margin: 10px 0px; padding: 5px; }
-      | fieldset { margin: 10px 0px; }
+      | div.label, div.component, div.choice { border-bottom: 1px solid black; padding: 5px; }
+      | div.add { padding: 5px; }
+      | a { cursor: pointer; color: #000077; font-size: 10pt; }
   body
-    h1 Ajouter une question
-
     form
       fieldset
         legend Labels
@@ -20,9 +18,9 @@ html
             option value="en" Anglais
           input.label placeholder="Label"
           .remove
-            button Supprimer le label
+            a Supprimer le label
         .add
-          button Ajouter un autre label
+          a Ajouter un autre label
 
       fieldset
         legend Composants
@@ -38,9 +36,9 @@ html
                 option value="en" Anglais
               input.label placeholder="Label"
               .remove
-                button Supprimer le label
+                a Supprimer le label
             .add
-              button Ajouter un nouveau label
+              a Ajouter un nouveau label
           fieldset
             legend Choix
             .choice
@@ -49,12 +47,14 @@ html
                 option value="en" Anglais
               input.choice placeholder="Choix 1, Choix 2"
               .remove
-                button Supprimer le choix
+                a Supprimer le choix
             .add
-              button Ajouter un nouveau choix
+              a Ajouter un nouveau choix
           .remove
-            button Supprimer le composant
+            a Supprimer le composant
         .add
-          button Ajouter un nouveau composant
+          a Ajouter un nouveau composant
+
+      input.token placeholder="Token d'identification"
 
       input type="submit" value="Ajouter"

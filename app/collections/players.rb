@@ -58,6 +58,12 @@ module Collections
       end
     end
 
+    # I'm hardcoding myself, so what?
+    def self.root
+      attrs = DB[:players].where(nickname: 'nicoolas25').first
+      Domain::Player.new(attrs)
+    end
+
   private
 
     def self.find_api(provider, token)

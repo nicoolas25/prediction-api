@@ -1,7 +1,9 @@
 module Domain
   class Question
+    LOCALES = %w(fr en).freeze
+
     include Common
 
-    attr_accessor :id, :labels, :tags, :components, :participations
+    attr_accessor :id, :author, :labels, :tags, :components, :participations
   end
 end
