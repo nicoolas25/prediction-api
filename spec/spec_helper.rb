@@ -1,3 +1,5 @@
+require 'pry'
+
 # Run a coverage analysis during tests
 if ENV['COVERAGE']
   require 'simplecov'
