@@ -8,15 +8,15 @@ module SocialAPI
     format :json
 
     def first_name
-      infos['first_name']
+      infos['first_name'] rescue nil
     end
 
     def last_name
-      infos['last_name']
+      infos['last_name'] rescue nil
     end
 
     def social_id
-      infos['id']
+      infos['id'] rescue nil
     end
 
   private

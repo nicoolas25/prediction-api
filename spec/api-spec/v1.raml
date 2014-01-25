@@ -57,6 +57,14 @@ schemas:
               }
             }
           },
+          "avatarBigUrl": {
+            "type": "string",
+            "required": true
+          },
+          "avatarSmallUrl": {
+            "type": "string",
+            "required": true
+          },
           "statistics": {
             "type": "array",
             "required": true,
@@ -125,17 +133,13 @@ schemas:
               "type": "string",
               "required": true
             },
-            "avatar": {
-              "type": "array",
-              "required": true,
-              "normal": {
-                "type": "string",
-                "required": true
-              },
-              "mini": {
-                "type": "string",
-                "required": true
-              }
+            "avatarBigUrl": {
+              "type": "string",
+              "required": true
+            },
+            "avatarSmallUrl": {
+              "type": "string",
+              "required": true
             },
             "country": {
               "type": "string",
@@ -518,10 +522,6 @@ traits:
           Dans le corps de la réponse figurent plus de détails sur l'origine
           de ce conflit. Ça peut être un email déjà utilisé ou bien un compte de
           réseau social déjà lié ou encore un pseudo déjà utilisé.
-        body:
-          application/json:
-            example: |
-              { error: "nickname is already taken" }
   patch:
     is: [ secured ]
     description: Permet d'ajouter un nouveau réseau social à son compte.
