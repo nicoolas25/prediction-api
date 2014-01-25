@@ -40,18 +40,6 @@ schemas:
             "type": "string",
             "required": true
           },
-          "avatar": {
-            "type": "array",
-            "required": true,
-            "normal": {
-              "type": "string",
-              "required": true
-            },
-            "mini": {
-              "type": "string",
-              "required": true
-            }
-          },
           "social": {
             "type": "array",
             "required": false,
@@ -61,6 +49,10 @@ schemas:
                 "provider": {
                   "type": "string",
                   "title": "Nom du réseau social lié au compte de l'utilisateur"
+                },
+                "id": {
+                  "type": "string",
+                  "title": "Identifiant de l'utilisateur pour le provider donné"
                 }
               }
             }

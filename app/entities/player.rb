@@ -2,8 +2,6 @@ module Entities
   class Player < Grape::Entity
     format_with(:timestamp) { |dt| dt.to_i }
 
-    expose :id
-
     expose :token,            if: :token
     expose :token_expiration, if: :token, format_with: :timestamp
 

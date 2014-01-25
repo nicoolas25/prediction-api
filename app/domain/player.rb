@@ -5,7 +5,7 @@ module Domain
   class Player
     include Common
 
-    attr_accessor :id, :nickname, :friends, :social_associations, :token, :token_expiration
+    attr_accessor :id, :nickname, :first_name, :last_name, :social_associations, :friends, :token, :token_expiration
 
     def regenerate_token!
       self.token = SecureRandom.hex
