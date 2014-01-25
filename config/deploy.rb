@@ -68,6 +68,15 @@ namespace :db do
       #{echo_cmd %[bundle exec rake db:migrate]}
     }
   end
+
+  desc "Cleanup the existing data."
+  task :cleanup => :environment do
+    queue %{
+      echo "-----> Cleaning the database data" &&
+      #{echo_cmd %[cd #{deploy_to}/current]}
+      #{echo_cmd %[bundle exec rake db:clean]}
+    }
+  end
 end
 
 #

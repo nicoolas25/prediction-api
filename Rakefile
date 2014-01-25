@@ -25,4 +25,12 @@ namespace :db do
 
     Rake::Task['db:version'].execute
   end
+
+  desc "Cleanup the database of all of its data"
+  task :clean do
+    puts "Trucate players..."
+    DB[:players].truncate
+    puts "Trucate social associations..."
+    DB[:social_associations].truncate
+  end
 end
