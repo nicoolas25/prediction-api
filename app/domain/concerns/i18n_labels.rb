@@ -16,7 +16,7 @@ module Domain
     def labels=(hash)
       hash = hash.with_indifferent_access
       LOCALES.each do |locale|
-        if (val = hash[:"label_#{locale}"]).present?
+        if (val = hash[locale]).present?
           self.__send__(:"label_#{locale}=", val)
         end
       end

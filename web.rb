@@ -21,7 +21,6 @@ module Prediction
     post '/questions' do
       return 404 if params[:token] != "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB"
 
-
       qparams = params[:question]
       author = Domain::Player.root
       question = Domain::Question.new(author: author)

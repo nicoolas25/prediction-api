@@ -16,8 +16,8 @@ module Domain
     def choices=(hash)
       hash = hash.with_indifferent_access
       LOCALES.each do |locale|
-        if (val = hash[:"choices_#{locale}"]).present?
-          self.__send__(:"choices_#{locale}=", val.map(&:strip).join(','))
+        if (val = hash[locale]).present?
+          self.__send__(:"choices_#{locale}=", val.split(',').map(&:strip).join(','))
         end
       end
     end
