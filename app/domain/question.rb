@@ -2,8 +2,11 @@ module Domain
   class Question < ::Sequel::Model
     unrestrict_primary_key
 
-    many_to_one :author, class: '::Domain::Player'
-    one_to_many :components, class: '::Domain::QuestionComponent'
+    many_to_one  :author, class: '::Domain::Player'
+    one_to_many  :components, class: '::Domain::QuestionComponent'
+    one_to_many  :predictions
+    one_to_many  :participations
+    many_to_many :players, join_table: :participations
 
     include I18nLabels
 

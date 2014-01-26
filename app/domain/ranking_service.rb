@@ -7,7 +7,7 @@ module Domain
 
     def rank
       participations.each_with_object({}) do |p, scores|
-        scores[p.player] = (scores[p.player] || 0) + p.earnings
+        scores[p.player] = (scores[p.player] || 0) + p.winnings
       end
     end
 

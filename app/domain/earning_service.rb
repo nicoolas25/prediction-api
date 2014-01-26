@@ -6,25 +6,25 @@ module Domain
 
     def earning_for(participation)
       compute_groups!
-      prediction_cristals = @cristals[participation.prediction]
-      other_cristals = @total - prediction_cristals
-      ratio = participation.cristals / prediction_cristals.to_f
-      (other_cristals * ratio).to_i + participation.cristals
+      prediction_stakes = @stakes[participation.prediction]
+      other_stakes = @total - prediction_stakes
+      ratio = participation.stakes / prediction_stakes.to_f
+      (other_stakes * ratio).to_i + participation.stakes
     end
 
     private
 
-      # @cristals can be obtained by SQL
+      # @stakes can be obtained by SQL
       # @total can be accumulated in the question
       def compute_groups!
-        @total    ||= 0
-        @groups   ||= @question.participations.group_by(&:prediction)
-        @cristals ||= @groups.each_with_object({}) do |(prediction, participations), hash|
-          prediction_cristals = participations.reduce(0) do |sum, participation|
-            participation.cristals + sum
+        @total  ||= 0
+        @groups ||= @question.participations.group_by(&:prediction)
+        @stakes ||= @groups.each_with_object({}) do |(prediction, participations), hash|
+          prediction_stakes = participations.reduce(0) do |sum, participation|
+            participation.stakes + sum
           end
-          hash[prediction] = prediction_cristals
-          @total += prediction_cristals
+          hash[prediction] = prediction_stakes
+          @total += prediction_stakes
         end
       end
   end
