@@ -13,9 +13,15 @@ module Entities
     end
 
     expose :choices, if: ->(c, opts){ c.kind == 0 } do |c, opts|
-      r = { propositions: c.choices[opts[:locale]] }
-      r[:dev_infos] = c.choices['dev'] if c.choices['dev']
-      r
+      localized_choices = c.choices[opts[:locale]]
+      dev_infos         = c.choices['dev']
+      choices           = []
+      localized_choices.each_with_index do |label, position|
+        choice = {label: label, position: position}
+        choice[:dev_info] = dev_infos[position] if dev_infos && dev_infos.kind_of?(Array)
+        choices << choice
+      end
+      choices
     end
   end
 end
