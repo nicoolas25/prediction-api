@@ -4,9 +4,6 @@ module SocialAPI
   class Facebook < Base
     include HTTParty
 
-    SMALL_PATTERN = "http://graph.facebook.com/%s/picture?height=100&width=100"
-    BIG_PATTERN   = "http://graph.facebook.com/%s/picture?height=300&width=300"
-
     base_uri 'https://graph.facebook.com'
     format :json
 
@@ -20,10 +17,6 @@ module SocialAPI
 
     def social_id
       @social_id ||= infos && infos['id']
-    end
-
-    def avatar_url(size=:small)
-      social_id && ((size == :big ? BIG_PATTERN : SMALL_PATTERN) % social_id)
     end
 
   private

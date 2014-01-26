@@ -14,7 +14,7 @@ module Controllers
       begin
         player = Domain::Player.find_by_social_infos(params[:oauth2Provider], params[:oauth2Token])
         player.authenticate!
-        present player, with: Entities::Player, token: true
+        present player, with: Entities::Player, token: true, config: true
       rescue Domain::Error
         fail! $!, 401
       end

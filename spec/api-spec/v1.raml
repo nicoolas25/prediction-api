@@ -3,7 +3,7 @@
 title: Prédiction
 version: v1
 baseUri: http://api.predictio.info/{version}
-schemas:
+schemas:  
   - errorReport: |
       {
         "$schema": "http://json-schema.org/schema",
@@ -48,20 +48,6 @@ schemas:
                   "type": "string",
                   "title": "Identifiant de l'utilisateur pour le provider donné"
                 }
-              }
-            }
-          },
-          "avatars": {
-            "type": "object",
-            "required": true,
-            "properties": {
-              "big": {
-                "type": "string",
-                "required": true
-              },
-              "small": {
-                "type": "string",
-                "required": true
               }
             }
           },
@@ -114,6 +100,11 @@ schemas:
           },
           "country": {
             "type": "string",
+            "required": false
+          },
+          "config": {
+            "type": "object",
+            "title": "La configuration de l'application",
             "required": false
           }
         }
@@ -487,11 +478,34 @@ traits:
             réponse pour utiliser le reste de l'API.
           body:
             application/json:
-              schema: TODO
+              schema: user
               example: |
                 {
-                  "authenticationToken": "abcdef01234567890",
-                  "validUntil": "2014-01-08 19:38:53 +0100"
+                  "token":"e92e040be1e896c6b38b2128051367f0",
+                  "token_expiration":1390931057,
+                  "nickname":"nicoolas25",
+                  "first_name":"John",
+                  "last_name":"Do",
+                  "social":[
+                    {
+                      "provider":0,
+                      "id":"100006962349730"
+                    }
+                  ],
+                  "config":{
+                    "stake":{
+                      "min":10,
+                      "max":1000
+                    },
+                    "avatars":{
+                      "small":{
+                        "facebook":"http://graph.facebook.com/__id__/picture?height=100\u0026width=100"
+                      },
+                      "big":{
+                        "facebook":"http://graph.facebook.com/__id__/picture?height=300\u0026width=300"
+                      }
+                    }
+                  }
                 }
   - secured:
       usage: Appliquer sur chaque méthode qui nécessite d'être identifié
