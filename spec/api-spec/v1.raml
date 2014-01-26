@@ -609,28 +609,34 @@ traits:
     body:
       application/json:
         schema: newQuestion
-  /{questionId}:
-    is: [ secured ]
-    type: { member: { elementName: "Question" } }
+  /{locale}:
     uriParameters:
-      questionId:
-        description: L'identifiant d'une question en particulier.
+      locale:
+        description: La langue dans laquelle les textes de la questions doivent être retournés
         type: string
-  /{scope}:
-    is: [ secured ]
-    type: { collection: { elementName: "Questions" } }
-    uriParameters:
-      scope:
-        description: Filtre les questions pour n'afficher que les amis.
-        type: string
-        pattern: friends|global|userId
-    /{tag}:
+        pattern: fr|en
+    /{questionId}:
       is: [ secured ]
-      type: { collection: { elementName: "Question" } }
+      type: { member: { elementName: "Question" } }
       uriParameters:
-        tag:
-          description: Filtre les questions pour n'afficher qu'un certain tag.
+        questionId:
+          description: L'identifiant d'une question en particulier.
           type: string
+    /{scope}:
+      is: [ secured ]
+      type: { collection: { elementName: "Questions" } }
+      uriParameters:
+        scope:
+          description: Filtre les questions pour n'afficher que les amis.
+          type: string
+          pattern: friends|global|userId
+      /{tag}:
+        is: [ secured ]
+        type: { collection: { elementName: "Question" } }
+        uriParameters:
+          tag:
+            description: Filtre les questions pour n'afficher qu'un certain tag.
+            type: string
 /participations/{questionId}:
   is: [ secured ]
   uriParameters:
