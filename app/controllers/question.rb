@@ -26,7 +26,7 @@ module Controllers
     end
     get '/questions/:locale/:id' do
       locale = params[:locale].to_sym
-      if question = Domain::Question.with_locale(locale).where(id: id).first
+      if question = Domain::Question.with_locale(locale).where(id: params[:id]).first
         present question, with: Entities::Question, locale: locale, details: true
       else
         fail!(:question_not_found , 404)

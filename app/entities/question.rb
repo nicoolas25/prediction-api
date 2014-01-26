@@ -7,7 +7,7 @@ module Entities
 
     expose :expires_at, format_with: :timestamp
 
-    expose :dev_info do |q, opts|
+    expose :dev_info, if: ->(q, opts){ q.labels['dev'] } do |q, opts|
       q.labels['dev']
     end
 

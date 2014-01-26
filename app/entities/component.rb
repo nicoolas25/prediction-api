@@ -8,13 +8,14 @@ module Entities
       c.labels[opts[:locale]]
     end
 
-    expose :dev_info do |c, opts|
+    expose :dev_info, if: ->(c, opts){ c.labels['dev'] } do |c, opts|
       c.labels['dev']
     end
 
     expose :choices, if: ->(c, opts){ c.kind == 0 } do |c, opts|
-      { propositions: c.choices[opts[:locale]],
-        dev_infos: c.choices['dev'] }
+      r = { propositions: c.choices[opts[:locale]] }
+      r[:dev_infos] = c.choices['dev'] if c.choices['dev']
+      r
     end
   end
 end
