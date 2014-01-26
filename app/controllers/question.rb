@@ -15,7 +15,7 @@ module Controllers
     end
     get '/questions/:locale/global/open' do
       questions = Domain::Question.where(author_id: nil).all
-      present questions, with: Entities::Question, type: :list
+      present questions, with: Entities::Question, type: :list, locale: params[:locale]
     end
   end
 end
