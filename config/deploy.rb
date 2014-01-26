@@ -70,11 +70,20 @@ namespace :db do
   end
 
   desc "Cleanup the existing data."
-  task :cleanup => :environment do
+  task :clean => :environment do
     queue %{
       echo "-----> Cleaning the database data" &&
       #{echo_cmd %[cd #{deploy_to}/current]}
       #{echo_cmd %[bundle exec rake db:clean]}
+    }
+  end
+
+  desc "Cleanup the test players."
+  task :clean_test_players => :environment do
+    queue %{
+      echo "-----> Cleaning the test players" &&
+      #{echo_cmd %[cd #{deploy_to}/current]}
+      #{echo_cmd %[bundle exec rake db:clean_test_players]}
     }
   end
 end

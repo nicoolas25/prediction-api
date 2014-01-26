@@ -2,7 +2,7 @@ Sequel.migration do
   change do
     create_table(:questions) do
       primary_key :id, type: Bignum
-      Bignum :author_id, null: false
+      Bignum :author_id
       Integer :cristals, null: false, default: 0
 
       String :label_fr, size: 500, null: true

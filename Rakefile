@@ -37,4 +37,10 @@ namespace :db do
     puts "Truncate components..."
     DB[:components].truncate(cascade: true)
   end
+
+  desc "Remove the database users"
+  task :clean_test_players do
+    count = DB[:players].where(Sequel.like(:nickname, '%_test')).delete
+    puts "#{count} players removed"
+  end
 end

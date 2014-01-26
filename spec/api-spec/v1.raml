@@ -495,7 +495,8 @@ traits:
             Des détails peuvent être dans le corps de la réponse.
           body:
             application/json:
-              schema: errorReport
+              schema: errorCode
+              example: {"code":"nickname_taken"}
 /registrations:
   post:
     is: [ exigent ]

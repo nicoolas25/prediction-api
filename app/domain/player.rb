@@ -71,10 +71,6 @@ module Domain
         raise SocialAPIError.new(:invalid_oauth2_token)    unless api.valid?
         api
       end
-
-      def root
-        where(nickname: 'nicoolas25').first
-      end
     end
   end
 end
