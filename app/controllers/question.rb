@@ -14,8 +14,9 @@ module Controllers
       requires :locale, type: String, regexp: /^(fr)|(en)$/
     end
     get '/questions/:locale/global/open' do
-      questions = Domain::Question.where(author_id: nil).all
-      present questions, with: Entities::Question, type: :list, locale: params[:locale]
+      locale = params[:locale].to_sym
+      questions = Domain::Question.global.open.with_locale(locale).all
+      present questions, with: Entities::Question, type: :list, locale: locale
     end
   end
 end
