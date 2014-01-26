@@ -22,8 +22,8 @@ module SocialAPI
       @social_id ||= infos && infos['id']
     end
 
-    def avatar_url(big=false)
-      social_id && ((big ? BIG_PATTERN : SMALL_PATTERN) % social_id)
+    def avatar_url(size=:small)
+      social_id && ((size == :big ? BIG_PATTERN : SMALL_PATTERN) % social_id)
     end
 
   private
