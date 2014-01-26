@@ -23,7 +23,8 @@ module Prediction
       qparams = params[:question]
       question = Domain::Question.new
       question.labels = qparams[:labels]
-      components = qparams[:components].values.map do |attrs|
+      question.expires_at = Time.parse(qparams[:expires_at])
+      component = qparams[:components].values.map do |attrs|
         component = Domain::QuestionComponent.new
         component.kind = attrs[:kind].to_i
         component.labels = attrs[:labels]

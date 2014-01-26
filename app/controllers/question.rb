@@ -10,8 +10,12 @@ module Controllers
     end
 
     desc "List all the questions"
-    post '/questions' do
-      {}
+    params do
+      requires :locale, type: String, regexp: /^(fr)|(en)$/
+    end
+    get '/questions/:locale/global/open' do
+      questions = Domain::Question.where(author_id: nil).all
+      present questions, with: Entities::Question, type: :list
     end
   end
 end

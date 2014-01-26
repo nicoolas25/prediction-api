@@ -183,13 +183,13 @@ schemas:
           "type": "object",
           "title": "Question",
           "properties": {
-            "questionId": {
+            "id": {
               "type": "string",
               "required": true
             },
             "author": {
               "type": "object",
-              "required": true,
+              "required": false,
               "properties": {
                 "id": {
                   "type": "string",
@@ -207,7 +207,12 @@ schemas:
             },
             "label": {
               "type": "string",
+              "title": "Label de la question dans la locale demandée",
               "required": true
+            },
+            "dev_info": {
+              "type": "string",
+              "required": false
             },
             "madePrediction": {
               "type": "boolean",

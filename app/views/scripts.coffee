@@ -22,17 +22,24 @@ $ ->
 
   $(document).on 'submit', 'form', (e) ->
     e.preventDefault()
-    params = {labels: {}, components: []}
+    params = {labels: {}, components: [], expires_at: null}
     $form = $(@)
+
+    expires_at = $form.find('> fieldset > input.expires_at').val()
+    params.expires_at = expires_at
+
     insertLocales($form, params.labels)
+
     $form.find('> fieldset > div.component').each (_, component) ->
       componentHash = {labels: {}}
       $component = $(component)
       componentHash.kind = $component.find('select.kind').val()
       insertLocales($component, componentHash.labels)
+
       if componentHash.kind is '0' # choices
         componentHash.choices = {}
         insertLocales($component, componentHash.choices, 'choice')
+
       params.components.push(componentHash)
 
     $.ajax '/questions',
