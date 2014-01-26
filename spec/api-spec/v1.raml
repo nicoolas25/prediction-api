@@ -307,11 +307,19 @@ schemas:
               "type": "object",
               "title": "Composant de la question",
               "properties": {
+                "id": {
+                  "type": "integer",
+                  "required": true
+                },
                 "label": {
                   "type": "string",
                   "required": true
                 },
-                "componentType": {
+                "dev_info": {
+                  "type": "string",
+                  "required": false
+                },
+                "kind": {
                   "type": "string",
                   "required": true
                 },
@@ -327,14 +335,13 @@ schemas:
                         "type": "string",
                         "required": "true"
                       },
-                      "choiceId": {
-                        "type": "string",
+                      "position": {
+                        "type": "integer",
                         "required": true
                       },
-                      "predictions": {
-                        "type": "integer",
-                        "title": "Le nombre de prédictions contenant ce choix",
-                        "required": false
+                      "dev_info": {
+                        "type": "string",
+                        "required": "true"
                       }
                     }
                   }
