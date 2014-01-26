@@ -622,7 +622,7 @@ traits:
         questionId:
           description: L'identifiant d'une question en particulier.
           type: string
-    /{scope}:
+    /{scope}/{status}:
       is: [ secured ]
       type: { collection: { elementName: "Questions" } }
       uriParameters:
@@ -630,6 +630,10 @@ traits:
           description: Filtre les questions pour n'afficher que les amis.
           type: string
           pattern: friends|global|userId
+        status:
+          description: Filtre les questions pour n'afficher que les question dans un certain état.
+          type: string
+          pattern: outdated|answered|open
       /{tag}:
         is: [ secured ]
         type: { collection: { elementName: "Question" } }

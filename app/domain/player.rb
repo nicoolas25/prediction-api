@@ -32,7 +32,11 @@ module Domain
     class << self
       def find_by_social_infos(provider_name, token)
         api = social_api(provider_name, token)
-        player = join(:social_associations).where(social_associations__provider: api.provider_id, social_associations__id: api.social_id).first
+        player =
+          select_all(:players).
+          join(:social_associations, player_id: :id).
+          where(social_associations__provider: api.provider_id, social_associations__id: api.social_id).
+          first
         raise SessionError.new(:social_account_unknown) unless player
         player
       end
@@ -55,13 +59,6 @@ module Domain
           end
         end
 
-        player
-      end
-
-      def find_by_social_infos(provider_name, token)
-        api = social_api(provider_name, token)
-        player = join(:social_associations).where(social_associations__provider: api.provider_id, social_associations__id: api.social_id).first
-        raise SessionError.new(:social_account_unknown) unless player
         player
       end
 

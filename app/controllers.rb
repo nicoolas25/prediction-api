@@ -5,7 +5,7 @@ module Controllers
     attr_reader :code, :status
 
     def initialize(error, status)
-      @code   = error.message
+      @code   = error.respond_to?(:message) ? error.message : error
       @status = status
     end
   end
@@ -30,9 +30,22 @@ module Controllers
       def fail!(err, status)
         raise ::Controllers::Failure.new(err, status)
       end
+
+      def player
+        return @player if @__player
+
+        token     = headers['Authentication-Token']
+        @__player = true
+        @player   = Domain::Player.where(token: token).where{ token_expiration > Time.now }.first
+      end
+
+      def check_auth!
+        fail!(:unauthorized, 401) if player.nil?
+      end
     end
   end
 
+  autoload :Question,     './app/controllers/question'
   autoload :Registration, './app/controllers/registration'
   autoload :Session,      './app/controllers/session'
 end

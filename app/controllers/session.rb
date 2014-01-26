@@ -12,10 +12,10 @@ module Controllers
     end
     post '/sessions' do
       begin
-        player = Domain::Players.find_by_social_infos(params[:oauth2Provider], params[:oauth2Token])
+        player = Domain::Player.find_by_social_infos(params[:oauth2Provider], params[:oauth2Token])
         player.authenticate!
         present player, with: Entities::Player, token: true
-      rescue
+      rescue Domain::Error
         fail! $!, 401
       end
     end
