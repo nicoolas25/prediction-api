@@ -14,5 +14,7 @@ module Entities
     expose :label do |q, opts|
       q.labels[opts[:locale]]
     end
+
+    expose :components, using: Component, if: :details
   end
 end

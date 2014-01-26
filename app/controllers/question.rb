@@ -16,7 +16,21 @@ module Controllers
     get '/questions/:locale/global/open' do
       locale = params[:locale].to_sym
       questions = Domain::Question.global.open.with_locale(locale).all
-      present questions, with: Entities::Question, type: :list, locale: locale
+      present questions, with: Entities::Question, locale: locale
+    end
+
+    desc "Show the details of a question"
+    params do
+      requires :locale, type: String, regexp: /^(fr)|(en)$/
+      requires :id, type: String, regexp: /^\d+$/
+    end
+    get '/questions/:locale/:id' do
+      locale = params[:locale].to_sym
+      if question = Domain::Question.with_locale(locale).where(id: id).first
+        present question, with: Entities::Question, locale: locale, details: true
+      else
+        fail!(:question_not_found , 404)
+      end
     end
   end
 end
