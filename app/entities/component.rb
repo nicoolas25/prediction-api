@@ -1,5 +1,7 @@
 module Entities
   class Component < Grape::Entity
+    expose :id
+
     expose :kind do |c, opts|
       Domain::QuestionComponent::KINDS[c.kind]
     end
