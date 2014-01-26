@@ -21,5 +21,9 @@ module Domain
         end
       end
     end
+
+    def choices_count
+      choices.values.first.try(:size) || 0
+    end
   end
 end

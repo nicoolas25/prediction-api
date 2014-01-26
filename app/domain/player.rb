@@ -32,6 +32,36 @@ module Domain
       end
     end
 
+    def participate_to!(question, stakes, raw_answers)
+      # Verify that the stakes are in the expected range
+      if defined?(APPLICATION_CONFIG)
+        range = APPLICATION_CONFIG[:stakes]
+        if range[:min] >= stakes && range[:max] <= stakes
+          raise ParticipationError.new(:invalid_stakes)
+        end
+      end
+
+      prediction = participation = nil
+
+      DB.transaction(isolation: :repeatable) do
+        if player.questions.where(id: question.id).count > 0
+          raise ParticipationError.new(:participation_exists)
+        end
+        prediction = Prediction.first_or_create_from_raw_answers(raw_answers, question)
+        participation = Participation.create(
+          player: self,
+          question: question,
+          prediction: prediction,
+          stakes: stakes)
+      end
+
+      # TODO: Increment the accumulators
+      # prediction.increment_with!(participation)
+      # question.increment_with!(participation)
+
+      participation
+    end
+
     class << self
       def find_by_social_infos(provider_name, token)
         api = social_api(provider_name, token)

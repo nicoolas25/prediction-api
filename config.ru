@@ -3,7 +3,7 @@ require './api'
 require './web'
 
 APPLICATION_CONFIG = {
-  stake: {
+  stakes: {
     min: 10,
     max: 1000
   },

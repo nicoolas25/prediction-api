@@ -1,5 +1,9 @@
 Sequel.migration do
   change do
+    alter_table(:predictions) do
+      add_column :cksum, String, null: false, size: 100
+    end
+
     create_table(:participations) do
       Bignum  :player_id,     null: false
       Bignum  :prediction_id, null: false
