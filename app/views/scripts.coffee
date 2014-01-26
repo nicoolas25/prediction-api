@@ -40,3 +40,8 @@ $ ->
       data:
         token: $form.find('input.token').val()
         question: params
+    .done ->
+      alert('Done!')
+    .fail ->
+      console.log arguments
+      alert('Fail!')
