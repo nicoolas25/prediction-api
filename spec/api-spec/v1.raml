@@ -7,22 +7,16 @@ schemas:
   - errorReport: |
       {
         "$schema": "http://json-schema.org/schema",
-        "type": "array",
-        "title": "Liste d'erreurs",
-        "items": {
-          "type": "object",
-          "title": "Détail de l'erreur",
-          "properties": {
-            "field": {
-              "type": "string",
-              "title": "Origine de l'erreur",
-              "require": true
-            },
-            "reason": {
-              "type": "string",
-              "title": "Motif de l'erreur",
-              "require": true
-            }
+        "type": "object",
+        "title": "Rapport d'erreur",
+        "properties": {
+          "code": {
+            "type": "string",
+            "required": true
+          },
+          "details": {
+            "type": "array",
+            "required": false
           }
         }
       }
@@ -495,8 +489,7 @@ traits:
             Des détails peuvent être dans le corps de la réponse.
           body:
             application/json:
-              schema: errorCode
-              example: {"code":"nickname_taken"}
+              schema: errorReport
 /registrations:
   post:
     is: [ exigent ]
@@ -535,6 +528,14 @@ traits:
           Dans le corps de la réponse figurent plus de détails sur l'origine
           de ce conflit. Ça peut être un email déjà utilisé ou bien un compte de
           réseau social déjà lié ou encore un pseudo déjà utilisé.
+
+          Voici les codes d'erreurs à prendre en compte :
+
+          * `nickname_taken`
+          * `social_account_taken`
+          * `bad_parameters`
+          * `invalid_oauth2_provider`
+          * `invalid_oauth2_token`
   patch:
     is: [ secured ]
     description: Permet d'ajouter un nouveau réseau social à son compte.
@@ -553,6 +554,15 @@ traits:
       
       L'utilisateur peut utiliser soit son couple email / password soit un des
       réseaux sociaux liés à son compte.
+    responses:
+      403:
+        description: |
+          Voici les codes d'erreurs à prendre en compte :
+
+          * `bad_parameters`
+          * `social_account_unknown`
+          * `invalid_oauth2_provider`
+          * `invalid_oauth2_token`
 /users:
   /{who}:
     is: [ secured, exigent ]
