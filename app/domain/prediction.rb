@@ -1,8 +1,9 @@
 module Domain
   class Prediction
-    include Common
+    unrestrict_primary_key
 
-    attr_accessor :answers, :question
+    many_to_one :question
+    one_to_many :answers, class: '::Domain::PredictionAnswer'
 
     def right?
       answers.all?(&:right?)

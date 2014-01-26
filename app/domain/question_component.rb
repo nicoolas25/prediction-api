@@ -5,6 +5,7 @@ module Domain
     set_dataset :components
 
     many_to_one :question
+    one_to_many :answers, class: '::Domain::PredictionAnswer'
 
     include I18nLabels
     include I18nChoices
