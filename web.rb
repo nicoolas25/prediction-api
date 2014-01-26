@@ -7,6 +7,8 @@ require './app/domain'
 
 module Prediction
   class Web < Sinatra::Base
+    ADMIN_TOKEN = "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB".freeze
+
     set :views, './app/views'
 
     get '/' do
@@ -18,13 +20,13 @@ module Prediction
     end
 
     post '/questions' do
-      return 404 if params[:token] != "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB"
+      return 404 if params[:token] != ADMIN_TOKEN
 
       qparams = params[:question]
       question = Domain::Question.new
       question.labels = qparams[:labels]
       question.expires_at = Time.parse(qparams[:expires_at])
-      component = qparams[:components].values.map do |attrs|
+      components = qparams[:components].values.map do |attrs|
         component = Domain::QuestionComponent.new
         component.kind = attrs[:kind].to_i
         component.labels = attrs[:labels]
