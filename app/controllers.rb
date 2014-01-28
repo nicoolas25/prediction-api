@@ -45,8 +45,8 @@ module Controllers
     end
   end
 
-  autoload :Participatio, './app/controllers/participation'
-  autoload :Question,     './app/controllers/question'
-  autoload :Registration, './app/controllers/registration'
-  autoload :Session,      './app/controllers/session'
+  autoload :Participation, './app/controllers/participation'
+  autoload :Question,      './app/controllers/question'
+  autoload :Registration,  './app/controllers/registration'
+  autoload :Session,       './app/controllers/session'
 end
