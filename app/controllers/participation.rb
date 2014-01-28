@@ -13,7 +13,7 @@ module Controllers
     params do
       requires :id, type: String, regexp: /^\d+$/
     end
-    post '/participations' doa
+    post '/participations' do
       question = Domain::Question.open.where(id: params[:id]).eager(:components).first
       fail!(:question_not_found_or_expired , 404) unless question
 
