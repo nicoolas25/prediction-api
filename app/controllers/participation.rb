@@ -1,5 +1,5 @@
 module Controllers
-  class Question < Grape::API
+  class Participation < Grape::API
     include Common
 
     version 'v1'
