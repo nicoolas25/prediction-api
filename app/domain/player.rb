@@ -25,6 +25,11 @@ module Domain
       self.token_expiration = Time.now + 2.days
     end
 
+    def expire_token!
+      self.token = nil
+      self.token_expiration = Time.now
+    end
+
     def authenticate!
       DB.transaction(retry_on: [Sequel::ConstraintViolation], num_retries: 30) do
         regenerate_token!

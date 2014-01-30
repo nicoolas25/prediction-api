@@ -1,5 +1,3 @@
-require 'grape'
-
 require './app/controllers'
 
 module Prediction

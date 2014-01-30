@@ -33,5 +33,6 @@ end
 group :test do
   gem 'rspec', '~> 3.0.0.beta1'
   gem 'simplecov'
+  gem 'rack-test', require: 'rack/test'
   gem 'pry'
 end

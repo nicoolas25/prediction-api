@@ -147,6 +147,7 @@ DEPENDENCIES
   pg
   pry
   puma
+  rack-test
   rspec (~> 3.0.0.beta1)
   sequel
   simplecov

@@ -1,3 +1,5 @@
+require 'grape'
+
 require './app/entities'
 
 module Controllers
@@ -24,6 +26,8 @@ module Controllers
       end
 
       helpers Helpers
+
+      logger LOGGER
     end
 
     module Helpers

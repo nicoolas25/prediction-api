@@ -1,6 +1,13 @@
-config:
+app:
   user: prediction
   pass: NNBb4GGYur
   name: prediction
+  host: localhost
+  port: 5433
+
+test:
+  user: prediction
+  pass: NNBb4GGYur
+  name: prediction_test
   host: localhost
   port: 5433
