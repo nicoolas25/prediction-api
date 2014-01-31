@@ -12,4 +12,35 @@ Feature: Session
     And the JSON response should have "$.token"
     And the "nickname" user should have a valid token equal to "$.token"
 
+  Scenario: Authenticate an non-existing user
+    Given I accept JSON
+    And I have a valid OAuth2 token for the "facebook" provider which returns the id "fake-id"
+    When I send a POST request to "/v1/sessions" with the following:
+      | oauth2Provider | facebook   |
+      | oauth2Token    | test-token |
+    Then the response status should be "401"
+    And the JSON response should have "$.code" with the text "social_account_unknown"
 
+  Scenario: Register a new user with an invalid provider
+    Given I accept JSON
+    When I send a POST request to "/v1/sessions" with the following:
+      | oauth2Provider | unknown    |
+      | oauth2Token    | test-token |
+    Then the response status should be "401"
+    And the JSON response should have "$.code" with the text "invalid_oauth2_provider"
+
+  Scenario: Register a new user with an invalid token
+    Given I accept JSON
+    And I have an invalid OAuth2 token for the "facebook" provider
+    When I send a POST request to "/v1/sessions" with the following:
+      | oauth2Provider | facebook   |
+      | oauth2Token    | test-token |
+    Then the response status should be "401"
+    And the JSON response should have "$.code" with the text "invalid_oauth2_token"
+
+  Scenario: Register a new user with a missing parameter
+    Given I accept JSON
+    When I send a POST request to "/v1/sessions" with the following:
+      | oauth2Provider | facebook   |
+    Then the response status should be "400"
+    And the JSON response should have "$.code" with the text "bad_parameters"
