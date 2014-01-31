@@ -1,7 +1,7 @@
 module Domain
   class MalformedComponentError < Error ; end
 
-  class Prediction
+  class Prediction < ::Sequel::Model
     unrestrict_primary_key
 
     many_to_one  :question
@@ -31,8 +31,7 @@ module Domain
         prediction = create(question: question, cksum: cksum)
         question.components.map do |component|
           answer = raw_answers.find{ |answer| answer['id'] == component.id.to_s }
-            prediction.add_answer(component_id: answer['id'], value: answer['value'].to_f)
-          end
+          prediction.add_answer(component_id: answer['id'], value: answer['value'].to_f)
         end
         prediction
       end

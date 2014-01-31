@@ -1,5 +1,5 @@
 module Domain
-  class PredictionAnswer
+  class PredictionAnswer < ::Sequel::Model
     many_to_one :prediction
     many_to_one :component, class: '::Domain::QuestionComponent'
 
