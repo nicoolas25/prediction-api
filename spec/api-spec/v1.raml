@@ -683,10 +683,6 @@ traits:
             type: string
 /participations:
   is: [ secured ]
-  uriParameters:
-    questionId:
-      description: L'identifiant d'une question en particulier.
-      type: string
   post:
     is: [ exigent ]
     description: Créé une participation pour une question donnée.
@@ -712,7 +708,7 @@ traits:
                   "reason": "must provide at least 2 choices"
                 }
               ]
-  /{questionId}
+  /{questionId}:
     get:
       description: Liste des utilisateurs ayant fait une prédiction sur une question donnée.
       responses:
