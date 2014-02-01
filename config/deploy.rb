@@ -65,7 +65,7 @@ namespace :db do
   task :migrate => :environment do
     queue %{
       echo "-----> Migrating database" &&
-      #{echo_cmd %[bundle exec rake db:migrate]}
+      #{echo_cmd %[RACK_ENV=production bundle exec rake db:migrate]}
     }
   end
 
@@ -74,7 +74,7 @@ namespace :db do
     queue %{
       echo "-----> Cleaning the database data" &&
       #{echo_cmd %[cd #{deploy_to}/current]}
-      #{echo_cmd %[bundle exec rake db:clean]}
+      #{echo_cmd %[RACK_ENV=production bundle exec rake db:clean]}
     }
   end
 
@@ -83,7 +83,7 @@ namespace :db do
     queue %{
       echo "-----> Cleaning the test players" &&
       #{echo_cmd %[cd #{deploy_to}/current]}
-      #{echo_cmd %[bundle exec rake db:clean_test_players]}
+      #{echo_cmd %[RACK_ENV=production bundle exec rake db:clean_test_players]}
     }
   end
 end
