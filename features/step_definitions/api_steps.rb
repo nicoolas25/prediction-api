@@ -43,14 +43,20 @@ Then /^the JSON response should (not)?\s?have "([^"]*)"$/ do |negative, json_pat
 end
 
 Then /^the JSON response should (not)?\s?have "([^"]*)" with the text "([^"]*)"$/ do |negative, json_path, text|
-  json    = JSON.parse(last_response.body)
-  results = JsonPath.new(json_path).on(json).to_a.map(&:to_s)
+  json     = JSON.parse(last_response.body)
+  results  = JsonPath.new(json_path).on(json).to_a.map(&:to_s)
 
   if negative.present?
     expect(results).to_not include(text)
   else
     expect(results).to include(text)
   end
+end
+
+Then /^the JSON response should have (\d+) "([^"]*)"$/ do |given_size, json_path|
+  json  = JSON.parse(last_response.body)
+  count = JsonPath.new(json_path).on(json).to_a.size
+  expect(count).to eql(given_size.to_i)
 end
 
 Then /^the JSON response should be:$/ do |json|

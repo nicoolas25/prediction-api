@@ -31,3 +31,24 @@ Given /^I am an authenticated user$/ do
       | Authentication-Token | 12345 |
   }
 end
+
+Given /^existing (expired )?questions:$/ do |expired, questions|
+  questions.rows_hash.each do |id, label|
+    attrs = {id: id.to_i, label_fr: label}
+    attrs[:expires_at] = expired.present? ? (Time.now - 1.day) : (Time.now + 1.day)
+    Domain::Question.create(attrs)
+  end
+end
+
+Given /^existing components for the question "([^"]*)":$/ do |question_id, components|
+  components.raw.each_with_index do |(kind, label, *extra), position|
+    attrs = {}
+    attrs[:kind] = Domain::QuestionComponent::KINDS.index(kind)
+    attrs[:position] = position
+    attrs[:label_fr] = label
+    attrs[:choices_fr] = (kind == 'choices') ? extra.shift : nil
+    attrs[:question_id] = question_id
+    attrs[:valid_answer] = extra.shift.try(:to_f)
+    Domain::QuestionComponent.create(attrs)
+  end
+end
