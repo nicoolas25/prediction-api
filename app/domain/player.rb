@@ -26,7 +26,6 @@ module Domain
     end
 
     def expire_token!
-      self.token = nil
       self.token_expiration = Time.now
     end
 

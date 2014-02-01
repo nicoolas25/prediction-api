@@ -10,7 +10,24 @@ Given /^an user named "([^"]*)" is already registered$/ do |nickname|
   Domain::Player.create(nickname: nickname)
 end
 
+Given /^the user "([^"]*)" have a valid token(?:: "([^"]*))?"$/ do |nickname, token|
+  player = Domain::Player.first!(nickname: nickname)
+  player.token = token.presence || SecureRandom.hex
+  player.token_expiration = Time.now + 1.day
+  player.save
+end
+
 Given /^a social account for "([^"]*)"  with "([^"]*)" id is linked to "([^"]*)"$/ do |provider, id, nickname|
   player = Domain::Player.first!(nickname: nickname)
   player.add_social_association(provider: SocialAPI::PROVIDERS.index(provider), id: id, token: 'dont-care')
+end
+
+Given /^I am an authenticated user$/ do
+  nickname = "nickname"
+  steps %Q{
+    Given an user named "#{nickname}" is already registered
+    And the user "#{nickname}" have a valid token: "12345"
+    And I set headers:
+      | Authentication-Token | 12345 |
+  }
 end

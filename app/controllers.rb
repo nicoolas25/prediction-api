@@ -40,11 +40,11 @@ module Controllers
 
         token     = headers['Authentication-Token']
         @__player = true
-        @player   = Domain::Player.where(token: token).where{ token_expiration > Time.now }.first
+        @player   = token.present? && Domain::Player.where(token: token).where{ token_expiration > Time.now }.first
       end
 
       def check_auth!
-        fail!(:unauthorized, 401) if player.nil?
+        fail!(:unauthorized, 401) unless player
       end
     end
   end
