@@ -19,10 +19,10 @@ module Controllers
         fail!(:question_not_found_or_expired , 404) unless question
 
         stakes = params[:stakes].to_i
-        componnents = params[:componnents]
-        participation = player.participate_to!(question, stakes, componnents)
+        components = params[:components]
+        participation = player.participate_to!(question, stakes, components)
 
-        present participation, with: Participation
+        present participation, with: Entities::Participation
       rescue Domain::Error
         fail! $!, 403
       end

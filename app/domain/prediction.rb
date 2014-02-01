@@ -47,7 +47,9 @@ module Domain
       def valid_raw_answers?(raw_answers, question)
         question.components.all? do |component|
           raw_answers.any? do |answer|
-            answer['id'] == component.id.to_s && (!component.have_choices? || component.choices_count > answer['value'].to_i)
+            answer['value'].present? &&
+              answer['id'] == component.id.to_s &&
+              (!component.have_choices? || component.choices_count > answer['value'].to_i)
           end
         end
       end

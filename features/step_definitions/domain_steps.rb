@@ -19,3 +19,9 @@ Then /^the only registered players are:$/ do |users|
   size_2 = Domain::Player.dataset.exclude(nickname: user_nicknames).count
   expect(size_2).to eql(0)
 end
+
+Then /^a participation for the user "([^"]*)" to the question "([^"]*)" should exists$/ do |nickname, question_id|
+  player = Domain::Player.first!(nickname: nickname)
+  participations = player.questions_dataset.where(id: question_id).count
+  expect(participations).to eql(1)
+end

@@ -67,3 +67,71 @@ Feature: An registered user can participate once to an open question
     """
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "participation_exists"
+
+  Scenario: The user send a too-high value for a choice component
+    Given I am an authenticated user
+    And existing questions:
+      | 1 | Qui va gagner ?  |
+    And existing components for the question "1":
+      | 1 | choices | Chosir la bonne équipe | France,Belgique |
+    And I send and accept JSON
+    When I send a POST request to "/v1/participations" with the following:
+    """
+    {
+      "id": "1",
+      "stakes": 10,
+      "components": [
+        {
+          "id": "1",
+          "value": "2"
+        }
+      ]
+    }
+    """
+    Then the response status should be "403"
+    And the JSON response should have "$.code" with the text "invalid_components"
+
+  Scenario: The user send a component without value
+    Given I am an authenticated user
+    And existing questions:
+      | 1 | Qui va gagner ?  |
+    And existing components for the question "1":
+      | 1 | choices | Chosir la bonne équipe | France,Belgique |
+    And I send and accept JSON
+    When I send a POST request to "/v1/participations" with the following:
+    """
+    {
+      "id": "1",
+      "stakes": 10,
+      "components": [
+        {
+          "id": "1"
+        }
+      ]
+    }
+    """
+    Then the response status should be "403"
+    And the JSON response should have "$.code" with the text "invalid_components"
+
+  Scenario: The user send a valid answer
+    Given I am an authenticated user
+    And existing questions:
+      | 1 | Qui va gagner ?  |
+    And existing components for the question "1":
+      | 1 | choices | Chosir la bonne équipe | France,Belgique |
+    And I send and accept JSON
+    When I send a POST request to "/v1/participations" with the following:
+    """
+    {
+      "id": "1",
+      "stakes": 10,
+      "components": [
+        {
+          "id": "1",
+          "value": "0"
+        }
+      ]
+    }
+    """
+    Then the response status should be "201"
+    And a participation for the user "nickname" to the question "1" should exists
