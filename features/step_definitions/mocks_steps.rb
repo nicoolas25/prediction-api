@@ -61,3 +61,12 @@ Given /^the user "([^"]*)" has answered the question "([^"]*)" with:$/ do |nickn
   raw_answers = answers.hashes
   player.participate_to!(question, stakes, raw_answers)
 end
+
+Given /^an application configuration with "([^"]*)" set to "([^"]*)"$/ do |path, value|
+  value = value.to_i if value =~ /\d+/
+  @app_config ||= {}
+  path = path.split('.').map(&:to_sym)
+  name = path.pop
+  path.reduce(@app_config){|hash, segment| hash[segment] ||= {} }[name] = value
+  stub_const('APPLICATION_CONFIG', @app_config)
+end

@@ -42,7 +42,7 @@ module Domain
       # Verify that the stakes are in the expected range
       if defined?(APPLICATION_CONFIG)
         range = APPLICATION_CONFIG[:stakes]
-        if range[:min] >= stakes && range[:max] <= stakes
+        if range[:min] > stakes || range[:max] < stakes
           raise ParticipationError.new(:invalid_stakes)
         end
       end
