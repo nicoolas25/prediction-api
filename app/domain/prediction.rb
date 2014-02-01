@@ -1,3 +1,5 @@
+require './app/domain/prediction_answer'
+
 module Domain
   class MalformedComponentError < Error ; end
 
@@ -20,7 +22,7 @@ module Domain
         end
 
         components_sum = sum_from_raw_answers(raw_answers)
-        prediction = question.predictions.where(cksum: components_sum).first
+        prediction = question.predictions_dataset.where(cksum: components_sum).first
         return prediction if prediction
         create_from_raw_answers(raw_answers, components_sum, question)
       end
@@ -31,7 +33,7 @@ module Domain
         prediction = create(question: question, cksum: cksum)
         question.components.map do |component|
           answer = raw_answers.find{ |answer| answer['id'] == component.id.to_s }
-          prediction.add_answer(component_id: answer['id'], value: answer['value'].to_f)
+          prediction.add_answer(component: component, value: answer['value'].to_f)
         end
         prediction
       end

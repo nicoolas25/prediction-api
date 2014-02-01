@@ -16,7 +16,7 @@ Feature: Display the details of a question
     And existing questions:
       | 1 | Qui va gagner ? |
     And existing components for the question "1":
-      | choices | Chosir la bonne équipe | France,Belgique |
+      | 1 | choices | Chosir la bonne équipe | France,Belgique |
     When I send a GET request to "/v1/questions/fr/1"
     Then the response status should be "200"
     And the JSON response should have "$.label" with the text "Qui va gagner ?"

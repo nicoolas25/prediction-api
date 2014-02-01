@@ -1,5 +1,9 @@
 module Domain
   class PredictionAnswer < ::Sequel::Model
+    set_dataset :answers
+
+    unrestrict_primary_key
+
     many_to_one :prediction
     many_to_one :component, class: '::Domain::QuestionComponent'
 

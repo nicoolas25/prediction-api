@@ -1,5 +1,5 @@
 Sequel.migration do
-  change do
+  up do
     # Updates on the components
     alter_table(:components) do
       add_primary_key :id, type: Bignum
@@ -21,5 +21,18 @@ Sequel.migration do
       foreign_key [:prediction_id], :predictions, key: :id, on_delete: :cascade
       foreign_key [:component_id], :components, key: :id, on_delete: :set_null
     end
+  end
+
+  down do
+    drop_table :answers
+    drop_table :predictions
+
+    alter_table(:components) do
+      set_column_type :valid_answer, Integer
+      drop_constraint :components_pkey
+      drop_column :id
+    end
+
+
   end
 end

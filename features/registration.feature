@@ -20,6 +20,8 @@ Feature: Registration
       | nickname       | nickname   |
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "nickname_taken"
+    But the only registered players are:
+      | nickname |
 
   Scenario: Register a new user with an existing social account
     Given I accept JSON

@@ -17,9 +17,9 @@ Feature: Display lists of questions
       | 1 | Qui va gagner ?  |
       | 2 | Qui va marquer ? |
     And existing components for the question "1":
-      | choices | Chosir la bonne équipe | France,Belgique |
+      | 1 | choices | Chosir la bonne équipe | France,Belgique |
     And existing components for the question "2":
-      | choices | Chosir le bon joueur | Zidane,Zlatan |
+      | 2 | choices | Chosir le bon joueur | Zidane,Zlatan |
     When I send a GET request to "/v1/questions/fr/global/open"
     Then the response status should be "200"
     And the JSON response should have 2 "$.[*].*"

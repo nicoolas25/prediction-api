@@ -1,11 +1,13 @@
 require 'securerandom'
 
 require './lib/social_apis'
+require './app/domain/prediction'
 
 module Domain
   class RegistrationError < Error ; end
   class SessionError < Error ; end
   class SocialAPIError < Error ; end
+  class ParticipationError < Error ; end
 
   class Player < ::Sequel::Model
     unrestrict_primary_key
@@ -48,7 +50,7 @@ module Domain
       prediction = participation = nil
 
       DB.transaction(isolation: :repeatable) do
-        if player.questions.where(id: question.id).count > 0
+        if self.questions_dataset.where(id: question.id).count > 0
           raise ParticipationError.new(:participation_exists)
         end
         prediction = Prediction.first_or_create_from_raw_answers(raw_answers, question)

@@ -4,6 +4,8 @@ module Domain
 
     set_dataset :components
 
+    unrestrict_primary_key
+
     many_to_one :question
     one_to_many :answers, class: '::Domain::PredictionAnswer'
 

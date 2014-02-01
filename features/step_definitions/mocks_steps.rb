@@ -22,8 +22,8 @@ Given /^a social account for "([^"]*)"  with "([^"]*)" id is linked to "([^"]*)"
   player.add_social_association(provider: SocialAPI::PROVIDERS.index(provider), id: id, token: 'dont-care')
 end
 
-Given /^I am an authenticated user$/ do
-  nickname = "nickname"
+Given /^I am an authenticated user(?:: "([^"]*)")?$/ do |nickname|
+  nickname ||= "nickname"
   steps %Q{
     Given an user named "#{nickname}" is already registered
     And the user "#{nickname}" have a valid token: "12345"
@@ -41,8 +41,9 @@ Given /^existing (expired )?questions:$/ do |expired, questions|
 end
 
 Given /^existing components for the question "([^"]*)":$/ do |question_id, components|
-  components.raw.each_with_index do |(kind, label, *extra), position|
+  components.raw.each_with_index do |(id, kind, label, *extra), position|
     attrs = {}
+    attrs[:id] = id.to_i
     attrs[:kind] = Domain::QuestionComponent::KINDS.index(kind)
     attrs[:position] = position
     attrs[:label_fr] = label
@@ -51,4 +52,12 @@ Given /^existing components for the question "([^"]*)":$/ do |question_id, compo
     attrs[:valid_answer] = extra.shift.try(:to_f)
     Domain::QuestionComponent.create(attrs)
   end
+end
+
+Given /^the user "([^"]*)" has answered the question "([^"]*)" with:$/ do |nickname, question_id, answers|
+  stakes = 10
+  player = Domain::Player.first!(nickname: nickname)
+  question = Domain::Question.first!(id: question_id)
+  raw_answers = answers.hashes
+  player.participate_to!(question, stakes, raw_answers)
 end
