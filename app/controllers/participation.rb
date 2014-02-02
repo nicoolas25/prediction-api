@@ -15,9 +15,7 @@ module Controllers
     end
     post '/participations' do
       begin
-        question = Domain::Question.dataset.open.where(id: params[:id]).eager(:components).first
-        fail!(:question_not_found_or_expired , 404) unless question
-
+        question = Domain::Question.find_for_participation(player, params[:id])
         stakes = params[:stakes].to_i
         components = params[:components]
         participation = player.participate_to!(question, stakes, components)

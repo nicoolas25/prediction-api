@@ -16,7 +16,7 @@ Feature: An registered user can participate once to an open question
       "components": []
     }
     """
-    Then the response status should be "404"
+    Then the response status should be "403"
     And the JSON response should have "$.code" with the text "question_not_found_or_expired"
 
   Scenario: The quesion already expired
@@ -39,7 +39,7 @@ Feature: An registered user can participate once to an open question
       ]
     }
     """
-    Then the response status should be "404"
+    Then the response status should be "403"
     And the JSON response should have "$.code" with the text "question_not_found_or_expired"
 
   Scenario: The quesion have already been answered by the user

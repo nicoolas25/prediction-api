@@ -1,4 +1,6 @@
 module Domain
+  class QuestionNotFound < Error ; end
+
   class Question < ::Sequel::Model
     unrestrict_primary_key
 
@@ -26,6 +28,22 @@ module Domain
 
       def with_locale(locale)
         exclude(:"label_#{locale}" => nil)
+      end
+    end
+
+    class << self
+      def find_for_participation(player, id)
+        question = dataset.open_for(player).where(id: id).eager(:components).first
+
+        unless question
+          if player.participations_dataset.where(question_id: id).empty?
+            raise QuestionNotFound.new(:question_not_found_or_expired)
+          else
+            raise QuestionNotFound.new(:participation_exists)
+          end
+        end
+
+        question
       end
     end
   end
