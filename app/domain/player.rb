@@ -61,10 +61,6 @@ module Domain
           stakes: stakes)
       end
 
-      # TODO: Increment the accumulators
-      # prediction.increment_with!(participation)
-      # question.increment_with!(participation)
-
       participation
     end
 

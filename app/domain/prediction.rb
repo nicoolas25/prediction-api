@@ -15,6 +15,14 @@ module Domain
       answers.all?(&:right?)
     end
 
+    def update_with_participation!(participation)
+      Prediction.dataset.where(id: self.id).update(amount: Sequel.expr(:amount) + participation.stakes)
+    end
+
+    def refresh_amount!
+      update(amount: participations.select{sum(stakes)})
+    end
+
     class << self
       def first_or_create_from_raw_answers(raw_answers, question)
         unless valid_raw_answers?(raw_answers, question)

@@ -54,8 +54,8 @@ Given /^existing components for the question "([^"]*)":$/ do |question_id, compo
   end
 end
 
-Given /^the user "([^"]*)" has answered the question "([^"]*)" with:$/ do |nickname, question_id, answers|
-  stakes = 10
+Given /^the user "([^"]*)" has answered the question "([^"]*)"(?: staking "(\d+)") with:$/ do |nickname, question_id, stakes, answers|
+  stakes = stakes.try(&:to_i) || 10
   player = Domain::Player.first!(nickname: nickname)
   question = Domain::Question.first!(id: question_id)
   raw_answers = answers.hashes

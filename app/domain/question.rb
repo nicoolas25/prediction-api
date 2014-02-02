@@ -31,6 +31,14 @@ module Domain
       end
     end
 
+    def update_with_participation!(participation)
+      Question.dataset.where(id: self.id).update(amount: Sequel.expr(:amount) + participation.stakes)
+    end
+
+    def refresh_amount!
+      update(amount: participations.select{sum(stakes)})
+    end
+
     class << self
       def find_for_participation(player, id)
         question = dataset.open_for(player).where(id: id).eager(:components).first

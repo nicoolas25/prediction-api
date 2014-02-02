@@ -14,6 +14,12 @@ module Entities
       q.labels['dev']
     end
 
+    expose :statistics do |q, opts|
+      {
+        total: q.amount
+      }
+    end
+
     expose :components, using: Component, if: :details
   end
 end
