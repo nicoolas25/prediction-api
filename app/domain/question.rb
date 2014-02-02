@@ -36,7 +36,7 @@ module Domain
     end
 
     def refresh_amount!
-      update(amount: participations.select{sum(stakes)})
+      update(amount: participations.select{sum(:stakes)})
     end
 
     class << self
