@@ -696,13 +696,7 @@ traits:
       403:
         body:
           application/json:
-            example: |
-              [
-                {
-                  "field": "prediction__component__0",
-                  "reason": "must provide at least 2 choices"
-                }
-              ]
+          schema: errorReport
   /{questionId}:
     get:
       description: Liste des utilisateurs ayant fait une prédiction sur une question donnée.
