@@ -15,8 +15,13 @@ module Domain
         where(author_id: nil)
       end
 
-      def open
-        where{ expires_at > Time.now }
+      def open_for(player)
+        exclude(id: player.participations_dataset.select(:question_id)).
+          where{expires_at > Time.now}
+      end
+
+      def answered_by(player)
+        where(id: player.participations_dataset.select(:question_id))
       end
 
       def with_locale(locale)

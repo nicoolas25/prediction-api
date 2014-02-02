@@ -9,27 +9,34 @@ module Controllers
       check_auth!
     end
 
-    desc "List all the questions"
-    params do
-      requires :locale, type: String, regexp: /^(fr)|(en)$/
-    end
-    get '/questions/:locale/global/open' do
-      locale = params[:locale].to_sym
-      questions = Domain::Question.global.open.with_locale(locale).all
-      present questions, with: Entities::Question, locale: locale, player: player
-    end
+    namespace :questions do
+      namespace ':locale' do
+        params { requires :locale, type: String, regexp: /^(fr)|(en)$/ }
+        before { @locale = params[:locale].to_sym }
 
-    desc "Show the details of a question"
-    params do
-      requires :locale, type: String, regexp: /^(fr)|(en)$/
-      requires :id, type: String, regexp: /^\d+$/
-    end
-    get '/questions/:locale/:id' do
-      locale = params[:locale].to_sym
-      if question = Domain::Question.with_locale(locale).where(id: params[:id]).first
-        present question, with: Entities::Question, locale: locale, details: true
-      else
-        fail!(:question_not_found , 404)
+        desc "List the open questions for a player"
+        get 'global/open' do
+          questions = Domain::Question.global.open_for(player).with_locale(@locale).all
+          present questions, with: Entities::Question, locale: @locale, player: player
+        end
+
+        desc "List the answered questions of a player"
+        get 'global/answered' do
+          questions = Domain::Question.global.answered_by(player).with_locale(@locale).all
+          present questions, with: Entities::Question, locale: @locale, player: player
+        end
+
+        desc "Show the details of a question"
+        params do
+          requires :id, type: String, regexp: /^\d+$/
+        end
+        get ':id' do
+          if question = Domain::Question.with_locale(@locale).where(id: params[:id]).first
+            present question, with: Entities::Question, locale: @locale, details: true
+          else
+            fail!(:question_not_found , 404)
+          end
+        end
       end
     end
   end

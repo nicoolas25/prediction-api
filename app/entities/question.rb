@@ -14,12 +14,6 @@ module Entities
       q.labels['dev']
     end
 
-    expose :made_prediction, exclude_nil: true do |q, opts|
-      if player = opts[:player]
-        player.answered?(q)
-      end
-    end
-
     expose :components, using: Component, if: :details
   end
 end
