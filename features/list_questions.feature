@@ -20,8 +20,12 @@ Feature: Display lists of questions
       | 1 | choices | Chosir la bonne équipe | France,Belgique |
     And existing components for the question "2":
       | 2 | choices | Chosir le bon joueur | Zidane,Zlatan |
+    And the user "nickname" has answered the question "1" with:
+      | id | value |
+      | 1  | 0     |
     When I send a GET request to "/v1/questions/fr/global/open"
     Then the response status should be "200"
     And the JSON response should have 2 "$.[*].*"
     And the JSON response should have "$.[0].expires_at"
     And the JSON response should have "$.[0].label" with the text "Qui va gagner ?"
+    And show me the response

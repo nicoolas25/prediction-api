@@ -16,7 +16,7 @@ module Controllers
     get '/questions/:locale/global/open' do
       locale = params[:locale].to_sym
       questions = Domain::Question.global.open.with_locale(locale).all
-      present questions, with: Entities::Question, locale: locale
+      present questions, with: Entities::Question, locale: locale, player: player
     end
 
     desc "Show the details of a question"

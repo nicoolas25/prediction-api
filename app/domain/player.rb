@@ -22,6 +22,11 @@ module Domain
       errors.add(:nickname, 'is already taken') if new? && Player.where(nickname: nickname).count > 0
     end
 
+    def answered?(question)
+      @answered_cache ||= questions_dataset.select(:id).all.each_with_object({}){ |q, cache| cache[q.id] = true }
+      @answered_cache.has_key?(question.id)
+    end
+
     def regenerate_token!
       self.token = SecureRandom.hex
       self.token_expiration = Time.now + 2.days
