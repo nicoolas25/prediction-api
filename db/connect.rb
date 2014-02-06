@@ -4,6 +4,7 @@ require 'sequel'
 env = ENV['RACK_ENV'] || 'app'
 
 database = YAML.load_file('./config/database.yml')[env]
+puts "Using #{env} environment"
 host = database['host']
 port = database['port']
 name = database['name']

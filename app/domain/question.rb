@@ -18,8 +18,9 @@ module Domain
       end
 
       def open_for(player)
-        exclude(id: player.participations_dataset.select(:question_id)).
-          where{expires_at > Time.now}
+        ds = where{expires_at > Time.now}
+        ds = ds.exclude(id: player.participations_dataset.select(:question_id)) unless player == :all
+        ds
       end
 
       def answered_by(player)
