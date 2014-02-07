@@ -27,7 +27,7 @@ module Domain
     end
 
     def refresh_players!
-      update(amount: participations_dataset.count)
+      update(players_count: participations_dataset.count)
     end
 
     class << self
