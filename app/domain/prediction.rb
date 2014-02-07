@@ -16,11 +16,18 @@ module Domain
     end
 
     def update_with_participation!(participation)
-      Prediction.dataset.where(id: self.id).update(amount: Sequel.expr(:amount) + participation.stakes)
+      Prediction.dataset.where(id: self.id).update({
+        amount: Sequel.expr(:amount) + participation.stakes,
+        players_count: Sequel.expr(:players_count) + 1
+      })
     end
 
     def refresh_amount!
       update(amount: participations_dataset.select{sum(:stakes)}.first[:sum])
+    end
+
+    def refresh_players!
+      update(amount: participations_dataset.count)
     end
 
     class << self

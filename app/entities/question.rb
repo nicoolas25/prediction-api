@@ -16,7 +16,8 @@ module Entities
 
     expose :statistics do |q, opts|
       {
-        total: q.amount
+        total: q.amount,
+        participations: q.players_count
       }
     end
 
