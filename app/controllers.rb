@@ -1,4 +1,5 @@
 require 'grape'
+require './lib/grape_validators'
 
 require './app/entities'
 

@@ -1,5 +1,6 @@
 module Domain
   class QuestionNotFound < Error ; end
+  class EmptyQuestionError < Error ; end
 
   class Question < ::Sequel::Model
     unrestrict_primary_key
@@ -39,6 +40,18 @@ module Domain
       })
     end
 
+    def create_with_components(components)
+      raise EmptyQuestionError.new(:empty_question) if components.nil? || components.empty?
+
+      DB.transaction do
+        save
+        components.each_with_index do |component, index|
+          component.position = index
+          add_component(component)
+        end
+      end
+    end
+
     class << self
       def find_for_participation(player, id)
         question = dataset.open_for(player).where(id: id).eager(:components).first
@@ -52,6 +65,10 @@ module Domain
         end
 
         question
+      end
+
+      def build(question_params)
+        Domain::Question.new(question_params)
       end
     end
 

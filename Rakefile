@@ -1,3 +1,17 @@
+desc "Load a console"
+task :console do
+  require './api'
+  ARGV.clear
+  begin
+    require 'pry'
+    Pry.start
+  rescue
+    require 'irb'
+    require 'irb/completion'
+    IRB.start
+  end
+end
+
 namespace :db do
   ROOT_PATH = File.dirname(__FILE__)
   MIGRATION_DIR = File.join(ROOT_PATH, 'db', 'migrations')

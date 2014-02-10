@@ -7,7 +7,7 @@ module Entities
     expose :expires_at, format_with: :timestamp
 
     expose :label do |q, opts|
-      q.labels[opts[:locale]]
+      opts[:locale] ? q.labels[opts[:locale]] : q.labels
     end
 
     expose :dev_info, exclude_nil: true do |q, opts|

@@ -25,3 +25,7 @@ Then /^a participation for the user "([^"]*)" to the question "([^"]*)" should e
   participations = player.questions_dataset.where(id: question_id).count
   expect(participations).to eql(1)
 end
+
+Then /^a question with label_(fr|en) set to "([^"]*)" should exist$/ do |locale, label|
+  expect(Domain::Question.where(:"label_#{locale}" => label).count).to eql(1)
+end
