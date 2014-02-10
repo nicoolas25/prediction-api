@@ -15,6 +15,10 @@ module Prediction
       slim :home
     end
 
+    get '/questions/new' do
+      slim :questions_new
+    end
+
     get '/questions' do
       @valid_token = (params[:token] == ADMIN_TOKEN)
       @questions = Domain::Question.global.open_for(:all).all
@@ -25,10 +29,6 @@ module Prediction
       @question = Domain::Question.where(id: params[:id]).first if params[:token] != ADMIN_TOKEN
       return 404 unless @question
       slim :questions_details
-    end
-
-    get '/questions/new' do
-      slim :questions_new
     end
 
     get '/scripts.js' do

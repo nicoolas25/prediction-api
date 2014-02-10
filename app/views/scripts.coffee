@@ -1,11 +1,13 @@
-insertLocales = ($root, hash, type='label') ->
-  $root.find("> fieldset > div.#{type}").each (_, block) ->
-    $block = $(block)
-    lang = $block.find('select.locale').val()
-    text = $block.find("input.#{type}").val()
-    hash[lang] = text
-
 addQuestionInit = ->
+  api_url = if window.location.host is 'predictio.info' then 'api.predictio.info' else window.location.host
+
+  insertLocales = ($root, hash, type='label') ->
+    $root.find("> fieldset > div.#{type}").each (_, block) ->
+      $block = $(block)
+      lang = $block.find('select.locale').val()
+      text = $block.find("input.#{type}").val()
+      hash[lang] = text
+
   if $('#add-question').length
     $(document).on 'click', 'div.add a', ->
       $el = $(@).closest('.add')
@@ -43,7 +45,7 @@ addQuestionInit = ->
 
         params.components.push(componentHash)
 
-      $.ajax '/questions',
+      $.ajax "http://#{api_url}/v1/questions",
         type: 'POST'
         data:
           token: $form.find('input.token').val()
