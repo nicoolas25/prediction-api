@@ -39,14 +39,6 @@ module Domain
       })
     end
 
-    def refresh_amount!
-      update(amount: participations_dataset.select{sum(:stakes)}.first[:sum])
-    end
-
-    def refresh_players!
-      update(amount: participations_dataset.count)
-    end
-
     class << self
       def find_for_participation(player, id)
         question = dataset.open_for(player).where(id: id).eager(:components).first
@@ -61,6 +53,16 @@ module Domain
 
         question
       end
+    end
+
+    # The following methods are maintainance
+
+    def refresh_amount!
+      update(amount: participations_dataset.select{sum(:stakes)}.first[:sum])
+    end
+
+    def refresh_players!
+      update(players_count: participations_dataset.count)
     end
   end
 end

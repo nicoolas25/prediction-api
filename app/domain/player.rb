@@ -50,9 +50,6 @@ module Domain
       prediction = participation = nil
 
       DB.transaction(isolation: :repeatable) do
-        if self.questions_dataset.where(id: question.id).count > 0
-          raise ParticipationError.new(:participation_exists)
-        end
         prediction = Prediction.first_or_create_from_raw_answers(raw_answers, question)
         participation = Participation.create(
           player: self,
@@ -62,6 +59,9 @@ module Domain
       end
 
       participation
+    rescue Sequel::UniqueConstraintViolation
+      # Never used in the test suite because it needs concurrency
+      raise QuestionNotFound.new(:participation_exists)
     end
 
     class << self
