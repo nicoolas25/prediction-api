@@ -1,6 +1,7 @@
 module Domain
   class QuestionNotFound < Error ; end
   class EmptyQuestionError < Error ; end
+  class InvalidQuestionError < Error ; end
 
   class Question < ::Sequel::Model
     unrestrict_primary_key
@@ -33,6 +34,11 @@ module Domain
       end
     end
 
+    def validate
+      super
+      errors.add(:labels, 'are missing') if new? && labels.empty?
+    end
+
     def update_with_participation!(participation)
       Question.dataset.where(id: self.id).update({
         amount: Sequel.expr(:amount) + participation.stakes,
@@ -42,6 +48,7 @@ module Domain
 
     def create_with_components(components)
       raise EmptyQuestionError.new(:empty_question) if components.nil? || components.empty?
+      raise InvalidQuestionError.new(:invalid_question) unless valid?
 
       DB.transaction do
         save

@@ -41,7 +41,6 @@ Feature: Add a new question
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "empty_question"
 
-
   Scenario: The components parameters are invalids
     Given I send and accept JSON
     When I send a POST request to "/v1/questions" with the following:
@@ -68,6 +67,34 @@ Feature: Add a new question
     """
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "invalid_component"
+
+  Scenario: The question's locale are invalid
+    Given I send and accept JSON
+    When I send a POST request to "/v1/questions" with the following:
+    """
+    {
+      "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
+      "question": {
+        "expires_at": "2014-01-26 20:00:00 +0000",
+        "labels": {
+          "de": "Qui sera le vainceur ?"
+        },
+        "components": [
+          {
+            "kind": "0",
+            "labels": {
+              "fr": "Choisir une équipe"
+            },
+            "choices": {
+              "fr": "France,Belgique"
+            }
+          }
+        ]
+      }
+    }
+    """
+    Then the response status should be "403"
+    And the JSON response should have "$.code" with the text "invalid_question"
 
   Scenario: The question parameters are valids
     Given I send and accept JSON

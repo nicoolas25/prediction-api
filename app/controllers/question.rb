@@ -22,12 +22,7 @@ module Controllers
           components = Domain::QuestionComponent.build_many(components_params)
           question = Domain::Question.build(question_params)
           question.create_with_components(components)
-
-          if question.id
-            present question, with: Entities::Question, details: true
-          else
-            fail!(:not_saved, 403)
-          end
+          present question, with: Entities::Question, details: true
         rescue Domain::Error => err
           fail! err, 403
         end
