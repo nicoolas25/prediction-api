@@ -35,6 +35,15 @@ module Controllers
           questions = Domain::Question.dataset.eager(:components).all
           present questions, with: Entities::Question, admin: true
         end
+
+        desc "Show a question"
+        get ':id' do
+          if question = Domain::Question.where(id: params[:id]).first
+            present question, with: Entities::Question, admin: true, details: true
+          else
+            fail!(:not_found, 404)
+          end
+        end
       end
     end
   end
