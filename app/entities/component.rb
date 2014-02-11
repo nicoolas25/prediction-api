@@ -15,25 +15,23 @@ module Entities
       c.labels['dev']
     end
 
-    expose :choices, if: ->(c, opts){ opts[:admin] && c.kind == 0 } do |c, opts|
+    expose :choices, if: ->(c, opts){ c.kind == 0 } do |c, opts|
       choices = []
-      c.choices.each do |locale, choices|
-        choices.each_with_index do |label, position|
-          choice = {locale: locale, label: label, position: position}
+      if opts[:locale]
+        localized_choices = c.choices[opts[:locale]]
+        dev_infos         = c.choices['dev']
+        localized_choices.each_with_index do |label, position|
+          choice = {label: label, position: position}
+          choice[:dev_info] = dev_infos[position] if dev_infos && dev_infos.kind_of?(Array)
           choices << choice
         end
-      end
-      choices
-    end
-
-    expose :choices, if: ->(c, opts){ opts[:locale] && c.kind == 0 } do |c, opts|
-      choices           = []
-      localized_choices = c.choices[opts[:locale]]
-      dev_infos         = c.choices['dev']
-      localized_choices.each_with_index do |label, position|
-        choice = {label: label, position: position}
-        choice[:dev_info] = dev_infos[position] if dev_infos && dev_infos.kind_of?(Array)
-        choices << choice
+      elsif opts[:admin]
+        c.choices.each do |locale, choice_list|
+          choice_list.each_with_index do |label, position|
+            choice = {locale: locale, label: label, position: position}
+            choices << choice
+          end
+        end
       end
       choices
     end
