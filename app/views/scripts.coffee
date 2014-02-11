@@ -66,17 +66,19 @@ listQuestionsInit = ->
   $list = $('#questions-list')
   return null unless $list.length
 
+  token = $('meta[name=token]').prop('content')
+
   $.ajax
     url: "http://#{api_url}/v1/admin/questions"
     type: 'GET'
-    data: { token: $('meta[name=token]').prop('content') }
+    data: { token: token }
   .done (questions) ->
     buffer = ''
     for question in questions
       buffer +=
         """
         <li class="question">
-          <a href="/admin/questions/#{question.id}">#{question.labels.fr ? question.labels.en}</a>
+          <a href="/questions/#{question.id}?token=#{token}">#{question.labels.fr ? question.labels.en}</a>
           <span class="expires_at">#{moment(question.expires_at * 1000).format(DATE_FORMAT)}</span>
           <span class="stats participations">#{question.statistics.participations} participations</span>
           <span class="stats cristals">#{question.statistics.total} cistaux</span>
