@@ -45,9 +45,12 @@ addQuestionInit = ->
 
         params.components.push(componentHash)
 
-      $.ajax "http://#{api_url}/v1/questions",
+      $.ajax
+        url: "http://#{api_url}/v1/questions",
         type: 'POST'
-        data:
+        contentType: 'application/json',
+        processData: false
+        data: JSON.stringify
           token: $form.find('input.token').val()
           question: params
       .done ->
