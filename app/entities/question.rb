@@ -6,12 +6,9 @@ module Entities
 
     expose :expires_at, format_with: :timestamp
 
-    expose :label do |q, opts|
-      opts[:locale] ? q.labels[opts[:locale]] : q.labels
-    end
-
-    expose :dev_info, exclude_nil: true do |q, opts|
-      q.labels['dev']
+    expose :labels, if: :admin
+    expose :label, if: :locale do |q, opts|
+      q.labels[opts[:locale]]
     end
 
     expose :statistics do |q, opts|

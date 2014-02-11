@@ -4,9 +4,28 @@ html
     title Predictio - Liste des questions en attente de réponse
     meta name="token" content="#{params[:token]}"
     /script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
+    /script src="//ajax.googleapis.com/ajax/libs/moment/moment.min.js"
     script src="/jquery.min.js"
+    script src="/moment.min.js"
     script src="/scripts.js"
+    style
+      | #questions-list .question span {
+      |   float: right;
+      |   margin: 0px 5px;
+      | }
+      | #questions-list {
+      |   list-style-type: none;
+      |   margin: 0px;
+      |   padding: 0px;
+      | }
+      | #questions-list .question {
+      |   padding: 5px;
+      | }
+      | #questions-list .question:nth-child(n+1) {
+      |   background: #EFEFEF;
+      | }
+      | #questions-list .question:hover {
+      |   background: #FFDDDD;
+      | }
   body
-    /ul
-      li
-        a href="/questions/#{question.id}?token=#{params[:token]}" = question.labels.values.first
+    ul#questions-list

@@ -6,15 +6,16 @@ module Entities
       Domain::QuestionComponent::KINDS[c.kind]
     end
 
-    expose :label do |c, opts|
-      opts[:locale] ? c.labels[opts[:locale]] : c.labels
+    expose :labels, if: :admin
+    expose :label, if: :locale do |c, opts|
+      c.labels[opts[:locale]]
     end
 
     expose :dev_info, exclude_nil: true do |c, opts|
       c.labels['dev']
     end
 
-    expose :choices, if: ->(c, opts){ !opts[:locale] && c.kind == 0 } do |c, opts|
+    expose :choices, if: ->(c, opts){ opts[:admin] && c.kind == 0 } do |c, opts|
       choices = []
       c.choices.each do |locale, choices|
         choices.each_with_index do |label, position|

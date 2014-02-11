@@ -1,3 +1,5 @@
+window.DATE_FORMAT = 'YYYY-MM-DD HH:mm'
+
 api_url = null
 
 addQuestionInit = ->
@@ -65,8 +67,22 @@ listQuestionsInit = ->
   return null unless $list.length
 
   $.ajax
-    url: "http://#{api_url}/v1/admin/questions",
-
+    url: "http://#{api_url}/v1/admin/questions"
+    type: 'GET'
+    data: { token: $('meta[name=token]').prop('content') }
+  .done (questions) ->
+    buffer = ''
+    for question in questions
+      buffer +=
+        """
+        <li class="question">
+          <a href="/admin/questions/#{question.id}">#{question.labels.fr ? question.labels.en}</a>
+          <span class="expires_at">#{moment(question.expires_at * 1000).format(DATE_FORMAT)}</span>
+          <span class="stats participations">#{question.statistics.participations} participations</span>
+          <span class="stats cristals">#{question.statistics.total} cistaux</span>
+        </li>
+        """
+    $list.html(buffer)
 
 $ ->
   # Set the api URL according to the host.
