@@ -2,8 +2,20 @@ doctype html
 html
   head
     title Predictio - Détail d'une question
+    meta name="token" content="#{params[:token]}"
+    meta name="questionId" content="#{params[:id]}"
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
     script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"
     script src="/scripts.js"
+    style
+      | #title { text-align: center; width: 100%; font-size: 200%; }
+      | #informations span.expires_at, #labels span.label { display: block; }
+      | span.label span.locale { color: #888; font-size: 90%; font-style: italic; }
+      | #questions-details .block { margin-bottom: 10px; }
   body
-    #question-details
+    #questions-details
+      .block#title Détails de la question #{params[:id]}
+      .block#informations
+      .block#labels
+      .block#components
+      .block#statistics

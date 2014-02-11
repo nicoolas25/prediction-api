@@ -1,7 +1,6 @@
 require 'slim'
 require 'coffee-script'
 require 'sinatra/base'
-require 'sinatra/reloader' if ENV['RELOAD'].present?
 
 require './app/domain'
 

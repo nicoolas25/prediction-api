@@ -1,9 +1,9 @@
 window.DATE_FORMAT = 'YYYY-MM-DD HH:mm'
 
-api_url = null
+token = api_url = null
 
 addQuestionInit = ->
-  return null unless $('#add-question').length
+  return null unless $('#questions-new').length
 
   insertLocales = ($root, hash, type='label') ->
     $root.find("> fieldset > div.#{type}").each (_, block) ->
@@ -66,8 +66,6 @@ listQuestionsInit = ->
   $list = $('#questions-list')
   return null unless $list.length
 
-  token = $('meta[name=token]').prop('content')
-
   $.ajax
     url: "http://#{api_url}/v1/admin/questions"
     type: 'GET'
@@ -86,6 +84,49 @@ listQuestionsInit = ->
         """
     $list.html(buffer)
 
+detailsQuestionsInit = ->
+  return null unless $('#questions-details').length
+
+  questionId = $('meta[name=questionId]').prop('content')
+
+  $.ajax
+    url: "http://#{api_url}/v1/admin/questions/#{questionId}"
+    type: 'GET'
+    data: { token: token }
+  .done (question) ->
+    # Set informations
+    $('#informations').html("""<span class="expires_at">Expiration #{moment(question.expires_at * 1000).format(DATE_FORMAT)}</span>""")
+
+    # Set labels
+    buffer = ''
+    for locale, label of question.labels
+      buffer += """<span class="label">#{label} <span class="locale">(#{locale})</span></span>"""
+    $('#labels').html(buffer)
+
+    # Set components
+    buffer = '<div class="component">'
+    for component in question.components
+      buffer += """<span class="type">#{component.kind}</span>"""
+      buffer += '<div class="labels">'
+      for locale, label of component.labels
+        buffer += """<span class="label">#{label} <span class="locale">(#{locale})</span></span>"""
+      buffer += '</div>'
+
+      if component.choices?
+        buffer += '<div class="choices">'
+        for choice in component.choices
+          buffer +=
+            """
+            <span class="choice" data-position="#{choice.position}">
+              #{choice.label}
+              <span class="locale">(#{choice.locale})</span>
+            </span>
+            """
+        buffer += '</div>'
+
+    buffer += '</div>'
+    $('#components').html(buffer)
+
 $ ->
   # Set the api URL according to the host.
   if window.location.host is 'predictio.info'
@@ -93,5 +134,8 @@ $ ->
   else
     api_url = window.location.host
 
+  token = $('meta[name=token]').prop('content')
+
   addQuestionInit()
   listQuestionsInit()
+  detailsQuestionsInit()
