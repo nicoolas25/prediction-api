@@ -2,13 +2,13 @@ Feature: Add a new question
 
   Scenario: No admin token is given
     Given I send and accept JSON
-    When I send a POST request to "/v1/questions"
+    When I send a POST request to "/v1/admin/questions"
     Then the response status should be "404"
     And the JSON response should have "$.code" with the text "not_found"
 
   Scenario: The question parameters are invalids
     Given I send and accept JSON
-    When I send a POST request to "/v1/questions" with the following:
+    When I send a POST request to "/v1/admin/questions" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
@@ -24,7 +24,7 @@ Feature: Add a new question
 
   Scenario: The components parameters are empty
     Given I send and accept JSON
-    When I send a POST request to "/v1/questions" with the following:
+    When I send a POST request to "/v1/admin/questions" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
@@ -43,7 +43,7 @@ Feature: Add a new question
 
   Scenario: The components parameters are invalids
     Given I send and accept JSON
-    When I send a POST request to "/v1/questions" with the following:
+    When I send a POST request to "/v1/admin/questions" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
@@ -70,7 +70,7 @@ Feature: Add a new question
 
   Scenario: The question's locale are invalid
     Given I send and accept JSON
-    When I send a POST request to "/v1/questions" with the following:
+    When I send a POST request to "/v1/admin/questions" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
@@ -98,7 +98,7 @@ Feature: Add a new question
 
   Scenario: The question parameters are valids
     Given I send and accept JSON
-    When I send a POST request to "/v1/questions" with the following:
+    When I send a POST request to "/v1/admin/questions" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",

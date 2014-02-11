@@ -2,6 +2,7 @@ doctype html
 html
   head
     title Predictio - Ajouter une question
+    meta name="token" content="#{params[:token]}"
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
     script src="/scripts.js"
     style
@@ -62,6 +63,6 @@ html
         .add
           a Ajouter un nouveau composant
 
-      input.token placeholder="Token d'identification"
+      input.token placeholder="Token d'identification" value="#{params[:token]}"
 
       input type="submit" value="Ajouter"

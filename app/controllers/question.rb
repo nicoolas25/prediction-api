@@ -5,32 +5,11 @@ module Controllers
     version 'v1'
     format :json
 
-    namespace :questions do
-      desc "Create a new question"
-      params do
-        requires :token, authentication_token: true
-        requires :question do
-          requires :expires_at, type: Time
-          requires :labels, type: Hash
-          requires :components, type: Array
-        end
-      end
-      post do
-        begin
-          question_params = params[:question]
-          components_params = question_params.delete(:components)
-          components = Domain::QuestionComponent.build_many(components_params)
-          question = Domain::Question.build(question_params)
-          question.create_with_components(components)
-          present question, with: Entities::Question, details: true
-        rescue Domain::Error => err
-          fail! err, 403
-        end
-      end
+    before { check_auth! }
 
+    namespace :questions do
       namespace ':locale' do
         params { requires :locale, type: String, regexp: /^(fr)|(en)$/ }
-        before { check_auth! }
         before { @locale = params[:locale].to_sym }
 
         desc "List the open questions for a player"
