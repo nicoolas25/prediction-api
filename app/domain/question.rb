@@ -1,7 +1,9 @@
 module Domain
   class QuestionNotFound < Error ; end
-  class EmptyQuestionError < Error ; end
+  class EmptyQuestion < Error ; end
   class InvalidQuestionError < Error ; end
+  class MissingComponent < Error ; end
+  class BadComponent < Error ; end
 
   class Question < ::Sequel::Model
     unrestrict_primary_key
@@ -25,6 +27,10 @@ module Domain
         ds
       end
 
+      def expired
+        exclude{expires_at > Time.now}
+      end
+
       def answered_by(player)
         where(id: player.participations_dataset.select(:question_id))
       end
@@ -46,9 +52,9 @@ module Domain
       })
     end
 
-    def create_with_components(components)
-      raise EmptyQuestionError.new(:empty_question) if components.nil? || components.empty?
-      raise InvalidQuestionError.new(:invalid_question) unless valid?
+    def create_with(components)
+      raise EmptyQuestion.new(:empty_question) if components.nil? || components.empty?
+      raise InvalidQuestion.new(:invalid_question) unless valid?
 
       DB.transaction do
         save
@@ -59,18 +65,38 @@ module Domain
       end
     end
 
-    class << self
-      def find_for_participation(player, id)
-        question = dataset.open_for(player).where(id: id).eager(:components).first
+    def answer_with(answers)
+      # Check that all the components of the question are given
+      unless components.all?{ |c| answers.has_key?(c.id.to_s) }
+        raise MissingComponent.new(:missing_component)
+      end
 
-        unless question
+      # Check that all the answers are acceptable
+      unless components.all?{ |c| c.accepts?(answers[c.id.to_s]) }
+        raise BadComponent.new(:bad_answer)
+      end
+
+      update(answered: true)
+    end
+
+    class << self
+      def find_for_answer(id)
+        unless question = dataset.expired.where(id: id).eager(:components).first
+          unless dataset.open_for(:all).where(id: id).empty?
+            raise QuestionNotFound.new(:not_expired)
+          end
+        end
+        question
+      end
+
+      def find_for_participation(player, id)
+        unless question = dataset.open_for(player).where(id: id).eager(:components).first
           if player.participations_dataset.where(question_id: id).empty?
             raise QuestionNotFound.new(:question_not_found_or_expired)
           else
             raise QuestionNotFound.new(:participation_exists)
           end
         end
-
         question
       end
 

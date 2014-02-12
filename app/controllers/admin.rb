@@ -23,7 +23,7 @@ module Controllers
             components_params = question_params.delete(:components)
             components = Domain::QuestionComponent.build_many(components_params)
             question = Domain::Question.build(question_params)
-            question.create_with_components(components)
+            question.create_with(components)
             present question, with: Entities::Question, details: true
           rescue Domain::Error => err
             fail! err, 403
@@ -32,16 +32,32 @@ module Controllers
 
         desc "List the questions"
         get do
-          questions = Domain::Question.dataset.eager(:components).all
+          questions = Domain::Question.all
           present questions, with: Entities::Question, admin: true
         end
 
         desc "Show a question"
         get ':id' do
-          if question = Domain::Question.where(id: params[:id]).first
+          if question = Domain::Question.dataset.where(id: params[:id]).eager(:components).first
             present question, with: Entities::Question, admin: true, details: true
           else
             fail!(:not_found, 404)
+          end
+        end
+
+        desc "Answer a question"
+        params do
+          requires :components, type: Hash
+        end
+        put ':id' do
+          begin
+            if question = Domain::Question.find_for_answer(params[:id])
+              question.answer_with(params[:components])
+            else
+              fail!(:not_found, 404)
+            end
+          rescue Domain::Error => err
+            fail! err, 403
           end
         end
       end

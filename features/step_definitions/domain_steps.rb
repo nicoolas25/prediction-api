@@ -29,3 +29,8 @@ end
 Then /^a question with label_(fr|en) set to "([^"]*)" should exist$/ do |locale, label|
   expect(Domain::Question.where(:"label_#{locale}" => label).count).to eql(1)
 end
+
+Then /^the question "([^"]*)" should have been answered$/ do |question_id|
+  question = Domain::Question.where(id: question_id).first
+  expect(question.answered).to eql(true)
+end

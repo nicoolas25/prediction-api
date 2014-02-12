@@ -30,6 +30,10 @@ module Domain
       end
     end
 
+    def accepts?(answer)
+      !have_choices? || answer.to_i < choices_count
+    end
+
     def have_choices?
       kind == 0
     end
