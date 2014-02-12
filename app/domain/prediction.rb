@@ -29,25 +29,32 @@ module Domain
         end
 
         components_sum = sum_from_raw_answers(raw_answers)
-        prediction = question.predictions_dataset.where(cksum: components_sum).first
+        first_or_create_from_cksum(components_sum)
+      end
+
+      def first_or_create_from_cksum(cksum, question)
+        prediction = question.predictions_dataset.where(cksum: cksum).first
         return prediction if prediction
-        create_from_raw_answers(raw_answers, components_sum, question)
+        create_from_cksum(cksum, question)
       end
 
     private
 
-      def create_from_raw_answers(raw_answers, cksum, question)
+      def create_from_cksum(cksum, question)
         prediction = create(question: question, cksum: cksum)
+        answers = cksum.split('&').each_with_object({}) do |p, h|
+          id, value = p.split(':')
+          h[id.to_i] = value.to_f
+        end
         question.components.map do |component|
-          answer = raw_answers.find{ |answer| answer['id'] == component.id.to_s }
-          prediction.add_answer(component: component, value: answer['value'].to_f)
+          prediction.add_answer(component: component, value: answers[component.id])
         end
         prediction
       end
 
       def sum_from_raw_answers(raw_answers)
         raw_answers.map do |answer|
-          [answer['id'].to_i, answer['value'].to_f].join('|')
+          [answer['id'].to_i, answer['value'].to_f].join(':')
         end.sort.join('&')
       end
 

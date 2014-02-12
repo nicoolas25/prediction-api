@@ -34,3 +34,11 @@ Then /^the question "([^"]*)" should have been answered$/ do |question_id|
   question = Domain::Question.where(id: question_id).first
   expect(question.answered).to eql(true)
 end
+
+Then /^the winnings for the question "(\d+)" are the following:$/ do |question_id, winnings|
+  winnings.raw.each do |nickname, expected_winnings|
+    player = Domain::Player.first!(nickname: nickname)
+    participation = player.participations_dataset.where(question_id: question_id).first
+    expect(participation.winnings).to eql(expected_winnings.to_i)
+  end
+end

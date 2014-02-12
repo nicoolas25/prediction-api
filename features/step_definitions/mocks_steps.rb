@@ -10,6 +10,12 @@ Given /^an user named "([^"]*)" is already registered$/ do |nickname|
   Domain::Player.create(nickname: nickname)
 end
 
+Given /^"(\d+)" registered users with "([^"]*)" as nickname prefix$/ do |size, prefix|
+  (0...size.to_i).each do |index|
+    Domain::Player.create(nickname: "#{prefix}_#{index}")
+  end
+end
+
 Given /^the user "([^"]*)" have a valid token(?:: "([^"]*))?"$/ do |nickname, token|
   player = Domain::Player.first!(nickname: nickname)
   player.token = token.presence || SecureRandom.hex
@@ -69,4 +75,13 @@ Given /^an application configuration with "([^"]*)" set to "([^"]*)"$/ do |path,
   name = path.pop
   path.reduce(@app_config){|hash, segment| hash[segment] ||= {} }[name] = value
   stub_const('APPLICATION_CONFIG', @app_config)
+end
+
+Given /^there is the following participations for the question "([^"]*)":$/ do |question_id, participations|
+  question = Domain::Question.first!(id: question_id)
+  participations.raw.each do |nickname, stakes, cksum|
+    player = Domain::Player.first!(nickname: nickname)
+    prediction = Domain::Prediction.first_or_create_from_cksum(cksum, question)
+    Domain::Participation.create(player: player, question: question, prediction: prediction, stakes: stakes)
+  end
 end

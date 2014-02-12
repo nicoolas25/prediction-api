@@ -67,16 +67,20 @@ module Domain
 
     def answer_with(answers)
       # Check that all the components of the question are given
-      unless components.all?{ |c| answers.has_key?(c.id.to_s) }
+      unless components.all?{ |component| answers.has_key?(component.id.to_s) }
         raise MissingComponent.new(:missing_component)
       end
 
       # Check that all the answers are acceptable
-      unless components.all?{ |c| c.accepts?(answers[c.id.to_s]) }
+      unless components.all?{ |component| component.accepts?(answers[component.id.to_s]) }
         raise BadComponent.new(:bad_answer)
       end
 
-      update(answered: true)
+      # Set all the component's answers
+      components.each { |component| component.update(valid_answer: answers[component.id.to_s]) }
+
+      # Update the earnings for the participations
+      EarningService.new(self).distribute_earnings!
     end
 
     class << self
