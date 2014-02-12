@@ -106,3 +106,4 @@ Feature: The distribution of the earnings are done when the question is answered
     And the winnings for the question "1" are the following:
       | nickname_3 | 40 |
       | nickname_4 | 20 |
+    And the player "nickname_3" should have "40" cristals

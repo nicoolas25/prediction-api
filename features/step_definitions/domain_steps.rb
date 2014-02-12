@@ -42,3 +42,8 @@ Then /^the winnings for the question "(\d+)" are the following:$/ do |question_i
     expect(participation.winnings).to eql(expected_winnings.to_i)
   end
 end
+
+Then /^the player "([^"]*)" should have "(\d+)" cristals$/ do |nickname, cristals|
+  player = Domain::Player.first!(nickname: nickname)
+  expect(player.cristals).to eql(cristals.to_i)
+end
