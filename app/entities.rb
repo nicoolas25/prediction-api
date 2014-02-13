@@ -15,6 +15,7 @@ module Entities
   autoload :Component,         './app/entities/component'
   autoload :Participation,     './app/entities/participation'
   autoload :Player,            './app/entities/player'
+  autoload :Prediction,        './app/entities/prediction'
   autoload :Question,          './app/entities/question'
   autoload :SocialAssociation, './app/entities/social_association'
 end

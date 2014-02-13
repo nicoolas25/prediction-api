@@ -21,5 +21,7 @@ module Entities
     expose :answered
 
     expose :components, using: Component, if: :details
+
+    expose :predictions, using: Prediction, if: :details
   end
 end
