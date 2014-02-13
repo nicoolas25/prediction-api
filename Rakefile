@@ -12,6 +12,23 @@ task :console do
   end
 end
 
+namespace :fixing do
+  desc "Update the amount and the player count"
+  task :amounts_and_players do
+    require './api'
+
+    Domain::Question.all.each do |q|
+      q.refresh_players!
+      q.refresh_amount!
+    end
+
+    Domain::Prediction.all.each do |p|
+      p.refresh_players!
+      p.refresh_amount!
+    end
+  end
+end
+
 namespace :db do
   ROOT_PATH = File.dirname(__FILE__)
   MIGRATION_DIR = File.join(ROOT_PATH, 'db', 'migrations')

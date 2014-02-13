@@ -57,6 +57,23 @@ task :deploy => :environment do
 end
 
 #
+# Fixing
+#
+
+namespace :fixing do
+  desc "Run the associated rake task"
+  task :amounts_and_players => :environment do
+    queue %{
+      echo "-----> Fixing amount and players" &&
+      #{echo_cmd %[cd #{deploy_to}/current]}
+      #{echo_cmd %[RACK_ENV=production bundle exec rake fixing:amounts_and_players]}
+    }
+  end
+
+
+end
+
+#
 # Database
 #
 
@@ -65,6 +82,7 @@ namespace :db do
   task :migrate => :environment do
     queue %{
       echo "-----> Migrating database" &&
+      #{echo_cmd %[cd #{deploy_to}/current]} &&
       #{echo_cmd %[RACK_ENV=production bundle exec rake db:migrate]}
     }
   end
