@@ -21,9 +21,7 @@ APPLICATION_CONFIG = {
 use Rack::Cors do
   allow do
     origins 'api.predictio.info', 'predictio.info'
-    resource '/questions/*',
-      headers: :any,
-      methods: [:get, :post, :put, :delete, :options]
+    resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
   end
 end
 
