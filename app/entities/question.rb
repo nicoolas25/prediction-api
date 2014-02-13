@@ -18,6 +18,8 @@ module Entities
       }
     end
 
+    expose :answered
+
     expose :components, using: Component, if: :details
   end
 end

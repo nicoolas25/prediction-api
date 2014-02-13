@@ -15,6 +15,8 @@ module Entities
       c.labels['dev']
     end
 
+    expose :valid_answer
+
     expose :choices, if: ->(c, opts){ c.kind == 0 } do |c, opts|
       choices = []
       if opts[:locale]

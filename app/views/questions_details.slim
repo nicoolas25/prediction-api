@@ -9,13 +9,22 @@ html
     script src="/scripts.js"
     style
       | #title { text-align: center; width: 100%; font-size: 200%; }
-      | #informations span.expires_at, #labels span.label { display: block; }
-      | span.label span.locale { color: #888; font-size: 90%; font-style: italic; }
+      | #informations span.expires_at { display: block; }
+      | span.locale { color: #888; font-size: 90%; font-style: italic; }
       | #questions-details .block { margin-bottom: 10px; }
+      | .component { padding: 10px; }
+      | .component.choices { background: darkorange; }
+      | hr { border: none; border-top: 1px solid black; width: 100%; }
+      | .answers input { background: darkorange; border: none; border-bottom: 1px solid lightgrey; padding: 0px 5px; }
   body
-    #questions-details
+    form#questions-details
       .block#title Détails de la question #{params[:id]}
-      .block#informations
       .block#labels
+      hr
       .block#components
+      hr
+      .block#informations
+      hr
       .block#statistics
+
+      a.submit href="#" Envoyer les réponses

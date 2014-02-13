@@ -89,43 +89,79 @@ detailsQuestionsInit = ->
 
   questionId = $('meta[name=questionId]').prop('content')
 
-  $.ajax
-    url: "http://#{api_url}/v1/admin/questions/#{questionId}"
-    type: 'GET'
-    data: { token: token }
-  .done (question) ->
-    # Set informations
-    $('#informations').html("""<span class="expires_at">Expiration #{moment(question.expires_at * 1000).format(DATE_FORMAT)}</span>""")
+  fetchQuestion = ->
+    $.ajax
+      url: "http://#{api_url}/v1/admin/questions/#{questionId}"
+      type: 'GET'
+      data: { token: token }
+    .done (question) ->
+      # Set informations
+      $('#informations').html("""<span class="expires_at">Expiration #{moment(question.expires_at * 1000).format(DATE_FORMAT)}</span>""")
 
-    # Set labels
-    buffer = ''
-    for locale, label of question.labels
-      buffer += """<span class="label">#{label} <span class="locale">(#{locale})</span></span>"""
-    $('#labels').html(buffer)
-
-    # Set components
-    buffer = '<div class="component">'
-    for component in question.components
-      buffer += """<span class="type">#{component.kind}</span>"""
-      buffer += '<div class="labels">'
-      for locale, label of component.labels
+      # Set labels
+      buffer = ''
+      for locale, label of question.labels
         buffer += """<span class="label">#{label} <span class="locale">(#{locale})</span></span>"""
-      buffer += '</div>'
+      $('#labels').html(buffer)
 
-      if component.choices?
-        buffer += '<div class="choices">'
-        for choice in component.choices
-          buffer +=
-            """
-            <span class="choice" data-position="#{choice.position}">
-              #{choice.label}
-              <span class="locale">(#{choice.locale})</span>
-            </span>
-            """
+      # Set components
+      buffer = '<div class="components">'
+      for component in question.components
+        buffer += """<div class="component #{component.kind}">"""
+
+        # Display the labels
+        buffer += '<div class="labels">'
+        for locale, label of component.labels
+          buffer += """<span class="label">#{label} <span class="locale">(#{locale})</span></span>"""
         buffer += '</div>'
 
-    buffer += '</div>'
-    $('#components').html(buffer)
+        # Display the component's choices
+        if component.choices?
+          buffer += '<div class="choices">'
+          for choice in component.choices
+            buffer +=
+              """
+              <span class="choice" data-position="#{choice.position}">
+                #{choice.position} - #{choice.label}
+                <span class="locale">(#{choice.locale})</span>
+              </span>
+              """
+          buffer += '</div>'
+
+        # Allow to add an answer
+        buffer += '<div class="answers">'
+        buffer += '<label>Solution</label>'
+        if component.valid_answer?
+          buffer += """<input type="text" data-id="#{component.id}" value="#{component.valid_answer}" disabled="disabled" />"""
+        else
+          buffer += """<input type="text" data-id="#{component.id}" />"""
+        buffer += '</div>'
+
+        buffer += '</div>'
+      buffer += '</div>'
+      $('#components').html(buffer)
+
+  $(document).on 'click', 'form a', ->
+    components = {}
+    $form = $(this).closest('form')
+    $form.find('input').each ->
+      $input = $(this)
+      id = $input.data('id')
+      answer = $input.val()
+      components[id] = answer
+
+    $.ajax
+      url: "http://#{api_url}/v1/admin/questions/#{questionId}"
+      type: 'PUT'
+      contentType: 'application/json'
+      processData: false
+      data: JSON.stringify
+        token: token
+        components: components
+    .done ->
+      fetchQuestion()
+
+  fetchQuestion()
 
 $ ->
   # Set the api URL according to the host.
