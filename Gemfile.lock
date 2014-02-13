@@ -92,6 +92,7 @@ GEM
     rack (1.5.2)
     rack-accept (0.4.5)
       rack (>= 0.4)
+    rack-cors (0.2.9)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
     rack-protection (1.5.2)
@@ -162,6 +163,7 @@ DEPENDENCIES
   pg
   pry
   puma
+  rack-cors
   rack-test
   rspec (~> 3.0.0.beta1)
   sequel

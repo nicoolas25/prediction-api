@@ -1,4 +1,5 @@
 # Requires both the api and the web components
+require 'rack/cors'
 require './api'
 require './web'
 
@@ -16,5 +17,14 @@ APPLICATION_CONFIG = {
     }
   }
 }
+
+use Rack::Cors do
+  allow do
+    origins 'api.predictio.info', 'predictio.info'
+    resource '/questions/*',
+      headers: :any,
+      methods: [:get, :post, :put, :delete, :options]
+  end
+end
 
 run Rack::Cascade.new [Prediction::API, Prediction::Web]

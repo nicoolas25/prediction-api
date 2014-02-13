@@ -14,6 +14,9 @@ gem 'pg'
 gem 'grape'
 gem 'grape-entity'
 
+# Add-ons
+gem 'rack-cors'
+
 # Web interface
 gem 'sinatra'
 gem 'sinatra-contrib'
