@@ -1,7 +1,7 @@
 module Domain
   class QuestionNotFound < Error ; end
   class EmptyQuestion < Error ; end
-  class InvalidQuestionError < Error ; end
+  class InvalidQuestion < Error ; end
   class MissingComponent < Error ; end
   class BadComponent < Error ; end
 

@@ -29,7 +29,7 @@ module Domain
         end
 
         components_sum = sum_from_raw_answers(raw_answers)
-        first_or_create_from_cksum(components_sum)
+        first_or_create_from_cksum(components_sum, question)
       end
 
       def first_or_create_from_cksum(cksum, question)
