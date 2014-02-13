@@ -52,27 +52,24 @@ schemas:
             }
           },
           "statistics": {
-            "type": "array",
+            "type": "object",
             "required": true,
-            "items": {
-              "type": "object",
-              "properties": {
-                "cristal": {
-                  "type": "integer",
-                  "required": false
-                },
-                "predictions": {
-                  "type": "integer",
-                  "required": true
-                },
-                "questions": {
-                  "type": "integer",
-                  "required": true
-                },
-                "friends": {
-                  "type": "integer",
-                  "required": true
-                }
+            "properties": {
+              "cristals": {
+                "type": "integer",
+                "required": true
+              },
+              "predictions": {
+                "type": "integer",
+                "required": true
+              },
+              "questions": {
+                "type": "integer",
+                "required": true
+              },
+              "friends": {
+                "type": "integer",
+                "required": true
               }
             }
           },
