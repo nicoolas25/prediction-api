@@ -1,3 +1,5 @@
+DEFAULT_CRISTALS = 20
+
 Given /^I have (a valid|an invalid) OAuth2 token for the "([^"]*)" provider(?: which returns the id "([^"]*)")?$/ do |valid, provider, id|
   klass = "SocialAPI::#{provider.camelize}".constantize
   messages = (valid == 'a valid') ?
@@ -7,13 +9,18 @@ Given /^I have (a valid|an invalid) OAuth2 token for the "([^"]*)" provider(?: w
 end
 
 Given /^an user named "([^"]*)" is already registered$/ do |nickname|
-  Domain::Player.create(nickname: nickname)
+  Domain::Player.create(nickname: nickname, cristals: DEFAULT_CRISTALS)
 end
 
 Given /^"(\d+)" registered users with "([^"]*)" as nickname prefix$/ do |size, prefix|
   (0...size.to_i).each do |index|
-    Domain::Player.create(nickname: "#{prefix}_#{index}")
+    Domain::Player.create(nickname: "#{prefix}_#{index}", cristals: DEFAULT_CRISTALS)
   end
+end
+
+Given /^the user "([^"]*)" have "(\d+)" cristals$/ do |nickname, cristals|
+  player = Domain::Player.first!(nickname: nickname)
+  player.update(cristals: cristals.to_i)
 end
 
 Given /^the user "([^"]*)" have a valid token(?:: "([^"]*))?"$/ do |nickname, token|
@@ -28,11 +35,13 @@ Given /^a social account for "([^"]*)"  with "([^"]*)" id is linked to "([^"]*)"
   player.add_social_association(provider: SocialAPI::PROVIDERS.index(provider), id: id, token: 'dont-care')
 end
 
-Given /^I am an authenticated user(?:: "([^"]*)")?$/ do |nickname|
+Given /^I am an authenticated user(?:: "([^"]*)")?(?: with "(\d+)" cristals)?$/ do |nickname, cristals|
   nickname ||= "nickname"
+  cristals ||= DEFAULT_CRISTALS
   steps %Q{
     Given an user named "#{nickname}" is already registered
     And the user "#{nickname}" have a valid token: "12345"
+    And the user "#{nickname}" have "#{cristals}" cristals
     And I set headers:
       | Authentication-Token | 12345 |
   }

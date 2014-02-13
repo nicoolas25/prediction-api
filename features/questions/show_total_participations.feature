@@ -3,7 +3,9 @@ Feature: Give the total participations for an open question
   Scenario: There is an open question to display
     Given I am an authenticated user: "nickname"
     And an user named "player1" is already registered
+    And the user "player1" have "100" cristals
     And an user named "player2" is already registered
+    And the user "player2" have "50" cristals
     And existing questions:
       | 1 | Qui va gagner ?  |
     And existing components for the question "1":
