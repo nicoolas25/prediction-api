@@ -13,7 +13,7 @@ Feature: Registration
   Scenario: Register a new user with an existing nickname
     Given I accept JSON
     And I have a valid OAuth2 token for the "facebook" provider
-    And an user named "nickname" is already registered
+    And an user "nickname" is already registered
     When I send a POST request to "/v1/registrations" with the following:
       | oauth2Provider | facebook   |
       | oauth2Token    | test-token |
@@ -26,7 +26,7 @@ Feature: Registration
   Scenario: Register a new user with an existing social account
     Given I accept JSON
     And I have a valid OAuth2 token for the "facebook" provider which returns the id "fake-id"
-    And an user named "nickname" is already registered
+    And an user "nickname" is already registered
     And a social account for "facebook"  with "fake-id" id is linked to "nickname"
     When I send a POST request to "/v1/registrations" with the following:
       | oauth2Provider | facebook   |

@@ -19,3 +19,4 @@ Feature: List all the questions
       | token | xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB |
     Then the response status should be "200"
     And the JSON response should have 2 "$.[*].*"
+

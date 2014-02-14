@@ -50,7 +50,8 @@ module Controllers
     end
   end
 
-  autoload :Admin,         './app/controllers/admin'
+  autoload :AdminQuestion, './app/controllers/admin_question'
+  autoload :AdminPlayer,   './app/controllers/admin_player'
   autoload :Participation, './app/controllers/participation'
   autoload :Question,      './app/controllers/question'
   autoload :Registration,  './app/controllers/registration'

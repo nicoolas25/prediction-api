@@ -1,5 +1,5 @@
 module Controllers
-  class Admin < Grape::API
+  class AdminQuestion < Grape::API
     include Common
 
     version 'v1'

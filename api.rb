@@ -2,7 +2,9 @@ require './app/controllers'
 
 module Prediction
   class API < Grape::API
-    mount Controllers::Admin
+    mount Controllers::AdminQuestion
+    mount Controllers::AdminPlayer
+
     mount Controllers::Participation
     mount Controllers::Question
     mount Controllers::Registration

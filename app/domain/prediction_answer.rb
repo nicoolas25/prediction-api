@@ -1,7 +1,5 @@
 module Domain
-  class PredictionAnswer < ::Sequel::Model
-    set_dataset :answers
-
+  class PredictionAnswer < ::Sequel::Model(:answers)
     unrestrict_primary_key
 
     many_to_one :prediction

@@ -8,7 +8,7 @@ Given /^I have (a valid|an invalid) OAuth2 token for the "([^"]*)" provider(?: w
   allow_any_instance_of(klass).to receive_messages(messages)
 end
 
-Given /^an user named "([^"]*)" is already registered$/ do |nickname|
+Given /^an user "([^"]*)" is already registered$/ do |nickname|
   Domain::Player.create(nickname: nickname, cristals: DEFAULT_CRISTALS)
 end
 
@@ -39,7 +39,7 @@ Given /^I am an authenticated user(?:: "([^"]*)")?(?: with "(\d+)" cristals)?$/ 
   nickname ||= "nickname"
   cristals ||= DEFAULT_CRISTALS
   steps %Q{
-    Given an user named "#{nickname}" is already registered
+    Given an user "#{nickname}" is already registered
     And the user "#{nickname}" have a valid token: "12345"
     And the user "#{nickname}" have "#{cristals}" cristals
     And I set headers:

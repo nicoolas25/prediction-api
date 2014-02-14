@@ -1,10 +1,8 @@
 module Domain
   class InvalidComponentError < Error ; end
 
-  class QuestionComponent < ::Sequel::Model
+  class QuestionComponent < ::Sequel::Model(:components)
     KINDS = %w(choices exact closest).freeze
-
-    set_dataset :components
 
     unrestrict_primary_key
 
