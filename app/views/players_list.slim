@@ -1,29 +1,25 @@
 doctype html
 html
   head
-    title Predictio - Liste des questions
+    title Predictio - Liste des joueurs
     meta name="token" content="#{params[:token]}"
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
     script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"
     script src="/scripts.js"
     style
-      | #questions-list .question span {
-      |   float: right;
-      |   margin: 0px 5px;
-      | }
-      | #questions-list {
+      | #players-list {
       |   list-style-type: none;
       |   margin: 0px;
       |   padding: 0px;
       | }
-      | #questions-list .question {
+      | #players-list .player {
       |   padding: 5px;
       | }
-      | #questions-list .question:nth-child(n+1) {
+      | #players-list .player:nth-child(n+1) {
       |   background: #EFEFEF;
       | }
-      | #questions-list .question:hover {
+      | #players-list .player:hover {
       |   background: #FFDDDD;
       | }
   body
-    ul#questions-list
+    ul#players-list

@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title Predictio - Détail d'une question
+    meta name="token" content="#{params[:token]}"
+    meta name="playerNickname" content="#{params[:nickname]}"
+    script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
+    script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"
+    script src="/scripts.js"
+    style
+      | #title { text-align: center; width: 100%; font-size: 200%; }
+  body
+    form#players-details
+      .block#title Détails du joueur #{params[:nickname]}
+      .block#informations
+        | Nombre de cistaux: 
+        input.cristals type='text'
+      a.submit href="#" Modifier

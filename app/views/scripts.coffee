@@ -84,6 +84,55 @@ listQuestionsInit = ->
         """
     $list.html(buffer)
 
+listPlayersInit = ->
+  $list = $('#players-list')
+  return null unless $list.length
+
+  $.ajax
+    url: "http://#{api_url}/v1/admin/players"
+    type: 'GET'
+    data: { token: token }
+  .done (players) ->
+    buffer = ''
+    for player in players
+      buffer +=
+        """
+        <li class="player">
+          <a href="/players/#{player.nickname}?token=#{token}">#{player.nickname}</a>
+        </li>
+        """
+    $list.html(buffer)
+
+detailsPlayersInit = ->
+  return null unless $('#players-details').length
+
+  nickname = $('meta[name=playerNickname]').prop('content')
+
+  fetchPlayer = ->
+    $.ajax
+      url: "http://#{api_url}/v1/admin/players/#{nickname}"
+      type: 'GET'
+      data: { token: token }
+    .done (player) ->
+      # Set informations
+      $('#informations .cristals').val(player.statistics.cristals)
+
+  $(document).on 'click', 'form a', ->
+    $form = $(this).closest('form')
+    $.ajax
+      url: "http://#{api_url}/v1/admin/players/#{nickname}"
+      type: 'PUT'
+      contentType: 'application/json'
+      processData: false
+      data: JSON.stringify
+        token: token
+        cristals: $form.find('input').val()
+    .done ->
+      alert('Done!')
+      fetchPlayer()
+
+  fetchPlayer()
+
 detailsQuestionsInit = ->
   return null unless $('#questions-details').length
 
@@ -175,3 +224,5 @@ $ ->
   addQuestionInit()
   listQuestionsInit()
   detailsQuestionsInit()
+  listPlayersInit()
+  detailsPlayersInit()

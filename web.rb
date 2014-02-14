@@ -26,6 +26,14 @@ module Prediction
       slim :questions_details
     end
 
+    get '/players' do
+      slim :players_list
+    end
+
+    get '/players/:nickname' do
+      slim :players_details
+    end
+
     get '/scripts.js' do
       content_type "text/javascript"
       coffee :scripts
