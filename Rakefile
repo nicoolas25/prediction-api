@@ -2,13 +2,13 @@ desc "Load a console"
 task :console do
   require './api'
   ARGV.clear
-  begin
-    require 'pry'
-    Pry.start
-  rescue
+  if ENV['RACK_ENV'] == 'production'
     require 'irb'
     require 'irb/completion'
     IRB.start
+  else
+    require 'pry'
+    Pry.start
   end
 end
 

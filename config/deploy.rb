@@ -107,6 +107,21 @@ namespace :db do
 end
 
 #
+# Console
+#
+
+namespace :remote do
+  desc "Open a ruby console"
+  task :console => :environment do
+    queue %{
+      echo "-----> Lauching the console" &&
+      #{echo_cmd %[cd #{deploy_to}/current]}
+      #{echo_cmd %[RACK_ENV=production bundle exec rake console]}
+    }
+  end
+end
+
+#
 # Target setup
 #
 
