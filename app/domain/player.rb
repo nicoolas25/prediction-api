@@ -19,6 +19,7 @@ module Domain
 
     def validate
       super
+      errors.add(:nickname, 'is too short')     if new? && nickname.size < 4
       errors.add(:nickname, 'is already taken') if new? && Player.where(nickname: nickname).count > 0
     end
 
