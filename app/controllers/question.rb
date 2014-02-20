@@ -14,13 +14,19 @@ module Controllers
 
         desc "List the open questions for a player"
         get 'global/open' do
-          questions = Domain::Question.global.open_for(player).with_locale(@locale).all
+          questions = Domain::Question.global.open.for(player).with_locale(@locale).all
           present questions, with: Entities::Question, locale: @locale
         end
 
         desc "List the answered questions of a player"
         get 'global/answered' do
-          questions = Domain::Question.global.answered_by(player).with_locale(@locale).all
+          questions = Domain::Question.global.open.answered_by(player).with_locale(@locale).all
+          present questions, with: Entities::Question, locale: @locale
+        end
+
+        desc "List the answered questions of a player"
+        get 'global/outdated' do
+          questions = Domain::Question.global.expired.answered_by(player).with_locale(@locale).all
           present questions, with: Entities::Question, locale: @locale
         end
 

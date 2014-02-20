@@ -21,14 +21,16 @@ module Domain
         where(author_id: nil)
       end
 
-      def open_for(player)
-        ds = where{expires_at > Time.now}
-        ds = ds.exclude(id: player.participations_dataset.select(:question_id)) unless player == :all
-        ds
+      def for(player)
+        exclude(id: player.participations_dataset.select(:question_id))
       end
 
       def expired
         exclude{expires_at > Time.now}
+      end
+
+      def open
+        where{expires_at > Time.now}
       end
 
       def answered_by(player)
@@ -86,7 +88,7 @@ module Domain
     class << self
       def find_for_answer(id)
         unless question = dataset.expired.where(id: id).eager(:components).first
-          unless dataset.open_for(:all).where(id: id).empty?
+          unless dataset.open.where(id: id).empty?
             raise QuestionNotFound.new(:not_expired)
           end
         end
@@ -94,7 +96,7 @@ module Domain
       end
 
       def find_for_participation(player, id)
-        unless question = dataset.open_for(player).where(id: id).eager(:components).first
+        unless question = dataset.open.for(player).where(id: id).eager(:components).first
           if player.participations_dataset.where(question_id: id).empty?
             raise QuestionNotFound.new(:question_not_found_or_expired)
           else
