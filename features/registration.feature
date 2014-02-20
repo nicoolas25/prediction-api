@@ -10,6 +10,16 @@ Feature: Registration
     Then the response status should be "201"
     And the JSON response should have "$.token"
 
+  Scenario: Register a new user with an empty nickname
+    Given I accept JSON
+    And I have a valid OAuth2 token for the "facebook" provider
+    When I send a POST request to "/v1/registrations" with the following:
+      | oauth2Provider | facebook   |
+      | oauth2Token    | test-token |
+      | nickname       |            |
+    Then the response status should be "403"
+    And the JSON response should have "$.code" with the text "nickname_taken"
+
   Scenario: Register a new user with an existing nickname
     Given I accept JSON
     And I have a valid OAuth2 token for the "facebook" provider
