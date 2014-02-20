@@ -27,7 +27,7 @@ module Controllers
         desc "List the answered questions of a player"
         get 'global/outdated' do
           questions = Domain::Question.global.expired.answered_by(player).with_locale(@locale).all
-          present questions, with: Entities::Question, locale: @locale
+          present questions, with: Entities::Question, locale: @locale, player: player
         end
 
         desc "Show the details of a question"

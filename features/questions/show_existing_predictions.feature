@@ -19,4 +19,3 @@ Feature: Give the repartition of the stakes for the existing predictions
     When I send a GET request to "/v1/questions/fr/1"
     Then the response status should be "200"
     And the JSON response should have 2 "$.predictions[*]"
-    And show me the response

@@ -6,6 +6,13 @@ module Domain
     many_to_one :prediction
     many_to_one :question
 
+    dataset_module do
+      def for_question(question)
+        id = question.respond_to?(:id) ? question.id : question
+        where(question_id: id)
+      end
+    end
+
     def before_create
       super
       player.update(cristals: Sequel.expr(:cristals) - stakes)

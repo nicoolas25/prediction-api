@@ -97,7 +97,7 @@ module Domain
 
       def find_for_participation(player, id)
         unless question = dataset.open.for(player).where(id: id).eager(:components).first
-          if player.participations_dataset.where(question_id: id).empty?
+          if player.participations_dataset.for_question(id).empty?
             raise QuestionNotFound.new(:question_not_found_or_expired)
           else
             raise QuestionNotFound.new(:participation_exists)

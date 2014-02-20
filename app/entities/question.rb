@@ -20,6 +20,10 @@ module Entities
 
     expose :answered
 
+    expose :winnings, if: :player do |q, opts|
+      opts[:player].participations_dataset.for_question(q).first.try(:winnings)
+    end
+
     expose :components, using: Component, if: :details
 
     expose :predictions, using: Prediction, if: :details

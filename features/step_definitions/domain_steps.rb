@@ -47,3 +47,9 @@ Then /^the player "([^"]*)" should have "(\d+)" cristals$/ do |nickname, cristal
   player = Domain::Player.first!(nickname: nickname)
   expect(player.cristals).to eql(cristals.to_i)
 end
+
+When /^the solution to the question "(\d+)" is:$/ do |question_id, components|
+  question = Domain::Question.where(id: question_id).first!
+  components = JSON.parse(components)
+  question.answer_with(components)
+end
