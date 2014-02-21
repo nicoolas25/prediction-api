@@ -1,3 +1,5 @@
+require 'httparty'
+
 module SocialAPI
   class GooglePlus < Base
     include HTTParty
