@@ -24,7 +24,9 @@ module SocialAPI
     def infos
       return @infos unless @infos.nil?
 
-      response = self.class.get('/me', query: {access_token: @token, fields: 'id,first_name,last_name'})
+      response = self.class.get(
+        '/me',
+        query: {access_token: @token, fields: 'id,first_name,last_name'})
 
       if response.code == 200
         @infos = response.parsed_response
