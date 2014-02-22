@@ -17,6 +17,22 @@ module Domain
     many_to_many :predictions, join_table: :participations
     many_to_many :questions, join_table: :participations
 
+    # A friendship is different depending on the social network
+    # it's from. GooglePlus and Twitter are directed edges but
+    # facebook have symetric relations.
+    many_to_many :friends, class: Player, dataset: ->{
+      Player.
+        exclude(players__id: id).
+        join(
+          :friendships,
+          (Sequel.expr(friendships__left_id: id) &
+           Sequel.expr(friendships__right_id: :players__id)) |
+          (Sequel.expr(friendships__right_id: id) &
+           Sequel.expr(friendships__left_id: :players__id) &
+           Sequel.expr(friendships__provider: SocialAPI::SYMETRIC_FRIENDSHIP_PROVIDERS))
+        )
+    }
+
     def validate
       super
       errors.add(:nickname, 'is too short')     if new? && nickname.size < 4

@@ -1,6 +1,6 @@
 Feature: Registration
 
-  Scenario: Register a new user normally
+  Scenario: Register a new player normally
     Given I accept JSON
     And I have a valid OAuth2 token for the "facebook" provider
     When I send a POST request to "/v1/registrations" with the following:
@@ -10,7 +10,7 @@ Feature: Registration
     Then the response status should be "201"
     And the JSON response should have "$.token"
 
-  Scenario: Register a new user with an empty nickname
+  Scenario: Register a new player with an empty nickname
     Given I accept JSON
     And I have a valid OAuth2 token for the "facebook" provider
     When I send a POST request to "/v1/registrations" with the following:
@@ -20,7 +20,7 @@ Feature: Registration
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "nickname_taken"
 
-  Scenario: Register a new user with an existing nickname
+  Scenario: Register a new player with an existing nickname
     Given I accept JSON
     And I have a valid OAuth2 token for the "facebook" provider
     And an user "nickname" is already registered
@@ -33,7 +33,7 @@ Feature: Registration
     But the only registered players are:
       | nickname |
 
-  Scenario: Register a new user with an existing social account
+  Scenario: Register a new player with an existing social account
     Given I accept JSON
     And I have a valid OAuth2 token for the "facebook" provider which returns the id "fake-id"
     And an user "nickname" is already registered
@@ -45,7 +45,7 @@ Feature: Registration
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "social_account_taken"
 
-  Scenario: Register a new user with an invalid provider
+  Scenario: Register a new player with an invalid provider
     Given I accept JSON
     When I send a POST request to "/v1/registrations" with the following:
       | oauth2Provider | unknown    |
@@ -54,7 +54,7 @@ Feature: Registration
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "invalid_oauth2_provider"
 
-  Scenario: Register a new user with an invalid token
+  Scenario: Register a new player with an invalid token
     Given I accept JSON
     And I have an invalid OAuth2 token for the "facebook" provider
     When I send a POST request to "/v1/registrations" with the following:
@@ -64,7 +64,7 @@ Feature: Registration
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "invalid_oauth2_token"
 
-  Scenario: Register a new user with a missing parameter
+  Scenario: Register a new player with a missing parameter
     Given I accept JSON
     When I send a POST request to "/v1/registrations" with the following:
       | oauth2Provider | facebook   |

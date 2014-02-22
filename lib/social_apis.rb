@@ -6,6 +6,7 @@ module SocialAPI
 
   # Do not reorder this!
   PROVIDERS = %w(facebook googleplus twitter).freeze
+  SYMETRIC_FRIENDSHIP_PROVIDERS = [0].freeze
 
   def self.for(provider, token, id=nil)
     case provider

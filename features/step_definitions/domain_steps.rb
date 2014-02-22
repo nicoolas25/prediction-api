@@ -53,3 +53,8 @@ When /^the solution to the question "(\d+)" is:$/ do |question_id, components|
   components = JSON.parse(components)
   question.answer_with(components)
 end
+
+Then /^the player "([^"]*)" should have "(\d+)" friends$/ do |nickname, count|
+  player = Domain::Player.first!(nickname: nickname)
+  expect(player.friends_dataset.count).to eql(count.to_i)
+end

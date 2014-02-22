@@ -1,11 +1,22 @@
 DEFAULT_CRISTALS = 20
 
-Given /^I have (a valid|an invalid) OAuth2 token for the "([^"]*)" provider(?: which returns the id "([^"]*)")?$/ do |valid, provider, id|
+# Fake the provider response for friends
+def fake_friends(provider, friend_ids=[])
   klass = "SocialAPI::#{provider.camelize}".constantize
-  messages = (valid == 'a valid') ?
-    { social_id: id || SecureRandom.hex, first_name: 'John', last_name: 'Do' } :
-    { social_id: nil }
+  messages = { friend_ids: friend_ids }
   allow_any_instance_of(klass).to receive_messages(messages)
+end
+
+def fake_social_id(provider, social_id=nil)
+  klass = "SocialAPI::#{provider.camelize}".constantize
+  messages = { social_id: social_id, first_name: 'John', last_name: 'Do' }
+  allow_any_instance_of(klass).to receive_messages(messages)
+end
+
+Given /^I have (a valid|an invalid) OAuth2 token for the "([^"]*)" provider(?: which returns the id "([^"]*)")?$/ do |valid, provider, id|
+  social_id = (valid == 'a valid') && (id || SecureRandom.hex)
+  fake_social_id(provider, social_id)
+  fake_friends(provider)
 end
 
 Given /^an user "([^"]*)" is already registered$/ do |nickname|
@@ -31,8 +42,10 @@ Given /^the user "([^"]*)" have a valid token(?:: "([^"]*))?"$/ do |nickname, to
 end
 
 Given /^a social account for "([^"]*)"  with "([^"]*)" id is linked to "([^"]*)"$/ do |provider, id, nickname|
+  fake_friends(provider)
   player = Domain::Player.first!(nickname: nickname)
-  player.add_social_association(provider: SocialAPI::PROVIDERS.index(provider), id: id, token: 'dont-care')
+  provider_id = SocialAPI::PROVIDERS.index(provider)
+  player.add_social_association(provider: provider_id, id: id, token: 'dont-care')
 end
 
 Given /^I am an authenticated user(?:: "([^"]*)")?(?: with "(\d+)" cristals)?$/ do |nickname, cristals|
@@ -93,4 +106,17 @@ Given /^there is the following participations for the question "([^"]*)":$/ do |
     prediction = Domain::Prediction.first_or_create_from_cksum(cksum, question)
     Domain::Participation.create(player: player, question: question, prediction: prediction, stakes: stakes)
   end
+end
+
+Given /^there are already registered players via "([^"]*)" friends to the id "([^"]*)":$/ do |provider, social_id, friends|
+  provider_id = SocialAPI::PROVIDERS.index(provider)
+
+  # Create the players and their social associations
+  fake_friends(provider, [])
+  friends.raw.map do |nickname, friend_social_id|
+    player = Domain::Player.create(nickname: nickname, cristals: DEFAULT_CRISTALS)
+    player.add_social_association(provider: provider_id, id: friend_social_id, token: 'not-revelent')
+  end
+
+  fake_friends(provider, friends.raw.map(&:last))
 end
