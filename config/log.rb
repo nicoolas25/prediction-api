@@ -6,11 +6,9 @@ env = ENV['RACK_ENV'] || 'app'
 # Keep 5 x 100 MB of logs
 LOGGER ||= Logger.new("./log/#{env}.log", 5, 100.megabytes)
 
-require 'rack/body_proxy'
-require 'rack/utils'
-
 class LoggerMiddleware
-  FORMAT = %{(%0.6fs) %s "%s%s" %d from: %s\n}
+  FORMAT_BGN = %{Receive %s "%s%s" from %s}
+  FORMAT_END = %{Completed %d (%0.6fs)\n}
 
   def initialize(app)
     @app = app
@@ -18,24 +16,26 @@ class LoggerMiddleware
 
   def call(env)
     began_at = Time.now
+    log_bgn(env)
     status, header, body = @app.call(env)
-    header = Rack::Utils::HeaderHash.new(header)
-    body = Rack::BodyProxy.new(body) { log(env, status, header, began_at) }
+    log_end(status, began_at)
     [status, header, body]
   end
 
   private
 
-  def log(env, status, header, began_at)
-    now = Time.now
-    msg = FORMAT % [
-      now - began_at,
+  def log_bgn(env)
+    msg = FORMAT_BGN % [
       env["REQUEST_METHOD"],
       env["PATH_INFO"],
       env["QUERY_STRING"].empty? ? "" : "?"+env["QUERY_STRING"],
-      status.to_s[0..3],
       env['HTTP_X_FORWARDED_FOR'] || env["REMOTE_ADDR"] || "-" ]
 
+    LOGGER.info(msg)
+  end
+
+  def log_end(status, began_at)
+    msg = FORMAT_END % [ status.to_s[0..3], Time.now - began_at ]
     LOGGER.info(msg)
   end
 end

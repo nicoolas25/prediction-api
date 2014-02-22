@@ -119,6 +119,15 @@ namespace :remote do
       #{echo_cmd %[RACK_ENV=production bundle exec rake console]}
     }
   end
+
+  desc "Tail the application log"
+  task :log => :environment do
+    queue %{
+      echo "-----> Fllowing the log" &&
+      #{echo_cmd %[cd #{deploy_to}/current]}
+      #{echo_cmd %[tail -f log/production.log]}
+    }
+  end
 end
 
 #
