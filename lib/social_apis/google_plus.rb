@@ -19,6 +19,33 @@ module SocialAPI
       @social_id ||= infos && infos['id']
     end
 
+    def friend_ids
+      ids = []
+      url = '/plus/v1/people/me/people/visible'
+      headers = {'Authorization' => "Bearer #{@token}"}
+      fields = 'items/id,nextPageToken'
+
+      response = self.class.get(url, headers: headers, query: {fields: fields})
+      code = response.code
+
+      while code == 200
+        hash = response.parsed_response
+        page_token = hash['nextPageToken']
+        page = hash['items'].try{ |friends| friends.map{ |friend| friend['id'] } }
+
+        break if page.nil? && page.empty?
+
+        ids += page
+
+        break unless page_token
+
+        response = self.class.get(url, headers: headers, query: {fields: fields, pageToken: page_token})
+        code = response.code
+      end
+
+      ids
+    end
+
   private
 
     def infos
