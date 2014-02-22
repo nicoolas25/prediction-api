@@ -16,4 +16,7 @@ url += "&password=#{pass}" if pass
 
 DB = Sequel.connect(url)
 
-DB.loggers << LOGGER if defined?(LOGGER)
+if defined?(LOGGER)
+  DB.loggers << LOGGER
+  DB.log_warn_duration = 0.2
+end

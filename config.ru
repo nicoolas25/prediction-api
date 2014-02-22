@@ -6,7 +6,7 @@ require './web'
 APPLICATION_CONFIG = {
   stakes: {
     min: 10,
-    max: 1000
+    max: 10
   },
   avatars: {
     small: {
@@ -26,5 +26,7 @@ use Rack::Cors do
     resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
   end
 end
+
+use LoggerMiddleware if defined?(LoggerMiddleware)
 
 run Rack::Cascade.new [Prediction::API, Prediction::Web]
