@@ -14,14 +14,31 @@ module Domain
       add_induced_friendships!
     end
 
+    def after_destroy
+      super
+      remove_induced_friendships!
+    end
+
     # This is not used by the application right now
     # it's for maintenance purpose
     def reload_friendships!
-      player.friends_dataset.where(provider: provider).delete
+      remove_induced_friendships!
       add_induced_friendships!
     end
 
   protected
+
+    def remove_induced_friendships!
+      ds = DB[:friendships].where(provider: provider)
+
+      if api.symetric_friends?
+        ds = ds.where(Sequel.expr(left_id: player_id) | Sequel.expr(right_id: player_id))
+      else
+        ds = ds.where(left_id: player_id)
+      end
+
+      ds.delete
+    end
 
     def add_induced_friendships!
       friend_ids = api.friend_ids
