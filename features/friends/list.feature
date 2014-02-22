@@ -21,4 +21,3 @@ Feature: Display the friends
     When I send a GET request to "/v1/users/me/friends"
     Then the response status should be "200"
     And the JSON response should have 1 "$.[*].*"
-    And show me the response
