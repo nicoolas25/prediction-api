@@ -47,7 +47,7 @@ namespace :db do
 
     Sequel.extension :migration
     if Sequel::Migrator.is_current?(DB, MIGRATION_DIR) && !args.target
-      puts "Migrations are good, nothing to doo here."
+      puts "Migrations are good, nothing to do here."
     else
       puts "Migrating to #{args.target || 'the lastest version'}..."
       options = args.target ? {target: args.target.to_i} : {}
