@@ -14,6 +14,13 @@ module Domain
       add_induced_friendships!
     end
 
+    # This is not used by the application right now
+    # it's for maintenance purpose
+    def reload_friendships!
+      player.friends_dataset.where(provider: provider).delete
+      add_induced_friendships!
+    end
+
   protected
 
     def add_induced_friendships!
