@@ -9,5 +9,6 @@ module Prediction
     mount Controllers::Question
     mount Controllers::Registration
     mount Controllers::Session
+    mount Controllers::User
   end
 end

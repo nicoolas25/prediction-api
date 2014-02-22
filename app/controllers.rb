@@ -56,4 +56,5 @@ module Controllers
   autoload :Question,      './app/controllers/question'
   autoload :Registration,  './app/controllers/registration'
   autoload :Session,       './app/controllers/session'
+  autoload :User,          './app/controllers/user'
 end

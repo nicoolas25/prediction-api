@@ -13,6 +13,7 @@ module Entities
   end
 
   autoload :Component,         './app/entities/component'
+  autoload :Friend,            './app/entities/friend'
   autoload :Participation,     './app/entities/participation'
   autoload :Player,            './app/entities/player'
   autoload :Prediction,        './app/entities/prediction'

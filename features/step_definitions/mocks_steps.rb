@@ -120,3 +120,12 @@ Given /^there are already registered players via "([^"]*)" friends to the id "([
 
   fake_friends(provider, friends.raw.map(&:last))
 end
+
+Given /^the user "([^"]*)" have the following "([^"]*)" friends:$/ do |nickname, provider, friends|
+  provider_id = SocialAPI::PROVIDERS.index(provider)
+  player = Domain::Player.first!(nickname: nickname)
+  friends.raw.map do |nickname|
+    friend = Domain::Player.first!(nickname: nickname)
+    DB[:friendships].insert(provider: provider_id, left_id: player.id, right_id: friend.id)
+  end
+end
