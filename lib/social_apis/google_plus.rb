@@ -4,6 +4,8 @@ module SocialAPI
   class GooglePlus < Base
     include HTTParty
 
+    logger LOGGER, :info
+
     base_uri 'https://www.googleapis.com'
     format :json
 

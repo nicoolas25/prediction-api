@@ -4,6 +4,8 @@ module SocialAPI
   class Facebook < Base
     include HTTParty
 
+    logger LOGGER, :info
+
     MAX_FRIENDS = 2000
 
     base_uri 'https://graph.facebook.com'

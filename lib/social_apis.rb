@@ -1,3 +1,5 @@
+require './config/log'
+
 module SocialAPI
   autoload :Base,       './lib/social_apis/base'
   autoload :Facebook,   './lib/social_apis/facebook'
