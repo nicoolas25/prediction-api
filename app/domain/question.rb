@@ -82,7 +82,7 @@ module Domain
       components.each { |component| component.update(valid_answer: answers[component.id.to_s]) }
 
       # Update the earnings for the participations
-      EarningService.new(self).distribute_earnings!
+      Services::Earning.new(self).distribute_earnings!
     end
 
     class << self

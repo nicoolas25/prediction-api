@@ -10,7 +10,6 @@ module Domain
   class Error < StandardError ; end
 
   autoload :Badges,                   './app/domain/badges'
-  autoload :EarningService,           './app/domain/earning_service'
   autoload :Participation,            './app/domain/participation'
   autoload :Player,                   './app/domain/player'
   autoload :Prediction,               './app/domain/prediction'
@@ -23,7 +22,7 @@ module Domain
   autoload :QuestionComponentChoice,  './app/domain/question_component'
   autoload :QuestionComponentClosest, './app/domain/question_component'
   autoload :QuestionComponentExact,   './app/domain/question_component'
-  autoload :RankingService,           './app/domain/ranking_service'
+  autoload :Services,                 './app/domain/services'
   autoload :SocialAssociation,        './app/domain/social_association'
 
   autoload :I18nLabels,               './app/domain/concerns/i18n_labels'
