@@ -219,9 +219,26 @@ schemas:
                     "required": true
                   },
                   "friends": {
-                    "type": "integer",
-                    "title": "Nombre d'utilisateurs dans les amis ayant déjà répondu",
-                    "required": true
+                    "type": "array",
+                    "title": "Utilisateurs dans les amis ayant déjà répondu",
+                    "required": true,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "provider": {
+                          "type": "string",
+                          "required": true
+                        },
+                        "social_id": {
+                          "type": "string",
+                          "required": true
+                        }
+                      }
+                    }
                   }
                 }
               }
