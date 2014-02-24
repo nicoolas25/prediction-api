@@ -15,21 +15,37 @@ module Domain
       def question_hash
         return @question_hash if @question_hash
 
-        results = Hash.new { 0 }
+        results = {}
 
         # Make one request to fetch the number of friends that have answered
         # the @question_ids
         friend_ids = @player.friends_dataset.select(:id)
         participations = ::Domain::Participation.dataset.
-          select(:question_id, Sequel.function(:count, Sequel.lit('*')).as(:friends_count)).
-          where(player_id: friend_ids, question_id: @question_ids).
-          group(:question_id)
+          select(
+            :participations__question_id,
+            :participations__player_id,
+            :social_associations__provider,
+            :social_associations__id).
+          where(
+            participations__question_id: @question_ids,
+            participations__player_id: friend_ids).
+          join(
+            :social_associations,
+            player_id: :player_id).
+          distinct(
+            :participations__question_id,
+            :participations__player_id,
+            :social_associations__provider)
 
         # Puts the response in a Hash
         participations.each do |p|
           qid = p.values[:question_id]
-          count = p.values[:friends_count]
-          results[qid] = count
+          friend_hash = {
+            id:        p.values[:player_id],
+            provider:  SocialAPI.provider(p.values[:provider]),
+            social_id: p.values[:id]
+          }
+          (results[qid] ||= []) << friend_hash
         end
 
         # Keep the hash for next calls

@@ -127,5 +127,6 @@ Given /^the user "([^"]*)" have the following "([^"]*)" friends:$/ do |nickname,
   friends.raw.map do |nickname|
     friend = Domain::Player.first!(nickname: nickname)
     DB[:friendships].insert(provider: provider_id, left_id: player.id, right_id: friend.id)
+    DB[:social_associations].insert(provider: provider_id, id: "fake-id-#{friend.id}", token: 'dont-care', player_id: friend.id)
   end
 end

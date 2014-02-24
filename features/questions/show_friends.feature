@@ -20,5 +20,4 @@ Feature: Give the number of friends that answered a question
       | 1  | 0     |
     When I send a GET request to "/v1/questions/fr/global/open"
     Then the response status should be "200"
-    And the JSON response should have "$.[0].statistics.participations" with the text "2"
-    And the JSON response should have "$.[0].statistics.friends" with the text "1"
+    And the JSON response should have 1 "$.[0].statistics.friends[*]"
