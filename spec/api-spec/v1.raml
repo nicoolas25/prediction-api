@@ -299,6 +299,47 @@ schemas:
               }
             }
           },
+          "statistics": {
+            "type": "array",
+            "required": true,
+            "items": {
+              "type": "object",
+              "properties": {
+                "cristals": {
+                  "type": "integer",
+                  "title": "Nombre de cristaux mis en jeu",
+                  "required": false
+                },
+                "participations": {
+                  "type": "integer",
+                  "title": "Nombre d'utilisateurs ayant déjà fait une prédiction pour la question",
+                  "required": true
+                },
+                "friends": {
+                  "type": "array",
+                  "title": "Utilisateurs dans les amis ayant déjà répondu",
+                  "required": true,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "provider": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "social_id": {
+                        "type": "string",
+                        "required": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "components": {
             "type": "array",
             "title": "Liste des composants de la question",
