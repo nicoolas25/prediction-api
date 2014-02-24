@@ -1,7 +1,7 @@
 module Entities
   class Player < Grape::Entity
     include Common
-    expose :id, if: :admin
+    expose :id
 
     expose :token,            if: :token
     expose :token_expiration, if: :token, format_with: :timestamp
@@ -11,7 +11,7 @@ module Entities
         cristals: p.cristals,
         predictions: p.participations_dataset.count,
         questions: 0,
-        friends: 0
+        friends: p.friends.count
       }
     end
 
