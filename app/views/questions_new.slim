@@ -4,11 +4,16 @@ html
     title Predictio - Ajouter une question
     meta name="token" content="#{params[:token]}"
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
+    script src="//jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"
     script src="/scripts.js"
+    link href="//jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.min.css" rel="stylesheet"
     style
+      | form#questions-new { width: 600px; float: left; }
       | div.label, div.component, div.choice { border-bottom: 1px solid black; padding: 5px; }
       | div.add { padding: 5px; }
       | a { cursor: pointer; color: #000077; font-size: 10pt; }
+      | #image-selector { padding: 5px; float: left; min-width: 300px; }
+      | #image-url { width: 250px; display: block; }
   body
     form#questions-new
       fieldset
@@ -66,3 +71,9 @@ html
       input.token placeholder="Token d'identification" value="#{params[:token]}"
 
       input type="submit" value="Ajouter"
+
+    fieldset#image-selector
+      legend Séléction d'une image
+      input#image-url type="text"
+      img#image-crop src="http://jcrop-cdn.tapmodo.com/v0.9.10/demos/demo_files/pool.jpg"
+      label#image-label

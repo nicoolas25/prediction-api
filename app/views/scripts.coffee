@@ -12,6 +12,26 @@ addQuestionInit = ->
       text = $block.find("input.#{type}").val()
       hash[lang] = text
 
+  updateSelection = (crop) ->
+    url = $('#image-url').val()
+    label = "#{url}!#{crop.w}!#{crop.x}!#{crop.y}!#{crop.x2}!#{crop.y2}"
+    $('#image-label').html(label)
+
+  jCropApi = null
+
+  cropImage = ->
+    $('#image-crop').Jcrop({
+      onChange: updateSelection,
+      onSelect: updateSelection,
+      aspectRatio: 1}, -> jCropApi = this)
+
+  cropImage()
+
+  $('#image-url').on 'change', ->
+    jCropApi.destroy()
+    $('#image-crop').prop('src', @value)
+    cropImage()
+
   $(document).on 'click', 'div.add a', ->
     $el = $(@).closest('.add')
     $bk = $el.prev()
