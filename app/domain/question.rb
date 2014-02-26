@@ -40,6 +40,10 @@ module Domain
       def with_locale(locale)
         exclude(:"label_#{locale}" => nil)
       end
+
+      def ordered
+        order(Sequel.asc(:expires_at))
+      end
     end
 
     def validate
