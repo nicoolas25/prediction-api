@@ -125,7 +125,7 @@ namespace :remote do
     queue %{
       echo "-----> Fllowing the log" &&
       #{echo_cmd %[cd #{deploy_to}/current]}
-      #{echo_cmd %[tail -f log/production.log]}
+      #{echo_cmd %[tail -n 100 -f log/production.log]}
     }
   end
 end
