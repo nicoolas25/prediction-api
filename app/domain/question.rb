@@ -41,8 +41,8 @@ module Domain
         exclude(:"label_#{locale}" => nil)
       end
 
-      def ordered
-        order(Sequel.asc(:expires_at))
+      def ordered(order=:asc)
+        order(Sequel.__send__(order, :expires_at))
       end
     end
 
