@@ -28,7 +28,7 @@ module Entities
 
     expose :answered
 
-    expose :winnings, if: :winning_service do |q, opts|
+    expose :winnings, exclude_nil: true, if: :winning_service do |q, opts|
       opts[:winning_service].winnings_for(q)
     end
 

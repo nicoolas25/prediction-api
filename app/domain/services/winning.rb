@@ -8,7 +8,12 @@ module Domain
 
       def winnings_for(question)
         prefetched_infos = question_hash[question.id]
-        Earning.new(question).earning_for(prefetched_infos)
+
+        if prefetched_infos
+          Earning.new(question).earning_for(prefetched_infos)
+        else
+          nil
+        end
       end
 
     private

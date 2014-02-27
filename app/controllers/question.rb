@@ -51,8 +51,15 @@ module Controllers
         end
         get ':id' do
           if question = Domain::Question.with_locale(@locale).where(id: params[:id]).first
-            friend_service = Domain::Services::Friend.new(player, [question.id])
-            present question, with: Entities::Question, locale: @locale, details: true, friend_service: friend_service
+            question_ids = [question.id]
+            friend_service = Domain::Services::Friend.new(player, question_ids)
+            winning_service = Domain::Services::Winning.new(player, question_ids)
+            present question,
+              with: Entities::Question,
+              locale: @locale,
+              friend_service: friend_service,
+              winning_service: winning_service,
+              details: true
           else
             fail!(:question_not_found , 404)
           end
