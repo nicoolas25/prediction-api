@@ -44,6 +44,11 @@ module Domain
         prediction_amount = prefetched_infos[:amount]
         prediction_players = prefetched_infos[:players]
         participation_stakes = prefetched_infos[:stakes]
+        participation_winnings = prefetched_infos[:winnings]
+
+        if participation_winnings
+          return participation_winnings
+        end
 
         losses = @question.amount - prediction_amount
         ratio = participation_stakes.to_f / prediction_amount

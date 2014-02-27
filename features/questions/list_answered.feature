@@ -31,4 +31,4 @@ Feature: Display lists of answered questions
     And the JSON response should have 1 "$.[*].*"
     And the JSON response should have "$.[0].expires_at"
     And the JSON response should have "$.[0].label" with the text "Qui va marquer ?"
-    And the JSON response should have "$.[0].expected" with the text "26"
+    And the JSON response should have "$.[0].winnings" with the text "26"

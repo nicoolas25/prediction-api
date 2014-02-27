@@ -28,6 +28,7 @@ Feature: Display lists of outdated questions
     And the JSON response should have 1 "$.[*].*"
     And the JSON response should have "$.[0].expires_at"
     And the JSON response should have "$.[0].label" with the text "Qui va marquer ?"
+    And the JSON response should have "$.[0].winnings" with the text "10"
 
   Scenario: There is some outdated and solved questions to display
     Given I am an authenticated user

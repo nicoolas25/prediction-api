@@ -35,8 +35,14 @@ module Controllers
         desc "List the answered questions of a player"
         get 'global/outdated' do
           questions = Domain::Question.global.expired.answered_by(player).with_locale(@locale).ordered(:desc).all
-          friend_service = Domain::Services::Friend.new(player, questions.map(&:id))
-          present questions, with: Entities::Question, locale: @locale, player: player, friend_service: friend_service
+          question_ids = questions.map(&:id)
+          friend_service = Domain::Services::Friend.new(player, question_ids)
+          winning_service = Domain::Services::Winning.new(player, question_ids)
+          present questions,
+            with: Entities::Question,
+            locale: @locale,
+            friend_service: friend_service,
+            winning_service: winning_service
         end
 
         desc "Show the details of a question"

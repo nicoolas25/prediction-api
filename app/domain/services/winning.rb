@@ -6,10 +6,9 @@ module Domain
         @question_ids = question_ids
       end
 
-      def expected_winnings_for(question)
+      def winnings_for(question)
         prefetched_infos = question_hash[question.id]
-        earning_service = Earning.new(question)
-        earning_service.earning_for(prefetched_infos)
+        Earning.new(question).earning_for(prefetched_infos)
       end
 
     private
@@ -25,6 +24,7 @@ module Domain
           select(
             :participations__question_id,
             :participations__stakes,
+            :participations__winnings,
             :predictions__amount,
             :predictions__players_count).
           where(
@@ -38,9 +38,10 @@ module Domain
         participations.each do |p|
           question_id = p.values[:question_id]
           results[question_id] = {
-            players: p.values[:players_count],
-            amount:  p.values[:amount],
-            stakes:  p.values[:stakes]
+            players:  p.values[:players_count],
+            amount:   p.values[:amount],
+            stakes:   p.values[:stakes],
+            winnings: p.values[:winnings]
           }
         end
 
