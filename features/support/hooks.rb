@@ -1,7 +1,7 @@
-# Truncate the database before each scenario
+require 'database_cleaner'
+
+DatabaseCleaner.strategy = :truncation
+
 Before do
-  DB.tables.each do |table_name|
-    next if table_name == :schema_info
-    DB[table_name].truncate(cascade: true)
-  end
+  DatabaseCleaner.clean
 end

@@ -36,6 +36,7 @@ GEM
       gherkin (~> 2.12)
       multi_json (>= 1.7.5, < 2.0)
       multi_test (>= 0.0.2)
+    database_cleaner (1.2.0)
     descendants_tracker (0.0.3)
     diff-lcs (1.2.5)
     docile (1.1.2)
@@ -155,6 +156,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-script
   cucumber
+  database_cleaner
   grape
   grape-entity
   httparty
