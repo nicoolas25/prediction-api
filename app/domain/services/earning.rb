@@ -24,7 +24,7 @@ module Domain
 
           if right_prediction
             # Update the right participation (1 SQL request)
-            winning_expr = Sequel.expr(:stakes) + (Sequel.expr(:stakes).cast(:float) / prediction_amount) * wrong_amount
+            winning_expr = Sequel.expr(:stakes) + Sequel.function(:floor, (Sequel.expr(:stakes).cast(:float) / prediction_amount) * wrong_amount)
             right_participations = @question.participations_dataset.where(prediction_id: right_prediction.id)
             right_participations.update(winnings: winning_expr)
 
@@ -40,29 +40,15 @@ module Domain
         end
       end
 
-      def earning_for(participation)
-        compute_groups!
-        prediction_stakes = @stakes[participation.prediction]
-        other_stakes = @total - prediction_stakes
-        ratio = participation.stakes / prediction_stakes.to_f
-        (other_stakes * ratio).to_i + participation.stakes
+      def earning_for(prefetched_infos)
+        prediction_amount = prefetched_infos[:amount]
+        prediction_players = prefetched_infos[:players]
+        participation_stakes = prefetched_infos[:stakes]
+
+        losses = @question.amount - prediction_amount
+        ratio = participation_stakes.to_f / prediction_amount
+        participation_stakes + (ratio * losses).to_i
       end
-
-      private
-
-        # @stakes can be obtained by SQL
-        # @total can be accumulated in the question
-        def compute_groups!
-          @total  ||= 0
-          @groups ||= @question.participations_dataset.eager(:prediction).all.group_by(&:prediction)
-          @stakes ||= @groups.each_with_object({}) do |(prediction, participations), hash|
-            prediction_stakes = participations.reduce(0) do |sum, participation|
-              participation.stakes + sum
-            end
-            hash[prediction] = prediction_stakes
-            @total += prediction_stakes
-          end
-        end
     end
   end
 end

@@ -89,7 +89,7 @@ Feature: The distribution of the earnings are done when the question is answered
     And "5" registered users with "nickname" as nickname prefix
     And there is the following participations for the question "1":
       | nickname_0 | 10 | 1:0 |
-      | nickname_1 | 10 | 1:0 |
+      | nickname_1 | 20 | 1:0 |
       | nickname_2 | 10 | 1:0 |
       | nickname_3 | 20 | 1:1 |
       | nickname_4 | 10 | 1:1 |
@@ -104,6 +104,6 @@ Feature: The distribution of the earnings are done when the question is answered
     """
     Then the question "1" should have been answered
     And the winnings for the question "1" are the following:
-      | nickname_3 | 40 |
-      | nickname_4 | 20 |
-    And the player "nickname_3" should have "40" cristals
+      | nickname_3 | 46 |
+      | nickname_4 | 23 |
+    And the player "nickname_3" should have "46" cristals

@@ -17,7 +17,7 @@ module Domain
 
         results = {}
 
-        # Make one request to fetch the number of friends that have answered
+        # Make one request to fetch the friends that have answered
         # the @question_ids
         friend_ids = @player.friends_dataset.select(:id)
         participations = ::Domain::Participation.dataset.

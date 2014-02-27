@@ -32,6 +32,10 @@ module Entities
       opts[:player].participations_dataset.for_question(q).first.try(:winnings)
     end
 
+    expose :expected, if: :winning_service do |q, opts|
+      opts[:winning_service].expected_winnings_for(q)
+    end
+
     expose :components, using: Component, if: :details
 
     expose :predictions, using: Prediction, if: :details
