@@ -21,14 +21,14 @@ module Controllers
 
         desc "List the answered questions of a player"
         get 'global/answered' do
-          questions = Domain::Question.global.open.answered_by(player).with_locale(@locale).ordered(:desc).all
+          questions = Domain::Question.global.open.answered_by(player).with_locale(@locale).ordered.all
           friend_service = Domain::Services::Friend.new(player, questions.map(&:id))
           present questions, with: Entities::Question, locale: @locale, friend_service: friend_service
         end
 
         desc "List the answered questions of a player"
         get 'global/outdated' do
-          questions = Domain::Question.global.expired.answered_by(player).with_locale(@locale).ordered.all
+          questions = Domain::Question.global.expired.answered_by(player).with_locale(@locale).ordered(:desc).all
           friend_service = Domain::Services::Friend.new(player, questions.map(&:id))
           present questions, with: Entities::Question, locale: @locale, player: player, friend_service: friend_service
         end
