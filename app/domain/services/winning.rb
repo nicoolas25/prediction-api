@@ -16,6 +16,12 @@ module Domain
         end
       end
 
+      def predicted?(prediction)
+        question = prediction.question
+        prefetched_infos = question_hash[question.id]
+        prefetched_infos[:cksum] == prediction.cksum
+      end
+
     private
 
       def question_hash
@@ -31,7 +37,8 @@ module Domain
             :participations__stakes,
             :participations__winnings,
             :predictions__amount,
-            :predictions__players_count).
+            :predictions__players_count,
+            :predictions__cksum).
           where(
             participations__question_id: @question_ids,
             participations__player_id: @player.id).
@@ -46,7 +53,8 @@ module Domain
             players:  p.values[:players_count],
             amount:   p.values[:amount],
             stakes:   p.values[:stakes],
-            winnings: p.values[:winnings]
+            winnings: p.values[:winnings],
+            cksum:    p.values[:cksum]
           }
         end
 
