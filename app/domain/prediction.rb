@@ -15,6 +15,15 @@ module Domain
       answers.all?(&:right?)
     end
 
+    def winnings_per_cristal
+      earning_service = Services::Earning.new(question)
+      earning_service.earning_for({
+        amount: amount,
+        players: players_count,
+        stakes: 1,
+      }, false)
+    end
+
     def update_with_participation!(participation)
       Prediction.dataset.where(id: self.id).update({
         amount: Sequel.expr(:amount) + participation.stakes,

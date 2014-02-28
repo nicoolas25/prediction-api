@@ -40,7 +40,7 @@ module Domain
         end
       end
 
-      def earning_for(prefetched_infos)
+      def earning_for(prefetched_infos, integer=true)
         prediction_amount = prefetched_infos[:amount]
         prediction_players = prefetched_infos[:players]
         participation_stakes = prefetched_infos[:stakes]
@@ -52,7 +52,8 @@ module Domain
 
         losses = @question.amount - prediction_amount
         ratio = participation_stakes.to_f / prediction_amount
-        participation_stakes + (ratio * losses).to_i
+        result = participation_stakes + (ratio * losses)
+        integer ? result.to_i : result
       end
     end
   end

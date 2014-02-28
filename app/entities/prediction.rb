@@ -7,7 +7,8 @@ module Entities
     expose :statistics do |p, opts|
       {
         cristals: p.amount,
-        players: p.players_count
+        players: p.players_count,
+        winnings: p.winnings_per_cristal
       }
     end
 
