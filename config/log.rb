@@ -8,7 +8,7 @@ LOGGER ||= Logger.new("./log/#{env}.log", 5, 100.megabytes)
 
 class LoggerMiddleware
   FORMAT_BGN = %{Receive %s "%s%s" from %s}
-  FORMAT_END = %{Completed %d (%0.6fs)\n}
+  FORMAT_END = %{Completed %d (%0.6fs)\nBody: %s\n}
 
   def initialize(app)
     @app = app
@@ -18,7 +18,7 @@ class LoggerMiddleware
     began_at = Time.now
     log_bgn(env)
     status, header, body = @app.call(env)
-    log_end(status, began_at)
+    log_end(status, began_at, body)
     [status, header, body]
   end
 
@@ -34,8 +34,8 @@ class LoggerMiddleware
     LOGGER.info(msg)
   end
 
-  def log_end(status, began_at)
-    msg = FORMAT_END % [ status.to_s[0..3], Time.now - began_at ]
+  def log_end(status, began_at, body)
+    msg = FORMAT_END % [ status.to_s[0..3], Time.now - began_at, body ]
     LOGGER.info(msg)
   end
 end
