@@ -208,40 +208,37 @@ schemas:
               "required": false
             },
             "statistics": {
-              "type": "array",
+              "type": "object",
               "required": true,
-              "items": {
-                "type": "object",
-                "properties": {
-                  "cristals": {
-                    "type": "integer",
-                    "title": "Nombre de cristaux mis en jeu",
-                    "required": false
-                  },
-                  "participations": {
-                    "type": "integer",
-                    "title": "Nombre d'utilisateurs ayant déjà fait une prédiction pour la question",
-                    "required": true
-                  },
-                  "friends": {
-                    "type": "array",
-                    "title": "Utilisateurs dans les amis ayant déjà répondu",
-                    "required": true,
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "required": true
-                        },
-                        "provider": {
-                          "type": "string",
-                          "required": true
-                        },
-                        "social_id": {
-                          "type": "string",
-                          "required": true
-                        }
+              "properties": {
+                "cristals": {
+                  "type": "integer",
+                  "title": "Nombre de cristaux mis en jeu",
+                  "required": false
+                },
+                "participations": {
+                  "type": "integer",
+                  "title": "Nombre d'utilisateurs ayant déjà fait une prédiction pour la question",
+                  "required": true
+                },
+                "friends": {
+                  "type": "array",
+                  "title": "Utilisateurs dans les amis ayant déjà répondu",
+                  "required": true,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "provider": {
+                        "type": "string",
+                        "required": true
+                      },
+                      "social_id": {
+                        "type": "string",
+                        "required": true
                       }
                     }
                   }
@@ -345,6 +342,48 @@ schemas:
               }
             }
           },
+
+          "predictions": {
+            "type": "array",
+            "title": "Les prédictions ayant déjà été faites",
+            "required": true,
+            "items": {
+              "type": "object",
+              "title": "Détails d'une prédiction",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "required": false
+                },
+                "cksum": {
+                  "type": "string",
+                  "title": "Somme de controle de la prédiction (id-composant):(réponse)",
+                  "required": true
+                },
+                "mine": {
+                  "type": "boolean",
+                  "title": "Présent à vrai si l'utilisateur à fait cette prédiction",
+                  "required": false
+                },
+                "statistics": {
+                  "type": "object",
+                  "required": true,
+                  "properties": {
+                    "cristals": {
+                      "type": "integer",
+                      "title": "Le nombre de cristaux misés sur cette prédiction",
+                      "required": true
+                    },
+                    "players": {
+                      "type": "integer",
+                      "title": "Le nombre de joueurs ayant fait cette prédiction",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          }
           "components": {
             "type": "array",
             "title": "Liste des composants de la question",
@@ -391,11 +430,6 @@ schemas:
                       }
                     }
                   }
-                },
-                "userPrediction": {
-                  "type": "string",
-                  "title": "La prédiction faite à ce composant de la question",
-                  "required": false
                 }
               }
             }
