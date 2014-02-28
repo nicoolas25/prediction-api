@@ -120,6 +120,15 @@ namespace :remote do
     }
   end
 
+  desc "Open a shell"
+  task :shell => :environment do
+    queue %{
+      echo "-----> Lauching the console" &&
+      #{echo_cmd %[cd #{deploy_to}/current]}
+      #{echo_cmd %[bash]}
+    }
+  end
+
   desc "Tail the application log"
   task :log => :environment do
     queue %{

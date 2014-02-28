@@ -1,4 +1,4 @@
-Feature: Give the repartition of the stakes for the existing predictions
+Feature: Give the potential winning for a prediction
 
   Scenario: There is an open question to display
     Given I am an authenticated user: "nickname"
@@ -18,4 +18,4 @@ Feature: Give the repartition of the stakes for the existing predictions
     Then the response status should be "200"
     And the JSON response should have 2 "$.predictions[*]"
     And the JSON response should have "$.winnings" with the text "60"
-    And show me the response
+    And the JSON response should have "$.predictions[1].statistics.winnings" with the text "6.0"
