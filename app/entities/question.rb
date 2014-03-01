@@ -19,8 +19,8 @@ module Entities
 
       # Expose the number of friends that answered the question
       if friend_service = opts[:friend_service]
-        count = friend_service.friends_that_answered(q)
-        hash[:friends] = count
+        friends = friend_service.friends_that_answered(q)
+        hash[:friends] = friends
       end
 
       hash
