@@ -39,7 +39,7 @@ class LoggerMiddleware
     body = body.body                   if body.kind_of?(Rack::Response)
     body = body.first                  if body.kind_of?(Array)
 
-    msg = FORMAT_END % [ status.to_s[0..3], Time.now - began_at, body_str ]
+    msg = FORMAT_END % [ status.to_s[0..3], Time.now - began_at, body ]
     LOGGER.info(msg)
   end
 end
