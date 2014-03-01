@@ -19,7 +19,7 @@ module Domain
       def predicted?(prediction)
         question = prediction.question
         prefetched_infos = question_hash[question.id]
-        prefetched_infos[:cksum] == prediction.cksum
+        prefetched_infos && prefetched_infos[:cksum] == prediction.cksum
       end
 
     private
