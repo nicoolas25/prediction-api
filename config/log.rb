@@ -35,7 +35,13 @@ class LoggerMiddleware
   end
 
   def log_end(status, began_at, body)
-    msg = FORMAT_END % [ status.to_s[0..3], Time.now - began_at, body ]
+    body_str =
+      if body.kind_of?(Rack::BodyProxy)
+        body.instance_eval{ @body }
+      else
+        body
+      end
+    msg = FORMAT_END % [ status.to_s[0..3], Time.now - began_at, body_str ]
     LOGGER.info(msg)
   end
 end
