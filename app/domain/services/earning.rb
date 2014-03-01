@@ -35,8 +35,8 @@ module Domain
             right_players.update(cristals: Sequel.expr(:cristals) + Sequel.expr(:winnings))
           end
 
-          # Mark the question as answered
-          @question.update(answered: true)
+          # Mark the question as answered / solved
+          @question.update(answered: true, solved_at: Time.now)
         end
       end
 

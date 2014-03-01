@@ -12,6 +12,7 @@ module Entities
     end
   end
 
+  autoload :Activity,          './app/entities/activity'
   autoload :Component,         './app/entities/component'
   autoload :Friend,            './app/entities/friend'
   autoload :Participation,     './app/entities/participation'

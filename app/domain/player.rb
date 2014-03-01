@@ -39,6 +39,11 @@ module Domain
       errors.add(:nickname, 'is already taken') if new? && Player.where(nickname: nickname).count > 0
     end
 
+    def before_create
+      super
+      self.created_at = Time.now
+    end
+
     def regenerate_token!
       self.token = SecureRandom.hex
       self.token_expiration = Time.now + 2.days

@@ -5,6 +5,7 @@ module Entities
     expose :nickname
     expose :first_name
     expose :last_name
+    expose :created_at, format_with: :timestamp
 
     expose :social_associations,
       using: SocialAssociation,
