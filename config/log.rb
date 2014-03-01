@@ -35,16 +35,9 @@ class LoggerMiddleware
   end
 
   def log_end(status, began_at, body)
-    body_str =
-      if body.kind_of?(Rack::BodyProxy)
-        if (response = body.instance_eval{ @body }).kind_of?(Rack::Response)
-          response.body
-        else
-          response
-        end
-      else
-        body
-      end
+    body = body.instance_eval{ @body } if body.kind_of?(Rack::BodyProxy)
+    body = body.body                   if body.kind_of?(Rack::Response)
+    body = body.first                  if body.kind_of?(Array)
 
     msg = FORMAT_END % [ status.to_s[0..3], Time.now - began_at, body_str ]
     LOGGER.info(msg)
