@@ -525,6 +525,27 @@ schemas:
           }
         }
       }
+  - activities: |
+      {
+        "$schema": "http://json-schema.org/schema",
+        "type": "object",
+        "title": "Liste d'évènements",
+        "properties": {
+          "answers": {
+            "type": "array",
+            "required": true
+          },
+          "solutions": {
+            "type": "array",
+            "required": true
+          },
+          "friends": {
+            "type": "array",
+            "required": true
+          }
+        }
+      }
+
 resourceTypes:
   - collection:
       usage: Liste d'éléments.
@@ -831,3 +852,26 @@ traits:
           oauth2Provider:
     responses:
       200:
+/activities:
+  is: [ secured ]
+  /{locale}:
+    uriParameters:
+      locale:
+        description: La langue dans laquelle les textes de la questions doivent être retournés
+        type: string
+        pattern: fr|en
+    get:
+      queryParameters:
+        before:
+          description: S'il est présent, tous les évènements retournés seront avant le timestamp donné
+          type: timestamp
+        after:
+          description: S'il est présent, tous les évènements retournés seront après le timestamp donné
+          type: timestamp
+      description: Liste des évènements (historique) relatifs à l'utilisateur et à ses amis
+      responses:
+        200:
+          body:
+            application/json:
+              schema: activities
+

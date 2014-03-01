@@ -14,11 +14,13 @@ module Controllers
 
         desc "List last events for the registered user"
         params do
-          optional :before, type: Time
-          optional :after, type: Time
+          optional :before, type: Integer
+          optional :after, type: Integer
         end
         get do
-          event_services = ::Domain::Services::Event.new(player, params[:before], params[:after])
+          before = params[:before].try{ |t| Time.at(t) }
+          after = params[:after].try{ |t| Time.at(t) }
+          event_services = ::Domain::Services::Event.new(player, before, after)
           present event_services, with: Entities::Activity, locale: @locale
         end
       end
