@@ -11,7 +11,7 @@ module Domain
         results =  participations_creation.eager(:question).all.map{ |p| [p.created_at, p] }
         results += participations_solving.eager(:question).all.map{ |p| [p.question.solved_at, p]}
         results += friends_creation.all.map{ |f| [f.created_at, f] }
-        results.sort_by!(&:first).map(&:last)
+        results.sort_by!(&:first).map!(&:last).reverse!
       end
 
     private
@@ -48,6 +48,7 @@ module Domain
         filter_dataset(
           :questions__solved_at,
           ::Domain::Participation.
+            select_append(:questions__answered___solved).
             join(:questions, id: :question_id).
             where(questions__answered: true).
             where(

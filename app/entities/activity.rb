@@ -5,7 +5,7 @@ module Entities
     expose :kind do |a, opts|
       if a.kind_of?(::Domain::Player)
         'friend'
-      elsif a.winnings
+      elsif a.values[:solved]
         'solution'
       else
         'answer'

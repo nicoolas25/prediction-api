@@ -528,20 +528,19 @@ schemas:
   - activities: |
       {
         "$schema": "http://json-schema.org/schema",
-        "type": "object",
+        "type": "array",
         "title": "Liste d'évènements",
-        "properties": {
-          "answers": {
-            "type": "array",
-            "required": true
-          },
-          "solutions": {
-            "type": "array",
-            "required": true
-          },
-          "friends": {
-            "type": "array",
-            "required": true
+        "items": {
+          "type": "object"
+          "properties": {
+            "kind": {
+              "type": "string",
+              "required": true
+            },
+            "created_at": {
+              "type": "timestamp",
+              "required": true
+            }
           }
         }
       }

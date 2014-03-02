@@ -24,10 +24,19 @@ Feature: Display the activity feed
     And the user "nickname" has answered the question "1" with:
       | id | value |
       | 1  | 0     |
-    When I send a GET request to "/v1/activities/fr"
+    When the solution to the question "1" is:
+    """
+    {
+      "1": 0.0
+    }
+    """
+    And I send a GET request to "/v1/activities/fr"
     Then the response status should be "200"
-    And the JSON response should have 2 "$.[*].*"
-    And the JSON response should have "$.[0].kind" with the text "friend"
-    And the JSON response should have "$.[0].nickname" with the text "friend_1"
+    And show me the response
+    And the JSON response should have 3 "$.[*].*"
+    And the JSON response should have "$.[0].kind" with the text "solution"
+    And the JSON response should have "$.[0].question.id" with the text "1"
     And the JSON response should have "$.[1].kind" with the text "answer"
     And the JSON response should have "$.[1].question.id" with the text "1"
+    And the JSON response should have "$.[2].kind" with the text "friend"
+    And the JSON response should have "$.[2].nickname" with the text "friend_1"
