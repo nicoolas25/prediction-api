@@ -1,32 +1,36 @@
 module Entities
-  class ActivityAnswer < Grape::Entity
+  class Activity < Grape::Entity
     include Common
 
-    expose :player_id
-
-    expose :created_at, format_with: :timestamp
-
-    expose :question, using: Question
-  end
-
-  class ActivitySolution < Grape::Entity
-    include Common
-
-    expose :player_id
-
-    expose :created_at do |s, opts|
-      s.question.solved_at.to_i
+    expose :kind do |a, opts|
+      if a.kind_of?(::Domain::Player)
+        'friend'
+      elsif a.winnings
+        'solution'
+      else
+        'answer'
+      end
     end
 
-    expose :winnings
+    expose :created_at do |a, opts|
+      if a.kind_of?(::Domain::Participation) && a.winnings
+        a.question.solved_at.to_i
+      else
+        a.created_at.to_i
+      end
+    end
 
-    expose :question, using: Question
-  end
+    with_options if: ->(a, opts){ a.kind_of?(::Domain::Player) } do
+      expose :id
+      expose :nickname
+      expose :social_associations, using: SocialAssociation, as: :social
+    end
 
-  class Activity < Grape::Entity
-    expose :answers, using: ActivityAnswer
-    expose :solutions, using: ActivitySolution
-    expose :friends, using: Friend
+    with_options if: ->(a, opts){ a.kind_of?(::Domain::Participation) } do
+      expose :player_id
+      expose :question, using: Question
+      expose :winnings, exclude_nil: true
+    end
   end
 end
 

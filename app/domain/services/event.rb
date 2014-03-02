@@ -7,16 +7,11 @@ module Domain
         @after  = after_datetime
       end
 
-      def answers
-        participations_creation.eager(:question).all
-      end
-
-      def solutions
-        participations_solving.eager(:question).all
-      end
-
-      def friends
-        friends_creation.all
+      def events
+        results =  participations_creation.eager(:question).all.map{ |p| [p.created_at, p] }
+        results += participations_solving.eager(:question).all.map{ |p| [p.question.solved_at, p]}
+        results += friends_creation.all.map{ |f| [f.created_at, f] }
+        results.sort_by!(&:first).map(&:last)
       end
 
     private
