@@ -151,13 +151,34 @@ schemas:
           "type": "object",
           "title": "Entrée du classement",
           "properties": {
-            "userId": {
+            "id": {
+              "type": "string",
+              "required": true
+            },
+            "nickname": {
               "type": "string",
               "required": true
             },
             "score": {
               "type": "integer",
               "required": true
+            },
+            "social": {
+              "type": "array",
+              "required": true,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "provider": {
+                    "type": "string",
+                    "title": "Nom du réseau social lié au compte de l'utilisateur"
+                  },
+                  "id": {
+                    "type": "string",
+                    "title": "Identifiant de l'utilisateur pour le provider donné"
+                  }
+                }
+              }
             }
           }
         }
