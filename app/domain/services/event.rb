@@ -10,7 +10,7 @@ module Domain
       def events
         results =  participations_creation.eager(:question).all.map{ |p| [p.created_at, p] }
         results += participations_solving.eager(:question).all.map{ |p| [p.question.solved_at, p]}
-        results += friends_creation.all.map{ |f| [f.created_at, f] }
+        results += friends_creation.eager(:social_associations).all.map{ |f| [f.created_at, f] }
         results.sort_by!(&:first).map!(&:last).reverse!
       end
 

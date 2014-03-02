@@ -32,7 +32,6 @@ Feature: Display the activity feed
     """
     And I send a GET request to "/v1/activities/fr"
     Then the response status should be "200"
-    And show me the response
     And the JSON response should have 3 "$.[*].*"
     And the JSON response should have "$.[0].kind" with the text "solution"
     And the JSON response should have "$.[0].question.id" with the text "1"
