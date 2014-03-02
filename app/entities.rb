@@ -15,6 +15,7 @@ module Entities
   autoload :Activity,          './app/entities/activity'
   autoload :Component,         './app/entities/component'
   autoload :Friend,            './app/entities/friend'
+  autoload :Ladder,            './app/entities/ladder'
   autoload :Participation,     './app/entities/participation'
   autoload :Player,            './app/entities/player'
   autoload :Prediction,        './app/entities/prediction'

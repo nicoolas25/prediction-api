@@ -54,6 +54,7 @@ module Controllers
   autoload :AdminPlayer,   './app/controllers/admin_player'
 
   autoload :Activity,      './app/controllers/activity'
+  autoload :Ladder,        './app/controllers/ladder'
   autoload :Participation, './app/controllers/participation'
   autoload :Question,      './app/controllers/question'
   autoload :Registration,  './app/controllers/registration'

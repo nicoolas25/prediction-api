@@ -6,6 +6,7 @@ module Prediction
     mount Controllers::AdminPlayer
 
     mount Controllers::Activity
+    mount Controllers::Ladder
     mount Controllers::Participation
     mount Controllers::Question
     mount Controllers::Registration

@@ -27,6 +27,7 @@ module Domain
             winning_expr = Sequel.expr(:stakes) + Sequel.function(:floor, (Sequel.expr(:stakes).cast(:float) / prediction_amount) * wrong_amount)
             right_participations = @question.participations_dataset.where(prediction_id: right_prediction.id)
             right_participations.update(winnings: winning_expr)
+            Ranking.update(right_participations)
 
             # Update the user cristals (1 SQL request)
             right_players = Player.dataset.
