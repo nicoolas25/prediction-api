@@ -45,6 +45,18 @@ Feature: Registration
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "social_account_taken"
 
+  Scenario: Register a new player with an existing social account and nickname
+    Given I accept JSON
+    And I have a valid OAuth2 token for the "facebook" provider which returns the id "fake-id"
+    And an user "nickname" is already registered
+    And a social account for "facebook"  with "fake-id" id is linked to "nickname"
+    When I send a POST request to "/v1/registrations" with the following:
+      | oauth2Provider | facebook   |
+      | oauth2Token    | test-token |
+      | nickname       | nickname   |
+    Then the response status should be "403"
+    And the JSON response should have "$.code" with the text "social_account_taken"
+
   Scenario: Register a new player with an invalid provider
     Given I accept JSON
     When I send a POST request to "/v1/registrations" with the following:
