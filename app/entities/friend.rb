@@ -21,9 +21,6 @@ module Entities
       }
     end
 
-    expose :social_associations,
-      using: SocialAssociation,
-      as: :social,
-      if: ->(p, opts){ !opts[:admin] || opts[:details] }
+    expose :social_associations, using: SocialAssociation, as: :social, if: :mine
   end
 end

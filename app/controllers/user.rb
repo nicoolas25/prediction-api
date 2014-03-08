@@ -19,7 +19,14 @@ module Controllers
 
         desc "List the open questions for a player"
         get 'friends' do
-          present @user.friends, with: Entities::Friend, mine: user == player
+          friends =
+            if user == player
+              @user.friends_dataset.eager(:social_associations).all
+            else
+              @user.friends
+            end
+
+          present friends, with: Entities::Friend, mine: user == player
         end
       end
     end
