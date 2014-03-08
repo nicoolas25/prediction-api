@@ -48,10 +48,8 @@ module Domain
         where(id: friend_ids)
 
       # Remove player's friends from selected social associations
-      if api.symetric_friends?
-        assocs = assocs.
-          exclude(player_id: player.friends_dataset.select(:id))
-      end
+      # This make the operation idempotent
+      assocs = assocs.exclude(player_id: player.friends_dataset.select(:id))
 
       # Insert a new friendship for each of the selected social assoc
       DB[:friendships].insert(
