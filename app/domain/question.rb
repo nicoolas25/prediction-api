@@ -4,6 +4,7 @@ module Domain
   class InvalidQuestion < Error ; end
   class MissingComponent < Error ; end
   class BadComponent < Error ; end
+  class AlreadyAnswered < Error ; end
 
   class Question < ::Sequel::Model
     unrestrict_primary_key
@@ -79,6 +80,8 @@ module Domain
     end
 
     def answer_with(answers)
+      raise AlreadyAnswered.new(:already_answered) if answered
+
       # Check that all the components of the question are given
       unless components.all?{ |component| answers.has_key?(component.id.to_s) }
         raise MissingComponent.new(:missing_component)

@@ -15,7 +15,7 @@ module Controllers
         get 'friends' do
           # Get the referenced player
           user = params[:uid] == 'me' ? player : Domain::Player.first!(id: params[:uid])
-          present user.friends, with: Entities::Friend, mine: user == player
+          present user.friends, with: Entities::Friend, details: true, mine: user == player
         end
       end
     end
