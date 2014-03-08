@@ -7,7 +7,7 @@ module Entities
     expose :last_name
     expose :created_at, format_with: :timestamp
 
-    expose :statistics, if: :details do |p, opts|
+    expose :statistics, if: ->(p, opts){ opts[:details] && opts[:mine] } do |p, opts|
       {
         best_ranking: 0,
         current_ranking: 0,
