@@ -611,7 +611,7 @@ traits:
               description: Token d'identification OAuth2
             oauth2Provider:
               description: Provider OAuth2 utilisé
-              pattern: facebook|googleplus|twitter
+              pattern: facebook|googleplus
       responses:
         401:
           description: Les identifiants fournis sont invalides.
@@ -692,7 +692,7 @@ traits:
             required: true
           oauth2Provider:
             description: Provider OAuth2 utilisé
-            pattern: facebook|googleplus|twitter
+            pattern: facebook|googleplus
             required: true
     responses:
       201:
@@ -856,7 +856,7 @@ traits:
     via:
       description: Le réseau social à utiliser.
       type: string
-      pattern: facebook|googleplus|twitter
+      pattern: facebook|googleplus
     predictionId:
       description: L'identifiant de la prédiction à partager
       type: string
