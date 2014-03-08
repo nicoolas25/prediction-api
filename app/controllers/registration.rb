@@ -14,7 +14,7 @@ module Controllers
     post '/registrations' do
       begin
         player = Domain::Player.register(params[:oauth2Provider], params[:oauth2Token], params[:nickname])
-        player.authenticate!
+        player.authenticate!(params[:oauth2Provider], params[:oauth2Token])
         present player, with: Entities::Player, token: true, config: true
       rescue Domain::Error
         fail! $!, 403

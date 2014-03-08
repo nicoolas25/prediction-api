@@ -61,7 +61,12 @@ module Domain
       self.token_expiration = Time.now
     end
 
-    def authenticate!
+    def authenticate!(provider_name, token)
+      # Update the social association token
+      provider_id = SocialAPI.for(provider_name, token).provider_id
+      SocialAssociation.dataset.where(player_id: self.id, provider: provider_id).update(token: token)
+
+      # Update the application token
       DB.transaction(retry_on: [Sequel::ConstraintViolation], num_retries: 30) do
         regenerate_token!
         save
