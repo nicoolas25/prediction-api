@@ -13,7 +13,7 @@ module Entities
     end
 
     expose :created_at do |a, opts|
-      if a.kind_of?(::Domain::Participation) && a.winnings
+      if a.values[:solved]
         a.question.solved_at.to_i
       else
         a.created_at.to_i
