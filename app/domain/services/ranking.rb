@@ -14,6 +14,15 @@ module Domain
           all
       end
 
+      def friends(player)
+        @friends ||= player.circle_dataset.
+          select_append(:r__score, :r__player_id).
+          join(:rankings___r, player_id: :players__id).
+          order(Sequel.desc(:r__score), Sequel.asc(:r__player_id)).
+          eager(:social_associations).
+          all
+      end
+
       def score_for(player)
         player.values[:score]
       end

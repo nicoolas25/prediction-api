@@ -14,6 +14,13 @@ module Controllers
         players = ranking_service.players
         present players, with: Entities::Ladder, ranking_service: ranking_service
       end
+
+      desc "List all the users ordered by the number of cristals they won (only friends)"
+      get :friends do
+        ranking_service = Domain::Services::Ranking.new
+        players = ranking_service.friends(player)
+        present players, with: Entities::Ladder, ranking_service: ranking_service
+      end
     end
   end
 end
