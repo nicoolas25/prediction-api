@@ -8,15 +8,17 @@ module Entities
     expose :created_at, format_with: :timestamp
 
     expose :statistics, if: :details do |p, opts|
-      hash = {
-        predictions: p.participations_dataset.count,
+      {
+        best_ranking: 0,
+        current_ranking: 0,
+        used_bonus: 0,
+        bonus: 0,
+        badges: 0,
         questions: 0,
-        friends: p.friends.count
+        predictions: p.participations_dataset.count,
+        friends: p.friends.count,
+        cristals: p.cristals
       }
-
-      hash[:cristals] = p.cristals if opts[:mine]
-
-      hash
     end
 
     expose :social_associations,

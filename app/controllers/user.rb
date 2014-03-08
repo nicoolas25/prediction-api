@@ -10,12 +10,16 @@ module Controllers
     namespace :users do
       namespace ':uid' do
         params { requires :uid, type: String }
+        before { @user = params[:uid] == 'me' ? player : Domain::Player.first!(id: params[:uid]) }
+
+        desc "Show the details of a player (account page too)"
+        get do
+          present @user, with: Entities::Friend, details: true
+        end
 
         desc "List the open questions for a player"
         get 'friends' do
-          # Get the referenced player
-          user = params[:uid] == 'me' ? player : Domain::Player.first!(id: params[:uid])
-          present user.friends, with: Entities::Friend, details: true, mine: user == player
+          present @user.friends, with: Entities::Friend, mine: user == player
         end
       end
     end
