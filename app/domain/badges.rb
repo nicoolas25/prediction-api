@@ -23,7 +23,7 @@ module Domain
         match, player_ids = badge_module.matches?(*arguments)
         next unless match && player_ids && player_ids.any?
         badges_dataset = ::Domain::Badge.prepare(player_ids, badge_module.identifier)
-        badges_dataset.update(count: Sequel.expr(:cristals) + 1)
+        badges_dataset.update(count: Sequel.expr(:count) + 1)
       end
     end
 

@@ -4,6 +4,9 @@ module Domain
       include DSL
 
       kind :after_participation
+
+      identifier "participation"
+
       steps 5, 50, 100, 200, 500, 1000
 
       # Matches any participation, update the Badge of the related Player
