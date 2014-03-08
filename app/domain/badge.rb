@@ -1,5 +1,7 @@
 module Domain
   class Badge < ::Sequel::Model
+    many_to_one :player
+
     def self.prepare(player_ids, identifier)
       badges_dataset = dataset.where(player_id: player_ids, identifier: identifier)
       unless badges_dataset.count == player_ids.size

@@ -58,3 +58,9 @@ Then /^the player "([^"]*)" should have "(\d+)" friends$/ do |nickname, count|
   player = Domain::Player.first!(nickname: nickname)
   expect(player.friends_dataset.count).to eql(count.to_i)
 end
+
+Then /^a "([^"]*)" badge for the user "([^"]*)" should exists$/ do |identifier, nickname|
+  player = Domain::Player.first!(nickname: nickname)
+  badge = player.badges_dataset.first!(identifier: identifier)
+  expect(badge.count).to eql(1)
+end
