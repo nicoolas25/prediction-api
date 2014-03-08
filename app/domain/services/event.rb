@@ -51,6 +51,7 @@ module Domain
             select_append(:questions__answered___solved).
             join(:questions, id: :question_id).
             where(questions__answered: true).
+            where(Sequel.expr(:participations__winnings) > 0).
             where(
               Sequel.expr(player_id: @player.id) |
               Sequel.expr(player_id: friends_ids)

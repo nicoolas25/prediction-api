@@ -39,3 +39,30 @@ Feature: Display the activity feed
     And the JSON response should have "$.[1].question.id" with the text "1"
     And the JSON response should have "$.[2].kind" with the text "friend"
     And the JSON response should have "$.[2].nickname" with the text "friend_1"
+
+  Scenario: The looses aren't displayed
+    Given I am an authenticated user: "nickname"
+    And an user "friend_1" is already registered
+    And an user "friend_2" is already registered
+    And the user "nickname" have the following "facebook" friends:
+      | friend_1 |
+    And existing questions:
+      | 1 | Qui va gagner ?  |
+    And existing components for the question "1":
+      | 1 | choices | Chosir la bonne équipe | France,Belgique |
+    And the user "nickname" has answered the question "1" with:
+      | id | value |
+      | 1  | 0     |
+    When the solution to the question "1" is:
+    """
+    {
+      "1": 1.0
+    }
+    """
+    And I send a GET request to "/v1/activities/fr"
+    Then the response status should be "200"
+    And the JSON response should have 2 "$.[*].*"
+    And the JSON response should have "$.[0].kind" with the text "answer"
+    And the JSON response should have "$.[0].question.id" with the text "1"
+    And the JSON response should have "$.[1].kind" with the text "friend"
+    And the JSON response should have "$.[1].nickname" with the text "friend_1"
