@@ -104,15 +104,15 @@ module Domain
         socass = SocialAssociation.new(provider: api.provider_id, id: api.social_id, token: token)
 
         DB.transaction(isolation: :repeatable, retry_on: [Sequel::SerializationFailure]) do
-          if player.valid?
-            if socass.valid?
+          if socass.valid?
+            if player.valid?
               player.save
               player.add_social_association(socass)
             else
-              raise RegistrationError.new(:social_account_taken)
+              raise RegistrationError.new(:nickname_taken)
             end
           else
-            raise RegistrationError.new(:nickname_taken)
+            raise RegistrationError.new(:social_account_taken)
           end
         end
 
