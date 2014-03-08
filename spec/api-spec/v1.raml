@@ -565,6 +565,25 @@ schemas:
           }
         }
       }
+  - badges: |
+      {
+        "$schema": "http://json-schema.org/schema",
+        "type": "array",
+        "title": "Liste de badges",
+        "items": {
+          "type": "object"
+          "properties": {
+            "identifier": {
+              "type": "string",
+              "required": true
+            },
+            "level": {
+              "type": "integer",
+              "required": true
+            }
+          }
+        }
+      }
 
 resourceTypes:
   - collection:
@@ -894,4 +913,12 @@ traits:
           body:
             application/json:
               schema: activities
-
+/badges:
+  is: [ secured ]
+  get:
+    description: Liste des badges obtenus par l'utilisateur
+    responses:
+      200:
+        body:
+          application/json:
+            schema: badges
