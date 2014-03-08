@@ -9,6 +9,7 @@ require './lib/social_apis'
 module Domain
   class Error < StandardError ; end
 
+  autoload :Badge,                    './app/domain/badge'
   autoload :Badges,                   './app/domain/badges'
   autoload :Participation,            './app/domain/participation'
   autoload :Player,                   './app/domain/player'

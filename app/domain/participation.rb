@@ -23,6 +23,7 @@ module Domain
       super
       prediction.update_with_participation!(self)
       question.update_with_participation!(self)
+      Badges.run_hooks(:after_participation, self)
     end
 
     def validate
