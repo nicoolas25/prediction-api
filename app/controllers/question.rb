@@ -45,6 +45,13 @@ module Controllers
             winning_service: winning_service
         end
 
+        desc "List the open questions for a player where a friend participate"
+        get 'friends/open' do
+          questions = Domain::Question.global.open.for(player).answered_by_friends(player).with_locale(@locale).ordered.all
+          friend_service = Domain::Services::Friend.new(player, questions.map(&:id))
+          present questions, with: Entities::Question, locale: @locale, friend_service: friend_service
+        end
+
         desc "Show the details of a question"
         params do
           requires :id, type: String, regexp: /^\d+$/
