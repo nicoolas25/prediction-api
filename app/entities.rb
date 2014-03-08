@@ -13,6 +13,7 @@ module Entities
   end
 
   autoload :Activity,          './app/entities/activity'
+  autoload :Badge,             './app/entities/badge'
   autoload :Component,         './app/entities/component'
   autoload :Friend,            './app/entities/friend'
   autoload :Ladder,            './app/entities/ladder'

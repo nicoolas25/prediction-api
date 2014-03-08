@@ -10,6 +10,9 @@ module Domain
       :after_friendship,
     ].freeze
 
+    @@modules = {}
+    mattr_accessor :modules
+
     # Initialize and create accessors for each hook
     HOOK_KINDS.each do |hook_kind|
       instance_eval "@@#{hook_kind} = []"
@@ -28,6 +31,7 @@ module Domain
     end
 
     def self.register_badge(badge_module)
+      modules[badge_module.identifier] = badge_module
       hooks = __send__(badge_module.kind)
       hooks << badge_module unless hooks.include?(badge_module)
     end

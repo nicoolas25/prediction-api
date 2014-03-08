@@ -130,3 +130,9 @@ Given /^the user "([^"]*)" have the following "([^"]*)" friends:$/ do |nickname,
     DB[:social_associations].insert(provider: provider_id, id: "fake-id-#{friend.id}", token: 'dont-care', player_id: friend.id)
   end
 end
+
+Given /^existing badges for "([^"]*)":$/ do |nickname, badges|
+  player = Domain::Player.first!(nickname: nickname)
+  rows = badges.raw.map{ |identifier, count| {identifier: identifier, count: count, player_id: player.id} }
+  Domain::Badge.dataset.multi_insert(rows)
+end
