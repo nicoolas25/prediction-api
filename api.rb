@@ -12,6 +12,7 @@ module Prediction
     mount Controllers::Question
     mount Controllers::Registration
     mount Controllers::Session
+    mount Controllers::Share
     mount Controllers::User
   end
 end

@@ -37,6 +37,14 @@ module SocialAPI
       end
     end
 
+    def share(locale, message, id)
+      response = self.class.post(
+        '/me/feed',
+        query: {access_token: @token, message: message})
+
+      response.code == 200
+    end
+
   private
 
     def infos

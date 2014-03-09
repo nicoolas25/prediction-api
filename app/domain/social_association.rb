@@ -19,6 +19,14 @@ module Domain
       remove_induced_friendships!
     end
 
+    def alive?
+      api.valid?
+    end
+
+    def share(locale, message, id)
+      api.share(locale, message, id)
+    end
+
     # This is not used by the application right now
     # it's for maintenance purpose
     def reload_friendships!
