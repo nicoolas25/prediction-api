@@ -18,9 +18,11 @@ module Controllers
           desc "Share something via a given social network"
           params do
             requires :kind, type: String, regexp: /^(participation)|(application)|(badge)$/
+            requires :oauth2Token, type: String, desc: "The oauth2 token for the provider."
           end
           post ':kind/:id' do
             sharing_service = ::Domain::Services::Sharing.new(player, params[:provider])
+            sharing_service.update_social_association_token(params[:oauth2Token])
             fail!(sharing_service.error, 403) unless sharing_service.ready?
 
             shared = sharing_service.share!(params[:kind], @locale, params[:id])

@@ -11,7 +11,11 @@ module Domain
         @assoc       = @player.social_associations_dataset.first(provider: @provider_id)
       end
 
-     def ready?
+      def update_social_association_token(token)
+        @assoc.update(token: token) if token.present? && @assoc.present?
+      end
+
+      def ready?
         self.error = false
 
         if @provider_id

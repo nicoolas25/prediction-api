@@ -14,11 +14,13 @@ Feature: An user can share a participation via a social network
     And I accept JSON
 
   Scenario: The user share the participation correctly
-    When I send a POST request to "/v1/shares/fr/facebook/participation/1"
+    When I send a POST request to "/v1/shares/fr/facebook/participation/1" with the following:
+      | oauth2Token    | test-token |
     Then the response status should be "201"
     And the last share should be in "fr" with an id containing "-participation-1"
 
   Scenario: The user share the participation correctly in english
-    When I send a POST request to "/v1/shares/en/facebook/participation/1"
+    When I send a POST request to "/v1/shares/en/facebook/participation/1" with the following:
+      | oauth2Token    | test-token |
     Then the response status should be "201"
     And the last share should be in "en" with an id containing "-participation-1"

@@ -10,11 +10,13 @@ Feature: An user can share a badge via a social network
     And I accept JSON
 
   Scenario: The user share the badge correctly
-    When I send a POST request to "/v1/shares/fr/facebook/badge/participation-1"
+    When I send a POST request to "/v1/shares/fr/facebook/badge/participation-1" with the following:
+      | oauth2Token    | test-token |
     Then the response status should be "201"
     And the last share should be in "fr" with an id containing "-badge-participation-1"
 
   Scenario: The user share the badge correctly in english
-    When I send a POST request to "/v1/shares/en/facebook/badge/participation-1"
+    When I send a POST request to "/v1/shares/en/facebook/badge/participation-1" with the following:
+      | oauth2Token    | test-token |
     Then the response status should be "201"
     And the last share should be in "en" with an id containing "-badge-participation-1"
