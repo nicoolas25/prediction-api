@@ -18,12 +18,15 @@ module Domain
 
     def self.run_hooks(hook_kind, *arguments)
       raise "Kind #{hook_kind} isn't in #{HOOK_KINDS}" if HOOK_KINDS.exclude?(hook_kind)
+      badges = []
       hooks = __send__(hook_kind)
       hooks.each do |badge_module|
         match, players = badge_module.matches?(*arguments)
         next unless match
-        ::Domain::Badge.increase_counts_for(players, badge_module)
+        new_badges = ::Domain::Badge.increase_counts_for(players, badge_module)
+        badges += new_badges
       end
+      badges
     end
 
     def self.register_badge(badge_module)
@@ -50,7 +53,7 @@ module Domain
         end
 
         def level_for(count)
-          @steps.reduce(0){ |level, step| step <= level ? level + 1 : level }
+          @steps.reduce(0){ |level, step| step <= count ? level + 1 : level }
         end
 
         def matches?(*arguments, &matcher)

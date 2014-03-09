@@ -6,6 +6,8 @@ module Domain
     many_to_one :prediction
     many_to_one :question
 
+    attr_accessor :badges
+
     dataset_module do
       def for_question(question)
         id = question.respond_to?(:id) ? question.id : question
@@ -23,7 +25,10 @@ module Domain
       super
       prediction.update_with_participation!(self)
       question.update_with_participation!(self)
-      Badges.run_hooks(:after_participation, self)
+
+      # Keep track of the generated badges relative to the participation
+      generated_badges = Badges.run_hooks(:after_participation, self)
+      self.badges = generated_badges.select(&:visible?)
     end
 
     def validate

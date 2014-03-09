@@ -14,16 +14,21 @@ module Domain
       end
     end
 
+    def visible?
+      level > 0
+    end
+
     def self.increase_counts_for(players, badge_module)
+      badges = []
       identifier = badge_module.identifier
       players.each do |player|
         last_badge = player.badges_dataset.for(identifier).order(Sequel.desc(:level)).first
         count = (last_badge.try(:count) || 0) + 1
         level = badge_module.level_for(count)
-        if last_badge.present? && level == last_badge.level
-          last_badge.update(Sequel.expr(:count) + 1)
+        if last_badge.present? && level < last_badge.level
+          last_badge.update(count: Sequel.expr(:count) + 1)
         else
-          create({
+          badges << create({
             player_id: player.id,
             identifier: identifier,
             count: count,
@@ -32,6 +37,7 @@ module Domain
           })
         end
       end
+      badges
     end
   end
 end

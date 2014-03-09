@@ -61,6 +61,6 @@ end
 
 Then /^a "([^"]*)" badge for the user "([^"]*)" should exists$/ do |identifier, nickname|
   player = Domain::Player.first!(nickname: nickname)
-  badge = player.badges_dataset.first!(identifier: identifier)
-  expect(badge.count).to eql(1)
+  badges = player.badges_dataset.visible.where(identifier: identifier)
+  expect(badges.count).to be >= 1
 end

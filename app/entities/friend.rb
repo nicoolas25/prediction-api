@@ -2,6 +2,7 @@ module Entities
   class Friend < Grape::Entity
     include Common
 
+    expose :id
     expose :nickname
     expose :first_name
     expose :last_name
