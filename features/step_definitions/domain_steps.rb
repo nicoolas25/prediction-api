@@ -64,3 +64,10 @@ Then /^a "([^"]*)" badge for the user "([^"]*)" should exists$/ do |identifier, 
   badges = player.badges_dataset.visible.where(identifier: identifier)
   expect(badges.count).to be >= 1
 end
+
+Then /^the last share should be in "([^"]*)" with an id containing "([^"]*)"$/ do |locale, id|
+  share = $shared_list.last
+  expect(share).to_not be_nil
+  expect(share[0].to_s).to eql(locale)
+  expect(share[2].to_s).to match(id)
+end

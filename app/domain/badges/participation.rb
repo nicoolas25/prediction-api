@@ -13,6 +13,8 @@ module Domain
       matches? do |participation|
         [true, [participation.player]]
       end
+
+      labels fr: "Joueur assidu", en: "Persevering player"
     end
 
     register_badge Participation

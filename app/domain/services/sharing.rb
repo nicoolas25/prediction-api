@@ -11,7 +11,7 @@ module Domain
         @assoc       = @player.social_associations_dataset.first(provider: @provider_id)
       end
 
-      def ready?
+     def ready?
         self.error = false
 
         if @provider_id
@@ -34,18 +34,25 @@ module Domain
         return false unless target
 
         id  = "#{@player.id}-#{kind}"
-        id << "-#{@target.id}" unless target.kind_of?(String)
+        id << "-#{target_id}" unless target.kind_of?(String)
         msg = compute_message(locale, target)
-        @assoc.share(locale, message, id)
+        @assoc.share(locale, msg, id)
       end
 
       private
 
       def compute_target(kind, id)
         case kind
-        when 'participation' then ::Domain::Question.first(id: id)
-        when 'application'   then kind
-        when 'badge'         then ::Domain::Badge.first(id: id)
+        when 'participation'
+          ::Domain::Question.first(id: id)
+        when 'application'
+          kind
+        when 'badge'
+          identifier, level = id.split('-')
+          ::Domain::Badge.first(
+            player_id: @player.id,
+            identifier: identifier,
+            level: level)
         else nil
         end
       end
@@ -56,18 +63,18 @@ module Domain
           text = target.labels[locale]
           case locale
           when :fr, 'fr' then "Je viens de répondre à la question : « #{text} » via Prédiction."
-          else :en, 'en' then "I just answered this question: '#{text}' through Prediction."
+          else                "I just answered this question: '#{text}' through Prediction."
           end
         when ::Domain::Badge
           text = target.labels[locale]
           case locale
           when :fr, 'fr' then "Je viens de gagner le badge : « #{text} » via Prédiction."
-          else :en, 'en' then "I just unlocked this badge: '#{text}' via Prédiction."
+          else                "I just unlocked this badge: '#{text}' via Prédiction."
           end
         when 'application'
           case locale
           when :fr, 'fr' then "Rejoins moi sur l'application Prédiction et prédis l'avenir de la Coupe du monde 2014."
-          else :en, 'en' then "Come and join me on the Prediction application and predict the futur of the World Cup 2014."
+          else                "Come and join me on the Prediction application and predict the futur of the World Cup 2014."
           end
         else
           raise "Unexpected target: #{target}"

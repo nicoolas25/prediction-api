@@ -18,6 +18,14 @@ module Domain
       level > 0
     end
 
+    def labels
+      badge_module.labels
+    end
+
+    def badge_module
+      @badge_module ||= Badges.modules[identifier]
+    end
+
     def self.increase_counts_for(players, badge_module)
       badges = []
       identifier = badge_module.identifier

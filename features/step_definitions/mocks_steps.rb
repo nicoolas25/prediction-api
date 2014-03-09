@@ -13,7 +13,18 @@ def fake_social_id(provider, social_id=nil)
   allow_any_instance_of(klass).to receive_messages(messages)
 end
 
-Given /^I have (a valid|an invalid) OAuth2 token for the "([^"]*)" provider(?: which returns the id "([^"]*)")?$/ do |valid, provider, id|
+$shared_list = []
+def fake_social_share(provider)
+  klass = "SocialAPI::#{provider.camelize}".constantize
+  messages = { social_id: 'fake-id' }
+  allow_any_instance_of(klass).to receive_messages(messages)
+  allow_any_instance_of(klass).to receive(:share) do |obj, *args|
+    $shared_list << args
+    true
+  end
+end
+
+Given /^(a valid|an invalid) OAuth2 token for the "([^"]*)" provider(?: which returns the id "([^"]*)")?$/ do |valid, provider, id|
   social_id = (valid == 'a valid') && (id || SecureRandom.hex)
   fake_social_id(provider, social_id)
   fake_friends(provider)
@@ -41,7 +52,7 @@ Given /^the user "([^"]*)" have a valid token(?:: "([^"]*))?"$/ do |nickname, to
   player.save
 end
 
-Given /^a social account for "([^"]*)"  with "([^"]*)" id is linked to "([^"]*)"$/ do |provider, id, nickname|
+Given /^a social account for "([^"]*)" with "([^"]*)" id is linked to "([^"]*)"$/ do |provider, id, nickname|
   fake_friends(provider)
   player = Domain::Player.first!(nickname: nickname)
   provider_id = SocialAPI::PROVIDERS.index(provider)
@@ -143,4 +154,8 @@ Given /^existing badges for "([^"]*)":$/ do |nickname, badges|
     }
   end
   Domain::Badge.dataset.multi_insert(rows)
+end
+
+Given /^the "([^"]*)" provider will share the messages correctly$/ do |provider|
+  fake_social_share(provider)
 end
