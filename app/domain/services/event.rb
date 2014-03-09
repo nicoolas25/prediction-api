@@ -11,6 +11,7 @@ module Domain
         results =  participations_creation.eager(:question).all.map{ |p| [p.created_at, p] }
         results += participations_solving.eager(:question).all.map{ |p| [p.question.solved_at, p]}
         results += friends_creation.eager(:social_associations).all.map{ |f| [f.created_at, f] }
+        results += badges_creation.eager(player: :social_associations).all.map{ |b| [b.created_at, b] }
         results.sort_by!(&:first).map!(&:last).reverse!
       end
 
@@ -59,9 +60,17 @@ module Domain
         )
       end
 
-      # TODO
-      # def badges_creation
-      # end
+      def badges_creation
+        filter_dataset(
+          :badges__created_at,
+          ::Domain::Badge.dataset.
+            visible.
+            where(
+              Sequel.expr(player_id: @player.id) |
+              Sequel.expr(player_id: friends_ids)
+            )
+        )
+      end
 
       # LATER
       # def questions_creation

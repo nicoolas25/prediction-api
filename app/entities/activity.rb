@@ -5,6 +5,8 @@ module Entities
     expose :kind do |a, opts|
       if a.kind_of?(::Domain::Player)
         'friend'
+      elsif a.kind_of?(::Domain::Badge)
+        'badge'
       elsif a.values[:solved]
         'solution'
       else
@@ -18,6 +20,12 @@ module Entities
       else
         a.created_at.to_i
       end
+    end
+
+    with_options if: ->(a, opts){ a.kind_of?(::Domain::Badge) } do
+      expose :identifier
+      expose :level
+      expose :owner_id do |a, opts| a.player_id end
     end
 
     with_options if: ->(a, opts){ a.kind_of?(::Domain::Player) } do
