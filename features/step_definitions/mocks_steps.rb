@@ -133,6 +133,14 @@ end
 
 Given /^existing badges for "([^"]*)":$/ do |nickname, badges|
   player = Domain::Player.first!(nickname: nickname)
-  rows = badges.raw.map{ |identifier, count| {identifier: identifier, count: count, player_id: player.id} }
+  rows = badges.raw.map do |identifier, count, level|
+    {
+      player_id: player.id,
+      identifier: identifier,
+      level: level.to_i,
+      count: count.to_i,
+      created_at: Time.now
+    }
+  end
   Domain::Badge.dataset.multi_insert(rows)
 end

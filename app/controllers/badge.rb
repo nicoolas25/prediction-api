@@ -9,7 +9,7 @@ module Controllers
 
     desc "List the user's badges"
     get :badges do
-      visible_badges = player.badges.select(&:visible?)
+      visible_badges = player.badges_dataset.visible.all
       present visible_badges, with: Entities::Badge
     end
   end

@@ -10,9 +10,6 @@ module Domain
       :after_friendship,
     ].freeze
 
-    @@modules = {}
-    mattr_accessor :modules
-
     # Initialize and create accessors for each hook
     HOOK_KINDS.each do |hook_kind|
       instance_eval "@@#{hook_kind} = []"
@@ -23,15 +20,13 @@ module Domain
       raise "Kind #{hook_kind} isn't in #{HOOK_KINDS}" if HOOK_KINDS.exclude?(hook_kind)
       hooks = __send__(hook_kind)
       hooks.each do |badge_module|
-        match, player_ids = badge_module.matches?(*arguments)
-        next unless match && player_ids && player_ids.any?
-        badges_dataset = ::Domain::Badge.prepare(player_ids, badge_module.identifier)
-        badges_dataset.update(count: Sequel.expr(:count) + 1)
+        match, players = badge_module.matches?(*arguments)
+        next unless match
+        ::Domain::Badge.increase_counts_for(players, badge_module)
       end
     end
 
     def self.register_badge(badge_module)
-      modules[badge_module.identifier] = badge_module
       hooks = __send__(badge_module.kind)
       hooks << badge_module unless hooks.include?(badge_module)
     end
@@ -52,6 +47,10 @@ module Domain
         def steps(*counts)
           return @steps if counts.empty?
           @steps = counts
+        end
+
+        def level_for(count)
+          @steps.reduce(0){ |level, step| step <= level ? level + 1 : level }
         end
 
         def matches?(*arguments, &matcher)

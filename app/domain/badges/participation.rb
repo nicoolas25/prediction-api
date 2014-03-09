@@ -11,7 +11,7 @@ module Domain
 
       # Matches any participation, update the Badge of the related Player
       matches? do |participation|
-        [true, [participation.player_id]]
+        [true, [participation.player]]
       end
     end
 

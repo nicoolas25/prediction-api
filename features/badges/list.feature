@@ -11,8 +11,7 @@ Feature: The user can list its badges
     Given I accept JSON
     And I am an authenticated user: "nickname"
     And existing badges for "nickname":
-      | participation | 5 |
+      | participation | 5 | 1 |
     When I send a GET request to "/v1/badges"
     Then the response status should be "200"
     And the JSON response should have 1 "$.[*]"
-    And show me the response

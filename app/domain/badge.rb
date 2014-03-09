@@ -1,30 +1,37 @@
 module Domain
   class Badge < ::Sequel::Model
+    unrestrict_primary_key
+
     many_to_one :player
 
-    def level
-      related_module.steps.select{ |s| s <= count }.size
-    end
-
-    def visible?
-      related_module.steps.first >= count
-    end
-
-    def self.prepare(player_ids, identifier)
-      badges_dataset = dataset.where(player_id: player_ids, identifier: identifier)
-      unless badges_dataset.count == player_ids.size
-        existing_player_ids = badges_dataset.select(:player_id).map(&:player_id)
-        missing_player_ids = player_ids - existing_player_ids
-        new_rows = missing_player_ids.map{ |id| { player_id: id, identifier: identifier, count: 0 } }
-        dataset.multi_insert(new_rows)
+    dataset_module do
+      def visible
+        where(Sequel.expr(:level) > 0)
       end
-      badges_dataset
+
+      def for(identifier)
+        where(identifier: identifier)
+      end
     end
 
-    private
-
-    def related_module
-      @related_module ||= Badges.modules[identifier]
+    def self.increase_counts_for(players, badge_module)
+      identifier = badge_module.identifier
+      players.each do |player|
+        last_badge = player.badges_dataset.for(identifier).order(Sequel.desc(:level)).first
+        count = (last_badge.try(:count) || 0) + 1
+        level = badge_module.level_for(count)
+        if last_badge.present? && level == last_badge.level
+          last_badge.update(Sequel.expr(:count) + 1)
+        else
+          create({
+            player_id: player.id,
+            identifier: identifier,
+            count: count,
+            level: level,
+            created_at: Time.now
+          })
+        end
+      end
     end
   end
 end
