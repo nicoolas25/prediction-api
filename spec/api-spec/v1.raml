@@ -869,26 +869,25 @@ traits:
           body:
             application/json:
               schema: users
-/shares/{via}/{predictionId}:
-  is: [ secured, authenticable ]
+/shares/{locale}/{via}/{kind}/{id}:
   uriParameters:
+    locale:
+      description: La langue dans laquelle les textes de la questions doivent être retournés
+      type: string
+      pattern: fr|en
     via:
       description: Le réseau social à utiliser.
       type: string
       pattern: facebook|googleplus
-    predictionId:
-      description: L'identifiant de la prédiction à partager
+    kind:
+      description: Le type de partage demandé
+      type: string
+      pattern: prediction|application|badge
+    id:
+      description: L'identifiant de l'élément à partager
       type: string
   post:
-    is: [ exigent ]
-    body:
-      application/x-www-form-urlencoded:
-        formParameters:
-          customMessage:
-            description: Un message personnalisé en plus du message par défaut
-            type: string
-          oauth2Token:
-          oauth2Provider:
+    is: [ secured, exigent, authenticable ]
     responses:
       200:
 /activities:
