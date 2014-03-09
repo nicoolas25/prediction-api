@@ -10,22 +10,21 @@ module Controllers
     namespace :users do
       namespace ':uid' do
         params { requires :uid, type: String }
-        before {
-          @user = params[:uid] == 'me' ? player : Domain::Player.first!(id: params[:uid])
-          @mine = @user == player
-        }
+        before { @user = params[:uid] == 'me' ? player : Domain::Player.first!(id: params[:uid]) }
 
         desc "Show the details of a player (account page too)"
         get do
-          present @user, with: Entities::Friend, details: true, mine: @mine
+          friend = player.circle_dataset.where(id: @user.id).count > 0
+          present @user, with: Entities::Friend, details: true, friend: friend
         end
 
         desc "List the open questions for a player"
         get 'friends' do
-          friends = @mine ?
+          mine = @user == player
+          friends = mine ?
             @user.friends_dataset.eager(:social_associations).all :
             @user.friends
-          present friends, with: Entities::Friend, mine: @mine
+          present friends, with: Entities::Friend, friend: mine
         end
       end
     end

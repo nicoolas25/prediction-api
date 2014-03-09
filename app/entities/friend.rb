@@ -8,7 +8,7 @@ module Entities
     expose :last_name
     expose :created_at, format_with: :timestamp
 
-    expose :statistics, if: ->(p, opts){ opts[:details] && opts[:mine] } do |p, opts|
+    expose :statistics, if: ->(p, opts){ opts[:details] && opts[:friend] } do |p, opts|
       {
         # TODO
         best_ranking: 0,
@@ -27,6 +27,6 @@ module Entities
       }
     end
 
-    expose :social_associations, using: SocialAssociation, as: :social, if: :mine
+    expose :social_associations, using: SocialAssociation, as: :social, if: :friend
   end
 end
