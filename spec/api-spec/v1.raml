@@ -887,7 +887,12 @@ traits:
       description: L'identifiant de l'élément à partager
       type: string
   post:
-    is: [ secured, exigent, authenticable ]
+    is: [ secured, exigent ]
+    body:
+      application/x-www-form-urlencoded:
+        formParameters:
+          oauth2Token:
+            description: Token d'identification OAuth2 attaché au même provider (paramètre via)
     responses:
       200:
 /activities:
