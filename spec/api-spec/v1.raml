@@ -914,11 +914,18 @@ traits:
             application/json:
               schema: activities
 /badges:
-  is: [ secured ]
-  get:
-    description: Liste des badges obtenus par l'utilisateur
-    responses:
-      200:
-        body:
-          application/json:
-            schema: badges
+  /{who}:
+    is: [ secured, exigent ]
+    type: user
+    uriParameters:
+      who:
+        description: Selectionne l'utilisateur
+        type: string
+        pattern: me|userId
+    get:
+      description: Liste des badges obtenus par l'utilisateur selectionné
+      responses:
+        200:
+          body:
+            application/json:
+              schema: badges

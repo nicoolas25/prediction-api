@@ -7,10 +7,20 @@ module Controllers
 
     before { check_auth! }
 
-    desc "List the user's badges"
-    get :badges do
-      visible_badges = player.badges_dataset.visible.all
-      present visible_badges, with: Entities::Badge
+    namespace :badges do
+      namespace ':uid' do
+        params { requires :uid, type: String }
+        before {
+          @user = params[:uid] == 'me' ? player : Domain::Player.first!(id: params[:uid])
+          @mine = @user == player
+        }
+
+        desc "List the user's badges"
+        get do
+          visible_badges = @user.badges_dataset.visible.all
+          present visible_badges, with: Entities::Badge
+        end
+      end
     end
   end
 end
