@@ -10,12 +10,17 @@ module Entities
 
     expose :statistics, if: ->(p, opts){ opts[:details] && opts[:mine] } do |p, opts|
       {
+        # TODO
         best_ranking: 0,
+        # TODO
         current_ranking: 0,
+        # TODO
         used_bonus: 0,
+        # TODO
         bonus: 0,
-        badges: 0,
+        # TODO
         questions: 0,
+        badges: p.badges_dataset.visible.count,
         predictions: p.participations_dataset.count,
         friends: p.friends.count,
         cristals: p.cristals
