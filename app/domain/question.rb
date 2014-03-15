@@ -54,6 +54,11 @@ module Domain
       end
     end
 
+    def before_create
+      super
+      self.created_at = Time.now
+    end
+
     def validate
       super
       errors.add(:labels, 'are missing') if new? && labels.empty?

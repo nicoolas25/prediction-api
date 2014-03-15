@@ -1,5 +1,5 @@
 Sequel.migration do
   change do
-    add_column :last_authentication_at, :shared_at, DateTime
+    add_column :players, :last_authentication_at, DateTime
   end
 end

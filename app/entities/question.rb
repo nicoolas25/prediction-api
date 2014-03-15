@@ -4,6 +4,7 @@ module Entities
 
     expose :id
 
+    expose :created_at, format_with: :timestamp
     expose :expires_at, format_with: :timestamp
 
     expose :labels, if: :admin

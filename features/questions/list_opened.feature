@@ -26,5 +26,6 @@ Feature: Display lists of opened questions
     When I send a GET request to "/v1/questions/fr/global/open"
     Then the response status should be "200"
     And the JSON response should have 1 "$.[*].*"
+    And the JSON response should have 1 "$.[*].created_at"
     And the JSON response should have "$.[0].expires_at"
     And the JSON response should have "$.[0].label" with the text "Qui va marquer ?"
