@@ -8,6 +8,7 @@ module Entities
     expose :last_name
     expose :created_at, format_with: :timestamp
     expose :shared_at, format_with: :timestamp
+    expose :last_authentication_at, format_with: :timestamp
 
     expose :statistics, if: ->(p, opts){ opts[:details] && opts[:friend] } do |p, opts|
       {
