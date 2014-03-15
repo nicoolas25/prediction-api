@@ -71,3 +71,23 @@ Then /^the last share should be in "([^"]*)" with an id containing "([^"]*)"$/ d
   expect(share[0].to_s).to eql(locale)
   expect(share[2].to_s).to match(id)
 end
+
+Then /^the "([^"]*)" attr of "([^"]*)" should be defined$/ do |attribute, nickname|
+  player = Domain::Player.first!(nickname: nickname)
+  value  = player.__send__(attribute)
+  expect(value).to_not be_nil
+end
+
+Then /^the "([^"]*)" attr for badge "([^"]*)" with level "(\d+)" of "([^"]*)" should be defined$/ do |attribute, identifier, level, nickname|
+  player = Domain::Player.first!(nickname: nickname)
+  badge  = player.badges_dataset.where(identifier: identifier, level: level.to_i).first
+  value  = badge.__send__(attribute)
+  expect(value).to_not be_nil
+end
+
+Then /^the "([^"]*)" attr for participation to the question "(\d+)" of "([^"]*)" should be defined$/ do |attribute, question_id, nickname|
+  player        = Domain::Player.first!(nickname: nickname)
+  participation = player.participations_dataset.first!(question_id: question_id)
+  value         = participation.__send__(attribute)
+  expect(value).to_not be_nil
+end

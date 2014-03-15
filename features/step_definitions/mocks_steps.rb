@@ -14,13 +14,13 @@ def fake_social_id(provider, social_id=nil)
 end
 
 $shared_list = []
-def fake_social_share(provider)
+def fake_social_share(provider, success)
   klass = "SocialAPI::#{provider.camelize}".constantize
   messages = { social_id: 'fake-id' }
   allow_any_instance_of(klass).to receive_messages(messages)
   allow_any_instance_of(klass).to receive(:share) do |obj, *args|
     $shared_list << args
-    true
+    success
   end
 end
 
@@ -156,6 +156,6 @@ Given /^existing badges for "([^"]*)":$/ do |nickname, badges|
   Domain::Badge.dataset.multi_insert(rows)
 end
 
-Given /^the "([^"]*)" provider will share the messages correctly$/ do |provider|
-  fake_social_share(provider)
+Given /^the "([^"]*)" provider (will|will not) share the messages correctly$/ do |provider, will|
+  fake_social_share(provider, will == 'will')
 end

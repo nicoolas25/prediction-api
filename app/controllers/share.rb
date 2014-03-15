@@ -26,7 +26,7 @@ module Controllers
             fail!(sharing_service.error, 403) unless sharing_service.ready?
 
             shared = sharing_service.share!(params[:kind], @locale, params[:id])
-            fail!(:not_shared, 403) unless shared
+            fail!(sharing_service.error, 403) unless shared
           end
         end
       end

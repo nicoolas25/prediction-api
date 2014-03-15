@@ -9,14 +9,30 @@ Feature: An user can share a badge via a social network
       | participation | 5 | 1 |
     And I accept JSON
 
+  Scenario: The user can't share the badge two times
+    When I send a POST request to "/v1/shares/fr/facebook/badge/participation-1" with the following:
+      | oauth2Token    | test-token |
+    When I send a POST request to "/v1/shares/fr/facebook/badge/participation-1" with the following:
+      | oauth2Token    | test-token |
+    Then the response status should be "403"
+    And the JSON response should have "$.code" with the text "already_shared"
+
+  Scenario: The user share a badge that he doesn't have
+    When I send a POST request to "/v1/shares/fr/facebook/badge/participation-2" with the following:
+      | oauth2Token    | test-token |
+    Then the response status should be "403"
+    And the JSON response should have "$.code" with the text "unknown_share"
+
   Scenario: The user share the badge correctly
     When I send a POST request to "/v1/shares/fr/facebook/badge/participation-1" with the following:
       | oauth2Token    | test-token |
     Then the response status should be "201"
     And the last share should be in "fr" with an id containing "-badge-participation-1"
+    And the "shared_at" attr for badge "participation" with level "1" of "nickname" should be defined
 
   Scenario: The user share the badge correctly in english
     When I send a POST request to "/v1/shares/en/facebook/badge/participation-1" with the following:
       | oauth2Token    | test-token |
     Then the response status should be "201"
     And the last share should be in "en" with an id containing "-badge-participation-1"
+    And the "shared_at" attr for badge "participation" with level "1" of "nickname" should be defined
