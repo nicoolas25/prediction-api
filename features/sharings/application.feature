@@ -79,3 +79,4 @@ Feature: An user can share the application via a social network
     Then the response status should be "201"
     And the last share should be in "en" with an id containing "-application"
     And the "shared_at" attr of "nickname" should be defined
+    And the player "nickname" should have "30" cristals

@@ -36,6 +36,7 @@ Feature: An user can share a participation via a social network
     Then the response status should be "201"
     And the last share should be in "fr" with an id containing "-participation-1"
     And the "shared_at" attr for participation to the question "1" of "nickname" should be defined
+    And the player "nickname" should have "12" cristals
 
   Scenario: The user share the participation correctly in english
     When I send a POST request to "/v1/shares/en/facebook/participation/1" with the following:

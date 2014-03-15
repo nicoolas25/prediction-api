@@ -29,6 +29,7 @@ Feature: An user can share a badge via a social network
     Then the response status should be "201"
     And the last share should be in "fr" with an id containing "-badge-participation-1"
     And the "shared_at" attr for badge "participation" with level "1" of "nickname" should be defined
+    And the player "nickname" should have "22" cristals
 
   Scenario: The user share the badge correctly in english
     When I send a POST request to "/v1/shares/en/facebook/badge/participation-1" with the following:

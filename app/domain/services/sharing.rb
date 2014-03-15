@@ -82,7 +82,18 @@ module Domain
       end
 
       def mark_as_shared!
-        @target && @target.update(shared_at: Time.now)
+        if @target
+          @target.update(shared_at: Time.now)
+          @player.update(cristals: Sequel.expr(:cristals) + earnings)
+        end
+      end
+
+      def earnings
+        case @target
+        when ::Domain::Participation then 2
+        when ::Domain::Badge         then 2
+        when ::Domain::Player        then 10
+        end
       end
 
       def compute_message(locale)
