@@ -82,7 +82,6 @@ namespace :db do
   task :migrate => :environment do
     queue %{
       echo "-----> Migrating database" &&
-      #{echo_cmd %[cd #{deploy_to}/current]} &&
       #{echo_cmd %[RACK_ENV=production bundle exec rake db:migrate]}
     }
   end
