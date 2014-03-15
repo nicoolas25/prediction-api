@@ -32,6 +32,10 @@ module Entities
       opts[:winning_service].winnings_for(q)
     end
 
+    expose :shared, if: :sharing_service do |q, opts|
+      opts[:sharing_service].shared?(q)
+    end
+
     expose :components, using: Component, if: :details
 
     expose :predictions, using: Prediction, if: :details

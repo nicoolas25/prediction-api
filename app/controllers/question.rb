@@ -25,11 +25,13 @@ module Controllers
           question_ids = questions.map(&:id)
           friend_service = Domain::Services::Friend.new(player, question_ids)
           winning_service = Domain::Services::Winning.new(player, question_ids)
+          sharing_service = Domain::Services::SharingQuestion.new(player, question_ids)
           present questions,
             with: Entities::Question,
             locale: @locale,
             friend_service: friend_service,
-            winning_service: winning_service
+            winning_service: winning_service,
+            sharing_service: sharing_service
         end
 
         desc "List the answered questions of a player"
@@ -38,11 +40,13 @@ module Controllers
           question_ids = questions.map(&:id)
           friend_service = Domain::Services::Friend.new(player, question_ids)
           winning_service = Domain::Services::Winning.new(player, question_ids)
+          sharing_service = Domain::Services::SharingQuestion.new(player, question_ids)
           present questions,
             with: Entities::Question,
             locale: @locale,
             friend_service: friend_service,
-            winning_service: winning_service
+            winning_service: winning_service,
+            sharing_service: sharing_service
         end
 
         desc "List the open questions for a player where a friend participate"
@@ -61,11 +65,13 @@ module Controllers
             question_ids = [question.id]
             friend_service = Domain::Services::Friend.new(player, question_ids)
             winning_service = Domain::Services::Winning.new(player, question_ids)
+            sharing_service = Domain::Services::SharingQuestion.new(player, question_ids)
             present question,
               with: Entities::Question,
               locale: @locale,
               friend_service: friend_service,
               winning_service: winning_service,
+              sharing_service: sharing_service,
               details: true
           else
             fail!(:question_not_found , 404)
