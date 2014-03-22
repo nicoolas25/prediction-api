@@ -42,7 +42,8 @@ Feature: Display the activity feed
     And the JSON response should have "$.[2].kind" with the text "answer"
     And the JSON response should have "$.[2].question.id" with the text "1"
     And the JSON response should have "$.[3].kind" with the text "friend"
-    And the JSON response should have "$.[3].nickname" with the text "friend_1"
+    And the JSON response should have "$.[3].player.nickname" with the text "friend_1"
+    And the JSON response should have 4 "$.[*].player.social"
 
   Scenario: The looses aren't displayed
     Given I am an authenticated user: "nickname"
@@ -69,4 +70,5 @@ Feature: Display the activity feed
     And the JSON response should have "$.[0].kind" with the text "answer"
     And the JSON response should have "$.[0].question.id" with the text "1"
     And the JSON response should have "$.[1].kind" with the text "friend"
-    And the JSON response should have "$.[1].nickname" with the text "friend_1"
+    And the JSON response should have "$.[1].player.nickname" with the text "friend_1"
+    And the JSON response should have 2 "$.[*].player.social"

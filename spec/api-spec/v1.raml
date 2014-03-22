@@ -561,6 +561,57 @@ schemas:
             "created_at": {
               "type": "timestamp",
               "required": true
+            },
+            "identifier": {
+              "type": "string",
+              "title": "L'identifiant du badge",
+              "required": false
+            },
+            "level": {
+              "type": "integer",
+              "title": "Le niveau du badge",
+              "required": false
+            },
+            "question": {
+              "type": "object",
+              "title": "Le détail de la question auquel l'évènement se rapporte (voir le schema question)",
+              "required": false,
+            },
+            "winnings": {
+              "type": "integer",
+              "title": "Les gains de la participation",
+              "required": false
+            },
+            "player": {
+              "type": "object",
+              "required": true,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "required": true
+                },
+                "nickname": {
+                  "type": "string",
+                  "required": true
+                },
+                "social": {
+                  "type": "array",
+                  "required": false,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "provider": {
+                        "type": "string",
+                        "title": "Nom du réseau social lié au compte de l'utilisateur"
+                      },
+                      "id": {
+                        "type": "string",
+                        "title": "Identifiant de l'utilisateur pour le provider donné"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }

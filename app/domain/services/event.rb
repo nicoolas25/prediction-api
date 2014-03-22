@@ -8,8 +8,8 @@ module Domain
       end
 
       def events
-        results =  participations_creation.eager(:question).all.map{ |p| [p.created_at, p] }
-        results += participations_solving.eager(:question).all.map{ |p| [p.question.solved_at, p]}
+        results =  participations_creation.eager(:question, player: :social_associations).all.map{ |p| [p.created_at, p] }
+        results += participations_solving.eager(:question, player: :social_associations).all.map{ |p| [p.question.solved_at, p]}
         results += friends_creation.eager(:social_associations).all.map{ |f| [f.created_at, f] }
         results += badges_creation.eager(player: :social_associations).all.map{ |b| [b.created_at, b] }
         results.sort_by!(&:first).map!(&:last).reverse!
