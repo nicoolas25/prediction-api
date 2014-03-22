@@ -7,7 +7,8 @@ env = ENV['RACK_ENV'] || 'app'
 LOGGER ||= Logger.new("./log/#{env}.log", 5, 100.megabytes)
 
 class LoggerMiddleware
-  FORMAT_BGN         = %{Receive %s "%s%s" from %s}
+  FORMAT_BGN         = %{Receive %s "%s%s" from %s\nBody: %s}
+  FORMAT_BGN_WO_BODY = %{Receive %s "%s%s" from %s}
   FORMAT_END         = %{Completed %d (%0.6fs)\nBody: %s\n}
   FORMAT_END_WO_BODY = %{Completed %d (%0.6fs)\n}
 
@@ -26,23 +27,34 @@ class LoggerMiddleware
   private
 
   def log_bgn(env)
-    msg = FORMAT_BGN % [
+    args = [
       env["REQUEST_METHOD"],
       env["PATH_INFO"],
       env["QUERY_STRING"].empty? ? "" : "?"+env["QUERY_STRING"],
-      env['HTTP_X_FORWARDED_FOR'] || env["REMOTE_ADDR"] || "-" ]
+      env['HTTP_X_FORWARDED_FOR'] || env["REMOTE_ADDR"] || "-"
+    ]
+
+    if (body = env['rack.input']).respond_to?(:read)
+      args << body
+      msg = FORMAT_BGN % args
+    else
+      msg = FORMAT_BGN_WO_BODY % args
+    end
 
     LOGGER.info(msg)
   end
 
   def log_end(status, header, began_at, body)
+    args = [ status.to_s[0..3], Time.now - began_at ]
+
     if header['Content-Type'] =~ /json/
       body = body.instance_eval{ @body } if body.kind_of?(Rack::BodyProxy)
       body = body.body                   if body.kind_of?(Rack::Response)
       body = body.first                  if body.kind_of?(Array)
-      msg  = FORMAT_END % [ status.to_s[0..3], Time.now - began_at, body ]
+      args << body
+      msg  = FORMAT_END % args
     else
-      msg = FORMAT_END_WO_BODY % [ status.to_s[0..3], Time.now - began_at]
+      msg = FORMAT_END_WO_BODY % args
     end
 
     LOGGER.info(msg)
