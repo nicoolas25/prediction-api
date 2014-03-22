@@ -20,18 +20,26 @@ module Domain
     end
 
     def alive?
-      api.valid?
+      api.valid?(true)
     end
 
     def share(locale, message, id)
       api.share(locale, message, id)
     end
 
-    # This is not used by the application right now
-    # it's for maintenance purpose
+    #
+    # This is not used by the application right now, it's for maintenance purpose
+    #
+
     def reload_friendships!
       remove_induced_friendships!
       add_induced_friendships!
+    end
+
+    def reload_avatar!
+      if api.valid?(true)
+        update(avatar_url: api.avatar_url)
+      end
     end
 
   protected

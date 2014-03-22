@@ -16,7 +16,15 @@ module SocialAPI
       SocialAPI::SYMETRIC_FRIENDSHIP_PROVIDERS.include?(@provider)
     end
 
-    def valid?
+    def valid?(force_refetch=false)
+      if force_refetch
+        social_id_was = social_id
+        @social_id = nil
+        if social_id != social_id_was
+          @social_id = social_id_was
+          return false
+        end
+      end
       !!social_id
     end
   end
