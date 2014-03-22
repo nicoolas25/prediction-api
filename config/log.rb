@@ -34,8 +34,8 @@ class LoggerMiddleware
       env['HTTP_X_FORWARDED_FOR'] || env["REMOTE_ADDR"] || "-"
     ]
 
-    if (body = env['rack.input']).respond_to?(:read)
-      args << body
+    if (body = env['rack.input']).respond_to?(:read) && (content = body.read).size > 0
+      args << content
       msg = FORMAT_BGN % args
     else
       msg = FORMAT_BGN_WO_BODY % args
