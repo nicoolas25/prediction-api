@@ -29,6 +29,9 @@ gem 'coffee-script'
 # HTTP
 gem 'httparty'
 
+# Social API clients
+gem 'twitter'
+
 group :development do
   gem 'mina', github: 'nadarei/mina', branch: 'master'
 end

@@ -13,7 +13,7 @@ module Controllers
         before { @locale = params[:locale].to_sym }
 
         namespace ':provider' do
-          params { requires :provider, type: String, regexp: /^(facebook)|(googleplus)$/ }
+          params { requires :provider, type: String, regexp: /^(facebook)|(googleplus)|(twitter)$/ }
 
           desc "Share something via a given social network"
           params do
