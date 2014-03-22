@@ -21,7 +21,7 @@ module SocialAPI
 
     def friend_ids
       return [] unless social_id
-      client.friend_ids(social_id).take(MAX_FRIENDS)
+      client.friend_ids(social_id.to_i).take(MAX_FRIENDS)
     end
 
     def share(locale, message, id)

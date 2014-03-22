@@ -17,13 +17,17 @@ module Controllers
     extend ActiveSupport::Concern
 
     included do
-      rescue_from Grape::Exceptions::ValidationErrors do |e|
-        errors = e.errors.each_with_object([]) { |(f, r), es| es << { field: f, reason: Array.wrap(r) } }
-        Rack::Response.new({code: 'bad_parameters', details: errors}.to_json, e.status)
-      end
-
-      rescue_from ::Controllers::Failure do |e|
-        Rack::Response.new({code: e.code}.to_json, e.status)
+      rescue_from :all do |exception|
+        case exception
+        when Grape::Exceptions::ValidationErrors
+          errors = exception.errors.each_with_object([]) { |(f, r), es| es << { field: f, reason: Array.wrap(r) } }
+          Rack::Response.new({code: 'bad_parameters', details: errors}.to_json, exception.status)
+        when ::Controllers::Failure
+          Rack::Response.new({code: exception.code}.to_json, exception.status)
+        else
+          LOGGER.error("Unexpected exception raised: #{exception}\n#{exception.backtrace.join("\n")}\n")
+          Rack::Response.new({code: :unknown_error}.to_json, 500)
+        end
       end
 
       helpers Helpers
