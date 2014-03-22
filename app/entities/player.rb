@@ -19,7 +19,7 @@ module Entities
     expose :first_name
     expose :last_name
 
-    expose :last_authentication_at, format_with: :timestamp
+    expose :last_authentication_at_was, format_with: :timestamp, as: :last_authentication_at
 
     expose :social_associations,
       using: SocialAssociation,
