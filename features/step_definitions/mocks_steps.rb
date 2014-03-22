@@ -56,7 +56,7 @@ Given /^a social account for "([^"]*)" with "([^"]*)" id is linked to "([^"]*)"$
   fake_friends(provider)
   player = Domain::Player.first!(nickname: nickname)
   provider_id = SocialAPI::PROVIDERS.index(provider)
-  player.add_social_association(provider: provider_id, id: id, token: 'dont-care')
+  player.add_social_association(provider: provider_id, id: id, token: 'dont-care', avatar_url: 'http://example.org.image.png')
 end
 
 Given /^I am an authenticated user(?:: "([^"]*)")?(?: with "(\d+)" cristals)?$/ do |nickname, cristals|
@@ -126,7 +126,7 @@ Given /^there are already registered players via "([^"]*)" friends to the id "([
   fake_friends(provider, [])
   friends.raw.map do |nickname, friend_social_id|
     player = Domain::Player.create(nickname: nickname, cristals: DEFAULT_CRISTALS)
-    player.add_social_association(provider: provider_id, id: friend_social_id, token: 'not-revelent')
+    player.add_social_association(provider: provider_id, id: friend_social_id, token: 'not-revelent', avatar_url: 'http://example.org.image.png')
   end
 
   fake_friends(provider, friends.raw.map(&:last))
@@ -138,7 +138,7 @@ Given /^the user "([^"]*)" have the following "([^"]*)" friends:$/ do |nickname,
   friends.raw.map do |nickname|
     friend = Domain::Player.first!(nickname: nickname)
     DB[:friendships].insert(provider: provider_id, left_id: player.id, right_id: friend.id)
-    DB[:social_associations].insert(provider: provider_id, id: "fake-id-#{friend.id}", token: 'dont-care', player_id: friend.id)
+    DB[:social_associations].insert(provider: provider_id, id: "fake-id-#{friend.id}", token: 'dont-care', player_id: friend.id, avatar_url: 'http://example.org.image.png')
   end
 end
 
