@@ -6,7 +6,7 @@ require 'rack/test'
 require 'cucumber/rspec/doubles'
 
 def app
-  Prediction::API
+  LoggerMiddleware.new Prediction::API
 end
 
 World(Rack::Test::Methods)

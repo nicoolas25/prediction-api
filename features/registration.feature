@@ -1,5 +1,14 @@
 Feature: Registration
 
+  #Scenario: Register a new player normally with real tokens
+  #  Given I accept JSON
+  #  When I send a POST request to "/v1/registrations" with the following:
+  #    | oauth2Provider | twitter   |
+  #    | oauth2Token    | 2345385277-G6EfBxaENGHqhR6994FalULrQIsJdDqKtXasS7x~l1FAotKhKSbt1yiSLhCaXkQYR7iFn4ex1oQSkLm6A2Bkv |
+  #    | nickname       | nickname   |
+  #  Then the response status should be "201"
+  #  And the JSON response should have "$.token"
+
   Scenario: Register a new player normally
     Given I accept JSON
     And a valid OAuth2 token for the "facebook" provider

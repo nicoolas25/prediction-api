@@ -35,6 +35,7 @@ class LoggerMiddleware
     ]
 
     if (body = env['rack.input']).respond_to?(:read) && (content = body.read).size > 0
+      env['rack.input'] = StringIO.new(content)
       args << content
       msg = FORMAT_BGN % args
     else
