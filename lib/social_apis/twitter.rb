@@ -21,7 +21,10 @@ module SocialAPI
 
     def friend_ids
       return [] unless social_id
-      client.friend_ids(social_id.to_i).take(MAX_FRIENDS)
+      LOGGER.info "Fetching friends for #{social_id}."
+      friends = client.friend_ids(social_id.to_i).take(MAX_FRIENDS)
+      LOGGER.info "#{friends.size} friends found for #{social_id}."
+      friends
     end
 
     def share(locale, message, id)
@@ -43,9 +46,11 @@ module SocialAPI
     def infos
       return @infos unless @infos.nil?
 
+      LOGGER.info "Verifying credentials for #{@token[0..15]}."
       user = client.verify_credentials rescue nil
 
       if user
+        LOGGER.info "Credentials for #{@token[0..15]} are valid and matches #{user.id}."
         name_split = user.name.split(' ', 2)
         @infos = {
           'id' => user.id,
@@ -53,6 +58,7 @@ module SocialAPI
           'last_name' => name_split[1]
         }
       else
+        LOGGER.info "Credentials for #{token[0..15]} are invalid."
         @infos = false
       end
     end
