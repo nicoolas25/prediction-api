@@ -23,6 +23,10 @@ module SocialAPI
       @social_id ||= infos && infos['id']
     end
 
+    def avatar_url
+      "http://graph.facebook.com/#{social_id}/picture?height=300&width=300"
+    end
+
     def friend_ids
       response = self.class.get(
         '/me/friends',

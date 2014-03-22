@@ -21,6 +21,10 @@ module SocialAPI
       @social_id ||= infos && infos['id']
     end
 
+    def avatar_url
+      infos && infos['image'].try{ |hash| hash['url'] }
+    end
+
     def friend_ids
       ids = []
       url = '/plus/v1/people/me/people/visible'
@@ -84,7 +88,7 @@ module SocialAPI
       response = self.class.get(
         '/plus/v1/people/me',
         headers: {'Authorization' => "Bearer #{@token}"},
-        query: {fields: "id,name(familyName,givenName)"})
+        query: {fields: "id,name(familyName,givenName),image(url)"})
 
       if response.code == 200
         @infos = response.parsed_response

@@ -14,17 +14,13 @@ module Controllers
 
         desc "Show the details of a player (account page too)"
         get do
-          friend = player.circle_dataset.where(id: @user.id).count > 0
-          present @user, with: Entities::Friend, details: true, friend: friend
+          present @user, with: Entities::Friend, details: true
         end
 
         desc "List the open questions for a player"
         get 'friends' do
-          mine = @user == player
-          friends = mine ?
-            @user.friends_dataset.eager(:social_associations).all :
-            @user.friends
-          present friends, with: Entities::Friend, friend: mine
+          friends = @user.friends_dataset.eager(:social_associations).all
+          present friends, with: Entities::Friend
         end
       end
     end

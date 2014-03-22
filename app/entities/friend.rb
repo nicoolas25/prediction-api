@@ -10,7 +10,7 @@ module Entities
     expose :shared_at, format_with: :timestamp
     expose :last_authentication_at, format_with: :timestamp
 
-    expose :statistics, if: ->(p, opts){ opts[:details] && opts[:friend] } do |p, opts|
+    expose :statistics, if: ->(p, opts){ opts[:details] } do |p, opts|
       {
         # TODO
         best_ranking: 0,
@@ -29,6 +29,6 @@ module Entities
       }
     end
 
-    expose :social_associations, using: SocialAssociation, as: :social, if: :friend
+    expose :social_associations, using: SocialAssociation, as: :social
   end
 end

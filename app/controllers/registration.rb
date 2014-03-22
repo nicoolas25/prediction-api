@@ -13,8 +13,8 @@ module Controllers
     end
     post '/registrations' do
       begin
-        player = Domain::Player.register(params[:oauth2Provider], params[:oauth2Token], params[:nickname])
-        player.authenticate!(params[:oauth2Provider], params[:oauth2Token])
+        player, api = Domain::Player.register(params[:oauth2Provider], params[:oauth2Token], params[:nickname])
+        player.authenticate!(api)
         present player, with: Entities::Player, token: true, config: true
       rescue Domain::Error
         fail! $!, 403

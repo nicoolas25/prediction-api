@@ -8,22 +8,30 @@ module SocialAPI
     CONSUMER_SECRET = 'XDs2otq17LBOV6U6XUow30NQFs7VXIkxnqdWjznCXa4'
 
     def first_name
-      infos && infos['first_name']
+      user && user.name.split(' ', 2)[0]
     end
 
     def last_name
-      infos && infos['last_name']
+      user && user.name.split(' ', 2)[1]
     end
 
     def social_id
-      @social_id ||= infos && infos['id']
+      @social_id ||= user && user.id.to_s
+    end
+
+    def avatar_url
+      user && user.profile_image_url? && user.profile_image_url.to_s
     end
 
     def friend_ids
       return [] unless social_id
+
       LOGGER.info "Fetching friends for #{social_id}."
+
       friends = client.friend_ids(social_id.to_i).take(MAX_FRIENDS)
+
       LOGGER.info "#{friends.size} friends found for #{social_id}."
+
       friends
     end
 
@@ -43,24 +51,20 @@ module SocialAPI
       end
     end
 
-    def infos
-      return @infos unless @infos.nil?
+    def user
+      return @user unless @user.nil?
 
       LOGGER.info "Verifying credentials for #{@token[0..15]}."
-      user = client.verify_credentials rescue nil
 
-      if user
-        LOGGER.info "Credentials for #{@token[0..15]} are valid and matches #{user.id}."
-        name_split = user.name.split(' ', 2)
-        @infos = {
-          'id' => user.id.to_s,
-          'first_name' => name_split[0],
-          'last_name' => name_split[1]
-        }
-      else
-        LOGGER.info "Credentials for #{token[0..15]} are invalid."
-        @infos = false
-      end
+      @user = client.verify_credentials rescue false
+
+      LOGGER.info(
+        @user ?
+          "Credentials for #{@token[0..15]} are valid and matches #{user.id}." :
+          "Credentials for #{token[0..15]} are invalid."
+      )
+
+      @user
     end
   end
 end

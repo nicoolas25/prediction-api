@@ -1,5 +1,7 @@
 module SocialAPI
   class Base
+    attr_reader :token
+
     def initialize(provider, token, social_id)
       @provider  = provider.kind_of?(Numeric) ? provider : SocialAPI::PROVIDERS.index(provider)
       @token     = token

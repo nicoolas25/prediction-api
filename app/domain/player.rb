@@ -73,10 +73,11 @@ module Domain
       self.token_expiration = Time.now
     end
 
-    def authenticate!(provider_name, token)
-      # Update the social association token
-      provider_id = SocialAPI.for(provider_name, token).provider_id
-      SocialAssociation.dataset.where(player_id: self.id, provider: provider_id).update(token: token)
+    def authenticate!(api)
+      # Update the social association with the last know token and avatar
+      SocialAssociation.dataset.
+        where(player_id: self.id, provider: api.provider_id).
+        update(token: api.token, avatar_url: api.avatar_url)
 
       # Update the application token
       DB.transaction(retry_on: [Sequel::ConstraintViolation], num_retries: 30) do
@@ -121,7 +122,7 @@ module Domain
           where(social_associations__provider: api.provider_id, social_associations__id: api.social_id).
           first
         raise SessionError.new(:social_account_unknown) unless player
-        player
+        [player, api]
       end
 
       def register(provider_name, token, nickname)
@@ -142,7 +143,7 @@ module Domain
           end
         end
 
-        player
+        [player, api]
       end
 
       def social_api(provider_name, token)
