@@ -44,6 +44,10 @@ schemas:
                   "type": "string",
                   "title": "Nom du réseau social lié au compte de l'utilisateur"
                 },
+                "avatar_url": {
+                  "type": "string",
+                  "title": "Avatar lié à l'association"
+                },
                 "id": {
                   "type": "string",
                   "title": "Identifiant de l'utilisateur pour le provider donné"
@@ -121,20 +125,6 @@ schemas:
               "type": "string",
               "required": true
             },
-            "avatars": {
-              "type": "object",
-              "required": true,
-              "properties": {
-                "big": {
-                  "type": "string",
-                  "required": true
-                },
-                "small": {
-                  "type": "string",
-                  "required": true
-                }
-              }
-            },
             "country": {
               "type": "string",
               "required": false
@@ -172,6 +162,10 @@ schemas:
                   "provider": {
                     "type": "string",
                     "title": "Nom du réseau social lié au compte de l'utilisateur"
+                  },
+                  "avatar_url": {
+                    "type": "string",
+                    "title": "Avatar lié à l'association"
                   },
                   "id": {
                     "type": "string",
@@ -604,6 +598,10 @@ schemas:
                         "type": "string",
                         "title": "Nom du réseau social lié au compte de l'utilisateur"
                       },
+                      "avatar_url": {
+                        "type": "string",
+                        "title": "Avatar lié à l'association"
+                      },
                       "id": {
                         "type": "string",
                         "title": "Identifiant de l'utilisateur pour le provider donné"
@@ -712,14 +710,6 @@ traits:
                       "min":10,
                       "max":1000
                     },
-                    "avatars":{
-                      "small":{
-                        "facebook":"http://graph.facebook.com/__id__/picture?height=100\u0026width=100"
-                      },
-                      "big":{
-                        "facebook":"http://graph.facebook.com/__id__/picture?height=300\u0026width=300"
-                      }
-                    }
                   }
                 }
   - secured:
