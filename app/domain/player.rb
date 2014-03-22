@@ -52,6 +52,11 @@ module Domain
       self.created_at = Time.now
     end
 
+    def after_create
+      super
+      Services::Ranking.ensure_player_presence(self)
+    end
+
     def regenerate_token!
       self.token = SecureRandom.hex
       self.token_expiration = Time.now + 2.days

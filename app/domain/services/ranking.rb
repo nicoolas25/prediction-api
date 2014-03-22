@@ -36,6 +36,15 @@ module Domain
         end
       end
 
+      def self.ensure_player_presence(player)
+        prepare
+        DB.transaction do
+          unless DB[:rankings].where(player_id: player.id).any?
+            DB[:rankings].insert(player_id: player.id, score: 0)
+          end
+        end
+      end
+
       def self.prepare
         unless DB.tables.include?(:rankings)
           # Create the table

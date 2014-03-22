@@ -159,3 +159,7 @@ end
 Given /^the "([^"]*)" provider (will|will not) share the messages correctly$/ do |provider, will|
   fake_social_share(provider, will == 'will')
 end
+
+Given /^the rankings table is already prepared$/ do
+  Domain::Services::Ranking.prepare
+end

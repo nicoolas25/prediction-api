@@ -38,3 +38,11 @@ Feature: Display the global ranking
     And the JSON response should have "$.[0].nickname" with the text "nickname"
     And the JSON response should have "$.[1].nickname" with the text "friend"
     And the JSON response should have "$.[2].nickname" with the text "player"
+
+  Scenario: A new player should appear in the ranking
+    Given the rankings table is already prepared
+    And I am an authenticated user: "nickname"
+    When I send a GET request to "/v1/ladders/global"
+    Then the response status should be "200"
+    And the JSON response should have 1 "$.[*].*"
+
