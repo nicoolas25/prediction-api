@@ -16,7 +16,7 @@ module SocialAPI
     case provider
     when 'facebook', 0   then Facebook.new(provider, token, id)
     when 'googleplus', 1 then GooglePlus.new(provider, token, id)
-    when 'twitter', 2    then GooglePlus.new(provider, token, id)
+    when 'twitter', 2    then Twitter.new(provider, token, id)
     else nil
     end
   end
