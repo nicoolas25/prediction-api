@@ -53,7 +53,7 @@ module SocialAPI
         LOGGER.info "Credentials for #{@token[0..15]} are valid and matches #{user.id}."
         name_split = user.name.split(' ', 2)
         @infos = {
-          'id' => user.id,
+          'id' => user.id.to_s,
           'first_name' => name_split[0],
           'last_name' => name_split[1]
         }
