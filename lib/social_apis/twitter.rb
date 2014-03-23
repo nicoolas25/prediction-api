@@ -32,7 +32,7 @@ module SocialAPI
 
       LOGGER.info "#{friends.size} friends found for #{social_id}."
 
-      friends
+      friends.map(&:to_s)
     end
 
     def share(locale, message, id)
