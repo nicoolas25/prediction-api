@@ -42,8 +42,12 @@ module Domain
       end
 
       def self.rank(player)
-        result = DB[:rankings].where(player_id: player.id).select(:rank).first
-        result.try{ |r| r[:rank] }
+        prepare
+        DB[:rankings].
+          where(player_id: player.id).
+          select(:rank).
+          first.
+          try{ |r| r[:rank] }
       end
 
       def self.update(participations_dataset)
@@ -99,7 +103,20 @@ module Domain
         # Uses the order on scorings to compute the orders
         DB.transaction do
           DB.drop_table?(:rankings_snapshot)
-          DB << 'select player_id, row_number() over (order by score desc, player_id asc) as rank into rankings_snapshot from scorings;'
+          DB << %Q{
+            select
+              s.player_id,
+              row_number() over (order by s.score desc, s.player_id asc) as rank,
+              case
+                when r.rank is null then 0
+                when r.rank < (row_number() over (order by s.score desc, s.player_id asc)) then 1
+                when r.rank > (row_number() over (order by s.score desc, s.player_id asc)) then 2
+                else 0
+              end as delta
+            into rankings_snapshot
+            from scorings as s
+            left join rankings as r on r.player_id = s.player_id;
+          }
           DB << 'truncate table rankings;'
           DB << 'insert into rankings select * from rankings_snapshot;'
         end
