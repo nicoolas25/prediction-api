@@ -11,4 +11,5 @@ Feature: Display the detailed infos about an user
     When I send a GET request to "/v1/users/me"
     Then the response status should be "200"
     And the JSON response should have 1 "$.statistics"
+    And the JSON response should have "$.statistics.current_ranking" with the text "1"
     And the JSON response should have "$.nickname" with the text "nickname"

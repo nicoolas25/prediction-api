@@ -33,6 +33,11 @@ module Domain
         player.values[:rank]
       end
 
+      def self.rank(player)
+        result = DB[:rankings].where(player_id: player.id).select(:rank).first
+        result.try{ |r| r[:rank] }
+      end
+
       def self.update(participations_dataset)
         unless prepare
           DB[:scorings].
