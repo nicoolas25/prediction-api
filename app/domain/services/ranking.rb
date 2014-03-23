@@ -104,17 +104,18 @@ module Domain
         DB.transaction do
           DB.drop_table?(:rankings_snapshot)
           DB << %Q{
+            with s as (select player_id, row_number() over (order by score desc, player_id asc) as rank from scorings)
             select
               s.player_id,
-              row_number() over (order by s.score desc, s.player_id asc) as rank,
+              s.rank,
               case
-                when r.rank is null then 0
-                when r.rank < (row_number() over (order by s.score desc, s.player_id asc)) then 1
-                when r.rank > (row_number() over (order by s.score desc, s.player_id asc)) then 2
-                else 0
+                when r.rank is null  then 0
+                when r.rank < s.rank then 1
+                when r.rank > s.rank then 2
+                else                      0
               end as delta
             into rankings_snapshot
-            from scorings as s
+            from s
             left join rankings as r on r.player_id = s.player_id;
           }
           DB << 'truncate table rankings;'
