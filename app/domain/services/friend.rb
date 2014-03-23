@@ -25,6 +25,7 @@ module Domain
             :participations__question_id,
             :participations__player_id,
             :participations__prediction_id,
+            :social_associations__avatar_url,
             :social_associations__provider,
             :social_associations__id).
           where(
@@ -45,6 +46,7 @@ module Domain
             id:            p.values[:player_id],
             prediction_id: p.values[:prediction_id],
             provider:      SocialAPI.provider(p.values[:provider]),
+            avatar_url:    p.values[:avatar_url],
             social_id:     p.values[:id]
           }
           (results[qid] ||= []) << friend_hash
