@@ -7,18 +7,18 @@ module Domain
 
       def players
         @players ||= Domain::Player.dataset.
-          select_append(:r__score, :r__player_id).
-          join(:scorings___r, player_id: :id).
-          order(Sequel.desc(:r__score), Sequel.asc(:r__player_id)).
+          select_append(:s__score, :s__player_id).
+          join(:scorings___s, player_id: :id).
+          order(Sequel.desc(:s__score), Sequel.asc(:s__player_id)).
           eager(:social_associations).
           all
       end
 
       def friends(player)
         @friends ||= player.circle_dataset.
-          select_append(:r__score, :r__player_id).
-          join(:scorings___r, player_id: :players__id).
-          order(Sequel.desc(:r__score), Sequel.asc(:r__player_id)).
+          select_append(:s__score, :s__player_id).
+          join(:scorings___s, player_id: :players__id).
+          order(Sequel.desc(:s__score), Sequel.asc(:s__player_id)).
           eager(:social_associations).
           all
       end
@@ -30,8 +30,8 @@ module Domain
       def self.update(participations_dataset)
         unless prepare
           DB[:scorings].
-            from(:scorings___r, participations_dataset.select(:player_id, :winnings).as(:t1)).
-            where(r__player_id: :t1__player_id).
+            from(:scorings___s, participations_dataset.select(:player_id, :winnings).as(:t1)).
+            where(s__player_id: :t1__player_id).
             update(score: Sequel.expr(:score) + Sequel.expr(:t1__winnings))
         end
       end
