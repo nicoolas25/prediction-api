@@ -45,4 +45,3 @@ Feature: Display the global ranking
     When I send a GET request to "/v1/ladders/global"
     Then the response status should be "200"
     And the JSON response should have 1 "$.[*].*"
-

@@ -6,6 +6,10 @@ module Entities
 
     expose :nickname
 
+    expose :rank, if: :ranking_service do |l, opts|
+      opts[:ranking_service].rank_for(l)
+    end
+
     expose :score, if: :ranking_service do |l, opts|
       opts[:ranking_service].score_for(l)
     end
