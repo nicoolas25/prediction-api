@@ -45,3 +45,10 @@ Feature: Display the global ranking
     When I send a GET request to "/v1/ladders/global"
     Then the response status should be "200"
     And the JSON response should have 1 "$.[*].*"
+
+  Scenario: The delta of ranking should appear
+    Given the ranking service is already prepared
+    And I am an authenticated user: "nickname"
+    When I send a GET request to "/v1/ladders/global"
+    Then the response status should be "200"
+    And the JSON response should have "$.[0].delta" with the text "same"

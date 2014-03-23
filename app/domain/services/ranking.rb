@@ -7,7 +7,7 @@ module Domain
 
       def players
         @players ||= Domain::Player.dataset.
-          select_append(:s__score, :s__player_id, :r__rank).
+          select_append(:s__score, :s__player_id, :r__rank, :r__delta).
           join(:scorings___s, player_id: :id).
           join(:rankings___r, player_id: :player_id).
           order(Sequel.desc(:s__score), Sequel.asc(:s__player_id)).
@@ -17,7 +17,7 @@ module Domain
 
       def friends(player)
         @friends ||= player.circle_dataset.
-          select_append(:s__score, :s__player_id, :r__rank).
+          select_append(:s__score, :s__player_id, :r__rank, :r__delta).
           join(:scorings___s, player_id: :players__id).
           join(:rankings___r, player_id: :player_id).
           order(Sequel.desc(:s__score), Sequel.asc(:s__player_id)).
@@ -31,6 +31,14 @@ module Domain
 
       def rank_for(player)
         player.values[:rank]
+      end
+
+      def delta_for(player)
+        case player.values[:delta]
+        when 1 then :down
+        when 2 then :up
+        else :same
+        end
       end
 
       def self.rank(player)

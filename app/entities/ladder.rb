@@ -6,6 +6,10 @@ module Entities
 
     expose :nickname
 
+    expose :delta, if: :ranking_service do |l, opts|
+      opts[:ranking_service].delta_for(l)
+    end
+
     expose :rank, if: :ranking_service do |l, opts|
       opts[:ranking_service].rank_for(l)
     end
