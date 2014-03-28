@@ -556,7 +556,7 @@ schemas:
         "type": "array",
         "title": "Liste d'évènements",
         "items": {
-          "type": "object"
+          "type": "object",
           "properties": {
             "kind": {
               "type": "string",
@@ -579,7 +579,7 @@ schemas:
             "question": {
               "type": "object",
               "title": "Le détail de la question auquel l'évènement se rapporte (voir le schema question)",
-              "required": false,
+              "required": false
             },
             "winnings": {
               "type": "integer",
@@ -630,7 +630,7 @@ schemas:
         "type": "array",
         "title": "Liste de badges",
         "items": {
-          "type": "object"
+          "type": "object",
           "properties": {
             "identifier": {
               "type": "string",
@@ -825,12 +825,16 @@ traits:
     get:
       description: |
         Retourne les informations de l'utilisateur identifié par le paramètre who.
-      
+        
         En fonction de la relation entre l'utilisateur identifié et l'utilisateur
         selectionné, les informations retournées ne seront pas les mêmes.
     /friends:
       is: [ secured ]
       type: { collection: { elementName: "Amis" } }
+      /refresh:
+        get:
+          description: |
+            Redirige vers la page friends en rafraichissant la liste des amis.
 /ladders:
   /{scope}:
     is: [ secured ]
@@ -958,10 +962,10 @@ traits:
       queryParameters:
         before:
           description: S'il est présent, tous les évènements retournés seront avant le timestamp donné
-          type: timestamp
+          type: date
         after:
           description: S'il est présent, tous les évènements retournés seront après le timestamp donné
-          type: timestamp
+          type: date
       description: Liste des évènements (historique) relatifs à l'utilisateur et à ses amis
       responses:
         200:
