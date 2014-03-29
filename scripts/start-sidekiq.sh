@@ -2,6 +2,8 @@
 
 # This script is intended to work with monit.
 
+chruby 2.1.0
+
 config_file=/var/www/api/current/config/sidekiq.yml
 pid_file=/var/www/api/shared/pids/sidekiq.pid
 log_file=/var/www/api/shared/log/sidekiq.log
