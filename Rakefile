@@ -1,4 +1,5 @@
 require 'logger'
+require 'active_support/core_ext/numeric'
 
 desc "Load a console"
 task :console do
