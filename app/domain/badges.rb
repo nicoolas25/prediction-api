@@ -73,6 +73,7 @@ module Domain
     end
   end
 
-  # Require the available badges here to fill the 
+  # Require the available badges here
   require './app/domain/badges/participation'
+  require './app/domain/badges/looser'
 end

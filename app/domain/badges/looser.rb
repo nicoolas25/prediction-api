@@ -1,11 +1,11 @@
 module Domain
   module Badges
-    module Participation
+    module Looser
       include DSL
 
-      kind :after_participation
+      kind :after_loosing
 
-      identifier 'participation'
+      identifier 'looser'
 
       steps 1, 10, 50, 100, 200, 500, 1000
 
@@ -14,9 +14,9 @@ module Domain
         [true, [participation.player]]
       end
 
-      labels fr: "Joueur assidu", en: "Persevering player"
+      labels fr: "Charlatan", en: "Charlatan"
     end
 
-    register_badge Participation
+    register_badge Looser
   end
 end

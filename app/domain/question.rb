@@ -103,6 +103,19 @@ module Domain
 
       # Update the earnings for the participations
       Services::Earning.new(self).distribute_earnings!
+
+      # Defer the badge triggers
+      Workers::BadgeTriggerer.perform_async(self.id)
+    end
+
+    def run_pending_hooks!
+      if answered && have_pending_hooks
+        participations.each do |participation|
+          hook = participation.win? ? :after_winning : :after_loosing
+          Badges.run_hooks(hook, participation)
+        end
+        update(have_pending_hooks: false)
+      end
     end
 
     class << self

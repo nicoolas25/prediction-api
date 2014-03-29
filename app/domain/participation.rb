@@ -38,5 +38,9 @@ module Domain
         raise CristalsNeeded.new(:cristals_needed)
       end
     end
+
+    def win?
+      winnings && winnings > 0
+    end
   end
 end
