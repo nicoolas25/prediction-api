@@ -17,7 +17,7 @@ set_default :sidekiq_log, -> { "#{deploy_to}/#{shared_path}/log/sidekiq.log" }
 set_default :sidekiq_pidfile, -> { "#{deploy_to}/#{shared_path}/pids/sidekiq.pid" }
 
 # Sets the sidekiq env
-set_default :sidekiq_env, -> { "./app/workers" }
+set_default :sidekiq_env, -> { "./app/workers.rb" }
 
 namespace :sidekiq do
   desc "Quiet sidekiq (stop accepting new work)"
