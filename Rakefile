@@ -52,7 +52,7 @@ namespace :fixing do
 
     Domain::Participation.all.each do |participation|
       Domain::Badges.run_hooks(:after_participation, participation)
-      if participation.winnings.nil?
+      unless participation.winnings.nil?
         if participation.win?
           Domain::Badges.run_hooks(:after_winning, participation)
         else
