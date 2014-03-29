@@ -24,4 +24,4 @@ Feature: The user get a badge when he made predictions
     """
     Then the response status should be "201"
     And the JSON response should have 1 "$.badges.*"
-    And a "participation" badge for the user "nickname" should exists
+    And a "participation" badge for the user "nickname" should exist

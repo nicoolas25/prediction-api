@@ -59,10 +59,14 @@ Then /^the player "([^"]*)" should have "(\d+)" friends$/ do |nickname, count|
   expect(player.friends_dataset.count).to eql(count.to_i)
 end
 
-Then /^a "([^"]*)" badge for the user "([^"]*)" should exists$/ do |identifier, nickname|
+Then /^a "([^"]*)" badge for the user "([^"]*)" should( not)? exist$/ do |identifier, nickname, should_not|
   player = Domain::Player.first!(nickname: nickname)
   badges = player.badges_dataset.visible.where(identifier: identifier)
-  expect(badges.count).to be >= 1
+  if should_not == ' not'
+    expect(badges.count).to eql(0)
+  else
+    expect(badges.count).to be >= 1
+  end
 end
 
 Then /^the last share should be in "([^"]*)" with an id containing "([^"]*)"$/ do |locale, id|

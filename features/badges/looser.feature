@@ -20,4 +20,4 @@ Feature: The user get a badge when he looses predictions
     """
     Then the response status should be "200"
     And the question "1" should have been answered
-    And a "looser" badge for the user "nickname" should exists
+    And a "looser" badge for the user "nickname" should exist
