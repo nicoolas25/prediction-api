@@ -48,7 +48,7 @@ namespace :fixing do
     require './api'
 
     # Destroy all badges - be careful
-    Domain::Badge.destroy
+    Domain::Badge.dataset.destroy
 
     Domain::Participation.all.each do |participation|
       Domain::Badges.run_hooks(:after_participation, participation)
