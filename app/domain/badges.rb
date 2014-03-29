@@ -24,9 +24,9 @@ module Domain
       badges = []
       hooks = __send__(hook_kind)
       hooks.each do |badge_module|
-        match, players = badge_module.matches?(*arguments)
+        match, players, *extra_args = badge_module.matches?(*arguments)
         next unless match
-        new_badges = ::Domain::Badge.increase_counts_for(players, badge_module)
+        new_badges = ::Domain::Badge.increase_counts_for(players, badge_module, *extra_args)
         badges += new_badges
       end
       badges

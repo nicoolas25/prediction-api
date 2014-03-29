@@ -11,7 +11,7 @@ module Domain
 
       # Matches any participation, update the Badge of the related Player
       matches? do |participation|
-        [true, [participation.player]]
+        [true, [participation.player], participation.created_at]
       end
 
       labels fr: "Joueur assidu", en: "Persevering player"

@@ -11,7 +11,7 @@ module Domain
 
       # Matches any participation, update the Badge of the related Player
       matches? do |participation|
-        [true, [participation.player]]
+        [true, [participation.player], participation.question.solved_at]
       end
 
       labels fr: "Charlatan", en: "Charlatan"

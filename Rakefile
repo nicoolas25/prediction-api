@@ -42,6 +42,25 @@ namespace :fixing do
       p.refresh_amount!
     end
   end
+
+  desc "Run hooks to get badges"
+  task :badges_hooks do
+    require './api'
+
+    # Destroy all badges - be careful
+    Domain::Badge.destroy
+
+    Domain::Participation.all.each do |participation|
+      Domain::Badges.run_hooks(:after_participation, participation)
+      if participation.winnings.nil?
+        if participation.win?
+          Domain::Badges.run_hooks(:after_winning, participation)
+        else
+          Domain::Badges.run_hooks(:after_loosing, participation)
+        end
+      end
+    end
+  end
 end
 
 namespace :db do

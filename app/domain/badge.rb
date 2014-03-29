@@ -26,7 +26,7 @@ module Domain
       @badge_module ||= Badges.modules[identifier]
     end
 
-    def self.increase_counts_for(players, badge_module, increment=1)
+    def self.increase_counts_for(players, badge_module, time=nil, increment=1)
       badges = []
       identifier = badge_module.identifier
       players.each do |player|
@@ -41,7 +41,7 @@ module Domain
             identifier: identifier,
             count: count,
             level: level,
-            created_at: Time.now
+            created_at: (time || Time.now)
           })
         end
       end

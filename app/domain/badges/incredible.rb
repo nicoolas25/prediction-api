@@ -12,7 +12,7 @@ module Domain
       # Matches any participation, update the Badge of the related Player
       matches? do |participation|
         if participation.winnings >= (5 * participation.stakes)
-          [true, [participation.player]]
+          [true, [participation.player], participation.question.solved_at]
         else
           [false, []]
         end
