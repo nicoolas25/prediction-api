@@ -1,6 +1,7 @@
 require 'mina/bundler'
 require 'mina/git'
 require 'mina/chruby'
+require 'mina/whenever'
 
 #
 # Configuration
@@ -18,6 +19,13 @@ set :branch,       'master'
 # Username and port to SSH.
 set :user, 'prediction'
 set :port, '25022'
+
+# Set the rack environment
+set :rack_env, 'production'
+
+# Set whenever required variables
+set :rails_env, rack_env
+set :domain, 'prediction-api'
 
 #
 # Environment
@@ -41,6 +49,7 @@ task :deploy => :environment do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'db:migrate'
+    invoke :'whenever:update'
 
     to :launch do
       queue %[
@@ -66,7 +75,7 @@ namespace :fixing do
     queue %{
       echo "-----> Fixing amount and players" &&
       #{echo_cmd %[cd #{deploy_to}/current]}
-      #{echo_cmd %[RACK_ENV=production bundle exec rake fixing:amounts_and_players]}
+      #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake fixing:amounts_and_players]}
     }
   end
 
@@ -82,7 +91,7 @@ namespace :db do
   task :migrate => :environment do
     queue %{
       echo "-----> Migrating database" &&
-      #{echo_cmd %[RACK_ENV=production bundle exec rake db:migrate]}
+      #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake db:migrate]}
     }
   end
 
@@ -91,7 +100,7 @@ namespace :db do
     queue %{
       echo "-----> Cleaning the database data" &&
       #{echo_cmd %[cd #{deploy_to}/current]}
-      #{echo_cmd %[RACK_ENV=production bundle exec rake db:clean]}
+      #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake db:clean]}
     }
   end
 
@@ -100,7 +109,7 @@ namespace :db do
     queue %{
       echo "-----> Cleaning the test players" &&
       #{echo_cmd %[cd #{deploy_to}/current]}
-      #{echo_cmd %[RACK_ENV=production bundle exec rake db:clean_test_players]}
+      #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake db:clean_test_players]}
     }
   end
 end
@@ -115,7 +124,7 @@ namespace :remote do
     queue %{
       echo "-----> Lauching the console" &&
       #{echo_cmd %[cd #{deploy_to}/current]}
-      #{echo_cmd %[RACK_ENV=production bundle exec rake console]}
+      #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake console]}
     }
   end
 
@@ -133,7 +142,7 @@ namespace :remote do
     queue %{
       echo "-----> Fllowing the log" &&
       #{echo_cmd %[cd #{deploy_to}/current]}
-      #{echo_cmd %[tail -n 100 -f log/production.log]}
+      #{echo_cmd %[tail -n 100 -f log/#{rack_env}.log]}
     }
   end
 end

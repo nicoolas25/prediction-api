@@ -32,6 +32,12 @@ gem 'httparty'
 # Social API clients
 gem 'twitter'
 
+# Asynchronous jobs
+gem 'sidekiq'
+
+# Cron jobs
+gem 'whenever'
+
 group :development do
   gem 'mina', github: 'nadarei/mina', branch: 'master'
 end
