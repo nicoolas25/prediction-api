@@ -76,4 +76,5 @@ module Domain
   # Require the available badges here
   require './app/domain/badges/participation'
   require './app/domain/badges/looser'
+  require './app/domain/badges/visionary'
 end
