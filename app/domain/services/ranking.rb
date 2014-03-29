@@ -34,11 +34,7 @@ module Domain
       end
 
       def delta_for(player)
-        case player.values[:delta]
-        when 1 then :down
-        when 2 then :up
-        else :same
-        end
+        player.values[:delta]
       end
 
       def self.rank(player)
@@ -108,12 +104,7 @@ module Domain
             select
               s.player_id,
               s.rank,
-              case
-                when r.rank is null  then 0
-                when r.rank < s.rank then 1
-                when r.rank > s.rank then 2
-                else                      0
-              end as delta
+              case when r.rank is null then 0 else r.rank - s.rank end as delta
             into rankings_snapshot
             from s
             left join rankings as r on r.player_id = s.player_id;

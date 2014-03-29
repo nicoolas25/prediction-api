@@ -18,4 +18,5 @@ Feature: Display the delta in the ranking
     """
     When I send a GET request to "/v1/ladders/global"
     Then the response status should be "200"
-    And show me the response
+    And the JSON response should have "$.[0].delta" with the text "1"
+    And the JSON response should have "$.[1].delta" with the text "-1"
