@@ -20,12 +20,6 @@ set :branch,       'master'
 set :user, 'prediction'
 set :port, '25022'
 
-# Set the rack environment
-set :rack_env, 'production'
-
-# Set whenever required variables
-set :rails_env, rack_env
-
 #
 # Environment
 #
@@ -36,6 +30,12 @@ set :rails_env, rack_env
 task :environment do
   invoke :'chruby[ruby-2.1.0]'
 end
+
+# Set the rack environment
+set :rack_env, 'production'
+
+# Set whenever required variables
+set :rails_env, rack_env
 
 #
 # Deployment
@@ -48,7 +48,6 @@ task :deploy => :environment do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'db:migrate'
-    invoke :'whenever:update'
 
     to :launch do
       queue %[
@@ -60,6 +59,9 @@ task :deploy => :environment do
           #{echo_cmd %[bundle exec puma -C ./config/puma.rb]}
         fi
       ]
+
+      # Invoke whenever after deploy
+      invoke :'whenever:update'
     end
   end
 end
