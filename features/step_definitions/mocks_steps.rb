@@ -144,16 +144,23 @@ end
 
 Given /^existing badges for "([^"]*)":$/ do |nickname, badges|
   player = Domain::Player.first!(nickname: nickname)
-  rows = badges.raw.map do |identifier, count, level|
-    {
-      player_id: player.id,
-      identifier: identifier,
-      level: level.to_i,
-      count: count.to_i,
-      created_at: Time.now
-    }
+  badges.raw.each do |identifier, count, level|
+    if last_badge = player.badges_dataset.for(identifier).order(Sequel.desc(:level)).first
+      last_badge.update({
+        level: level.to_i,
+        count: count.to_i,
+        created_at: Time.now
+      })
+    else
+      Domain::Badge.dataset.insert({
+        player_id: player.id,
+        identifier: identifier,
+        level: level.to_i,
+        count: count.to_i,
+        created_at: Time.now
+      })
+    end
   end
-  Domain::Badge.dataset.multi_insert(rows)
 end
 
 Given /^the "([^"]*)" provider (will|will not) share the messages correctly$/ do |provider, will|
