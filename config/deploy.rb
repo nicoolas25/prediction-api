@@ -3,6 +3,9 @@ require 'mina/git'
 require 'mina/chruby'
 require 'mina/whenever'
 
+# Custom sidekiq recipe
+require "#{File.dirname(__FILE__)}/../lib/mina/sidekiq"
+
 #
 # Configuration
 #
@@ -44,6 +47,7 @@ set :rails_env, rack_env
 desc "Deploys the current version to the server."
 task :deploy => :environment do
   deploy do
+    invoke :'sidekiq:quiet'
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
@@ -62,6 +66,9 @@ task :deploy => :environment do
 
       # Invoke whenever after deploy
       invoke :'whenever:update'
+
+      # Restart sidekiq
+      invoke :'sidekiq:restart'
     end
   end
 end
