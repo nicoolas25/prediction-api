@@ -1,6 +1,7 @@
 require 'grape'
 require './lib/grape_validators'
 
+require './app/workers'
 require './app/entities'
 
 module Controllers

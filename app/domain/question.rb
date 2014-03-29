@@ -84,9 +84,7 @@ module Domain
       end
     end
 
-    def answer_with(answers)
-      raise AlreadyAnswered.new(:already_answered) if answered
-
+    def validate_answers!(answers)
       # Check that all the components of the question are given
       unless components.all?{ |component| answers.has_key?(component.id.to_s) }
         raise MissingComponent.new(:missing_component)
@@ -96,7 +94,10 @@ module Domain
       unless components.all?{ |component| component.accepts?(answers[component.id.to_s]) }
         raise BadComponent.new(:bad_answer)
       end
+    end
 
+    # Expect that validate_answers! have already been called on the question
+    def answer_with(answers)
       # Set all the component's answers
       components.each { |component| component.update(valid_answer: answers[component.id.to_s]) }
 
@@ -111,6 +112,11 @@ module Domain
             raise QuestionNotFound.new(:not_expired)
           end
         end
+
+        if question.try(:answered)
+          raise AlreadyAnswered.new(:already_answered)
+        end
+
         question
       end
 

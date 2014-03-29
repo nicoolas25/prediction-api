@@ -52,7 +52,9 @@ module Controllers
         put ':id' do
           begin
             if question = Domain::Question.find_for_answer(params[:id])
-              question.answer_with(params[:components])
+              components = params[:components]
+              question.validate_answers!(components) # This will raise error unless components are valid.
+              Workers::QuestionAnswerer.perform_async(question.id, components)
             else
               fail!(:not_found, 404)
             end
