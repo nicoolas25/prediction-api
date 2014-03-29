@@ -33,7 +33,7 @@ module Domain
         last_badge = player.badges_dataset.for(identifier).order(Sequel.desc(:level)).first
         count = (last_badge.try(:count) || 0) + increment
         level = badge_module.level_for(count)
-        if last_badge.present? && level < last_badge.level
+        if last_badge.present? && level <= last_badge.level
           last_badge.update(count: Sequel.expr(:count) + increment)
         else
           badges << create({
