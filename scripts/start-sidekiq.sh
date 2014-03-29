@@ -2,6 +2,7 @@
 
 # This script is intended to work with monit.
 
+source /etc/profile.d/chruby.sh
 chruby 2.1.0
 
 config_file=/var/www/api/current/config/sidekiq.yml
