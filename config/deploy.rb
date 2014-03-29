@@ -8,7 +8,7 @@ require 'mina/whenever'
 #
 
 # Target configuration
-set :domain,       '146.185.138.74'
+set :domain,       'predictio.info' # also knonw as '146.185.138.74'
 set :deploy_to,    '/var/www/api'
 set :shared_paths, ['log', 'pids', 'config/database.yml']
 
@@ -25,7 +25,6 @@ set :rack_env, 'production'
 
 # Set whenever required variables
 set :rails_env, rack_env
-set :domain, 'prediction-api'
 
 #
 # Environment
