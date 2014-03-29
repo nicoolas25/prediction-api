@@ -22,6 +22,12 @@ module Controllers
           friends = @user.friends_dataset.eager(:social_associations).all
           present friends, with: Entities::Friend
         end
+
+        desc "Refresh the friends list of the current user"
+        get 'friends/refresh' do
+          player.social_associations.each(&:reload_friendships!)
+          redirect "/v1/users/#{params[:uid]}/friends"
+        end
       end
     end
   end
