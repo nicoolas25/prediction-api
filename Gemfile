@@ -40,6 +40,7 @@ gem 'whenever'
 
 group :development do
   gem 'mina', github: 'nadarei/mina', branch: 'master'
+  gem 'rerun'
 end
 
 group :test do

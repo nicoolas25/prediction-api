@@ -1,6 +1,49 @@
 doctype html
-html
+html lang="en"
   head
     title Predictio
-  body
-    h1 Coming...
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+
+    /[if lt IE 9]
+      script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
+      script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"
+
+    link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+    link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"
+
+  body data-spy="scroll" data-target=".sidemenu"
+
+    .container
+      .jumbotron
+        h1 Welcome to Prediction
+        p This is where you learn how to master the art of making predictions.
+
+    .container
+      .row
+        .col-md-3
+          .sidemenu
+            ul.nav
+              li
+                a href="#introduction" Introduction
+              li
+                a href="#make-predictions" Make predictions
+              li
+                a href="#win-cristals" Win cristals
+
+        .col-md-9 role="main"
+          section
+            h1#introduction Your first steps into the game
+            p Coming soon
+
+          section
+            h1#make-predictions Start making predictions
+            p Coming soon
+
+          section
+            h1#win-cristals Win always more cristals
+            p Coming soon
+
+    script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
+    script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
