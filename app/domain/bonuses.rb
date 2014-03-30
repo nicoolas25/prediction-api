@@ -18,7 +18,14 @@ module Domain
       mattr_accessor hook_kind
     end
 
-    def self.run_hooks(hook_kind, participation)
+    def self.run_hooks(hook_kinds, participation)
+      hook_kinds = [hook_kinds] unless hook_kinds.kind_of?(Array)
+      hook_kinds.each do |hook_kind|
+        run_hook(hook_kind, participation)
+      end
+    end
+
+    def self.run_hook(hook_kind, participation)
       raise "Kind #{hook_kind} isn't in #{HOOK_KINDS}" if HOOK_KINDS.exclude?(hook_kind)
       return unless (bonus = participation.bonus)
       hooks = __send__(hook_kind)

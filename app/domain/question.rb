@@ -108,11 +108,13 @@ module Domain
       Workers::BadgeTriggerer.perform_async(self.id)
     end
 
+    # Run both Badges & Bonuses hooks (after participation ones)
     def run_pending_hooks!
       if answered && have_pending_hooks
         participations.each do |participation|
           hook = participation.win? ? :after_winning : :after_loosing
           Badges.run_hooks(hook, participation)
+          Bonuses.run_hooks([:after_solving, bonus_hook], participation)
         end
         update(have_pending_hooks: false)
       end
