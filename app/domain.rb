@@ -11,6 +11,8 @@ module Domain
 
   autoload :Badge,                    './app/domain/badge'
   autoload :Badges,                   './app/domain/badges'
+  autoload :Bonus,                    './app/domain/bonus'
+  autoload :Bonuses,                  './app/domain/bonuses'
   autoload :Participation,            './app/domain/participation'
   autoload :Player,                   './app/domain/player'
   autoload :Prediction,               './app/domain/prediction'
