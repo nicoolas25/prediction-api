@@ -5,17 +5,7 @@ module Domain
     many_to_one :player
     many_to_one :prediction
     many_to_one :question
-
-    # Custom association based on participation primary key
-    one_to_one :bonus,
-               dataset: proc { |r|
-                 r.association_dataset.
-                   where(prediction_id: :participations__prediction_id).
-                   where(player_id: :participations__player_id)
-                   select_all(:bonuses)
-               }
-
-
+    one_to_one  :bonus, key: [:player_id, :prediction_id], class: '::Domain::Bonus'
 
     attr_accessor :badges
 

@@ -119,6 +119,21 @@ Given /^there is the following participations for the question "([^"]*)":$/ do |
   end
 end
 
+Given /^there is the following badges for the question "([^"]*)":$/ do |question_id, badges|
+  question = Domain::Question.first!(id: question_id)
+  badges.raw.each do |nickname, badge_identifier|
+    player = Domain::Player.first!(nickname: nickname)
+    participation = Domain::Participation.where(player_id: player.id, question_id: question_id.to_i).first
+    if participation
+      Domain::Bonus.create({
+        prediction_id: participation.prediction_id,
+        player_id: player.id,
+        identifier: badge_identifier
+      })
+    end
+  end
+end
+
 Given /^there are already registered players via "([^"]*)" friends to the id "([^"]*)":$/ do |provider, social_id, friends|
   provider_id = SocialAPI::PROVIDERS.index(provider)
 

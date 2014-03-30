@@ -114,7 +114,7 @@ module Domain
         participations.each do |participation|
           hook = participation.win? ? :after_winning : :after_loosing
           Badges.run_hooks(hook, participation)
-          Bonuses.run_hooks([:after_solving, bonus_hook], participation)
+          Bonuses.run_hooks([:after_solving, hook], participation)
         end
         update(have_pending_hooks: false)
       end

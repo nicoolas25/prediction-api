@@ -6,15 +6,7 @@ module Domain
 
     many_to_one :player
     many_to_one :prediction
-
-    # Custom association based on participation primary key
-    one_to_one :participation,
-               dataset: proc { |r|
-                 r.association_dataset.
-                   where(prediction_id: :bonuses__prediction_id).
-                   where(player_id: :bonuses__player_id)
-                   select_all(:participations)
-               }
+    many_to_one :participation, key: [:player_id, :prediction_id]
 
     dataset_module do
       def available_for(player)
