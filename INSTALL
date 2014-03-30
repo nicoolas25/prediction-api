@@ -52,7 +52,50 @@ Créer les tables nécessaire au fonctionnement de l'application se fait grace �
 
     bundle exec rake db:migrate
 
+Penser à faire de même avec la base de test.
+
+    RACK_ENV=test bundle exec rake db:migrate
+
+Tester
+------
+
+Uniquement via des scénarios :
+
+    COVERAGE=true bundle exec cucumber
+
 Lancer l'application
 --------------------
 
-    bundle exec puma
+Avec puma :
+
+    bundle exec puma -e app
+
+Avec puma et rerun pour faciliter le dev :
+
+    RACK_ENV=app bundle exec rerun --pattern '**/*.{rb,js,css,scss,sass,erb,html,haml,slim,ru}' puma
+
+Pour faire tourner le serveur en production
+===========================================
+
+Taches asynchrones
+------------------
+
+Installer redis.
+
+Les taches de déploiement s'occupent du reste.
+
+Déploiement de l'application
+----------------------------
+
+À l'aide de mina :
+
+    bundle exec mina deploy
+
+Monitoring
+----------
+
+Via monit, les fichiers de conf de monit sont dans `scripts/monit` (TODO).
+
+Deux scripts sont également nécessaires :
+
+    scripts/{start,stop}-sidekiq.sh
