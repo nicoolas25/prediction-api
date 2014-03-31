@@ -71,4 +71,5 @@ module Domain
   # Require the available badges here
   require './app/domain/bonuses/blind'
   require './app/domain/bonuses/cresus'
+  require './app/domain/bonuses/double'
 end
