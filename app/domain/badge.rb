@@ -18,6 +18,23 @@ module Domain
       level > 0
     end
 
+    def remaining
+      badge_module.steps[level] - count
+    end
+
+    def progress
+      total = badge_module.steps[level]
+      step  = count
+
+      if level >= 1
+        prev   = badge_module.steps[level - 1]
+        total -= prev
+        step  -= prev
+      end
+
+      ((step / total.to_f) * 100).to_i
+    end
+
     def labels
       badge_module.labels
     end

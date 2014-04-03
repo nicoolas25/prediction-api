@@ -15,3 +15,5 @@ Feature: The user can list its badges
     When I send a GET request to "/v1/badges/me"
     Then the response status should be "200"
     And the JSON response should have 1 "$.[*]"
+    And the JSON response should have "$.[0].remaining" with the text "5"
+    And the JSON response should have "$.[0].progress" with the text "44"
