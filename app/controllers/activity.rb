@@ -20,8 +20,11 @@ module Controllers
         get do
           before = params[:before].try{ |t| Time.at(t) }
           after = params[:after].try{ |t| Time.at(t) }
-          event_services = ::Domain::Services::Event.new(player, before, after)
-          present event_services.events, with: Entities::Activity, locale: @locale
+          event_service = ::Domain::Services::Event.new(player, before, after)
+          present event_service.events,
+            with: Entities::Activity,
+            event_service: event_service,
+            locale: @locale
         end
       end
     end

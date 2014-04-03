@@ -1,3 +1,5 @@
+require 'set'
+
 module Domain
   module Services
     class Event
@@ -8,11 +10,17 @@ module Domain
       end
 
       def events
-        results =  participations_creation.eager(:question, player: :social_associations).all.map{ |p| [p.created_at, p] }
+        return @events if @events
+
+        results  = participations_creation.eager(:question, player: :social_associations).all.map{ |p| [p.created_at, p] }
         results += participations_solving.eager(:question, player: :social_associations).all.map{ |p| [p.question.solved_at, p]}
         results += friends_creation.eager(:social_associations).all.map{ |f| [f.created_at, f] }
         results += badges_creation.eager(player: :social_associations).all.map{ |b| [b.created_at, b] }
-        results.sort_by!(&:first).map!(&:last).reverse!
+        @events  = results.sort_by!(&:first).map!(&:last).reverse!
+      end
+
+      def have_a_participation?(question)
+        participations.member?(question.id)
       end
 
     private
@@ -70,6 +78,24 @@ module Domain
               Sequel.expr(player_id: friends_ids)
             )
         )
+      end
+
+      def participations
+        return @participations if @participations
+
+        participations = Set.new
+        question_ids = events.map do |e|
+          if e.kind_of?(::Domain::Participation)
+            e.question_id
+          end
+        end.compact!.uniq!
+        @player.participations_dataset.
+          where(question_id: question_ids).
+          select(:question_id).
+          all.
+          each { |p| participations << p.question_id }
+
+        @participations = participations
       end
 
       # LATER
