@@ -26,8 +26,12 @@ module Controllers
         when ::Controllers::Failure
           Rack::Response.new({code: exception.code}.to_json, exception.status)
         else
-          LOGGER.error("Unexpected exception raised: #{exception}\n#{exception.backtrace.join("\n")}\n")
-          Rack::Response.new({code: :unknown_error}.to_json, 500)
+          if ENV['RACK_ENV'] == 'test'
+            raise exception
+          else
+            LOGGER.error("Unexpected exception raised: #{exception}\n#{exception.backtrace.join("\n")}\n")
+            Rack::Response.new({code: :unknown_error}.to_json, 500)
+          end
         end
       end
 

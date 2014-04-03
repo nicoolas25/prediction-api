@@ -1,3 +1,5 @@
+require './app/domain/bonus'
+
 module Domain
   class CristalsNeeded < Error ; end
 

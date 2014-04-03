@@ -1,4 +1,5 @@
 require './app/domain/prediction_answer'
+require './app/domain/bonus'
 
 module Domain
   class MalformedComponentError < Error ; end

@@ -2,6 +2,7 @@ require 'securerandom'
 
 require './lib/social_apis'
 require './app/domain/prediction'
+require './app/domain/bonus'
 
 module Domain
   class RegistrationError < Error ; end
@@ -46,6 +47,7 @@ module Domain
 
     def validate
       super
+      errors.add(:nickname, 'doesn\'t match')   if new? && !(nickname =~ /^[a-z0-9_]*$/i)
       errors.add(:nickname, 'is too short')     if new? && nickname.size < 4
       errors.add(:nickname, 'is already taken') if new? && Player.where(nickname: nickname).count > 0
     end
@@ -137,7 +139,11 @@ module Domain
               player.save
               player.add_social_association(socass)
             else
-              raise RegistrationError.new(:nickname_taken)
+              if player.errors[:nickname].include?('doesn\'t match')
+                raise RegistrationError.new(:nickname_format_error)
+              else
+                raise RegistrationError.new(:nickname_taken)
+              end
             end
           else
             raise RegistrationError.new(:social_account_taken)

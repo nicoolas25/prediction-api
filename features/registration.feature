@@ -20,6 +20,16 @@ Feature: Registration
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "nickname_taken"
 
+  Scenario: Register a new player with a bad nickname
+    Given I accept JSON
+    And a valid OAuth2 token for the "facebook" provider
+    When I send a POST request to "/v1/registrations" with the following:
+      | oauth2Provider | facebook   |
+      | oauth2Token    | test-token |
+      | nickname       | pipo.pipi  |
+    Then the response status should be "403"
+    And the JSON response should have "$.code" with the text "nickname_format_error"
+
   Scenario: Register a new player with an existing nickname
     Given I accept JSON
     And a valid OAuth2 token for the "facebook" provider
