@@ -19,10 +19,14 @@ module Domain
     end
 
     def remaining
+      return 0 if badge_module.steps.size == level
+
       badge_module.steps[level] - count
     end
 
     def progress
+      return 100 if badge_module.steps.size == level
+
       total = badge_module.steps[level]
       step  = count
 
