@@ -17,3 +17,14 @@ Feature: The user can list its badges
     And the JSON response should have 1 "$.[*]"
     And the JSON response should have "$.[0].remaining" with the text "5"
     And the JSON response should have "$.[0].progress" with the text "44"
+
+  Scenario: The user earned some badge at its maximum level
+    Given I accept JSON
+    And I am an authenticated user: "nickname"
+    And existing badges for "nickname":
+      | participation | 1000 | 7 |
+    When I send a GET request to "/v1/badges/me"
+    Then the response status should be "200"
+    And the JSON response should have 1 "$.[*]"
+    And the JSON response should have "$.[0].remaining" with the text "0"
+    And the JSON response should have "$.[0].progress" with the text "100"
