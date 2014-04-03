@@ -9,6 +9,7 @@ Feature: Registration
       | nickname       | nickname   |
     Then the response status should be "201"
     And the JSON response should have "$.token"
+    And the player "nickname" should have "30" cristals
 
   Scenario: Register a new player with an empty nickname
     Given I accept JSON

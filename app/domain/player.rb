@@ -11,6 +11,8 @@ module Domain
   class ParticipationError < Error ; end
 
   class Player < ::Sequel::Model
+    DEFAULT_CRISTALS_COUNT = 30
+
     unrestrict_primary_key
 
     one_to_many  :social_associations
@@ -54,6 +56,7 @@ module Domain
 
     def before_create
       super
+      self.cristals   = DEFAULT_CRISTALS_COUNT
       self.created_at = Time.now
     end
 
