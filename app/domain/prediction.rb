@@ -58,7 +58,9 @@ module Domain
           h[id.to_i] = value.to_f
         end
         question.components.map do |component|
-          prediction.add_answer(component: component, value: answers[component.id])
+          value = answers[component.id]
+          value = value.abs if component.have_choices?
+          prediction.add_answer(component: component, value: value)
         end
         prediction
       end
@@ -74,7 +76,10 @@ module Domain
           raw_answers.any? do |answer|
             answer['value'].present? &&
               answer['id'] == component.id.to_s &&
-              (!component.have_choices? || component.choices_count > answer['value'].to_i)
+              ( !component.have_choices? ||
+                ( component.choices_count > answer['value'].to_i ) &&
+                ( answer['value'].to_i >= 0 )
+              )
           end
         end
       end
