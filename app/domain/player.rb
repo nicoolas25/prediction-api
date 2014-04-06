@@ -119,6 +119,28 @@ module Domain
       raise QuestionNotFound.new(:participation_exists)
     end
 
+    def update_social_association(provider_name, token)
+      api = self.class.social_api(provider_name, token)
+      DB.transaction(isolation: :repeatable, retry_on: [Sequel::SerializationFailure]) do
+        socass   = social_associations_dataset.where(provider: api.provider_id).first
+        socass ||= SocialAssociation.new(provider: api.provider_id, player_id: id)
+        socass.set(id: api.social_id, token: token)
+        if socass.valid?
+          if socass.new?
+            socass.save
+          else
+            # Use this update method since the classic save will not work
+            # without primary key.
+            SocialAssociation.dataset.
+              where(player_id: id, provider: api.provider_id).
+              update(id: api.social_id, token: token)
+          end
+        else
+          raise RegistrationError.new(:social_account_taken)
+        end
+      end
+    end
+
     class << self
       def find_by_social_infos(provider_name, token)
         api = social_api(provider_name, token)

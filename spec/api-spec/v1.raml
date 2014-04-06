@@ -802,16 +802,17 @@ traits:
           * `bad_parameters`
           * `invalid_oauth2_provider`
           * `invalid_oauth2_token`
-  patch:
-    is: [ secured ]
-    description: Permet d'ajouter un nouveau réseau social à son compte.
-    body:
-      application/x-www-form-urlencoded:
-        formParameters:
-          oauth2Token:
-          oauth2Provider:
-    responses:
-      200:
+  /social:
+    post:
+      is: [ secured ]
+      description: Permet d'ajouter ou de modifier un réseau social lié à son compte.
+      body:
+        application/x-www-form-urlencoded:
+          formParameters:
+            oauth2Token:
+            oauth2Provider:
+      responses:
+        200:
 /sessions:
   post:
     is: [ authenticable ]
