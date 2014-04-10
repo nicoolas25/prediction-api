@@ -12,7 +12,7 @@ Feature: The player earns cristals at each connection
       | oauth2Provider | facebook   |
       | oauth2Token    | test-token |
     Then the response status should be "201"
-    And the JSON response should have "$.statistics.cristals" with the text "32"
+    And the JSON response should have "$.statistics.cristals" with the text "22"
 
   Scenario: The user can do the same too soon
     Given the last auto-earned cristals for "nickname" are "5 minutes" from now
@@ -20,6 +20,6 @@ Feature: The player earns cristals at each connection
       | oauth2Provider | facebook   |
       | oauth2Token    | test-token |
     Then the response status should be "201"
-    And the JSON response should have "$.statistics.cristals" with the text "30"
+    And the JSON response should have "$.statistics.cristals" with the text "20"
 
 
