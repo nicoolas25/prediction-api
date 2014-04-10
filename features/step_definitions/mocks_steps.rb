@@ -185,3 +185,10 @@ end
 Given /^the ranking service is already prepared$/ do
   Domain::Services::Ranking.prepare
 end
+
+Given /^the last auto-earned cristals for "([^"]*)" are "(\d+ [^"]*)" from now$/ do |nickname, time|
+  player = Domain::Player.first!(nickname: nickname)
+  count, unit = time.split(' ')
+  time = Time.now - count.to_i.__send__(unit)
+  player.update(auto_earn_at: time)
+end

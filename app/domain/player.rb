@@ -12,6 +12,8 @@ module Domain
 
   class Player < ::Sequel::Model
     DEFAULT_CRISTALS_COUNT = 30
+    DURATION_BETWEEN_AUTO_EARN = 1.hour
+    CRISTAL_BY_AUTO_EARN = 2
 
     unrestrict_primary_key
 
@@ -56,8 +58,9 @@ module Domain
 
     def before_create
       super
-      self.cristals   = DEFAULT_CRISTALS_COUNT
-      self.created_at = Time.now
+      self.cristals     = DEFAULT_CRISTALS_COUNT
+      self.created_at   = Time.now
+      self.auto_earn_at = Time.now
     end
 
     def after_create
@@ -89,7 +92,7 @@ module Domain
       DB.transaction(retry_on: [Sequel::ConstraintViolation], num_retries: 30) do
         regenerate_token!
         touch!
-        save
+        save_changes
       end
     end
 
@@ -117,6 +120,20 @@ module Domain
     rescue Sequel::UniqueConstraintViolation
       # Never used in the test suite because it needs concurrency
       raise QuestionNotFound.new(:participation_exists)
+    end
+
+    def ask_for_cristals!
+      DB.transaction(isolation: :repeatable) do
+        if reload.auto_earn_at + DURATION_BETWEEN_AUTO_EARN < Time.now
+          DB[:players].
+            where(id: id).
+            update({
+              auto_earn_at: Time.now,
+              cristals: Sequel.expr(:cristals) + CRISTAL_BY_AUTO_EARN
+            })
+        end
+      end
+      reload
     end
 
     def update_social_association(provider_name, token)
@@ -161,7 +178,7 @@ module Domain
         DB.transaction(isolation: :repeatable, retry_on: [Sequel::SerializationFailure]) do
           if socass.valid?
             if player.valid?
-              player.save
+              player.save_changes
               player.add_social_association(socass)
             else
               if player.errors[:nickname].include?('doesn\'t match')

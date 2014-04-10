@@ -14,6 +14,7 @@ module Controllers
       begin
         player, api = Domain::Player.find_by_social_infos(params[:oauth2Provider], params[:oauth2Token])
         player.authenticate!(api)
+        player.ask_for_cristals!
         present player, with: Entities::Player, token: true, config: true
       rescue Domain::Error
         fail! $!, 401
