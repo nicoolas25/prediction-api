@@ -654,7 +654,43 @@ schemas:
               "type": "integer",
               "title": "Pourcentage de complétion du niveau de badge.",
               "required": true
+            },
+            "converted_to": {
+              "type": "string",
+              "title": "Le type de gains choisis pour ce badge",
+              "required": "false"
             }
+          }
+        }
+      }
+  - badge: |
+      {
+        "$schema": "http://json-schema.org/schema",
+        "type": "object",
+        "title": "Badge",
+        "properties": {
+          "identifier": {
+            "type": "string",
+            "required": true
+          },
+          "level": {
+            "type": "integer",
+            "required": true
+          },
+          "remaining": {
+            "type": "integer",
+            "title": "Nombre de réalisation du critère avant le prochain niveau.",
+            "required": true
+          },
+          "progress": {
+            "type": "integer",
+            "title": "Pourcentage de complétion du niveau de badge.",
+            "required": true
+          },
+          "converted_to": {
+            "type": "string",
+            "title": "Le type de gains choisis pour ce badge",
+            "required": "false"
           }
         }
       }
@@ -1010,3 +1046,29 @@ traits:
           body:
             application/json:
               schema: badges
+    /{identifier}/{level}:
+      is: [ secured, exigent ]
+      type: user
+      uriParameters:
+        identifier:
+          description: Selectionne le badge
+          type: string
+        level:
+          description: Selectionne le niveau du badge
+          type: string
+      get:
+        description: Affiche les détails du badge : s'il a été partagé, si les gains ont été retirés, etc.
+        responses:
+          200:
+            body:
+              application/json:
+                schema: badge
+      post:
+        description: Pour un badge donné, permet de récupérer cristaux ou bonus.
+        formParameters:
+          convert_to:
+            description: Choix des gains
+            pattern: (cristals|bonus)
+          share_via:
+            description: Le réseau social à utiliser pour partager le badge
+
