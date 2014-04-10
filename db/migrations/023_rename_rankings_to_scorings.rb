@@ -1,9 +1,15 @@
+require 'pry'
+
 Sequel.migration do
   up do
-    rename_table :rankings, :scorings if table_exists?(:rankings)
+    if tables.include?(:rankings)
+      rename_table :rankings, :scorings
+    end
   end
 
   down do
-    rename_table :scorings, :scorings if table_exists?(:scorings)
+    if tables.include?(:scorings)
+      rename_table :scorings, :scorings
+    end
   end
 end

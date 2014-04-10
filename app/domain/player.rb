@@ -58,9 +58,9 @@ module Domain
 
     def before_create
       super
-      self.cristals     = DEFAULT_CRISTALS_COUNT
-      self.created_at   = Time.now
-      self.auto_earn_at = Time.now
+      self.cristals     ||= DEFAULT_CRISTALS_COUNT
+      self.created_at   ||= Time.now
+      self.auto_earn_at ||= Time.now
     end
 
     def after_create

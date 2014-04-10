@@ -76,3 +76,7 @@ Then /^show me the (unparsed)?\s?response$/ do |unparsed|
     puts last_response.body
   end
 end
+
+Then /^stop time$/ do
+  binding.pry
+end
