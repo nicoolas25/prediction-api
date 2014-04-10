@@ -845,6 +845,11 @@ traits:
         
         En fonction de la relation entre l'utilisateur identifié et l'utilisateur
         selectionné, les informations retournées ne seront pas les mêmes.
+    /cristals:
+      is: [ secured ]
+      get:
+        description: |
+          Retourne le nombre de cristaux d'un utilisateur.
     /friends:
       is: [ secured ]
       type: { collection: { elementName: "Amis" } }

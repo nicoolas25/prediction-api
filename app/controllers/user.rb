@@ -17,6 +17,11 @@ module Controllers
           present @user, with: Entities::Friend, details: true
         end
 
+        desc "Give the amount of cristals for a given user"
+        get 'cristals' do
+          present player.cristals, with: Entities::Cristal
+        end
+
         desc "List the open questions for a player"
         get 'friends' do
           friends = @user.friends_dataset.eager(:social_associations).all
