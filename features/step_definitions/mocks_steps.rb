@@ -192,3 +192,9 @@ Given /^the last auto-earned cristals for "([^"]*)" are "(\d+ [^"]*)" from now$/
   time = Time.now - count.to_i.__send__(unit)
   player.update(auto_earn_at: time)
 end
+
+Given /^the "([^"]*?)" badge level "(\d+)" of "([^"]*)" is already converted$/ do |identifier, level, nickname|
+  player = Domain::Player.first!(nickname: nickname)
+  badge  = player.badges_dataset.where(identifier: identifier, level: level.to_i).first
+  badge.update(converted_to: 0)
+end

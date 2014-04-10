@@ -1,5 +1,10 @@
 module Domain
+  class TargetNotFoundError < Error ; end
+  class AlreadyConvertedError < Error ; end
+
   class Badge < ::Sequel::Model
+    CONVERSIONS = %w(cristals bonus).freeze
+
     unrestrict_primary_key
 
     many_to_one :player
@@ -12,10 +17,29 @@ module Domain
       def for(identifier)
         where(identifier: identifier)
       end
+
+      def level(level)
+        where(level: level)
+      end
+
+      def claimable
+        where(converted_to: nil)
+      end
+    end
+
+    def claim!(target)
+      target_index = CONVERSIONS.index(target)
+      raise TargetNotFoundError.new(:target_not_found) unless target_index
+      raise AlreadyConvertedError.new(:badge_already_claimed) if converted?
+      update(converted_to: target_index)
     end
 
     def visible?
       level > 0
+    end
+
+    def converted?
+      !converted_to.nil?
     end
 
     def remaining

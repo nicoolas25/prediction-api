@@ -21,17 +21,39 @@ module Controllers
           present visible_badges, with: Entities::Badge
         end
 
-        desc "Show the details of an user badge"
-        params do
-          requires :identifier, type: String
-          requires :level, type: Integer
-        end
-        get ':identifier/:level' do
-          badge = player.badges_dataset.
-            where(identifier: params[:identifier], level: params[:level]).
-            first
-          fail! :badge_not_found, 404 unless badge
-          present badge, with: Entities::Badge
+        namespace ':identifier/:level' do
+          params do
+            requires :identifier, type: String
+            requires :level, type: Integer
+          end
+
+          desc "Show the details of an user badge"
+          get do
+            badge = player.badges_dataset.for(params[:identifier]).level(params[:level]).first
+            if badge
+              present badge, with: Entities::Badge
+            else
+              fail! :badge_not_found, 404
+            end
+          end
+
+          desc "Claim the bonus or cristals from a badge"
+          params do
+            requires :convert_to, type: String
+          end
+          post do
+            begin
+              badge = player.badges_dataset.for(params[:identifier]).level(params[:level]).first
+              if badge
+                badge.claim!(params[:convert_to])
+                present badge, with: Entities::Badge
+              else
+                fail! :badge_not_found, 404
+              end
+            rescue Domain::Error
+              fail! $!, 403
+            end
+          end
         end
       end
     end

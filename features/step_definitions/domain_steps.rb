@@ -95,3 +95,8 @@ Then /^the "([^"]*)" attr for participation to the question "(\d+)" of "([^"]*)"
   value         = participation.__send__(attribute)
   expect(value).to_not be_nil
 end
+
+Then /^the player "([^"]*)" should have "(\d+)" available bonus$/ do |nickname, count|
+  player = Domain::Player.first!(nickname: nickname)
+  expect(Domain::Bonus.dataset.available_for(player).count).to eql(count.to_i)
+end
