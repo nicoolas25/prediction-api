@@ -32,6 +32,9 @@ gem 'httparty'
 # Social API clients
 gem 'twitter'
 
+# Backup related gems
+gem 'dropbox-sdk'
+
 # Asynchronous jobs
 gem 'sidekiq'
 

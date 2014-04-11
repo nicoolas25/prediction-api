@@ -7,3 +7,7 @@ job_type :rake,
 every 10.minutes do
   rake "test:whenever"
 end
+
+every 1.day, at: '00:00am' do
+  rake "backup:dropbox"
+end

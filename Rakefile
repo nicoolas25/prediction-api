@@ -15,14 +15,29 @@ task :console do
   end
 end
 
-namespace :test do
-  desc "Test the reccurent tasks are running"
-  task :whenever do
-    logger = Logger.new('./log/test-whenever.log', 5, 100.megabytes)
-    logger.info '==> Whenever is running'
-    logger.info "Time.now: #{Time.now.strftime('%c')}"
-    logger.info "RACK_ENV: #{ENV['RACK_ENV']}"
-    logger.info '==> done'
+namespace :backup do
+  desc "Save the database content to the dropbox account"
+  task :dropbox do
+    require './db/connect'
+    require './lib/backup_dropbox'
+
+    database = DB.opts[:database]
+    host     = DB.opts[:host]
+    port     = DB.opts[:port]
+    user     = DB.opts[:user]
+    password = DB.opts[:password]
+    prefix   = password ? "PGPASSWORD=#{password} " : ''
+    target   = '/tmp/prediction-database.gz'
+
+    %x{#{prefix} pg_dump -U#{user} -h #{host} -p #{port} #{database} | gzip > #{target}}
+
+    if $?.exitstatus == 0
+      BackupDropbox.upload(File.new(target), '.gz')
+    else
+      message = "Dump failed with status #{$?.exitstatus}."
+      BackupDropbox.logger.error message
+      puts message
+    end
   end
 end
 
@@ -88,5 +103,16 @@ namespace :fixing do
         end
       end
     end
+  end
+end
+
+namespace :test do
+  desc "Test the reccurent tasks are running"
+  task :whenever do
+    logger = Logger.new('./log/test-whenever.log', 5, 100.megabytes)
+    logger.info '==> Whenever is running'
+    logger.info "Time.now: #{Time.now.strftime('%c')}"
+    logger.info "RACK_ENV: #{ENV['RACK_ENV']}"
+    logger.info '==> done'
   end
 end

@@ -1,0 +1,12 @@
+# Run BackupDropbox.get_token for getting the token,
+# the token never expires.
+
+app:
+  key: "pozagwlaea3vnuw"
+  secret: "rxuj34vlkccml4i"
+  token: ""
+
+test:
+  key: "pozagwlaea3vnuw"
+  secret: "rxuj34vlkccml4i"
+  token: ""

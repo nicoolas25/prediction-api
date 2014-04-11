@@ -13,7 +13,7 @@ require "#{File.dirname(__FILE__)}/../lib/mina/sidekiq"
 # Target configuration
 set :domain,       'predictio.info' # also knonw as '146.185.138.74'
 set :deploy_to,    '/var/www/api'
-set :shared_paths, ['log', 'pids', 'config/database.yml']
+set :shared_paths, ['log', 'pids', 'config/database.yml', 'config/dropbox.yml']
 
 # Repository configuration
 set :repository,   'git@bitbucket:n25/pr-dictions.git'
@@ -133,6 +133,7 @@ task :setup => :environment do
   end
 
   queue! %[touch #{deploy_to}/shared/config/database.yml]
+  queue! %[touch #{deploy_to}/shared/config/dropbox.yml]
 end
 
 #

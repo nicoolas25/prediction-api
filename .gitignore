@@ -1,5 +1,6 @@
 log/
 coverage/
 config/database.yml
+config/dropbox.yml
 scripts/seed_*
 public/
