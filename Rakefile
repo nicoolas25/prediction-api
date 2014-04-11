@@ -33,6 +33,7 @@ namespace :backup do
 
     if $?.exitstatus == 0
       BackupDropbox.upload(File.new(target), '.gz')
+      puts "Backup sent sucessfully to Dropbox account."
     else
       message = "Dump failed with status #{$?.exitstatus}."
       BackupDropbox.logger.error message
