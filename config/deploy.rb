@@ -90,6 +90,7 @@ namespace :db do
   task :backup => :environment do
     queue %{
       echo "-----> Create a backup of the database (via Dropbox)" &&
+      #{echo_cmd %[cd #{deploy_to}/current]} &&
       #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake backup:dropbox]}
     }
   end
