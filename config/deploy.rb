@@ -85,6 +85,14 @@ namespace :db do
       #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake db:migrate]}
     }
   end
+
+  desc "Create an ondemand backup of the database (via Dropbox)"
+  task :backup => :environment do
+    queue %{
+      echo "-----> Create a backup of the database (via Dropbox)" &&
+      #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake backup:dropbox]}
+    }
+  end
 end
 
 #
