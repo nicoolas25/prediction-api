@@ -8,6 +8,6 @@ every 10.minutes do
   rake "test:whenever"
 end
 
-every 1.day, at: '00:00am' do
+every 1.day, at: '00:35am' do
   rake "backup:dropbox"
 end
