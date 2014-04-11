@@ -50,7 +50,8 @@ class LoggerMiddleware
   def log_end(status, header, began_at, body)
     args = [ status.to_s[0..3], Time.now - began_at ]
 
-    if header['Content-Type'] =~ /json/
+    # TODO: replace with production when ready
+    if env != 'todo' && header['Content-Type'] =~ /json/
       body = body.instance_eval{ @body } if body.kind_of?(Rack::BodyProxy)
       body = body.body                   if body.kind_of?(Rack::Response)
       body = body.first                  if body.kind_of?(Array)

@@ -74,23 +74,6 @@ task :deploy => :environment do
 end
 
 #
-# Fixing
-#
-
-namespace :fixing do
-  desc "Run the associated rake task"
-  task :amounts_and_players => :environment do
-    queue %{
-      echo "-----> Fixing amount and players" &&
-      #{echo_cmd %[cd #{deploy_to}/current]}
-      #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake fixing:amounts_and_players]}
-    }
-  end
-
-
-end
-
-#
 # Database
 #
 
@@ -102,28 +85,10 @@ namespace :db do
       #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake db:migrate]}
     }
   end
-
-  desc "Cleanup the existing data."
-  task :clean => :environment do
-    queue %{
-      echo "-----> Cleaning the database data" &&
-      #{echo_cmd %[cd #{deploy_to}/current]}
-      #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake db:clean]}
-    }
-  end
-
-  desc "Cleanup the test players."
-  task :clean_test_players => :environment do
-    queue %{
-      echo "-----> Cleaning the test players" &&
-      #{echo_cmd %[cd #{deploy_to}/current]}
-      #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake db:clean_test_players]}
-    }
-  end
 end
 
 #
-# Console
+# Remote tasks: console shell log
 #
 
 namespace :remote do
@@ -148,7 +113,7 @@ namespace :remote do
   desc "Tail the application log"
   task :log => :environment do
     queue %{
-      echo "-----> Fllowing the log" &&
+      echo "-----> Following the log" &&
       #{echo_cmd %[cd #{deploy_to}/current]}
       #{echo_cmd %[tail -n 100 -f log/#{rack_env}.log]}
     }
@@ -168,4 +133,19 @@ task :setup => :environment do
   end
 
   queue! %[touch #{deploy_to}/shared/config/database.yml]
+end
+
+#
+# Fixing
+#
+
+namespace :fixing do
+  desc "Run the associated rake task"
+  task :amounts_and_players => :environment do
+    queue %{
+      echo "-----> Fixing amount and players" &&
+      #{echo_cmd %[cd #{deploy_to}/current]}
+      #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake fixing:amounts_and_players]}
+    }
+  end
 end
