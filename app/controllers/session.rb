@@ -20,5 +20,12 @@ module Controllers
         fail! $!, 401
       end
     end
+
+    desc "Ping the server to get cristals"
+    get '/ping' do
+      check_auth!
+      player.ask_for_cristals!
+      present player, with: Entities::Player
+    end
   end
 end

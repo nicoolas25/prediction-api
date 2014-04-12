@@ -871,6 +871,13 @@ traits:
           * `social_account_unknown`
           * `invalid_oauth2_provider`
           * `invalid_oauth2_token`
+/ping:
+  is: [ secured ]
+  get:
+    description: Permet de pinger l'API pour avoir des cristaux.
+    responses:
+      200:
+        schema: user
 /users:
   /{who}:
     is: [ secured, exigent ]
