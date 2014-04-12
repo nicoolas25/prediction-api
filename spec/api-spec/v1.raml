@@ -523,12 +523,17 @@ schemas:
         "properties": {
           "id": {
             "type": "string",
-            "require": true
+            "required": true
           },
           "stakes": {
             "type": "integer",
             "title": "Le nombre de cristaux misés",
-            "require": true
+            "required": true
+          },
+          "bonus": {
+            "type": "string",
+            "title": "L'identifiant du bonus à utiliser",
+            "required": false
           },
           "components": {
             "type": "array",
@@ -539,11 +544,11 @@ schemas:
               "properties": {
                 "id": {
                   "type": "string",
-                  "require": true
+                  "required": true
                 },
                 "value": {
                   "type": "float",
-                  "require": true
+                  "required": true
                 }
               }
             }
@@ -967,10 +972,14 @@ traits:
           La participation a bien été prise en compte.
           
           L'identifiant de la participation est retourné dans le corps de la réponse.
+          Les badges débloqués instantanéments sont également retournés dans le corps.
         body:
           application/json:
             example: '{ participationId: "1234567890abcdef" }'
       403:
+        description: |
+          Une erreur est survenue. La participation existe déjà, les composants fournis sont
+          invalide, le bonus n'est pas disponible, etc.
         body:
           application/json:
             schema: errorReport
