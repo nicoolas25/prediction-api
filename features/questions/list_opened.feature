@@ -11,6 +11,17 @@ Feature: Display lists of opened questions
     Then the response status should be "200"
     And the JSON response should have 0 "$.[*].*"
 
+  Scenario: There is no open questions to display because the question isn't visible YET
+    Given I am an authenticated user
+    And existing questions:
+      | 1 | Qui va gagner ?  |
+    And existing components for the question "1":
+      | 1 | choices | Chosir la bonne équipe | France,Belgique |
+    And the question "1" isn't visible until "tomorrow"
+    When I send a GET request to "/v1/questions/fr/global/open"
+    Then the response status should be "200"
+    And the JSON response should have 0 "$.[*].*"
+
   Scenario: There is some open questions to display
     Given I am an authenticated user
     And existing questions:

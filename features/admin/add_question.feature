@@ -14,6 +14,7 @@ Feature: Add a new question
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
       "question": {
         "expires_at": "2014",
+        "reveals_at": "2014-01-26 19:00:00 +0000",
         "labels": { "fr": "Qui sera le vainceur ?" },
         "components": [ ]
       }
@@ -30,6 +31,7 @@ Feature: Add a new question
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
       "question": {
         "expires_at": "2014-01-26 20:00:00 +0000",
+        "reveals_at": "2014-01-26 19:00:00 +0000",
         "labels": {
           "fr": "Qui sera le vainceur ?",
           "en": "Who will be the winner?"
@@ -49,6 +51,7 @@ Feature: Add a new question
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
       "question": {
         "expires_at": "2014-01-26 20:00:00 +0000",
+        "reveals_at": "2014-01-26 19:00:00 +0000",
         "labels": {
           "fr": "Qui sera le vainceur ?",
           "en": "Who will be the winner?"
@@ -76,6 +79,7 @@ Feature: Add a new question
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
       "question": {
         "expires_at": "2014-01-26 20:00:00 +0000",
+        "reveals_at": "2014-01-26 19:00:00 +0000",
         "labels": {
           "de": "Qui sera le vainceur ?"
         },
@@ -104,6 +108,7 @@ Feature: Add a new question
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
       "question": {
         "expires_at": "2014-01-26 20:00:00 +0000",
+        "reveals_at": "2014-01-26 19:00:00 +0000",
         "labels": {
           "fr": "Qui sera le vainceur ?",
           "en": "Who will be the winner?"

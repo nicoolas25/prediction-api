@@ -54,4 +54,6 @@ group :test do
   gem 'cucumber'
   gem 'simplecov'
   gem 'database_cleaner'
+  gem 'chronic'
+  gem 'timecop'
 end

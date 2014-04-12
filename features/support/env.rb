@@ -44,5 +44,3 @@ APPLICATION_CONFIG = {
     max: 1000
   }
 }
-
-

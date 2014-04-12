@@ -74,7 +74,7 @@ end
 Given /^existing (expired )?questions:$/ do |expired, questions|
   questions.rows_hash.each do |id, label|
     attrs = {id: id.to_i, label_fr: label}
-    attrs[:expires_at] = expired.present? ? (Time.now - 1.day) : (Time.now + 1.day)
+    attrs[:expires_at] = expired.present? ? (Time.now - 3.day) : (Time.now + 3.day)
     Domain::Question.create(attrs)
   end
 end
@@ -204,4 +204,10 @@ Given /^the player "([^"]*)" have the following bonuses:$/ do |nickname, bonuses
   bonuses.raw.each do |bonus_identifier|
     Domain::Bonus.create(player_id: player.id, identifier: bonus_identifier)
   end
+end
+
+Given /^the question "(\d+)" isn't visible until "([^"]*)"$/ do |question_id, time|
+  time     = Chronic.parse(time) || Time.parse(time)
+  question = Domain::Question.first!(id: question_id)
+  question.update(reveals_at: time)
 end

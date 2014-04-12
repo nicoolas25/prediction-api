@@ -13,6 +13,7 @@ module Controllers
         params do
           requires :question do
             requires :expires_at, type: Time
+            requires :reveals_at, type: Time
             requires :labels, type: Hash
             requires :components, type: Array
           end

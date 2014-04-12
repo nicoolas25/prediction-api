@@ -4,7 +4,8 @@ module Entities
 
     expose :id
 
-    expose :created_at, format_with: :timestamp
+    # TODO: maybe I should use reveals_at directly?
+    expose :reveals_at, format_with: :timestamp, as: :created_at
     expose :expires_at, format_with: :timestamp
 
     expose :labels, if: :admin

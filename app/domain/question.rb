@@ -18,6 +18,10 @@ module Domain
     include I18nLabels
 
     dataset_module do
+      def visible
+        where(Sequel.expr(:reveals_at) <= Time.now)
+      end
+
       def global
         where(author_id: nil)
       end
@@ -38,7 +42,7 @@ module Domain
       end
 
       def open
-        where{expires_at > Time.now}
+        visible.where{expires_at > Time.now}
       end
 
       def answered_by(player)
@@ -56,7 +60,8 @@ module Domain
 
     def before_create
       super
-      self.created_at = Time.now
+      self.created_at   = Time.now
+      self.reveals_at ||= self.created_at
     end
 
     def validate
