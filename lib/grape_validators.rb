@@ -8,12 +8,4 @@ module Validator
       end
     end
   end
-
-  class BadgeLevel < Grape::Validations::Validator
-    def validate_param!(attr_name, params)
-      unless params[attr_name] =~ /^[1-9]$/
-        raise Grape::Exceptions::Validation, param: @scope.full_name(attr_name), message: "must be a valid badge level"
-      end
-    end
-  end
 end

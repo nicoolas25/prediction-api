@@ -20,7 +20,7 @@ module Domain
     one_to_many  :social_associations
     one_to_many  :participations
     one_to_many  :badges
-    one_to_many  :bonuses, class: '::Domain::Bonus'
+    one_to_many  :bonuses
     many_to_many :predictions, join_table: :participations
     many_to_many :questions, join_table: :participations
 

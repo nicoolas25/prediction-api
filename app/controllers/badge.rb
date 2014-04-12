@@ -22,12 +22,11 @@ module Controllers
         end
 
         namespace ':identifier/:level' do
+          desc "Show the details of an user badge"
           params do
             requires :identifier, type: String
-            requires :level, type: Integer, badge_level: true
+            requires :level, type: Fixnum, values: (1..7).to_a
           end
-
-          desc "Show the details of an user badge"
           get do
             badge = player.badges_dataset.for(params[:identifier]).level(params[:level]).first
             if badge
@@ -39,6 +38,8 @@ module Controllers
 
           desc "Claim the bonus or cristals from a badge"
           params do
+            requires :identifier, type: String
+            requires :level, type: Fixnum, values: (1..7).to_a
             requires :convert_to, type: String
           end
           post do

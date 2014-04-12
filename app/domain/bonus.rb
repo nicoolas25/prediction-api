@@ -1,7 +1,5 @@
 module Domain
   class Bonus < ::Sequel::Model
-    set_dataset :bonuses
-
     unrestrict_primary_key
 
     many_to_one :player

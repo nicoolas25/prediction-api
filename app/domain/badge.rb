@@ -1,3 +1,5 @@
+require 'securerandom'
+
 module Domain
   class TargetNotFoundError < Error ; end
   class AlreadyConvertedError < Error ; end
@@ -30,15 +32,25 @@ module Domain
     def claim!(target)
       target_index = CONVERSIONS.index(target)
       raise TargetNotFoundError.new(:target_not_found) unless target_index
-      raise AlreadyConvertedError.new(:badge_already_claimed) if converted?
+
+      step_index = level - 1
 
       DB.transaction do
+        reload
+        raise AlreadyConvertedError.new(:badge_already_claimed) if converted?
+
         if target == 'cristals'
-          cristals = badge_module.earning_cristals[level - 1]
+          cristals = badge_module.earning_cristals[step_index]
           player.increment_cristals_by!(cristals)
         elsif target == 'bonus'
-          # TODO
+          frequencies = badge_module.earning_bonus_frequencies[step_index]
+          badge_module.earning_bonuses[step_index].times do
+            rnd = SecureRandom.random_number
+            identifier, _ = frequencies.find { |_, frq| rnd <= frq }
+            player.add_bonus(identifier: identifier) if identifier
+          end
         end
+
         update(converted_to: target_index)
       end
     end

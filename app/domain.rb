@@ -6,6 +6,10 @@ require './config/log'
 require './db/connect'
 require './lib/social_apis'
 
+# Set some inflections for bonuses
+ActiveSupport::Inflector.inflections do |inflect| inflect.irregular('bonus', 'bonuses') end
+Sequel.inflections                   do |inflect| inflect.irregular('bonus', 'bonuses') end
+
 module Domain
   class Error < StandardError ; end
 
