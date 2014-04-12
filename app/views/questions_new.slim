@@ -1,79 +1,168 @@
 doctype html
-html
+html lang="en"
   head
     title Predictio - Ajouter une question
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
     meta name="token" content="#{params[:token]}"
-    script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
+
+    /[if lt IE 9]
+      script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
+      script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"
+
+    link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+    link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"
+    link rel="stylesheet" href="//jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.min.css"
+
+  body
+    form#questions-new.form-horizontal role="form"
+      .container
+        .row
+          .col-sm-12
+            h1 Ajouter une question
+        .row
+          .col-sm-8
+            .row
+              .col-sm-12
+                legend Informations
+
+                .form-group
+                  label.control-label.col-sm-2 Expiration
+                  .col-sm-10
+                    input.form-control.expires_at type="text" placeholder="2014-01-26 20:00:00 +0000"
+
+                .form-group
+                  label.control-label.col-sm-2 Visibilité
+                  .col-sm-10
+                    input.form-control.reveals_at type="text" placeholder="2014-01-26 19:00:00 +0000"
+
+                .form-group
+                  label.control-label.col-sm-2 Token
+                  .col-sm-10
+                    input.form-control.token placeholder="Token d'identification" value="#{params[:token]}"
+
+            .row
+              .col-sm-12
+                legend Labels
+
+                .row
+                  .col-sm-12
+                    .form-group
+                      .col-sm-12
+                        button.btn.btn-default.add data-section="question-label"
+                          i.glyphicon.glyphicon-plus>
+                          | Ajouter une autre langue
+
+                .question-label
+                  .row
+                    .col-sm-12
+                      .form-group
+                        .col-sm-3
+                          select.locale.form-control
+                            option value="fr" Français
+                            option value="en" Anglais
+                            option value="dev" Développeur
+                        .col-sm-8
+                          input.form-control.question-label type="text" placeholder="Label"
+                        .col-sm-1
+                          button.btn.btn-danger.remove data-section="question-label"
+                            i.glyphicon.glyphicon-remove
+
+            .row
+              .col-sm-12
+                legend Composants
+
+                .row
+                  .col-sm-12
+                    .form-group
+                      .col-sm-12
+                        button.btn.btn-default.add data-section="question-component"
+                          i.glyphicon.glyphicon-plus>
+                          | Ajouter un nouveau composant
+
+                .question-component
+                  .row
+                    .col-sm-12
+                      .form-group
+                        .col-sm-11
+                          select.form-control.kind
+                            option value="0" Choix
+                            option value="1" Numerique
+                            option value="2" Plus proche
+
+                        .col-sm-1
+                          button.btn.btn-danger.remove data-section="question-component"
+                            i.glyphicon.glyphicon-remove
+
+                  .row
+                    .col-sm-10.col-sm-offset-1
+                      h4 Labels du composant
+
+                      .row
+                        .col-sm-12
+                          .form-group
+                            .col-sm-12
+                              button.btn.btn-default.add data-section="component-label"
+                                i.glyphicon.glyphicon-plus>
+                                | Ajouter une autre langue
+
+                      .component-label
+                        .row
+                          .col-sm-12
+                            .form-group
+                              .col-sm-3
+                                select.locale.form-control
+                                  option value="fr" Français
+                                  option value="en" Anglais
+                                  option value="dev" Développeur
+                              .col-sm-8
+                                input.form-control.component-label type="text" placeholder="Label"
+                              .col-sm-1
+                                button.btn.btn-danger.remove data-section="component-label"
+                                  i.glyphicon.glyphicon-remove
+
+                  .row
+                    .col-sm-10.col-sm-offset-1
+                      h4 Choix du composant
+
+                      .row
+                        .col-sm-12
+                          .form-group
+                            .col-sm-12
+                              button.btn.btn-default.add data-section="component-choice"
+                                i.glyphicon.glyphicon-plus>
+                                | Ajouter une autre langue
+
+                      .component-choice
+                        .row
+                          .col-sm-12
+                            .form-group
+                              .col-sm-3
+                                select.locale.form-control
+                                  option value="fr" Français
+                                  option value="en" Anglais
+                                  option value="dev" Développeur
+                              .col-sm-8
+                                input.form-control.component-choice type="text" placeholder="Choix 1, Choix 2"
+                              .col-sm-1
+                                button.btn.btn-danger.remove
+                                  i.glyphicon.glyphicon-remove
+
+            .row
+              .col-sm-12
+                .form-group
+                  .col-sm-12
+                    button.btn.btn-primary.col-sm-12 type="submit" Ajouter
+
+          .col-sm-4#image-selector
+            legend Séléction d'une image
+            input#image-url type="text"
+            img#image-crop src="http://jcrop-cdn.tapmodo.com/v0.9.10/demos/demo_files/pool.jpg"
+            label#image-label
+
+
+    script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
+    script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
     script src="//jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"
     script src="/scripts.js"
-    link href="//jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.min.css" rel="stylesheet"
-    style
-      | form#questions-new { width: 600px; float: left; }
-      | div.label, div.component, div.choice { border-bottom: 1px solid black; padding: 5px; }
-      | div.add { padding: 5px; }
-      | a { cursor: pointer; color: #000077; font-size: 10pt; }
-      | #image-selector { padding: 5px; float: left; min-width: 300px; }
-      | #image-url { width: 250px; display: block; }
-  body
-    form#questions-new
-      fieldset
-        legend Expiration
-        input.expires_at placeholder="2014-01-26 20:00:00 +0000"
-      fieldset
-        legend Labels
-        .label
-          select.locale
-            option value="fr" Français
-            option value="en" Anglais
-            option value="dev" Développeur
-          input.label placeholder="Label"
-          .remove
-            a Supprimer le label
-        .add
-          a Ajouter un autre label
-
-      fieldset
-        legend Composants
-        .component
-          select.kind
-            option value="0" Choix
-            option value="1" Numerique
-            option value="2" Plus proche
-          fieldset
-            legend Labels
-            .label
-              select.locale
-                option value="fr" Français
-                option value="en" Anglais
-                option value="dev" Développeur
-              input.label placeholder="Label"
-              .remove
-                a Supprimer le label
-            .add
-              a Ajouter un nouveau label
-          fieldset
-            legend Choix
-            .choice
-              select.locale
-                option value="fr" Français
-                option value="en" Anglais
-                option value="dev" Développeur
-              input.choice placeholder="Choix 1, Choix 2"
-              .remove
-                a Supprimer le choix
-            .add
-              a Ajouter un nouveau choix
-          .remove
-            a Supprimer le composant
-        .add
-          a Ajouter un nouveau composant
-
-      input.token placeholder="Token d'identification" value="#{params[:token]}"
-
-      input type="submit" value="Ajouter"
-
-    fieldset#image-selector
-      legend Séléction d'une image
-      input#image-url type="text"
-      img#image-crop src="http://jcrop-cdn.tapmodo.com/v0.9.10/demos/demo_files/pool.jpg"
-      label#image-label

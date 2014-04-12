@@ -2,16 +2,7 @@ window.DATE_FORMAT = 'YYYY-MM-DD HH:mm'
 
 token = api_url = null
 
-addQuestionInit = ->
-  return null unless $('#questions-new').length
-
-  insertLocales = ($root, hash, type='label') ->
-    $root.find("> fieldset > div.#{type}").each (_, block) ->
-      $block = $(block)
-      lang = $block.find('select.locale').val()
-      text = $block.find("input.#{type}").val()
-      hash[lang] = text
-
+cropInit = ->
   updateSelection = (crop) ->
     url = $('#image-url').val()
     label = "#{url}!#{crop.w}!#{crop.x}!#{crop.y}!#{crop.x2}!#{crop.y2}"
@@ -32,39 +23,62 @@ addQuestionInit = ->
     $('#image-crop').prop('src', @value)
     cropImage()
 
-  $(document).on 'click', 'div.add a', ->
-    $el = $(@).closest('.add')
-    $bk = $el.prev()
-    $cl = $bk.clone()
-    $cl.find('input, select').val(null)
-    $cl.insertAfter($bk)
 
-  $(document).on 'click', 'div.remove a', ->
-    $el = $(@).closest('div.remove').parent()
-    if $el.prev().is('div.label, div.component, div.choice')
-      $el.remove()
+addQuestionInit = ->
+  return null unless $('#questions-new').length
+
+  cropInit()
+
+  $(document).on 'click', 'button.add', (event) ->
+    event.preventDefault()
+    $btn   = $(@)
+    sect   = $btn.data('section')
+    $bloc  = $btn.closest('.row').next("div.#{sect}")
+    $clone = $bloc.clone()
+    $clone.find('input, select').val(null)
+    $clone.insertBefore($bloc)
+
+  $(document).on 'click', 'button.remove', (event) ->
+    event.preventDefault()
+
+    $btn  = $(@)
+    sect  = $btn.data('section')
+    sel   = "div.#{sect}"
+    $bloc = $btn.closest(sel)
+    if $bloc.prev().is(sel) or $bloc.next().is(sel)
+      $bloc.remove()
     else
-      alert('Dernier de son genre...')
+      alert('Vous devez avoir au moins un element de ce type.')
 
-  $(document).on 'submit', 'form', (e) ->
-    e.preventDefault()
-    params = {labels: {}, components: [], expires_at: null}
+
+  insertLocales = ($root, object, type) ->
+    $root.find("div.#{type}").each (_, block) ->
+      $block = $(block)
+      lang = $block.find('select.locale').val()
+      text = $block.find("input.#{type}").val()
+      object[lang] = text
+
+  $(document).on 'submit', 'form', (event) ->
+    event.preventDefault()
+
+    params = {labels: {}, components: [], expires_at: null, reveals_at: null}
     $form = $(@)
 
-    expires_at = $form.find('> fieldset > input.expires_at').val()
-    params.expires_at = expires_at
+    params.expires_at = $form.find('input.expires_at').val()
 
-    insertLocales($form, params.labels)
+    params.reveals_at = $form.find('input.reveals_at').val()
 
-    $form.find('> fieldset > div.component').each (_, component) ->
-      componentHash = {labels: {}}
+    insertLocales($form, params.labels, 'question-label')
+
+    $form.find('.question-component').each (_, component) ->
       $component = $(component)
+      componentHash = {labels: {}}
       componentHash.kind = $component.find('select.kind').val()
-      insertLocales($component, componentHash.labels)
+      insertLocales($component, componentHash.labels, 'component-label')
 
       if componentHash.kind is '0' # choices
         componentHash.choices = {}
-        insertLocales($component, componentHash.choices, 'choice')
+        insertLocales($component, componentHash.choices, 'component-choice')
 
       params.components.push(componentHash)
 
@@ -80,7 +94,7 @@ addQuestionInit = ->
       alert('Done!')
     .fail ->
       console.log arguments
-      alert('Fail!')
+      alert('Failed! See the console for more information.')
 
 listQuestionsInit = ->
   $list = $('#questions-list')
@@ -97,6 +111,7 @@ listQuestionsInit = ->
         """
         <li class="question">
           <a href="/questions/#{question.id}?token=#{token}">#{question.labels.fr ? question.labels.en}</a>
+          <span class="reveals_at">#{moment(question.reveals_at * 1000).format(DATE_FORMAT)}</span>
           <span class="expires_at">#{moment(question.expires_at * 1000).format(DATE_FORMAT)}</span>
           <span class="stats participations">#{question.statistics.participations} participations</span>
           <span class="stats cristals">#{question.statistics.total} cistaux</span>
@@ -165,7 +180,11 @@ detailsQuestionsInit = ->
       data: { token: token }
     .done (question) ->
       # Set informations
-      $('#informations').html("""<span class="expires_at">Expiration #{moment(question.expires_at * 1000).format(DATE_FORMAT)}</span>""")
+      $('#informations').html(
+        """
+        <span class="reveals_at">Visible #{moment(question.reveals_at * 1000).format(DATE_FORMAT)}</span>
+        <span class="expires_at">Expiration #{moment(question.expires_at * 1000).format(DATE_FORMAT)}</span>
+        """)
 
       # Set labels
       buffer = ''
