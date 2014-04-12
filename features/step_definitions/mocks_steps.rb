@@ -98,7 +98,7 @@ Given /^the user "([^"]*)" has answered the question "([^"]*)"(?: staking "(\d+)
   player = Domain::Player.first!(nickname: nickname)
   question = Domain::Question.first!(id: question_id)
   raw_answers = answers.hashes
-  player.participate_to!(question, stakes, raw_answers)
+  player.participate_to!(question, stakes, raw_answers, nil)
 end
 
 Given /^an application configuration with "([^"]*)" set to "([^"]*)"$/ do |path, value|
@@ -193,8 +193,15 @@ Given /^the last auto-earned cristals for "([^"]*)" are "(\d+ [^"]*)" from now$/
   player.update(auto_earn_at: time)
 end
 
-Given /^the "([^"]*?)" badge level "(\d+)" of "([^"]*)" is already converted$/ do |identifier, level, nickname|
+Given /^the "([^"]*)" badge level "(\d+)" of "([^"]*)" is already converted$/ do |identifier, level, nickname|
   player = Domain::Player.first!(nickname: nickname)
   badge  = player.badges_dataset.where(identifier: identifier, level: level.to_i).first
   badge.update(converted_to: 0)
+end
+
+Given /^the player "([^"]*)" have the following bonuses:$/ do |nickname, bonuses|
+  player = Domain::Player.first!(nickname: nickname)
+  bonuses.raw.each do |bonus_identifier|
+    Domain::Bonus.create(player_id: player.id, identifier: bonus_identifier)
+  end
 end

@@ -28,10 +28,6 @@ module Domain
       super
       prediction.update_with_participation!(self)
       question.update_with_participation!(self)
-
-      # Keep track of the generated badges relative to the participation
-      generated_badges = Badges.run_hooks(:after_participation, self)
-      self.badges = generated_badges.select(&:visible?)
     end
 
     def validate

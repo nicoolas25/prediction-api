@@ -12,13 +12,16 @@ module Controllers
     desc "Participate to a question"
     params do
       requires :id, type: String, regexp: /^\d+$/
+      optional :bonus, type: String, regexp: /^[a-z]+$/
     end
     post '/participations' do
       begin
-        question = Domain::Question.find_for_participation(player, params[:id])
-        stakes = params[:stakes].to_i
-        components = params[:components]
-        participation = player.participate_to!(question, stakes, components)
+        question      = Domain::Question.find_for_participation(player, params[:id])
+        identifier    = params[:bonus]
+        bonus         = identifier && Domain::Bonus.find_for_participation(player, identifier)
+        stakes        = params[:stakes].to_i
+        components    = params[:components]
+        participation = player.participate_to!(question, stakes, components, bonus)
 
         present participation, with: Entities::Participation
       rescue Domain::Error

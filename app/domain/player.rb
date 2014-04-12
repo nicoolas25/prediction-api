@@ -96,7 +96,7 @@ module Domain
       end
     end
 
-    def participate_to!(question, stakes, raw_answers)
+    def participate_to!(question, stakes, raw_answers, bonus=nil)
       # Verify that the stakes are in the expected range
       if defined?(APPLICATION_CONFIG)
         range = APPLICATION_CONFIG[:stakes]
@@ -107,14 +107,24 @@ module Domain
 
       prediction = participation = nil
 
-      DB.transaction(isolation: :repeatable) do
+      DB.transaction do
         prediction = Prediction.first_or_create_from_raw_answers(raw_answers, question)
         participation = Participation.create(
           player: self,
           question: question,
           prediction: prediction,
           stakes: stakes)
+        bonus.try(:use_for!, participation)
       end
+
+      # Reload the participation's bonus when needed
+      if bonus
+        participation.bonus(true)
+      end
+
+      # Keep track of the generated badges relative to the participation
+      generated_badges = Badges.run_hooks(:after_participation, participation)
+      participation.badges = generated_badges.select(&:visible?)
 
       participation
     rescue Sequel::UniqueConstraintViolation
