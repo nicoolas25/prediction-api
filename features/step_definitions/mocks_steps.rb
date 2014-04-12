@@ -119,16 +119,16 @@ Given /^there is the following participations for the question "([^"]*)":$/ do |
   end
 end
 
-Given /^there is the following badges for the question "([^"]*)":$/ do |question_id, badges|
+Given /^there is the following bonuses for the question "([^"]*)":$/ do |question_id, bonuses|
   question = Domain::Question.first!(id: question_id)
-  badges.raw.each do |nickname, badge_identifier|
+  bonuses.raw.each do |nickname, bonus_identifier|
     player = Domain::Player.first!(nickname: nickname)
     participation = Domain::Participation.where(player_id: player.id, question_id: question_id.to_i).first
     if participation
       Domain::Bonus.create({
         prediction_id: participation.prediction_id,
         player_id: player.id,
-        identifier: badge_identifier
+        identifier: bonus_identifier
       })
     end
   end

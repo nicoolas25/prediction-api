@@ -9,7 +9,7 @@ Feature: The user earns 20 cristal after a prediction
       | 1 | choices | Chosir la bonne équipe | France,Belgique |
     And there is the following participations for the question "1":
       | nickname | 10 | 1:1 |
-    And there is the following badges for the question "1":
+    And there is the following bonuses for the question "1":
       | nickname | cresus |
 
   Scenario: The user looses a prediction

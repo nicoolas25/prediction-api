@@ -9,7 +9,7 @@ Feature: The user regains its stakes after a missed prediction
       | 1 | choices | Chosir la bonne équipe | France,Belgique |
     And there is the following participations for the question "1":
       | nickname | 10 | 1:1 |
-    And there is the following badges for the question "1":
+    And there is the following bonuses for the question "1":
       | nickname | blind |
     When I send a PUT request to "/v1/admin/questions/1" with the following:
     """
