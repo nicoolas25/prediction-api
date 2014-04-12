@@ -13,6 +13,7 @@ html lang="en"
 
     link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
     link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"
+    link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css"
     link rel="stylesheet" href="//jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.min.css"
 
   body
@@ -30,12 +31,18 @@ html lang="en"
                 .form-group
                   label.control-label.col-sm-2 Expiration
                   .col-sm-10
-                    input.form-control.expires_at type="text" placeholder="2014-01-26 20:00:00 +0000"
+                    .input-group.date
+                      input.form-control.expires_at type="text" placeholder="2014-01-26 20:00:00 +0000"
+                      span.input-group-addon
+                        i.glyphicon.glyphicon-calendar
 
                 .form-group
                   label.control-label.col-sm-2 Visibilité
                   .col-sm-10
-                    input.form-control.reveals_at type="text" placeholder="2014-01-26 19:00:00 +0000"
+                    .input-group.date
+                      input.form-control.reveals_at type="text" placeholder="2014-01-26 19:00:00 +0000"
+                      span.input-group-addon
+                        i.glyphicon.glyphicon-calendar
 
                 .form-group
                   label.control-label.col-sm-2 Token
@@ -172,5 +179,8 @@ html lang="en"
 
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
     script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
+    script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"
+    script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"
+    script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/2.1.30/js/locales/bootstrap-datetimepicker.fr.js"
     script src="//jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"
     script src="/scripts.js"

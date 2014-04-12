@@ -29,6 +29,10 @@ addQuestionInit = ->
 
   cropInit()
 
+  $('.input-group.date').datetimepicker
+    language: 'fr'
+    format: "YYYY-MM-DD HH:mm:00 +0000"
+
   $(document).on 'click', 'button.add', (event) ->
     event.preventDefault()
     $btn   = $(@)
