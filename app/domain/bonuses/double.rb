@@ -10,12 +10,10 @@ module Domain
       # When the participation ends, get 20 cristals
       apply_to! do |participation, bonus|
         player = participation.player
-        stakes = participation.stakes
         winnings = participation.winnings
-        if winnings == 0
-          player.update(cristals: Sequel.expr(:cristals) - stakes)
-        else
-          player.update(cristals: Sequel.expr(:cristals) + winnings)
+
+        if winnings > 0
+          player.increment_cristals_by!(winnings)
         end
       end
 

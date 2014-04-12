@@ -136,6 +136,11 @@ module Domain
       reload
     end
 
+    def increment_cristals_by!(amount)
+      self.cristals += amount
+      DB[:players].where(id: id).update(cristals: Sequel.expr(:cristals) + amount)
+    end
+
     def update_social_association(provider_name, token)
       api = self.class.social_api(provider_name, token)
       DB.transaction(isolation: :repeatable, retry_on: [Sequel::SerializationFailure]) do

@@ -12,7 +12,7 @@ module Domain
         if participation.winnings == 0
           stakes = participation.stakes
           player = participation.player
-          player.update(cristals: Sequel.expr(:cristals) + stakes)
+          player.increment_cristals_by!(stakes)
         end
       end
 

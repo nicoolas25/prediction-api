@@ -56,6 +56,27 @@ module Domain
           @steps = counts
         end
 
+        def earning_cristals
+          @earning_cristals ||= steps.map { |count| if count == 1 then 10 else count * 2.5 end }
+        end
+
+        def earning_bonuses
+          @earning_bonuses ||= steps.map { |count| if count == 1 then 1 else count * 0.2 end }
+        end
+
+        def earning_bonus_frequencies
+          # This will be badge specific later and should not be a constant
+          [
+            {'blind' => 0.8, 'cresus' => 1.0,  'double' => 0.0},
+            {'blind' => 0.8, 'cresus' => 0.9,  'double' => 1.0},
+            {'blind' => 0.6, 'cresus' => 0.8,  'double' => 1.0},
+            {'blind' => 0.5, 'cresus' => 0.75, 'double' => 1.0},
+            {'blind' => 0.5, 'cresus' => 0.7,  'double' => 1.0},
+            {'blind' => 0.5, 'cresus' => 0.7,  'double' => 1.0},
+            {'blind' => 0.5, 'cresus' => 0.7,  'double' => 1.0}
+          ]
+        end
+
         def level_for(count)
           @steps.reduce(0){ |level, step| step <= count ? level + 1 : level }
         end

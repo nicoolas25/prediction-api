@@ -31,7 +31,16 @@ module Domain
       target_index = CONVERSIONS.index(target)
       raise TargetNotFoundError.new(:target_not_found) unless target_index
       raise AlreadyConvertedError.new(:badge_already_claimed) if converted?
-      update(converted_to: target_index)
+
+      DB.transaction do
+        if target == 'cristals'
+          cristals = badge_module.earning_cristals[level - 1]
+          player.increment_cristals_by!(cristals)
+        elsif target == 'bonus'
+          # TODO
+        end
+        update(converted_to: target_index)
+      end
     end
 
     def visible?

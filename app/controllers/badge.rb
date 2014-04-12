@@ -24,7 +24,7 @@ module Controllers
         namespace ':identifier/:level' do
           params do
             requires :identifier, type: String
-            requires :level, type: Integer
+            requires :level, type: Integer, badge_level: true
           end
 
           desc "Show the details of an user badge"

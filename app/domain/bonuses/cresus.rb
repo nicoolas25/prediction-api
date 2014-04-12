@@ -9,7 +9,7 @@ module Domain
 
       # When the participation ends, get 20 cristals
       apply_to! do |participation, bonus|
-        participation.player.update(cristals: Sequel.expr(:cristals) + 20)
+        participation.player.increment_cristals_by!(20)
       end
 
       labels fr: "Appelez moi Cresus", en: "Call me Cresus"
