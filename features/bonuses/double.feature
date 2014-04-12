@@ -12,7 +12,7 @@ Feature: The user double its earnings or he loose it's stakes another time
     And there is the following badges for the question "1":
       | nickname | double |
 
-  Scenario: The user looses a prediction and loose its stakes
+  Scenario: The user looses a prediction but loose nothing more
     When I send a PUT request to "/v1/admin/questions/1" with the following:
     """
     {
@@ -23,7 +23,7 @@ Feature: The user double its earnings or he loose it's stakes another time
     }
     """
     Then the response status should be "200"
-    And the player "nickname" should have "0" cristals
+    And the player "nickname" should have "10" cristals
 
   Scenario: The user wins a prediction and win 2 times
     When I send a PUT request to "/v1/admin/questions/1" with the following:
