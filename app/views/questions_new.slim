@@ -157,8 +157,16 @@ html lang="en"
 
           .col-sm-4#image-selector
             legend Séléction d'une image
-            input#image-url type="text"
-            img#image-crop src="http://jcrop-cdn.tapmodo.com/v0.9.10/demos/demo_files/pool.jpg"
+
+            .form-group
+              label.control-label.col-sm-2 Url
+              .col-sm-10
+                input#image-url.form-control type="text"
+
+            .form-group
+              .col-sm-12
+                img#image-crop src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Zlatan_Ibrahimovi%C4%87_Euro_2012_vs_Ukraine.JPG/275px-Zlatan_Ibrahimovi%C4%87_Euro_2012_vs_Ukraine.JPG"
+
             label#image-label
 
 
