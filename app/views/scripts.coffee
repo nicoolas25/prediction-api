@@ -104,6 +104,10 @@ listQuestionsInit = ->
   $list = $('#questions-list')
   return null unless $list.length
 
+  $template = $list.find('.question.template')
+  $template.removeClass('template')
+  $template.detach()
+
   $.ajax
     url: "http://#{api_url}/v1/admin/questions"
     type: 'GET'
@@ -111,17 +115,21 @@ listQuestionsInit = ->
   .done (questions) ->
     buffer = ''
     for question in questions
-      buffer +=
-        """
-        <li class="question">
-          <a href="/questions/#{question.id}?token=#{token}">#{question.labels.fr ? question.labels.en}</a>
-          <span class="reveals_at">#{moment(question.reveals_at * 1000).format(DATE_FORMAT)}</span>
-          <span class="expires_at">#{moment(question.expires_at * 1000).format(DATE_FORMAT)}</span>
-          <span class="stats participations">#{question.statistics.participations} participations</span>
-          <span class="stats cristals">#{question.statistics.total} cistaux</span>
-        </li>
-        """
-    $list.html(buffer)
+      $clone    = $template.clone()
+      $title    = $clone.find('a.title')
+      $reveals  = $clone.find('.reveals_at')
+      $expires  = $clone.find('.expires_at')
+      $cristals = $clone.find('.cristals')
+
+      $title.html(question.labels.fr ? question.labels.en)
+      $title.prop('href', "/questions/#{question.id}?token=#{token}")
+      $reveals.html(moment(question.reveals_at * 1000).format(DATE_FORMAT))
+      $expires.html(moment(question.expires_at * 1000).format(DATE_FORMAT))
+      $cristals.html(question.statistics.total)
+
+      buffer += $clone[0].outerHTML
+
+    $list.find('.questions').html(buffer)
 
 listPlayersInit = ->
   $list = $('#players-list')

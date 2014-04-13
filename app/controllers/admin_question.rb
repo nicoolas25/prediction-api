@@ -33,7 +33,7 @@ module Controllers
 
         desc "List the questions"
         get do
-          questions = Domain::Question.all
+          questions = Domain::Question.dataset.ordered(:desc).all
           present questions, with: Entities::Question, admin: true
         end
 

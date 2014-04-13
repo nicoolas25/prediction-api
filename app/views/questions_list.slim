@@ -1,29 +1,45 @@
 doctype html
-html
+html lang="en"
   head
     title Predictio - Liste des questions
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
     meta name="token" content="#{params[:token]}"
-    script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
+
+    /[if lt IE 9]
+      script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
+      script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"
+
+    link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+    link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"
+
+  body
+    .container
+      .row
+        .col-sm-12
+          h1 Liste des questions
+      .row
+        .col-sm-12
+          table.table-condensed.table.table-striped.table-hover#questions-list
+            thead
+              tr
+                th Label
+                th Visible
+                th Expiration
+                th # Cristaux
+            tbody.questions
+              tr.template.question
+                td
+                  a.title href="#"
+                td
+                  span.reveals_at
+                td
+                  span.expires_at
+                td
+                  span.cristals
+
+    script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
+    script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
     script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"
     script src="/scripts.js"
-    style
-      | #questions-list .question span {
-      |   float: right;
-      |   margin: 0px 5px;
-      | }
-      | #questions-list {
-      |   list-style-type: none;
-      |   margin: 0px;
-      |   padding: 0px;
-      | }
-      | #questions-list .question {
-      |   padding: 5px;
-      | }
-      | #questions-list .question:nth-child(n+1) {
-      |   background: #EFEFEF;
-      | }
-      | #questions-list .question:hover {
-      |   background: #FFDDDD;
-      | }
-  body
-    ul#questions-list
