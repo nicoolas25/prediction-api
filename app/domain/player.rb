@@ -39,8 +39,6 @@ module Domain
       Player.exclude(players__id: id).join(:friendships, FRIENDSHIPS_EXPR[id])
     }
 
-    attr_accessor :last_authentication_at_was
-
     # Friends including himself
     def circle_dataset
       Player.
@@ -74,8 +72,8 @@ module Domain
     end
 
     def touch!
-      self.last_authentication_at_was = self.last_authentication_at
-      self.last_authentication_at = Time.now
+      self.last_authentication_at    = self.current_authentication_at
+      self.current_authentication_at = Time.now
     end
 
     def expire_token!

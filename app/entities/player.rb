@@ -21,9 +21,7 @@ module Entities
     expose :first_name
     expose :last_name
 
-    expose :last_authentication_at do |p, opts|
-      (p.last_authentication_at_was || p.last_authentication_at).to_i
-    end
+    expose :last_authentication_at, format: :timestamp
 
     expose :social_associations,
       using: SocialAssociation,
