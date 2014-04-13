@@ -8,7 +8,7 @@ module Entities
     extend ActiveSupport::Concern
 
     included do
-      format_with(:timestamp) { |dt| dt.to_i }
+      format_with(:timestamp) { |dt| dt && dt.to_i }
     end
   end
 
