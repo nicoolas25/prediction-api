@@ -152,11 +152,9 @@ listPlayersInit = ->
       $cristals = $clone.find('.cristals')
       $auth     = $clone.find('.last_auth')
 
-      console.log player
-
       $id.html(player.id)
       $nick.html(player.nickname)
-      $nick.prop('href', "/players/#{player.id}?token=#{token}")
+      $nick.prop('href', "/players/#{player.nickname}?token=#{token}")
       $cristals.html(player.cristals)
       $auth.html(moment(player.last_authentication_at * 1000).format(DATE_FORMAT))
 
@@ -165,7 +163,11 @@ listPlayersInit = ->
     $list.find('.players').html(buffer)
 
 detailsPlayersInit = ->
-  return null unless $('#players-details').length
+  $details = $('#players-details')
+  return null unless $details.length
+
+  $social = $details.find('.social-association')
+  $social.detach()
 
   nickname = $('meta[name=playerNickname]').prop('content')
 
@@ -175,11 +177,26 @@ detailsPlayersInit = ->
       type: 'GET'
       data: { token: token }
     .done (player) ->
-      # Set informations
-      $('#informations .cristals').val(player.statistics.cristals)
+      $details.find('input.cristals').val(player.cristals)
+      $details.find('input.nickname').val(player.nickname)
+      $details.find('input.fullname').val("#{player.first_name} #{player.last_name}")
+      $details.find('input.friends').val(player.statistics.friends)
+      $details.find('input.predictions').val(player.statistics.predictions)
+      $details.find('input.last_auth').val(moment(player.last_authentication_at * 1000).format(DATE_FORMAT))
 
-  $(document).on 'click', 'form a', ->
-    $form = $(this).closest('form')
+      buffer = ''
+      for social in player.social
+        $clone = $social.clone()
+        $clone.find('.provider').attr('value', social.provider)
+        $clone.find('.social-id').attr('value', social.id)
+        $clone.find('.avatar').prop('src', social.avatar_url)
+        buffer += $clone[0].outerHTML
+      $details.find('.social-associations').html(buffer)
+
+
+  $(document).on 'submit', 'form', (event) ->
+    event.preventDefault()
+
     $.ajax
       url: "http://#{api_url}/v1/admin/players/#{nickname}"
       type: 'PUT'
@@ -187,7 +204,7 @@ detailsPlayersInit = ->
       processData: false
       data: JSON.stringify
         token: token
-        cristals: $form.find('input').val()
+        cristals: $details.find('input.cristals').val()
     .done ->
       alert('Done!')
       fetchPlayer()

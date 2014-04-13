@@ -1,18 +1,91 @@
 doctype html
-html
+html lang="en"
   head
     title Predictio - Détail d'une question
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
     meta name="token" content="#{params[:token]}"
     meta name="playerNickname" content="#{params[:nickname]}"
-    script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
+
+    /[if lt IE 9]
+      script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
+      script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"
+
+    link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+    link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"
+
+  body
+    form#players-details.form-horizontal
+      .container
+        .row
+          .col-sm-12
+            h1 Détails d'un joueur
+        .row
+          .col-sm-6
+            legend Informations
+
+            .form-group
+              label.control-label.col-sm-6 Nickname
+              .col-sm-6
+                input.form-control.nickname.disabled type='text' disabled="disabled"
+
+            .form-group
+              label.control-label.col-sm-6 Nom complet
+              .col-sm-6
+                input.form-control.fullname.disabled type='text' disabled="disabled"
+
+            .form-group
+              label.control-label.col-sm-6 Dernière connexion
+              .col-sm-6
+                input.form-control.last_auth.disabled type='text' disabled="disabled"
+
+          .col-sm-6
+            legend Statistiques
+
+            .form-group
+              label.control-label.col-sm-6 Nombre de cristaux
+              .col-sm-6
+                input.form-control.cristals type='text'
+
+            .form-group
+              label.control-label.col-sm-6 Nombre d'amis
+              .col-sm-6
+                input.form-control.friends.disabled type='text' disabled="disabled"
+
+            .form-group
+              label.control-label.col-sm-6 Nombre de prédictions
+              .col-sm-6
+                input.form-control.predictions.disabled type='text' disabled="disabled"
+
+        .row
+          .col-sm-12
+            legend Reseaux sociaux
+            .row.social-associations
+              .col-sm-6.social-association
+                .form-group
+                  label.control-label.col-sm-6 Fournisseur
+                  .col-sm-6
+                    input.form-control.provider.disabled type='text' disabled="disabled"
+
+                .form-group
+                  label.control-label.col-sm-6 Identifiant
+                  .col-sm-6
+                    input.form-control.social-id.disabled type='text' disabled="disabled"
+
+                .form-group
+                  label.control-label.col-sm-6 Avatar
+                  .col-sm-6
+                    img.avatar alt="Avatar"
+
+        .row
+          .col-sm-12
+            .form-group
+              .col-sm-12
+                button.btn.btn-primary.form-control type="submit" Modifier
+
+
+    script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
+    script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
     script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"
     script src="/scripts.js"
-    style
-      | #title { text-align: center; width: 100%; font-size: 200%; }
-  body
-    form#players-details
-      .block#title Détails du joueur #{params[:nickname]}
-      .block#informations
-        | Nombre de cistaux: 
-        input.cristals type='text'
-      a.submit href="#" Modifier
