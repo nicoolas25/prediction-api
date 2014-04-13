@@ -94,9 +94,9 @@ addQuestionInit = ->
       data: JSON.stringify
         token: $form.find('input.token').val()
         question: params
-    .done ->
+    .then ->
       alert('Done!')
-    .fail ->
+    , ->
       console.log arguments
       alert('Failed! See the console for more information.')
 
@@ -212,7 +212,14 @@ detailsPlayersInit = ->
   fetchPlayer()
 
 detailsQuestionsInit = ->
-  return null unless $('#questions-details').length
+  $details = $('#questions-details')
+  return null unless $details.length
+
+  # Fetch templates
+  $labelTemplate           = $details.find('div.question-label').detach()
+  $componentLabelTemplate  = $details.find('div.component-label').detach()
+  $componentChoiceTemplate = $details.find('div.component-choice').detach()
+  $componentTemplate       = $details.find('div.question-component').detach()
 
   questionId = $('meta[name=questionId]').prop('content')
 
@@ -223,59 +230,74 @@ detailsQuestionsInit = ->
       data: { token: token }
     .done (question) ->
       # Set informations
-      $('#informations').html(
-        """
-        <span class="reveals_at">Visible #{moment(question.reveals_at * 1000).format(DATE_FORMAT)}</span>
-        <span class="expires_at">Expiration #{moment(question.expires_at * 1000).format(DATE_FORMAT)}</span>
-        """)
+      $details.find('.reveals_at').val(moment(question.reveals_at * 1000).format(DATE_FORMAT))
+      $details.find('.expires_at').val(moment(question.expires_at * 1000).format(DATE_FORMAT))
 
       # Set labels
+      $details.find('.question-labels > .question-label').remove()
       buffer = ''
       for locale, label of question.labels
-        buffer += """<span class="label">#{label} <span class="locale">(#{locale})</span></span>"""
-      $('#labels').html(buffer)
+        $clone = $labelTemplate.clone()
+        $clone.find("select.locale option[value=#{locale}]").attr('selected', true)
+        $clone.find('input.question-label').attr('value', label)
+        buffer += $clone[0].outerHTML
+      $details.find('.question-labels').append(buffer)
 
       # Set components
-      buffer = '<div class="components">'
+      $details.find('.question-components > .question-component').remove()
+      buffer = ''
       for component in question.components
-        buffer += """<div class="component #{component.kind}">"""
+        console.log component
+        $clone = $componentTemplate.clone()
 
-        # Display the labels
-        buffer += '<div class="labels">'
-        for locale, label of component.labels
-          buffer += """<span class="label">#{label} <span class="locale">(#{locale})</span></span>"""
-        buffer += '</div>'
-
-        # Display the component's choices
-        if component.choices?
-          buffer += '<div class="choices">'
-          for choice in component.choices
-            buffer +=
-              """
-              <span class="choice" data-position="#{choice.position}">
-                #{choice.position} - #{choice.label}
-                <span class="locale">(#{choice.locale})</span>
-              </span>
-              """
-          buffer += '</div>'
-
-        # Allow to add an answer
-        buffer += '<div class="answers">'
-        buffer += '<label>Solution</label>'
+        # Set type and solution field
+        kind = if component.kind is 'choices' then '0' else '1'
+        $clone.find("select.kind option[value=#{kind}]").attr('selected', true)
+        $solution = $clone.find('input.solution')
         if component.valid_answer?
-          buffer += """<input type="text" data-id="#{component.id}" value="#{component.valid_answer}" disabled="disabled" />"""
+          $solution.attr('value', component.valid_answer)
+          $solution.attr('disabled', 'disabled')
         else
-          buffer += """<input type="text" data-id="#{component.id}" />"""
-        buffer += '</div>'
+          $solution.attr('data-id', component.id)
 
-        buffer += '</div>'
-      buffer += '</div>'
-      $('#components').html(buffer)
+        # Set labels
+        labelBuffer = ''
+        for locale, label of component.labels
+          $labelClone = $componentLabelTemplate.clone()
+          $labelClone.find("select.locale option[value=#{locale}]").attr('selected', true)
+          $labelClone.find('input.component-label').attr('value', label)
+          labelBuffer += $labelClone[0].outerHTML
+        $clone.find('.component-labels').append(labelBuffer)
 
-  $(document).on 'click', 'form a', ->
+        # Set component's choices
+        if component.choices?
+          locale = component.choices[0].locale
+          choiceBuffer = ''
+          for choice in component.choices
+            if choice.locale is locale
+              $choiceClone = $componentChoiceTemplate.clone()
+              $choiceClone.find('input.component-choice').attr('value', choice.label)
+              $choiceClone.find('button.position').html(choice.position)
+              choiceBuffer += $choiceClone[0].outerHTML
+          $clone.find('.component-choices').append(choiceBuffer)
+
+        buffer += $clone[0].outerHTML
+      $details.find('.question-components').append(buffer)
+
+
+  $(document).on 'click', '.position', (event) ->
+    event.preventDefault()
+
+    $btn = $(this)
+    $sol = $btn.closest('.question-component').find('.solution')
+    $sol.val($btn.html())
+
+  $(document).on 'submit', 'form', (event) ->
+    event.preventDefault()
+
     components = {}
-    $form = $(this).closest('form')
-    $form.find('input').each ->
+    $form = $(this)
+    $form.find('input.solution').each ->
       $input = $(this)
       id = $input.data('id')
       answer = $input.val()
@@ -289,8 +311,12 @@ detailsQuestionsInit = ->
       data: JSON.stringify
         token: token
         components: components
-    .done ->
+    .then ->
+      alert('Done!')
       fetchQuestion()
+    , ->
+      console.log arguments
+      alert('Failed! See the console for more information.')
 
   fetchQuestion()
 
