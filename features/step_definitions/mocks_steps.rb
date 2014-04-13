@@ -199,10 +199,14 @@ Given /^the "([^"]*)" badge level "(\d+)" of "([^"]*)" is already converted$/ do
   badge.update(converted_to: 0)
 end
 
-Given /^the player "([^"]*)" have the following bonuses:$/ do |nickname, bonuses|
+Given /^the player "([^"]*)" have the following (used )?bonuses:$/ do |nickname, used, bonuses|
   player = Domain::Player.first!(nickname: nickname)
   bonuses.raw.each do |bonus_identifier|
-    Domain::Bonus.create(player_id: player.id, identifier: bonus_identifier)
+    Domain::Bonus.create(
+      player_id: player.id,
+      identifier: bonus_identifier,
+      prediction_id: used ? player.predictions_dataset.first.id : nil
+    )
   end
 end
 

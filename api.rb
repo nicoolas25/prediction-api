@@ -7,6 +7,7 @@ module Prediction
 
     mount Controllers::Activity
     mount Controllers::Badge
+    mount Controllers::Bonus
     mount Controllers::Ladder
     mount Controllers::Participation
     mount Controllers::Question

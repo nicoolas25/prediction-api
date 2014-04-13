@@ -64,6 +64,7 @@ module Controllers
 
   autoload :Activity,      './app/controllers/activity'
   autoload :Badge,         './app/controllers/badge'
+  autoload :Bonus,         './app/controllers/bonus'
   autoload :Ladder,        './app/controllers/ladder'
   autoload :Participation, './app/controllers/participation'
   autoload :Question,      './app/controllers/question'

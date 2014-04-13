@@ -15,6 +15,7 @@ module Entities
   autoload :Activity,          './app/entities/activity'
   autoload :Author,            './app/entities/author'
   autoload :Badge,             './app/entities/badge'
+  autoload :Bonus,             './app/entities/bonus'
   autoload :Component,         './app/entities/component'
   autoload :Cristal,           './app/entities/cristal'
   autoload :Friend,            './app/entities/friend'

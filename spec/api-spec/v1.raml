@@ -634,6 +634,31 @@ schemas:
           }
         }
       }
+  - bonuses: |
+      {
+        "$schema": "http://json-schema.org/schema",
+        "type": "array",
+        "title": "Liste de bonus",
+        "items": {
+          "type": "object",
+          "properties": {
+            "identifier": {
+              "type": "string",
+              "required": true
+            },
+            "remaining": {
+              "type": "integer",
+              "title": "Nombre de bonus identiques disponibles."
+              "required": true
+            },
+            "used": {
+              "type": "integer",
+              "title": "Nombre de bonus identiques utilisés.",
+              "required": true
+            }
+          }
+        }
+      }
   - badges: |
       {
         "$schema": "http://json-schema.org/schema",
@@ -1046,6 +1071,23 @@ traits:
           body:
             application/json:
               schema: activities
+/bonus:
+  /{who}:
+    is: [ secured, exigent ]
+    type: user
+    uriParameters:
+      who:
+        description: Selectionne l'utilisateur
+        type: string
+        pattern: me|userId
+    get:
+      description: Liste des bonus obtenus par l'utilisateur selectionné
+      responses:
+        200:
+          body:
+            application/json:
+              schema: bonuses
+
 /badges:
   /{who}:
     is: [ secured, exigent ]
