@@ -11,7 +11,7 @@ module Controllers
       namespace :players do
         desc "List the players"
         get do
-          players = Domain::Player.all
+          players = Domain::Player.dataset.order(:id).all
           present players, with: Entities::Player, admin: true
         end
 

@@ -135,6 +135,10 @@ listPlayersInit = ->
   $list = $('#players-list')
   return null unless $list.length
 
+  $template = $list.find('.player.template')
+  $template.removeClass('template')
+  $template.detach()
+
   $.ajax
     url: "http://#{api_url}/v1/admin/players"
     type: 'GET'
@@ -142,13 +146,23 @@ listPlayersInit = ->
   .done (players) ->
     buffer = ''
     for player in players
-      buffer +=
-        """
-        <li class="player">
-          <a href="/players/#{player.nickname}?token=#{token}">#{player.nickname}</a>
-        </li>
-        """
-    $list.html(buffer)
+      $clone    = $template.clone()
+      $id       = $clone.find('.player-id')
+      $nick     = $clone.find('a.nickname')
+      $cristals = $clone.find('.cristals')
+      $auth     = $clone.find('.last_auth')
+
+      console.log player
+
+      $id.html(player.id)
+      $nick.html(player.nickname)
+      $nick.prop('href', "/players/#{player.id}?token=#{token}")
+      $cristals.html(player.cristals)
+      $auth.html(moment(player.last_authentication_at * 1000).format(DATE_FORMAT))
+
+      buffer += $clone[0].outerHTML
+
+    $list.find('.players').html(buffer)
 
 detailsPlayersInit = ->
   return null unless $('#players-details').length

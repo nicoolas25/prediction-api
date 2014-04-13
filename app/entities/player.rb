@@ -6,6 +6,8 @@ module Entities
     expose :token,            if: :token
     expose :token_expiration, if: :token, format_with: :timestamp
 
+    expose :cristals, if: :admin
+
     expose :statistics, if: ->(p, opts){ !opts[:admin] || opts[:details] } do |p, opts|
       {
         cristals: p.cristals,
@@ -19,7 +21,9 @@ module Entities
     expose :first_name
     expose :last_name
 
-    expose :last_authentication_at_was, format_with: :timestamp, as: :last_authentication_at
+    expose :last_authentication_at do |p, opts|
+      (p.last_authentication_at_was || p.last_authentication_at).to_i
+    end
 
     expose :social_associations,
       using: SocialAssociation,
