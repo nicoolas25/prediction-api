@@ -8,11 +8,11 @@ module SocialAPI
     CONSUMER_SECRET = 'XDs2otq17LBOV6U6XUow30NQFs7VXIkxnqdWjznCXa4'
 
     def first_name
-      user && user.name.split(' ', 2)[0]
+      user && user.name.split(' ', 2)[0] rescue nil
     end
 
     def last_name
-      user && user.name.split(' ', 2)[1]
+      user && user.name.split(' ', 2)[1] rescue nil
     end
 
     def social_id
@@ -21,6 +21,10 @@ module SocialAPI
 
     def avatar_url
       user && user.profile_image_url? && user.profile_image_url.to_s
+    end
+
+    def email
+      user && user.screen_name rescue nil
     end
 
     def friend_ids

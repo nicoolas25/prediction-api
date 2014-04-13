@@ -10,11 +10,11 @@ module SocialAPI
     format :json
 
     def first_name
-      infos && infos['name']['givenName']
+      infos && infos['name']['givenName'] rescue nil
     end
 
     def last_name
-      infos && infos['name']['familyName']
+      infos && infos['name']['familyName'] rescue nil
     end
 
     def social_id
@@ -23,6 +23,10 @@ module SocialAPI
 
     def avatar_url
       infos && infos['image'].try{ |hash| hash['url'] }
+    end
+
+    def email
+      infos && infos['emails'].first['value'] rescue nil
     end
 
     def friend_ids
@@ -88,7 +92,7 @@ module SocialAPI
       response = self.class.get(
         '/plus/v1/people/me',
         headers: {'Authorization' => "Bearer #{@token}"},
-        query: {fields: "id,name(familyName,givenName),image(url)"})
+        query: {fields: "id,name(familyName,givenName),image(url),emails"})
 
       if response.code == 200
         @infos = response.parsed_response

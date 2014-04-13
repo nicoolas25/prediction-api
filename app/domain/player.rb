@@ -81,10 +81,10 @@ module Domain
     end
 
     def authenticate!(api)
-      # Update the social association with the last know token and avatar
+      # Update the social association with the last know token, email, and avatar
       SocialAssociation.dataset.
         where(player_id: self.id, provider: api.provider_id).
-        update(token: api.token, avatar_url: api.avatar_url)
+        update(token: api.token, avatar_url: api.avatar_url, email: api.email)
 
       # Update the application token
       DB.transaction(retry_on: [Sequel::ConstraintViolation], num_retries: 30) do

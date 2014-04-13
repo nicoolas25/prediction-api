@@ -23,6 +23,10 @@ module SocialAPI
       @social_id ||= infos && infos['id']
     end
 
+    def email
+      infos && infos['email']
+    end
+
     def avatar_url
       "http://graph.facebook.com/#{social_id}/picture?height=300&width=300"
     end
@@ -56,7 +60,7 @@ module SocialAPI
 
       response = self.class.get(
         '/me',
-        query: {access_token: @token, fields: 'id,first_name,last_name'})
+        query: {access_token: @token, fields: 'id,first_name,last_name,email'})
 
       if response.code == 200
         @infos = response.parsed_response
