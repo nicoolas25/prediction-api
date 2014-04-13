@@ -7,5 +7,7 @@ module Entities
     expose :provider do |sa, opts|
       SocialAPI.provider(sa.provider)
     end
+
+    expose :email, if: :admin
   end
 end

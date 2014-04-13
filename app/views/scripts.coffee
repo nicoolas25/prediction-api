@@ -189,6 +189,7 @@ detailsPlayersInit = ->
         $clone = $social.clone()
         $clone.find('.provider').attr('value', social.provider)
         $clone.find('.social-id').attr('value', social.id)
+        $clone.find('.email').attr('value', social.email)
         $clone.find('.avatar').prop('src', social.avatar_url)
         buffer += $clone[0].outerHTML
       $details.find('.social-associations').html(buffer)
