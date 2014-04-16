@@ -7,7 +7,7 @@ module Entities
     expose :shared_at, format_with: :timestamp
     expose :remaining
     expose :progress
-    expose :converted_to, exclude_nil: true do |b, opts|
+    expose :converted_to do |b, opts|
       b.converted_to && Domain::Badge::CONVERSIONS[b.converted_to]
     end
   end

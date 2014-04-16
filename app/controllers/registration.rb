@@ -6,13 +6,10 @@ module Controllers
     format :json
 
     namespace :registrations do
+      desc "Create a new user."
       params do
         requires :oauth2Provider, type: String, desc: "The oauth2 provider to use."
         requires :oauth2Token,    type: String, desc: "The oauth2 token for the provider."
-      end
-
-      desc "Create a new user."
-      params do
         requires :nickname, type: String, desc: "The user's nickname."
       end
       post do
@@ -26,6 +23,10 @@ module Controllers
       end
 
       desc "Add a social account to an existing user."
+      params do
+        requires :oauth2Provider, type: String, desc: "The oauth2 provider to use."
+        requires :oauth2Token,    type: String, desc: "The oauth2 token for the provider."
+      end
       post :social do
         check_auth! # Ensure the user is authenticated
         begin
