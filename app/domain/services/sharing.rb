@@ -5,35 +5,11 @@ module Domain
     class Sharing
       attr_accessor :error
 
-      def initialize(player, provider_name)
-        @player      = player
-        @provider_id = SocialAPI::PROVIDERS.index(provider_name)
-        @assoc       = @player.social_associations_dataset.first(provider: @provider_id)
+      def initialize(player)
+        @player = player
       end
 
-      def update_social_association_token(token)
-        @assoc.update(token: token) if token.present? && @assoc.present?
-      end
-
-      def ready?
-        self.error = false
-
-        if @provider_id
-          if @assoc
-            unless @assoc.alive?
-              self.error = :social_association_dead
-            end
-          else
-            self.error = :social_association_missing
-          end
-        else
-          self.error = :provider_not_found
-        end
-
-        not self.error
-      end
-
-      def share!(kind, locale, target_id)
+      def share(kind, locale, target_id)
         unless compute_target(kind, target_id)
           self.error = :unknown_share
           return false
@@ -46,12 +22,15 @@ module Domain
 
         msg = compute_message(locale)
         id = "#{@player.id}-#{kind}-#{target_id}"
-        if @assoc.share(locale, msg, id)
-          mark_as_shared!
-          true
-        else
-          self.error = :not_shared
-          false
+
+        @player.social_associations.map do |assoc|
+          provider_name = SocialAPI.provider(assoc.provider)
+          if assoc.share(locale, msg, id)
+            mark_as_shared!
+            [provider_name, :shared]
+          else
+            [provider_name, :not_shared]
+          end
         end
       end
 

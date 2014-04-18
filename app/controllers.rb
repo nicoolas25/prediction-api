@@ -56,6 +56,12 @@ module Controllers
       def check_auth!
         fail!(:unauthorized, 401) unless player
       end
+
+      def mapping_provider_tokens
+        { facebook: params[:oauth2TokenFacebook],
+          twitter: params[:oauth2TokenTwitter],
+          googleplus: params[:oauth2TokenGooglePlus] }
+      end
     end
   end
 

@@ -100,3 +100,9 @@ Then /^the player "([^"]*)" should have "(\d+)" available bonus$/ do |nickname, 
   player = Domain::Player.first!(nickname: nickname)
   expect(Domain::Bonus.dataset.available_for(player).count).to eql(count.to_i)
 end
+
+Then /^the token for the "([^"]*)" social association of "([^"]*)" is "([^"]*)"$/ do |provider, nickname, token|
+  player = Domain::Player.first!(nickname: nickname)
+  assoc  = player.social_associations_dataset.where(provider: SocialAPI::PROVIDERS.index(provider)).first
+  expect(assoc.token).to eql(token)
+end

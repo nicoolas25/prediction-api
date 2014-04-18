@@ -149,6 +149,21 @@ module Domain
       DB[:players].where(id: id).update(cristals: Sequel.expr(:cristals) + amount)
     end
 
+    def update_social_association_tokens(mapping_provider_tokens)
+      # Convert { twitter: '123' } into { 0 => '123' }
+      mpt = mapping_provider_tokens.each_with_object({}) do |(provider, token), hash|
+        if token.present? && (index = SocialAPI::PROVIDERS.index(provider.to_s))
+          hash[index] = token
+        end
+      end
+
+      if mpt.size > 0
+        social_associations_dataset.
+          where(provider: mpt.keys).
+          update(token: Sequel.case(mpt, nil, :provider))
+      end
+    end
+
     def update_social_association(provider_name, token)
       api = self.class.social_api(provider_name, token)
       DB.transaction(isolation: :repeatable, retry_on: [Sequel::SerializationFailure]) do
