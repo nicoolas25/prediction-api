@@ -47,7 +47,7 @@ module Domain
     end
 
     def reload_friendships!(force=false)
-      if force || expired?
+      if (force || expired?) && alive?
         remove_induced_friendships!
         add_induced_friendships!
         touch!

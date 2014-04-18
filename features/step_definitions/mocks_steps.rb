@@ -9,7 +9,7 @@ end
 
 def fake_social_id(provider, social_id=nil)
   klass = "SocialAPI::#{provider.camelize}".constantize
-  messages = { social_id: social_id, first_name: 'John', last_name: 'Do', avatar_url: 'http://example.org/image.png' }
+  messages = { social_id: social_id, email: 'john@do.org', first_name: 'John', last_name: 'Do', avatar_url: 'http://example.org/image.png' }
   allow_any_instance_of(klass).to receive_messages(messages)
 end
 
