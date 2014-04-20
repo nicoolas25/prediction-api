@@ -123,9 +123,15 @@ listQuestionsInit = ->
 
       $title.html(question.labels.fr ? question.labels.en)
       $title.prop('href', "/questions/#{question.id}?token=#{token}")
-      $reveals.html(moment(question.reveals_at * 1000).format(DATE_FORMAT))
-      $expires.html(moment(question.expires_at * 1000).format(DATE_FORMAT))
+      revealsAt = moment(question.reveals_at * 1000)
+      expiresAt = moment(question.expires_at * 1000)
+      $reveals.html(revealsAt.format(DATE_FORMAT))
+      $expires.html(expiresAt.format(DATE_FORMAT))
       $cristals.html(question.statistics.total)
+
+
+      if expiresAt.isBefore(moment()) and not question.answered
+        $clone.addClass('warning')
 
       buffer += $clone[0].outerHTML
 
