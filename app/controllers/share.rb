@@ -22,8 +22,9 @@ module Controllers
         post ':kind/:id' do
           player.update_social_association_tokens(mapping_provider_tokens)
           sharing_service = ::Domain::Services::Sharing.new(player)
-          shared = sharing_service.share(params[:kind], @locale, params[:id])
-          shared or fail!(sharing_service.error, 403)
+          shares = sharing_service.share(params[:kind], @locale, params[:id])
+          fail!(sharing_service.error, 403) unless shares
+          { cristals: player.reload.cristals, shares: shares }
         end
       end
     end

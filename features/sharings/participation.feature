@@ -36,6 +36,7 @@ Feature: An user can share a participation via a social network
     Then the response status should be "201"
     And the last share should be in "fr" with an id containing "-participation-1"
     And the "shared_at" attr for participation to the question "1" of "nickname" should be defined
+    And the JSON response should have "$.cristals" with the text "12"
     And the player "nickname" should have "12" cristals
 
   Scenario: The user share the participation correctly in english

@@ -58,6 +58,7 @@ module Controllers
 
         desc "Show the details of a question"
         params do
+          requires :locale, type: String, regexp: /^(fr)|(en)$/
           requires :id, type: String, regexp: /^\d+$/
         end
         get ':id' do

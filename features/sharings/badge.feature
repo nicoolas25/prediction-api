@@ -29,6 +29,7 @@ Feature: An user can share a badge via a social network
     Then the response status should be "201"
     And the last share should be in "fr" with an id containing "-badge-participation-1"
     And the "shared_at" attr for badge "participation" with level "1" of "nickname" should be defined
+    And the JSON response should have "$.cristals" with the text "22"
     And the player "nickname" should have "22" cristals
 
   Scenario: The user share the badge correctly in english

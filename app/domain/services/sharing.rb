@@ -23,13 +23,13 @@ module Domain
         msg = compute_message(locale)
         id = "#{@player.id}-#{kind}-#{target_id}"
 
-        @player.social_associations.map do |assoc|
+        @player.social_associations.each_with_object({}) do |assoc, hash|
           provider_name = SocialAPI.provider(assoc.provider)
           if assoc.share(locale, msg, id)
             mark_as_shared!
-            [provider_name, :shared]
+            hash[provider_name] = :shared
           else
-            [provider_name, :not_shared]
+            hash[provider_name] = :not_shared
           end
         end
       end

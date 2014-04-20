@@ -927,9 +927,15 @@ traits:
       is: [ secured ]
       type: { collection: { elementName: "Amis" } }
       /refresh:
-        get:
+        post:
           description: |
             Redirige vers la page friends en rafraichissant la liste des amis.
+          body:
+            application/x-www-form-urlencoded:
+              formParameters:
+                oauth2TokenTwitter:
+                oauth2TokenFacebook:
+                oauth2TokenGooglePlus:
 /ladders:
   /{scope}:
     is: [ secured ]
@@ -1023,32 +1029,36 @@ traits:
           body:
             application/json:
               schema: users
-/shares/{locale}/{via}/{kind}/{id}:
+/shares/{locale}/{kind}/{id}:
   uriParameters:
     locale:
       description: La langue dans laquelle les textes de la questions doivent être retournés
       type: string
       pattern: fr|en
-    via:
-      description: Le réseau social à utiliser.
-      type: string
-      pattern: facebook|googleplus|twitter
     kind:
       description: Le type de partage demandé
       type: string
       pattern: participation|application|badge
     id:
-      description: L'identifiant de l'élément à partager
+      description: |
+        L'identifiant de l'élément à partager.
+
+        Pour l'application : 0, pour une participation : l'id de la question et pour
+        un badge : la chaine "<identifier>-<level>".
       type: string
   post:
     is: [ secured, exigent ]
     body:
       application/x-www-form-urlencoded:
         formParameters:
-          oauth2Token:
-            description: Token d'identification OAuth2 attaché au même provider (paramètre via)
+          oauth2TokenTwitter:
+          oauth2TokenFacebook:
+          oauth2TokenGooglePlus:
     responses:
       200:
+        body:
+          example: |
+            { cristals: 125, shares: { "facebook": "shared", "googleplus": "not_shared" } }
 /activities:
   is: [ secured ]
   /{locale}:

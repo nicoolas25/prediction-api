@@ -29,6 +29,12 @@ module Controllers
         end
 
         desc "Refresh the friends list of the current user"
+        params do
+          requires :uid, type: String
+          optional :oauth2TokenFacebook, type: String
+          optional :oauth2TokenTwitter, type: String
+          optional :oauth2TokenGooglePlus, type: String
+        end
         post 'friends/refresh' do
           player.update_social_association_tokens(mapping_provider_tokens)
           player.social_associations.each(&:reload_friendships!)

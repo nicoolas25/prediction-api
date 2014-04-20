@@ -9,11 +9,11 @@ module Controllers
 
     namespace :activities do
       namespace ':locale' do
-        params { requires :locale, type: String, regexp: /^(fr)|(en)$/ }
         before { @locale = params[:locale].to_sym }
 
         desc "List last events for the registered user"
         params do
+          requires :locale, type: String, regexp: /^(fr)|(en)$/
           optional :before, type: Integer
           optional :after, type: Integer
         end

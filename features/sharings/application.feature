@@ -12,7 +12,7 @@ Feature: An user can share the application via a social network
     When I send a POST request to "/v1/shares/fr/application/0" with the following:
       | oauth2TokenFacebook    | test-token |
     Then the response status should be "201"
-    And the JSON response should have 0 "$.[*]"
+    And the JSON response should have 0 "$.shares[*]"
 
   Scenario: The user has an outdated token
     Given I am an authenticated user: "nickname"
@@ -22,8 +22,7 @@ Feature: An user can share the application via a social network
     When I send a POST request to "/v1/shares/fr/application/0" with the following:
       | oauth2TokenFacebook    | test-token |
     Then the response status should be "201"
-    And the JSON response should have "$.[0].[0]" with the text "facebook"
-    And the JSON response should have "$.[0].[1]" with the text "not_shared"
+    And the JSON response should have "$.shares.facebook" with the text "not_shared"
 
   Scenario: The user can't share the application two times
     Given I am an authenticated user: "nickname"
@@ -46,8 +45,7 @@ Feature: An user can share the application via a social network
     And I accept JSON
     When I send a POST request to "/v1/shares/fr/application/0" with the following:
       | oauth2TokenFacebook    | test-token |
-    Then the JSON response should have "$.[0].[0]" with the text "facebook"
-    And the JSON response should have "$.[0].[1]" with the text "not_shared"
+    Then the JSON response should have "$.shares.facebook" with the text "not_shared"
 
   Scenario: The user share the application correctly
     Given I am an authenticated user: "nickname"
@@ -60,6 +58,7 @@ Feature: An user can share the application via a social network
     Then the response status should be "201"
     And the last share should be in "fr" with an id containing "-application"
     And the "shared_at" attr of "nickname" should be defined
+    Then the JSON response should have "$.cristals" with the text "30"
 
   Scenario: The user share the application correctly in english
     Given I am an authenticated user: "nickname"
