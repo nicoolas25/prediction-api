@@ -31,7 +31,7 @@ set :port, '25022'
 # the application will use Ruby 2.1.0 since the target
 # have only one thread available.
 task :environment do
-  invoke :'chruby[ruby-2.1.0]'
+  invoke :'chruby[ruby-2.1.1]'
 end
 
 # Set the rack environment

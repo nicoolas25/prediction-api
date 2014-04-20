@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Force the ruby on production
-ruby '2.1.0' if ENV['RACK_ENV'] == 'production'
+ruby '2.1.1' if ENV['RACK_ENV'] == 'production'
 
 # Web server
 gem 'puma'

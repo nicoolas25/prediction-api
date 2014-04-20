@@ -4,7 +4,7 @@ Pour faire tourner le serveur en local
 Installer les logiciels suivants
 --------------------------------
 
-* Ruby - 2.1.0 de préférence
+* Ruby - 2.1.1 de préférence
 * Postgresql - version 9.1 ou supérieure
 * Les paquets de développement de Postgresql (postgresql-server-dev-9.1 sur Ubuntu)
 
