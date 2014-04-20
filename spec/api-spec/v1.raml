@@ -34,6 +34,16 @@ schemas:
             "type": "string",
             "required": true
           },
+          "last_authentication_at": {
+            "type": "datetime",
+            "title": "La date de dernière connexion (/sessions)",
+            "required": true
+          },
+          "shared_at": {
+            "type": "datetime",
+            "title": "La date de partage de l'application",
+            "required": true
+          },
           "social": {
             "type": "array",
             "required": false,
@@ -755,6 +765,36 @@ resourceTypes:
             body:
               application/json:
                 schema: user
+                example: |
+                  {
+                    "id": 3399,
+                    "token": "2b26c2c1df022b141bab1a4692a6e8b2",
+                    "token_expiration": 1398160878,
+                    "statistics": {
+                      "cristals": 20,
+                      "predictions": 0,
+                      "questions": 0,
+                      "friends": 0
+                    },
+                    "nickname": "nickname",
+                    "first_name": null,
+                    "last_name": null,
+                    "last_authentication_at": null,
+                    "shared_at": null,
+                    "social": [
+                      {
+                        "id": "fake-id",
+                        "avatar_url": "http://example.org/image.png",
+                        "provider": "facebook"
+                      }
+                    ],
+                    "config": {
+                      "stakes": {
+                        "min": 10,
+                        "max": 1000
+                      }
+                      }
+                  }
 traits:
   - authenticable:
       usage: Appliquer sur les méthodes qui permettent de s'identifier.
@@ -783,26 +823,6 @@ traits:
           body:
             application/json:
               schema: user
-              example: |
-                {
-                  "token":"e92e040be1e896c6b38b2128051367f0",
-                  "token_expiration":1390931057,
-                  "nickname":"nicoolas25",
-                  "first_name":"John",
-                  "last_name":"Do",
-                  "social":[
-                    {
-                      "provider":0,
-                      "id":"100006962349730"
-                    }
-                  ],
-                  "config":{
-                    "stake":{
-                      "min":10,
-                      "max":1000
-                    },
-                  }
-                }
   - secured:
       usage: Appliquer sur chaque méthode qui nécessite d'être identifié
       description: Certaines requêtes nécessites d'être identifié
@@ -1084,7 +1104,6 @@ traits:
 /bonus:
   /{who}:
     is: [ secured, exigent ]
-    type: user
     uriParameters:
       who:
         description: Selectionne l'utilisateur
@@ -1101,7 +1120,6 @@ traits:
 /badges:
   /{who}:
     is: [ secured, exigent ]
-    type: user
     uriParameters:
       who:
         description: Selectionne l'utilisateur
@@ -1116,7 +1134,6 @@ traits:
               schema: badges
     /{identifier}/{level}:
       is: [ secured, exigent ]
-      type: user
       uriParameters:
         identifier:
           description: Selectionne le badge
