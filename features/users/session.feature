@@ -1,4 +1,4 @@
-Feature: Session
+Feature: Create a new session
 
   Scenario: Authenticate an existing user normally
     Given I accept JSON
@@ -11,7 +11,6 @@ Feature: Session
     Then the response status should be "201"
     And the JSON response should have "$.token"
     And the "nickname" user should have a valid token equal to "$.token"
-    And show me the response
 
   Scenario: Authenticate an non-existing user
     Given I accept JSON

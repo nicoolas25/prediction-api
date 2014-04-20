@@ -76,6 +76,10 @@ module Domain
       self.current_authentication_at = Time.now
     end
 
+    def token_eprires_soon?
+      token_expiration < (Time.now + 2.hours)
+    end
+
     def expire_token!
       self.token_expiration = Time.now
     end
@@ -88,7 +92,7 @@ module Domain
 
       # Update the application token
       DB.transaction(retry_on: [Sequel::ConstraintViolation], num_retries: 30) do
-        regenerate_token!
+        regenerate_token! if token_eprires_soon?
         touch!
         save_changes
       end
