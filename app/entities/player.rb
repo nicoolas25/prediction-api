@@ -12,8 +12,9 @@ module Entities
       {
         cristals: p.cristals,
         predictions: p.participations_dataset.count,
-        questions: 0,
-        friends: p.friends.count
+        friends: p.friends.count,
+        bonus: p.bonuses_dataset.used.count,
+        questions: 0
       }
     end
 

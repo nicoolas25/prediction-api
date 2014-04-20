@@ -12,6 +12,10 @@ module Domain
       def available_for(player)
         where(player_id: player.id, prediction_id: nil)
       end
+
+      def used
+        exclude(prediction_id: nil)
+      end
     end
 
     def use_for!(participation)
