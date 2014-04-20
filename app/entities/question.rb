@@ -30,6 +30,10 @@ module Entities
 
     expose :answered
 
+    expose :made_prediction do |q, opts|
+      opts[:made_prediction] || opts[:winning_service].try(:answered?, q) || false
+    end
+
     expose :winnings, exclude_nil: true, if: :winning_service do |q, opts|
       opts[:winning_service].winnings_for(q)
     end

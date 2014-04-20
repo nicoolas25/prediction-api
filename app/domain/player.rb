@@ -77,7 +77,11 @@ module Domain
     end
 
     def token_eprires_soon?
-      token_expiration < (Time.now + 2.hours)
+      if token_expiration
+        token_expiration < (Time.now + 2.hours)
+      else
+        true
+      end
     end
 
     def expire_token!

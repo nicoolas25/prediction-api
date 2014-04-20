@@ -16,7 +16,11 @@ module Controllers
         get 'global/open' do
           questions = Domain::Question.global.open.for(player).with_locale(@locale).ordered.all
           friend_service = Domain::Services::Friend.new(player, questions.map(&:id))
-          present questions, with: Entities::Question, locale: @locale, friend_service: friend_service
+          present questions,
+            with: Entities::Question,
+            locale: @locale,
+            friend_service: friend_service,
+            made_prediction: false
         end
 
         desc "List the answered questions of a player"
@@ -31,7 +35,8 @@ module Controllers
             locale: @locale,
             friend_service: friend_service,
             winning_service: winning_service,
-            sharing_service: sharing_service
+            sharing_service: sharing_service,
+            made_prediction: true
         end
 
         desc "List the answered questions of a player"
@@ -46,14 +51,19 @@ module Controllers
             locale: @locale,
             friend_service: friend_service,
             winning_service: winning_service,
-            sharing_service: sharing_service
+            sharing_service: sharing_service,
+            made_prediction: true
         end
 
         desc "List the open questions for a player where a friend participate"
         get 'friends/open' do
           questions = Domain::Question.global.open.for(player).answered_by_friends(player).with_locale(@locale).ordered.all
           friend_service = Domain::Services::Friend.new(player, questions.map(&:id))
-          present questions, with: Entities::Question, locale: @locale, friend_service: friend_service
+          present questions,
+            with: Entities::Question,
+            locale: @locale,
+            friend_service: friend_service,
+            made_prediction: false
         end
 
         desc "Show the details of a question"

@@ -16,6 +16,11 @@ module Domain
         end
       end
 
+      def answered?(question)
+        prefetched_infos = question_hash[question.id]
+        !!prefetched_infos
+      end
+
       def predicted?(prediction)
         question = prediction.question
         prefetched_infos = question_hash[question.id]
