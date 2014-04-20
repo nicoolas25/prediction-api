@@ -50,7 +50,7 @@ group :test do
   gem 'pry'
   gem 'rack-test'
   gem 'jsonpath'
-  gem 'rspec', '~> 3.0.0.beta1'
+  gem 'rspec', '3.0.0.beta1'
   gem 'cucumber'
   gem 'simplecov'
   gem 'database_cleaner'

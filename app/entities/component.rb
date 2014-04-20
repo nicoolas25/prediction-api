@@ -11,7 +11,7 @@ module Entities
       c.labels[opts[:locale]]
     end
 
-    expose :dev_info, exclude_nil: true do |c, opts|
+    expose :dev_info do |c, opts|
       c.labels['dev']
     end
 

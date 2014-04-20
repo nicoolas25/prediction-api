@@ -12,7 +12,7 @@ module Entities
       }
     end
 
-    expose :mine, exclude_nil: true, if: :winning_service do |p, opts|
+    expose :mine, if: :winning_service do |p, opts|
       opts[:winning_service].predicted?(p) || nil
     end
   end

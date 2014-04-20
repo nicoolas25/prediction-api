@@ -11,10 +11,10 @@ module Controllers
       namespace :questions do
         desc "Create a new question"
         params do
-          requires :question do
+          requires :question, type: Hash do
             requires :expires_at, type: Time
             requires :reveals_at, type: Time
-            requires :labels, type: Hash
+            requires :labels,     type: Hash
             requires :components, type: Array
           end
         end

@@ -29,7 +29,7 @@ module Entities
 
     with_options if: ->(a, opts){ a.kind_of?(::Domain::Participation) } do
       expose :question, using: Question
-      expose :winnings, exclude_nil: true
+      expose :winnings
       expose :prediction_exists do |a, opts|
         opts[:event_service].have_a_participation?(a.question)
       end
