@@ -15,7 +15,7 @@ module Entities
         friends: p.friends.count,
         bonus_used: p.bonuses_dataset.used.count,
         bonus_available: p.bonuses_dataset.available.count,
-        badges: p.badges_dataset.visible.count,
+        badges: p.badges_dataset.visible.distinct(:identifier).count,
         questions: 0
       }
     end
