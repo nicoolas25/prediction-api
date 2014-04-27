@@ -25,7 +25,7 @@ module Controllers
     get '/ping' do
       check_auth!
       player.ask_for_cristals!
-      present player, with: Entities::Player
+      present player, with: Entities::Player, config: true
     end
   end
 end

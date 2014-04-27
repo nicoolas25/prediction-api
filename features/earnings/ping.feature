@@ -11,11 +11,13 @@ Feature: The player earns cristals when he pings
       | oauth2Token    | test-token |
     Then the response status should be "200"
     And the JSON response should have "$.statistics.cristals" with the text "22"
+    And the JSON response should have 1 "$.config"
 
   Scenario: The user can't do the same too soon
     Given the last auto-earned cristals for "nickname" are "5 minutes" from now
     When I send a GET request to "/v1/ping" with the following:
     Then the response status should be "200"
     And the JSON response should have "$.statistics.cristals" with the text "20"
+    And the JSON response should have 1 "$.config"
 
 
