@@ -18,3 +18,5 @@ Feature: Give the repartition of the stakes for the existing predictions
     Then the response status should be "200"
     And the JSON response should have 2 "$.predictions[*]"
     And the JSON response should have "$.winnings" with the text "60"
+    And the JSON response should have "$.predictions[0].mine" with the text "false"
+    And the JSON response should have "$.predictions[1].mine" with the text "true"
