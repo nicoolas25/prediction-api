@@ -14,7 +14,8 @@ module Controllers
 
         desc "Show the details of a player (account page too)"
         get do
-          present @user, with: Entities::Friend, details: true
+          is_friend = player.friends_dataset.where(id: @user.id).count > 0
+          present @user, with: Entities::Friend, details: true, is_friend: is_friend
         end
 
         desc "Give the amount of cristals for a given user"
@@ -25,7 +26,8 @@ module Controllers
         desc "List the open questions for a player"
         get 'friends' do
           friends = @user.friends_dataset.eager(:social_associations).all
-          present friends, with: Entities::Friend
+          friend_service = Domain::Services::Friend.new(player)
+          present friends, with: Entities::Friend, friend_service: friend_service
         end
 
         desc "Refresh the friends list of the current user"

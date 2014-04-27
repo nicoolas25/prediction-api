@@ -8,16 +8,14 @@ module Entities
 
     expose :cristals, if: :admin
 
-    expose :statistics, if: ->(p, opts){ !opts[:admin] || opts[:details] } do |p, opts|
-      {
-        cristals: p.cristals,
-        predictions: p.participations_dataset.count,
-        friends: p.friends.count,
-        bonus_used: p.bonuses_dataset.used.count,
-        bonus_available: p.bonuses_dataset.available.count,
-        badges: p.badges_dataset.visible.distinct(:identifier).count,
-        questions: 0
-      }
+    expose :statistics, if: ->(p, opts){ !opts[:admin] || opts[:details] }
+
+    expose :is_friend, if: ->(p, opts){ opts.has_key?(:is_friend) || opts.has_key?(:friend_service) } do |p, opts|
+      if opts.has_key?(:is_friend)
+        opts[:is_friend]
+      else
+        opts[:friend_service].friend_with?(p)
+      end
     end
 
     expose :nickname

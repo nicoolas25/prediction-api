@@ -9,25 +9,7 @@ module Entities
     expose :created_at, format_with: :timestamp
     expose :shared_at, format_with: :timestamp
     expose :last_authentication_at, format_with: :timestamp
-
-    expose :statistics, if: ->(p, opts){ opts[:details] } do |p, opts|
-      {
-        # TODO
-        best_ranking: 0,
-        # TODO
-        used_bonus: 0,
-        # TODO
-        bonus: 0,
-        # TODO
-        questions: 0,
-        current_ranking: Domain::Services::Ranking.rank(p),
-        badges: p.badges_dataset.visible.count,
-        predictions: p.participations_dataset.count,
-        friends: p.friends.count,
-        cristals: p.cristals
-      }
-    end
-
+    expose :statistics, if: ->(p, opts){ opts[:details] }
     expose :social_associations, using: SocialAssociation, as: :social
   end
 end

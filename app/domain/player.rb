@@ -194,6 +194,21 @@ module Domain
       end
     end
 
+    def statistics
+      {
+        cristals: cristals,
+        predictions: participations_dataset.count,
+        friends: friends.count,
+        bonus_used: bonuses_dataset.used.count,
+        bonus_available: bonuses_dataset.available.count,
+        badges: badges_dataset.visible.distinct(:identifier).count,
+        questions: 0,
+        current_ranking: Domain::Services::Ranking.rank(self),
+        # TODO
+        best_ranking: 0
+      }
+    end
+
     class << self
       def find_by_social_infos(provider_name, token)
         api = social_api(provider_name, token)
