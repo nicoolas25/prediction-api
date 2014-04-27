@@ -14,6 +14,7 @@ module Entities
         predictions: p.participations_dataset.count,
         friends: p.friends.count,
         bonus: p.bonuses_dataset.used.count,
+        badges: p.badges_dataset.visible.count,
         questions: 0
       }
     end
