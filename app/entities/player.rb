@@ -13,7 +13,8 @@ module Entities
         cristals: p.cristals,
         predictions: p.participations_dataset.count,
         friends: p.friends.count,
-        bonus: p.bonuses_dataset.used.count,
+        bonus_used: p.bonuses_dataset.used.count,
+        bonus_available: p.bonuses_dataset.available.count,
         badges: p.badges_dataset.visible.count,
         questions: 0
       }

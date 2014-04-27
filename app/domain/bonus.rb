@@ -10,7 +10,11 @@ module Domain
 
     dataset_module do
       def available_for(player)
-        where(player_id: player.id, prediction_id: nil)
+        available.where(player_id: player.id)
+      end
+
+      def available
+        where(prediction_id: nil)
       end
 
       def used
