@@ -28,7 +28,7 @@ module Controllers
         desc "Follow the user described by uid"
         post 'follow' do
           fail!(:failed, 403) if player == @user
-          player.add_local_friend(@user)
+          player.add_local_friend(@user) rescue fail!(:failed, 403)
           {success: true}
         end
 
