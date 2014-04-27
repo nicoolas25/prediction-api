@@ -18,6 +18,20 @@ module Controllers
           present @user, with: Entities::Friend, details: true, is_friend: is_friend
         end
 
+        desc "Un-follow the user described by uid"
+        post 'unfollow' do
+          fail!(:failed, 403) if player == @user
+          player.remove_local_friend(@user)
+          redirect "/v1/users/me/friends"
+        end
+
+        desc "Follow the user described by uid"
+        post 'follow' do
+          fail!(:failed, 403) if player == @user
+          player.add_local_friend(@user)
+          redirect "/v1/users/me/friends"
+        end
+
         desc "Give the amount of cristals for a given user"
         get 'cristals' do
           present player.cristals, with: Entities::Cristal

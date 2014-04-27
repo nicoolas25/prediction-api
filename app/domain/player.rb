@@ -157,6 +157,22 @@ module Domain
       DB[:players].where(id: id).update(cristals: Sequel.expr(:cristals) + amount)
     end
 
+    def add_local_friend(player)
+      DB[:friendships].insert({
+        provider: SocialAPI::PROVIDERS.index('local'),
+        left_id: id,
+        right_id: player.id
+      })
+    end
+
+    def remove_local_friend(player)
+      DB[:friendships].where({
+        provider: SocialAPI::PROVIDERS.index('local'),
+        left_id: id,
+        right_id: player.id
+      }).delete
+    end
+
     def update_social_association_tokens(mapping_provider_tokens)
       # Convert { twitter: '123' } into { 0 => '123' }
       mpt = mapping_provider_tokens.each_with_object({}) do |(provider, token), hash|

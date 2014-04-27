@@ -943,6 +943,16 @@ traits:
       get:
         description: |
           Retourne le nombre de cristaux d'un utilisateur.
+    /follow:
+      is: [ secured ]
+      post:
+        description: |
+          Redirige vers la page friends en ajoutant {who} à la liste des amis locaux.
+    /unfollow:
+      is: [ secured ]
+      post:
+        description: |
+          Redirige vers la page friends en supprimant {who} de la liste des amis locaux.
     /friends:
       is: [ secured ]
       type: { collection: { elementName: "Amis" } }

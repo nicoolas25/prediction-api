@@ -30,8 +30,10 @@ Given /^(a valid|an invalid) OAuth2 token for the "([^"]*)" provider(?: which re
   fake_friends(provider)
 end
 
-Given /^an user "([^"]*)" is already registered$/ do |nickname|
-  Domain::Player.create(nickname: nickname, cristals: DEFAULT_CRISTALS)
+Given /^an user "([^"]*)" is already registered(?: with the id "(\d+)")?$/ do |nickname, id|
+  player_params = {nickname: nickname, cristals: DEFAULT_CRISTALS}
+  player_params[:id] = id.to_i if id.present?
+  Domain::Player.create(player_params)
 end
 
 Given /^"(\d+)" registered users with "([^"]*)" as nickname prefix$/ do |size, prefix|
