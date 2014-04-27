@@ -22,14 +22,14 @@ module Controllers
         post 'unfollow' do
           fail!(:failed, 403) if player == @user
           player.remove_local_friend(@user)
-          redirect "/v1/users/me/friends"
+          {success: true}
         end
 
         desc "Follow the user described by uid"
         post 'follow' do
           fail!(:failed, 403) if player == @user
           player.add_local_friend(@user)
-          redirect "/v1/users/me/friends"
+          {success: true}
         end
 
         desc "Give the amount of cristals for a given user"
