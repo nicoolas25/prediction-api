@@ -10,14 +10,6 @@ module Entities
 
     expose :statistics, if: ->(p, opts){ !opts[:admin] || opts[:details] }
 
-    expose :is_friend, if: ->(p, opts){ opts.has_key?(:is_friend) || opts.has_key?(:friend_service) } do |p, opts|
-      if opts.has_key?(:is_friend)
-        opts[:is_friend]
-      else
-        opts[:friend_service].friend_with?(p)
-      end
-    end
-
     expose :nickname
     expose :first_name
     expose :last_name
