@@ -1,12 +1,13 @@
 require 'set'
+require 'active_support/core_ext/date_time'
 
 module Domain
   module Services
     class Event
       def initialize(player, before_datetime, after_datetime)
         @player = player
-        @before = before_datetime
-        @after  = after_datetime
+        @before = before_datetime || Time.now.to_datetime
+        @after  = after_datetime  || Time.now.to_datetime.at_midnight
       end
 
       def events
@@ -30,9 +31,9 @@ module Domain
       end
 
       def filter_dataset(attribute, dataset)
-        dataset = dataset.where(Sequel.expr(attribute) >= @after) if @after
-        dataset = dataset.where(Sequel.expr(attribute) < @before) if @before
-        dataset
+        dataset.
+          where(Sequel.expr(attribute) >= @after).
+          where(Sequel.expr(attribute) < @before)
       end
 
       def friends_creation
@@ -44,7 +45,7 @@ module Domain
 
       def participations_creation
         filter_dataset(
-          :participation__created_at,
+          :participations__created_at,
           ::Domain::Participation.dataset.
             where(
               Sequel.expr(player_id: @player.id) |
