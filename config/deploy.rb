@@ -11,9 +11,9 @@ require "#{File.dirname(__FILE__)}/../lib/mina/sidekiq"
 #
 
 # Target configuration
-set :domain,       'predictio.info' # also knonw as '146.185.138.74'
+set :domain,       'predictio.info' # also known as '146.185.138.74'
 set :deploy_to,    '/var/www/api'
-set :shared_paths, ['log', 'pids', 'config/database.yml', 'config/dropbox.yml']
+set :shared_paths, ['log', 'pids', 'config/database.yml', 'config/dropbox.yml', 'config/pulpo-sa.p12']
 
 # Repository configuration
 set :repository,   'git@bitbucket:n25/pr-dictions.git'

@@ -73,3 +73,18 @@ Feature: Buy cristals from the application
     """
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "existing_transaction"
+
+  # Scenario: The player send a valid request (real case)
+  #   Given I send and accept JSON
+  #   And I am an authenticated user: "nickname"
+  #   When I send a POST request to "/v1/payments/google" with the following:
+  #   """
+  #   {
+  #     "payload": {
+  #       "token": "dlnejjgcbhamaloaomlfbkgj.AO-J1Oy4cHCbdmRWmBlR6h17FK7WdLwHI_kUWhZlwDWJQ0qnWcbl2Msf46W2q3R16XLtvnslJ7ztFpAcT9CSZ9XgJfBEU9_2QEfm0_bVq-Ukjs0XRsVt6ZQ",
+  #       "product_id": "pack_10"
+  #     }
+  #   }
+  #   """
+  #   Then the response status should be "403"
+  #   And the JSON response should have "$.code" with the text "unknown_product_id"
