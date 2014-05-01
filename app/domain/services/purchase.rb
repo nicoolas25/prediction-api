@@ -46,7 +46,9 @@ module Domain
       [1, 2, 3, 4].each do |count|
         define_method("bonus_#{count}") do
           ::Domain::Bonuses.modules.keys.each do |identifier|
-            ::Domain::Bonus.create(player_id: @player.id, identifier: identifier)
+            count.times do
+              ::Domain::Bonus.create(player_id: @player.id, identifier: identifier)
+            end
           end
         end
       end

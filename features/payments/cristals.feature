@@ -73,6 +73,3 @@ Feature: Buy cristals from the application
     """
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "existing_transaction"
-
-
-
