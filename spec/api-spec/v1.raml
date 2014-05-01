@@ -1059,6 +1059,24 @@ traits:
           body:
             application/json:
               schema: users
+/payments/{provider}:
+  uriParameters:
+    provider:
+      description: Le market utilisé.
+      type: string
+      pattern: apple|google
+  post:
+    is: [ secured, exigent ]
+    body:
+      application/json:
+        example: |
+          {
+            "payload": {
+              "receipt": "apple-only-receipt",
+              "product_id": "cristals_100",
+              "token": "google-only-token"
+            }
+          }
 /shares/{locale}/{kind}/{id}:
   uriParameters:
     locale:
