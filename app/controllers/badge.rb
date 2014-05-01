@@ -43,16 +43,12 @@ module Controllers
             requires :convert_to, type: String
           end
           post do
-            begin
-              badge = player.badges_dataset.for(params[:identifier]).level(params[:level]).first
-              if badge
-                badge.claim!(params[:convert_to])
-                present badge, with: Entities::Badge
-              else
-                fail! :badge_not_found, 404
-              end
-            rescue Domain::Error
-              fail! $!, 403
+            badge = player.badges_dataset.for(params[:identifier]).level(params[:level]).first
+            if badge
+              badge.claim!(params[:convert_to])
+              present badge, with: Entities::Badge
+            else
+              fail! :badge_not_found, 404
             end
           end
         end

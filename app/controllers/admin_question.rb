@@ -19,16 +19,12 @@ module Controllers
           end
         end
         post do
-          begin
-            question_params = params[:question]
-            components_params = question_params.delete(:components)
-            components = Domain::QuestionComponent.build_many(components_params)
-            question = Domain::Question.build(question_params)
-            question.create_with(components)
-            present question, with: Entities::Question, details: true
-          rescue Domain::Error => err
-            fail! err, 403
-          end
+          question_params = params[:question]
+          components_params = question_params.delete(:components)
+          components = Domain::QuestionComponent.build_many(components_params)
+          question = Domain::Question.build(question_params)
+          question.create_with(components)
+          present question, with: Entities::Question, details: true
         end
 
         desc "List the questions"
@@ -51,16 +47,12 @@ module Controllers
           requires :components, type: Hash
         end
         put ':id' do
-          begin
-            if question = Domain::Question.find_for_answer(params[:id])
-              components = params[:components]
-              question.validate_answers!(components) # This will raise error unless components are valid.
-              Workers::QuestionAnswerer.perform_async(question.id, components)
-            else
-              fail!(:not_found, 404)
-            end
-          rescue Domain::Error => err
-            fail! err, 403
+          if question = Domain::Question.find_for_answer(params[:id])
+            components = params[:components]
+            question.validate_answers!(components) # This will raise error unless components are valid.
+            Workers::QuestionAnswerer.perform_async(question.id, components)
+          else
+            fail!(:not_found, 404)
           end
         end
       end

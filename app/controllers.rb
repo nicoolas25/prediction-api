@@ -25,6 +25,8 @@ module Controllers
           Rack::Response.new({code: 'bad_parameters', details: errors}.to_json, exception.status)
         when ::Controllers::Failure
           Rack::Response.new({code: exception.code}.to_json, exception.status)
+        when ::Domain::Error
+          Rack::Response.new({code: exception.message}.to_json, 403)
         else
           if ENV['RACK_ENV'] == 'test'
             raise exception
@@ -73,6 +75,7 @@ module Controllers
   autoload :Bonus,         './app/controllers/bonus'
   autoload :Ladder,        './app/controllers/ladder'
   autoload :Participation, './app/controllers/participation'
+  autoload :Payment,       './app/controllers/payment'
   autoload :Question,      './app/controllers/question'
   autoload :Registration,  './app/controllers/registration'
   autoload :Session,       './app/controllers/session'

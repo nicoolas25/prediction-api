@@ -5,6 +5,7 @@ module Domain
     autoload :Event,           './app/domain/services/event'
     autoload :Friend,          './app/domain/services/friend'
     autoload :FriendQuestion,  './app/domain/services/friend_question'
+    autoload :Purchase,        './app/domain/services/purchase'
     autoload :Ranking,         './app/domain/services/ranking'
     autoload :Sharing,         './app/domain/services/sharing'
     autoload :SharingQuestion, './app/domain/services/sharing_question'

@@ -11,14 +11,10 @@ module Controllers
       requires :oauth2Token, type: String, desc: "The oauth2 token for the provider."
     end
     post '/sessions' do
-      begin
-        player, api = Domain::Player.find_by_social_infos(params[:oauth2Provider], params[:oauth2Token])
-        player.authenticate!(api)
-        player.ask_for_cristals!
-        present player, with: Entities::Player, token: true, config: true
-      rescue Domain::Error
-        fail! $!, 401
-      end
+      player, api = Domain::Player.find_by_social_infos(params[:oauth2Provider], params[:oauth2Token])
+      player.authenticate!(api)
+      player.ask_for_cristals!
+      present player, with: Entities::Player, token: true, config: true
     end
 
     desc "Ping the server to get cristals"

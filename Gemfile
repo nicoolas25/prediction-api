@@ -31,6 +31,7 @@ gem 'httparty'
 
 # Social API clients
 gem 'twitter'
+gem 'google-api-client'
 
 # Backup related gems
 gem 'dropbox-sdk'

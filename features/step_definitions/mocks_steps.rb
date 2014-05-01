@@ -24,6 +24,17 @@ def fake_social_share(provider, success)
   end
 end
 
+def fake_payment(provider, transaction_id, product_id)
+  klass = "PaymentAPI::#{provider.camelize}".constantize
+  messages = { transaction_id: transaction_id, product_id: product_id }
+  allow_any_instance_of(klass).to receive_messages(messages)
+end
+
+Given /^the "([^"]*)" payment api respond with trasanction "([^"]*)" and product "([^"]*)"$/ do |provider, tid, pid|
+  tid = nil if tid == 'nil'
+  fake_payment(provider, tid, pid)
+end
+
 Given /^(a valid|an invalid) OAuth2 token for the "([^"]*)" provider(?: which returns the id "([^"]*)")?$/ do |valid, provider, id|
   social_id = (valid == 'a valid') && (id || SecureRandom.hex)
   fake_social_id(provider, social_id)

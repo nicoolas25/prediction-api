@@ -13,13 +13,9 @@ module Controllers
         requires :nickname, type: String, desc: "The user's nickname."
       end
       post do
-        begin
-          player, api = Domain::Player.register(params[:oauth2Provider], params[:oauth2Token], params[:nickname])
-          player.authenticate!(api)
-          present player, with: Entities::Player, token: true, config: true
-        rescue Domain::Error
-          fail! $!, 403
-        end
+        player, api = Domain::Player.register(params[:oauth2Provider], params[:oauth2Token], params[:nickname])
+        player.authenticate!(api)
+        present player, with: Entities::Player, token: true, config: true
       end
 
       desc "Add a social account to an existing user."

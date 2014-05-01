@@ -10,6 +10,7 @@ module Prediction
     mount Controllers::Bonus
     mount Controllers::Ladder
     mount Controllers::Participation
+    mount Controllers::Payment
     mount Controllers::Question
     mount Controllers::Registration
     mount Controllers::Session

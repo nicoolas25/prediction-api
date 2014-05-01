@@ -5,6 +5,7 @@ require 'active_support/core_ext'
 require './config/log'
 require './db/connect'
 require './lib/social_apis'
+require './lib/payment_apis'
 
 # Set some inflections for bonuses
 ActiveSupport::Inflector.inflections do |inflect| inflect.irregular('bonus', 'bonuses') end
@@ -18,6 +19,7 @@ module Domain
   autoload :Bonus,                    './app/domain/bonus'
   autoload :Bonuses,                  './app/domain/bonuses'
   autoload :Participation,            './app/domain/participation'
+  autoload :Payment,                  './app/domain/payment'
   autoload :Player,                   './app/domain/player'
   autoload :Prediction,               './app/domain/prediction'
   autoload :PredictionAnswer,         './app/domain/prediction_answer'

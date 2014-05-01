@@ -21,6 +21,7 @@ module Domain
     one_to_many  :participations
     one_to_many  :badges
     one_to_many  :bonuses
+    one_to_many  :payments
     many_to_many :predictions, join_table: :participations
     many_to_many :questions, join_table: :participations
 

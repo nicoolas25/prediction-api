@@ -15,18 +15,14 @@ module Controllers
       optional :bonus, type: String, regexp: /^[a-z]+$/
     end
     post '/participations' do
-      begin
-        question      = Domain::Question.find_for_participation(player, params[:id])
-        identifier    = params[:bonus]
-        bonus         = identifier && Domain::Bonus.find_for_participation(player, identifier)
-        stakes        = params[:stakes].to_i
-        components    = params[:components]
-        participation = player.participate_to!(question, stakes, components, bonus)
+      question      = Domain::Question.find_for_participation(player, params[:id])
+      identifier    = params[:bonus]
+      bonus         = identifier && Domain::Bonus.find_for_participation(player, identifier)
+      stakes        = params[:stakes].to_i
+      components    = params[:components]
+      participation = player.participate_to!(question, stakes, components, bonus)
 
-        present participation, with: Entities::Participation
-      rescue Domain::Error
-        fail! $!, 403
-      end
+      present participation, with: Entities::Participation
     end
   end
 end
