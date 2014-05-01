@@ -46,6 +46,17 @@ module Domain
           try{ |r| r[:rank] }
       end
 
+      def self.rank_friends(player)
+        prepare
+        rank = rank(player)
+        return (player.friends_dataset.count + 1) unless rank
+        DB[:rankings].
+          where(player_id: player.friends_dataset.select(:id)).
+          where(Sequel.expr(:rank) < rank).
+          count + 1
+      end
+
+
       def self.update(participations_dataset)
         unless prepare
           DB[:scorings].

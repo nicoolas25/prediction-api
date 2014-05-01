@@ -212,8 +212,9 @@ module Domain
     end
 
     def statistics
-      event_service = Domain::Services::Event.new(self,
+      event_service = Services::Event.new(self,
         Time.now, (self.last_authentication_at || (Time.now - 2.days)).at_midnight)
+
 
       {
         cristals: cristals,
@@ -227,6 +228,8 @@ module Domain
         questions: Question.dataset.for(self).count,
         questions_expired: Question.dataset.of(self).expired.count,
         questions_ongoing: Question.dataset.of(self).open.count,
+        ranking: Services::Ranking.rank(self),
+        ranking_friends: Services::Ranking.rank_friends(self),
         # TODO
         best_ranking: 0
       }
