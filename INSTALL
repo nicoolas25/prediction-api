@@ -68,11 +68,11 @@ Lancer l'application
 
 Avec puma :
 
-    bundle exec puma -e app
+    bundle exec puma -e app --config config/puma.dev.rb
 
 Avec puma et rerun pour faciliter le dev :
 
-    RACK_ENV=app bundle exec rerun --pattern '**/*.{rb,js,css,scss,sass,erb,html,haml,slim,ru}' puma
+    RACK_ENV=app be rerun --pattern '**/*.{rb,js,coffee,css,scss,sass,erb,html,haml,slim,ru}' "puma --config config/puma.dev.rb"
 
 Pour faire tourner le serveur en production
 ===========================================

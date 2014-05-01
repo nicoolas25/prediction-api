@@ -1,13 +1,13 @@
 #!/usr/bin/env puma
 
-ROOT_PATH = '/var/www/api'.freeze
-SHRD_PATH = "#{ROOT_PATH}/shared".freeze
+ROOT_PATH = ".".freeze
+SHRD_PATH = "#{ROOT_PATH}/tmp".freeze
 
 # The directory to operate out of.
 #
 # The default is the current directory.
-
-directory "#{ROOT_PATH}/current"
+#
+# directory ROOT_PATH
 
 # Use an object or block as the rack application. This allows the
 # config file to be the application itself.
@@ -30,14 +30,14 @@ directory "#{ROOT_PATH}/current"
 #
 # The default is “development”.
 
-environment 'production'
+environment 'app'
 
 # Daemonize the server into the background. Highly suggest that
 # this be combined with “pidfile” and “stdout_redirect”.
 #
 # The default is “false”.
 
-daemonize true
+daemonize false
 
 # Store the pid of the server in the file at “path”.
 
@@ -52,7 +52,7 @@ state_path "#{SHRD_PATH}/pids/puma.state"
 # (“append”) specifies whether the output is appended, the default is
 # “false”.
 
-stdout_redirect "#{SHRD_PATH}/log/puma.out.log", "#{SHRD_PATH}/log/puma.err.log", true
+stdout_redirect "#{ROOT_PATH}/log/puma.out.log", "#{ROOT_PATH}/log/puma.err.log", true
 
 # Disable request logging.
 #
@@ -72,12 +72,10 @@ threads 0, 4
 #
 # The default is “tcp://0.0.0.0:9292”.
 #
-# bind 'tcp://0.0.0.0:9292'
+bind 'tcp://0.0.0.0:9292'
 # bind 'unix:///var/run/puma.sock'
 # bind 'unix:///var/run/puma.sock?umask=0777'
 # bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'
-
-bind "unix://#{SHRD_PATH}/sockets/puma.sock"
 
 # Instead of “bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'” you
 # can also use the “ssl_bind” option.
@@ -130,5 +128,4 @@ bind "unix://#{SHRD_PATH}/sockets/puma.sock"
 # activate_control_app 'unix:///var/run/pumactl.sock'
 # activate_control_app 'unix:///var/run/pumactl.sock', { auth_token: '12345' }
 # activate_control_app 'unix:///var/run/pumactl.sock', { no_token: true }
-
-activate_control_app "unix://#{SHRD_PATH}/sockets/pumactl.sock"
+# activate_control_app "unix://#{SHRD_PATH}/sockets/pumactl.sock"
