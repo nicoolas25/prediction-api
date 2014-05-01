@@ -30,6 +30,10 @@ module Domain
         exclude(id: player.participations_dataset.select(:question_id))
       end
 
+      def of(player)
+        where(id: player.participations_dataset.select(:question_id))
+      end
+
       def answered_by_friends(player)
         friends_questions = player.friends_dataset.
           join(:participations, player_id: :players__id).

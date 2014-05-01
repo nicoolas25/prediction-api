@@ -212,6 +212,9 @@ module Domain
     end
 
     def statistics
+      event_service = Domain::Services::Event.new(self,
+        Time.now, (self.last_authentication_at || (Time.now - 2.days)).at_midnight)
+
       {
         cristals: cristals,
         predictions: participations_dataset.count,
@@ -219,8 +222,11 @@ module Domain
         bonus_used: bonuses_dataset.used.count,
         bonus_available: bonuses_dataset.available.count,
         badges: badges_dataset.visible.distinct(:identifier).count,
-        questions: 0,
         current_ranking: Domain::Services::Ranking.rank(self),
+        recent_news: event_service.events_count,
+        questions: Question.dataset.for(self).count,
+        questions_expired: Question.dataset.of(self).expired.count,
+        questions_ongoing: Question.dataset.of(self).open.count,
         # TODO
         best_ranking: 0
       }

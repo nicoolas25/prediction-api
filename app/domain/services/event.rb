@@ -1,13 +1,12 @@
 require 'set'
-require 'active_support/core_ext/date_time'
 
 module Domain
   module Services
     class Event
       def initialize(player, before_datetime, after_datetime)
         @player = player
-        @before = before_datetime || Time.now.to_datetime
-        @after  = after_datetime  || Time.now.to_datetime.at_midnight
+        @before = before_datetime || Time.now
+        @after  = after_datetime  || Time.now.at_midnight
       end
 
       def events
@@ -18,6 +17,13 @@ module Domain
         results += friends_creation.eager(:social_associations).all.map{ |f| [f.created_at, f] }
         results += badges_creation.eager(player: :social_associations).all.map{ |b| [b.created_at, b] }
         @events  = results.sort_by!(&:first).map!(&:last).reverse!
+      end
+
+      def events_count
+        participations_creation.count +
+          participations_solving.count +
+          friends_creation.count +
+          badges_creation.count
       end
 
       def have_a_participation?(question)
