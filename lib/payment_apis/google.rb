@@ -82,7 +82,7 @@ module PaymentAPI
               api = Marshal.load(file)
             end
           else
-            api = client.discovered_api('androidpublisher', API_VERSION)
+            api = api_client.discovered_api('androidpublisher', API_VERSION)
             File.open(CACHED_API_FILE, 'w') do |file|
               Marshal.dump(api, file)
             end
