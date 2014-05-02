@@ -11,7 +11,10 @@ require "#{File.dirname(__FILE__)}/../lib/mina/sidekiq"
 #
 
 # Target configuration
-set :domain,       'predictio.info' # also known as '146.185.138.74'
+ENV['TARGET'] == 'production' ?
+  set(:domain, '188.226.228.120') : # also known as 'prod.prediction.info'
+  set(:domain, 'predictio.info')    # also known as '146.185.138.74'
+
 set :deploy_to,    '/var/www/api'
 set :shared_paths, ['log', 'pids', 'config/database.yml', 'config/dropbox.yml', 'config/pulpo-sa.p12']
 

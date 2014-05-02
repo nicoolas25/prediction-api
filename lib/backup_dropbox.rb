@@ -2,7 +2,7 @@ require 'dropbox_sdk'
 
 module BackupDropbox
   def self.upload(file, ext=nil, overwrite=true)
-    filename = [ File.basename(file.path, ext), Time.now.strftime('%Y%m%d%H%M%S') ].join('-')
+    filename = [ prefix, File.basename(file.path, ext), Time.now.strftime('%Y%m%d%H%M%S') ].join('-')
     filename = filename + ext if ext
     client.put_file("/#{filename}", file, overwrite)
   rescue
@@ -45,5 +45,9 @@ module BackupDropbox
 
   def self.secret
     config['secret']
+  end
+
+  def self.prefix
+    config['prefix']
   end
 end

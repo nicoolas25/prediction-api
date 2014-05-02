@@ -5,8 +5,10 @@ app:
   key: "pozagwlaea3vnuw"
   secret: "rxuj34vlkccml4i"
   token: ""
+  prefix: "production"
 
 test:
   key: "pozagwlaea3vnuw"
   secret: "rxuj34vlkccml4i"
   token: ""
+  prefix: "test"
