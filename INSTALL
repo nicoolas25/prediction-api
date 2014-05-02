@@ -34,6 +34,7 @@ Dans le fichier de `config/database.yml` :
       host: localhost
       port: 5433
 
+
 Installer les dépendances
 -------------------------
 
@@ -77,19 +78,20 @@ Avec puma et rerun pour faciliter le dev :
 Pour faire tourner le serveur en production
 ===========================================
 
+Serveur web
+-----------
+
+Nginx est utilisé, des fichiers sont mis à disposition dans scripts/nginx.
+
+Serveur d'application
+---------------------
+
+Puma est utilisé, des fichiers sont mis à disposition dans scripts/puma.
+
 Taches asynchrones
 ------------------
 
 Installer redis.
-
-Les taches de déploiement s'occupent du reste.
-
-Déploiement de l'application
-----------------------------
-
-À l'aide de mina :
-
-    bundle exec mina deploy
 
 Monitoring
 ----------
@@ -99,3 +101,30 @@ Via monit, les fichiers de conf de monit sont dans `scripts/monit` (TODO).
 Deux scripts sont également nécessaires :
 
     scripts/{start,stop}-sidekiq.sh
+
+Utiisateurs
+-----------
+
+Créer un utilisateur 'prediction' dédié au déploiement :
+
+    sudo useradd prediction
+
+Donner les droits à cet utilisateur sur /var/www/api :
+
+    sudo chown prediction /var/www/api
+    sudo chmod ug+s /var/www/api
+
+Configuer les backup dropbox
+----------------------------
+
+Utiliser en exemple le fichier config/dropbox.yml.example. Remplir le fichier
+à l'aide des éléments obtenus via `BackupDropbox.get_token`.
+
+Déploiement de l'application
+----------------------------
+
+À l'aide de mina :
+
+    bundle exec mina deploy
+
+
