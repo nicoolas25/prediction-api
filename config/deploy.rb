@@ -12,7 +12,7 @@ require "#{File.dirname(__FILE__)}/../lib/mina/sidekiq"
 
 # Target configuration
 ENV['TARGET'] == 'production' ?
-  set(:domain, '188.226.228.120') : # also known as 'prod.prediction.info'
+  set(:domain, 'pulpo.info') :      # also known as '188.226.228.120'
   set(:domain, 'predictio.info')    # also known as '146.185.138.74'
 
 set :deploy_to,    '/var/www/api'
