@@ -213,7 +213,7 @@ module Domain
 
     def statistics
       event_service = Services::Event.new(self,
-        Time.now, (self.last_authentication_at || (Time.now - 2.days)).at_midnight)
+        Time.now, (self.last_authentication_at || (Time.now - 2.days).at_midnight))
 
       {
         cristals: cristals,
