@@ -215,7 +215,6 @@ module Domain
       event_service = Services::Event.new(self,
         Time.now, (self.last_authentication_at || (Time.now - 2.days)).at_midnight)
 
-
       {
         cristals: cristals,
         predictions: participations_dataset.count,
@@ -225,9 +224,9 @@ module Domain
         badges: badges_dataset.visible.distinct(:identifier).count,
         current_ranking: Domain::Services::Ranking.rank(self),
         recent_news: event_service.events_count,
-        questions: Question.dataset.for(self).count,
-        questions_expired: Question.dataset.of(self).expired.count,
-        questions_ongoing: Question.dataset.of(self).open.count,
+        questions: Question.dataset.open.for(self).count,
+        questions_expired: Question.dataset.expired.of(self).count,
+        questions_ongoing: Question.dataset.open.of(self).open.count,
         ranking: Services::Ranking.rank(self),
         ranking_friends: Services::Ranking.rank_friends(self),
         # TODO
