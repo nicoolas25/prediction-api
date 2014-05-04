@@ -95,7 +95,9 @@ module Domain
           if e.kind_of?(::Domain::Participation)
             e.question_id
           end
-        end.compact!.uniq!
+        end.compact!
+        question_ids ||= []
+        question_ids.uniq!
         @player.participations_dataset.
           where(question_id: question_ids).
           select(:question_id).
