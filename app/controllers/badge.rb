@@ -46,6 +46,7 @@ module Controllers
             badge = player.badges_dataset.for(params[:identifier]).level(params[:level]).first
             if badge
               badge.claim!(params[:convert_to])
+              # TODO: return cristals + badges
               present badge, with: Entities::Badge
             else
               fail! :badge_not_found, 404

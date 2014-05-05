@@ -9,7 +9,7 @@ module Domain
         'cristals_250',
         'cristals_500',
         'cristals_1000',
-        'cristals_3000',
+        'cristals_2000',
         'bonus_1',
         'bonus_2',
         'bonus_3',
@@ -36,7 +36,7 @@ module Domain
       end
 
       # Define cristals methods
-      [100, 250, 500, 1000, 3000].each do |count|
+      [100, 250, 500, 1000, 2000].each do |count|
         define_method("cristals_#{count}") do
           @player.increment_cristals_by!(count)
         end
