@@ -49,8 +49,6 @@ module PaymentAPI
         @transaction = nil
       end
 
-      binding.pry
-
       @transaction
     end
 
