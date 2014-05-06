@@ -44,7 +44,7 @@ module Domain
           player.increment_cristals_by!(cristals)
         elsif target == 'bonus'
           frequencies = badge_module.earning_bonus_frequencies[step_index]
-          badge_module.earning_bonuses[step_index].times do
+          badge_module.earning_bonuses[step_index].to_i.times do
             rnd = SecureRandom.random_number
             identifier, _ = frequencies.find { |_, frq| rnd <= frq }
             player.add_bonus(identifier: identifier) if identifier
