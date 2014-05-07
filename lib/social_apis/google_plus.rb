@@ -57,34 +57,11 @@ module SocialAPI
     end
 
     def share(locale, message, id)
-      moment = {
-        type: 'http://schemas.google.com/AddActivity',
-        startDate: DateTime.now.rfc3339,
-        target: {
-          id: id,
-          type: 'http://schema.org/Thing',
-          name: share_name(locale),
-          description: message,
-          image: 'https://developers.google.com/+/web/snippet/examples/thing.png'
-        }
-      }
-
-      url = '/plus/v1/people/me/moments/vault'
-      headers = {'Authorization' => "Bearer #{@token}"}
-      response = self.class.post(url, headers: headers, body: moment.to_json)
-
-      response.code == 200
+      # Consider the sharing via google plus successfull
+      true
     end
 
   private
-
-    # HARDCODED TEXT
-    def share_name(locale)
-      case locale
-      when :fr, 'fr' then 'Partage depuis Prédiction'
-      else 'Sharing from Prediction'
-      end
-    end
 
     def infos
       return @infos unless @infos.nil?
