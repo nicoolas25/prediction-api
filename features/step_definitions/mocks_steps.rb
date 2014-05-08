@@ -30,6 +30,29 @@ def fake_payment(provider, transaction_id, product_id)
   allow_any_instance_of(klass).to receive_messages(messages)
 end
 
+Given /^the players with nickname prefix "([^"]*)" have random scores$/ do |nickname_prefix|
+  Domain::Services::Ranking.prepare
+  player_ids = Domain::Player.where(Sequel.like(:nickname, "#{nickname_prefix}%")).select(:id)
+  DB[:scorings].where(player_id: player_ids).update(score: Sequel.function(:random) * 1000)
+  Domain::Services::Ranking.update_rankings
+end
+
+Given /^the player "([^"]*)" has a ranking of "(\d+)"$/ do |nickname, ranking|
+  player = Domain::Player.first!(nickname: nickname)
+  target_rank = ranking.to_i
+  current_rank = Domain::Services::Ranking.rank(player)
+  if target_rank != current_rank
+    # Find and swap the desired user
+    current_score = DB[:scorings].where(player_id: player.id).select(:score).first[:score]
+    target_id = DB[:rankings].where(rank: target_rank).select(:player_id).first[:player_id]
+    target_score = DB[:scorings].where(player_id: target_id).select(:score).first[:score]
+    DB[:rankings].where(player_id: target_id).update(rank: current_rank)
+    DB[:rankings].where(player_id: player.id).update(rank: target_rank)
+    DB[:scorings].where(player_id: target_id).update(score: current_score)
+    DB[:scorings].where(player_id: player.id).update(score: target_score)
+  end
+end
+
 Given /^the percentage of change to get a bonus after a participation is "(\d+)"$/ do |percent|
   chances = percent.to_i / 100.0
   stub_const('Domain::Participation::BONUS_CHANCES', chances)

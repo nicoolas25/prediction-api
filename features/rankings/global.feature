@@ -1,13 +1,13 @@
 Feature: Display the global ranking
 
   Scenario: The user doesn't give a valid auth token
-    When I send a GET request to "/v1/ladders/global"
+    When I send a GET request to "/v1/ladders/global/me"
     Then the response status should be "401"
     And the JSON response should have "$.code" with the text "unauthorized"
 
   Scenario: There is nobody but me
     Given I am an authenticated user
-    When I send a GET request to "/v1/ladders/global"
+    When I send a GET request to "/v1/ladders/global/me"
     Then the response status should be "200"
     And the JSON response should have 1 "$.[*].*"
     And the JSON response should have "$.[0].nickname" with the text "nickname"
@@ -32,7 +32,7 @@ Feature: Display the global ranking
       "1": 0.0
     }
     """
-    When I send a GET request to "/v1/ladders/global"
+    When I send a GET request to "/v1/ladders/global/me"
     Then the response status should be "200"
     And the JSON response should have 3 "$.[*].*"
     And the JSON response should have "$.[0].nickname" with the text "nickname"
@@ -42,13 +42,13 @@ Feature: Display the global ranking
   Scenario: A new player should appear in the ranking
     Given the ranking service is already prepared
     And I am an authenticated user: "nickname"
-    When I send a GET request to "/v1/ladders/global"
+    When I send a GET request to "/v1/ladders/global/me"
     Then the response status should be "200"
     And the JSON response should have 1 "$.[*].*"
 
   Scenario: The delta of ranking should appear
     Given the ranking service is already prepared
     And I am an authenticated user: "nickname"
-    When I send a GET request to "/v1/ladders/global"
+    When I send a GET request to "/v1/ladders/global/me"
     Then the response status should be "200"
     And the JSON response should have "$.[0].delta" with the text "0"

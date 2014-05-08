@@ -16,7 +16,7 @@ Feature: Display the delta in the ranking
       "1": 0.0
     }
     """
-    When I send a GET request to "/v1/ladders/global"
+    When I send a GET request to "/v1/ladders/global/me"
     Then the response status should be "200"
     And the JSON response should have "$.[0].delta" with the text "1"
     And the JSON response should have "$.[1].delta" with the text "-1"

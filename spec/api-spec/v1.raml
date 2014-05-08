@@ -975,6 +975,26 @@ traits:
         description: Filtre le classement pour n'afficher que les amis.
         type: string
         pattern: friends|global
+    /{uid}:
+      is: [ secured ]
+      type: { member: { elementName: "Classement" } }
+      uriParameters:
+        uid:
+          description: Un identifiant utilisateur
+          type: string
+          pattern: me|(\d+)
+      /before:
+        is: [ secured ]
+        type: { member: { elementName: "Classement" } }
+        description: Un extrait du classement avant {uid}.
+      /after:
+        is: [ secured ]
+        type: { member: { elementName: "Classement" } }
+        description: Un extrait du classement après {uid}.
+      /top:
+        is: [ secured ]
+        type: { member: { elementName: "Classement" } }
+        description: Affiche le top du classement.
     /{tag}:
       is: [ secured ]
       type: { member: { elementName: "Classement" } }
