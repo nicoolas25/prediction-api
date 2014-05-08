@@ -13,10 +13,6 @@ module Domain
     end
 
     class << self
-      def exists_like?(payment_api)
-        where(transaction_id: payment_api.transaction_id, provider: payment_api.provider).count > 0
-      end
-
       # Add a new payment from a PaymentAPI object
       def create_from(player, payment_api, &block)
         DB.transaction do

@@ -51,8 +51,6 @@ module Domain
               player_id: @player.id,
               identifier: identifier,
               level: level)
-          else
-            nil
           end
       end
 

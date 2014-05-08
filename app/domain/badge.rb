@@ -23,10 +23,6 @@ module Domain
       def level(level)
         where(level: level)
       end
-
-      def claimable
-        where(converted_to: nil)
-      end
     end
 
     def claim!(target)
