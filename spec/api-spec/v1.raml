@@ -1077,6 +1077,25 @@ traits:
               "token": "google-only-token"
             }
           }
+/conversions:
+  post:
+    is: [ secured, exigent ]
+    description: |
+      Permet de couvertir des cristaux en lots de bonus.
+
+      Les couts des packs sont les suivants :
+
+       Cible  | Cout
+      bonus_1 |  30
+      bonus_2 |  50
+      bonus_3 |  70
+      bonus_4 |  90
+
+    body:
+      application/x-www-form-urlencoded:
+        formParameters:
+          target:
+            description: La conversion demandée : bonus_{1,2,3,4}
 /shares/{locale}/{kind}/{id}:
   uriParameters:
     locale:
