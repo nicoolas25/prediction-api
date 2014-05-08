@@ -4,8 +4,10 @@ require 'twitter'
 module SocialAPI
   class Twitter < Base
     MAX_FRIENDS     = 2000
+
     CONSUMER_KEY    = 'uxn2mjhUoP9L6htVTOp1ng'
     CONSUMER_SECRET = 'XDs2otq17LBOV6U6XUow30NQFs7VXIkxnqdWjznCXa4'
+    ACCOUNT_NAME    = '@PulpoGame'
 
     def first_name
       user && user.name.split(' ', 2)[0] rescue nil
@@ -40,6 +42,7 @@ module SocialAPI
     end
 
     def share(locale, message, id)
+      message = message.gsub('Pulpo', ACCOUNT_NAME)
       client.update(message) rescue false
     end
 

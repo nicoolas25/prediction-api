@@ -80,19 +80,19 @@ module Domain
         when ::Domain::Participation
           text = @target.question.labels[locale]
           case locale
-          when :fr, 'fr' then "Je viens de répondre à la question : « #{text} » via Prédiction."
-          else                "I just answered this question: '#{text}' through Prediction."
+          when :fr, 'fr' then "Je viens de répondre à la question : « #{text} » via Pulpo."
+          else                "I just answered this question: '#{text}' through Pulpo."
           end
         when ::Domain::Badge
           text = @target.labels[locale]
           case locale
-          when :fr, 'fr' then "Je viens de gagner le badge : « #{text} » via Prédiction."
-          else                "I just unlocked this badge: '#{text}' via Prédiction."
+          when :fr, 'fr' then "Je viens de gagner le badge : « #{text} » via Pulpo."
+          else                "I just unlocked this badge: '#{text}' via Pulpo."
           end
         when ::Domain::Player
           case locale
-          when :fr, 'fr' then "Rejoins moi sur l'application Prédiction et prédis l'avenir de la Coupe du monde 2014."
-          else                "Come and join me on the Prediction application and predict the futur of the World Cup 2014."
+          when :fr, 'fr' then "Rejoins moi sur l'application Pulpo et prédis l'avenir de la Coupe du monde 2014."
+          else                "Come and join me on the Pulpo application and predict the futur of the World Cup 2014."
           end
         end
       end

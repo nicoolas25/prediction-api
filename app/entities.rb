@@ -16,6 +16,7 @@ module Entities
   autoload :Badge,             './app/entities/badge'
   autoload :Bonus,             './app/entities/bonus'
   autoload :Component,         './app/entities/component'
+  autoload :ConversionResult,  './app/entities/conversion_result'
   autoload :Cristal,           './app/entities/cristal'
   autoload :Friend,            './app/entities/friend'
   autoload :Ladder,            './app/entities/ladder'

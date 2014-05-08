@@ -19,17 +19,10 @@ module Controllers
           end
         end
         post do
-          provider = params[:provider]
-          payload = params[:payload]
-          purchase_service = ::Domain::Services::Purchase.new(player, provider, payload)
+          purchase_service = ::Domain::Services::Purchase.new(player, params[:provider], params[:payload])
           purchase_service.apply!
-
-          bonuses = player.bonuses_dataset.distinct(:identifier).all
           bonus_service = Domain::Services::Bonus.new(player)
-          {
-            cristals: player.cristals,
-            bonus: present(bonuses, with: Entities::Bonus, bonus_service: bonus_service)
-          }
+          present player, with: Entities::ConversionResult, bonus_service: bonus_service
         end
       end
     end

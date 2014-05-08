@@ -23,10 +23,8 @@ module Domain
     end
 
     def use_for!(participation)
-      DB[:bonuses].
-        where(player_id: player_id, identifier: identifier, prediction_id: nil).
-        update(prediction_id: participation.prediction_id).
-        limit(1)
+      id = DB[:bonuses].select(:id).where(player_id: player_id, identifier: identifier, prediction_id: nil).limit(1)
+      DB[:bonuses].where(id: id).update(prediction_id: participation.prediction_id)
     end
 
     class << self

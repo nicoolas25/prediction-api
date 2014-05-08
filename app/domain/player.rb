@@ -9,6 +9,7 @@ module Domain
   class SessionError < Error ; end
   class SocialAPIError < Error ; end
   class ParticipationError < Error ; end
+  class CristalNeeded < Error ; end
 
   class Player < ::Sequel::Model
     DEFAULT_CRISTALS_COUNT = 30
@@ -65,6 +66,10 @@ module Domain
     def after_create
       super
       Services::Ranking.ensure_player_presence(self)
+    end
+
+    def distinct_bonuses
+      bonuses_dataset.distinct(:identifier).all
     end
 
     def regenerate_token!
@@ -154,8 +159,14 @@ module Domain
     end
 
     def increment_cristals_by!(amount)
+      raise CristalNeeded.new(:cristals_needed) if cristals + amount < 0
+
       self.cristals += amount
       DB[:players].where(id: id).update(cristals: Sequel.expr(:cristals) + amount)
+    end
+
+    def decrement_cristals_by!(amount)
+      increment_cristals_by!(-amount)
     end
 
     def add_local_friend(player)

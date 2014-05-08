@@ -12,9 +12,9 @@ module Controllers
         params { requires :uid, type: String }
         before { @user = params[:uid] == 'me' ? player : Domain::Player.first!(id: params[:uid]) }
 
-        desc "List the user's badges"
+        desc "List the user's bonus"
         get do
-          bonuses = @user.bonuses_dataset.distinct(:identifier).all
+          bonuses = @user.distinct_bonuses
           bonus_service = Domain::Services::Bonus.new(@user)
           present bonuses, with: Entities::Bonus, bonus_service: bonus_service
         end
