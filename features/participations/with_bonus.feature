@@ -7,7 +7,7 @@ Feature: The player can use a bonus with its participation
     And existing components for the question "1":
       | 1 | choices | Chosir la bonne équipe | France,Belgique |
     And the player "nickname" have the following bonuses:
-      | double |
+      | cresus |
     And I send and accept JSON
 
   Scenario: The user send a valid answer with a valid bonus
@@ -16,7 +16,7 @@ Feature: The player can use a bonus with its participation
     {
       "id": "1",
       "stakes": 10,
-      "bonus": "double",
+      "bonus": "cresus",
       "components": [
         {
           "id": "1",

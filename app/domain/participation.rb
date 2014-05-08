@@ -21,7 +21,7 @@ module Domain
     def before_create
       super
       self.created_at = Time.now
-      player.update(cristals: Sequel.expr(:cristals) - stakes)
+      player.update(cristals: Sequel.expr(:cristals) - stakes) and player.reload
     end
 
     def after_create

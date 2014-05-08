@@ -2,17 +2,31 @@ Feature: The user double its earnings or he loose it's stakes another time
 
   Background:
     Given I send and accept JSON
-    And I am an authenticated user: "nickname"
-    And existing expired questions:
+    And I am an authenticated user: "nickname" with "30" cristals
+    And existing questions:
       | 1 | Qui va gagner ? |
     And existing components for the question "1":
       | 1 | choices | Chosir la bonne équipe | France,Belgique |
-    And there is the following participations for the question "1":
-      | nickname | 10 | 1:1 |
-    And there is the following bonuses for the question "1":
-      | nickname | double |
+    And the player "nickname" have the following bonuses:
+      | double |
+    When I send a POST request to "/v1/participations" with the following:
+    """
+    {
+      "id": "1",
+      "stakes": 10,
+      "bonus": "double",
+      "components": [
+        {
+          "id": "1",
+          "value": "1"
+        }
+      ]
+    }
+    """
+    Then the player "nickname" should have "10" cristals
 
   Scenario: The user looses a prediction but loose nothing more
+    Given it is currently next week
     When I send a PUT request to "/v1/admin/questions/1" with the following:
     """
     {
@@ -26,6 +40,7 @@ Feature: The user double its earnings or he loose it's stakes another time
     And the player "nickname" should have "10" cristals
 
   Scenario: The user wins a prediction and win 2 times
+    Given it is currently next week
     When I send a PUT request to "/v1/admin/questions/1" with the following:
     """
     {

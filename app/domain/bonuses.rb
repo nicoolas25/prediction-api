@@ -60,6 +60,15 @@ module Domain
           @procedure.call(*arguments) if arguments.any?
         end
 
+        def when_used(*arguments, &block)
+          @when_used = block if block
+          @when_used.call(*arguments) if arguments.any?
+        end
+
+        def when_used?
+          !!@when_used
+        end
+
         def labels(hash=nil)
           return @labels unless hash
           @labels = hash

@@ -17,6 +17,13 @@ module Domain
         end
       end
 
+      when_used do |participation, bonus|
+        player = participation.player
+        stakes = participation.stakes
+
+        player.decrement_cristals_by!(stakes)
+      end
+
       labels fr: "Double", en: "Double"
     end
 

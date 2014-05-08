@@ -159,10 +159,9 @@ module Domain
     end
 
     def increment_cristals_by!(amount)
-      raise CristalNeeded.new(:cristals_needed) if cristals + amount < 0
+      raise CristalNeeded.new(:cristals_needed) if (cristals + amount) < 0
 
-      self.cristals += amount
-      DB[:players].where(id: id).update(cristals: Sequel.expr(:cristals) + amount)
+      update(cristals: Sequel.expr(:cristals) + amount) and reload
     end
 
     def decrement_cristals_by!(amount)
