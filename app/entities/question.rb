@@ -31,7 +31,7 @@ module Entities
     expose :answered
 
     expose :made_prediction do |q, opts|
-      opts[:made_prediction] || opts[:winning_service].try(:answered?, q) || false
+      opts[:made_prediction] || opts[:winning_service].try(:answered?, q) || opts[:event_service].have_a_participation?(q) || false
     end
 
     expose :winnings, if: :winning_service do |q, opts|

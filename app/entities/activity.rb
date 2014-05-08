@@ -33,10 +33,7 @@ module Entities
 
     with_options if: ->(a, opts){ a.kind_of?(::Domain::Question) } do
       expose :question do |a, opts|
-        Question.new(a)
-      end
-      expose :prediction_exists do |a, opts|
-        opts[:event_service].have_a_participation?(a)
+        Question.new(a, opts)
       end
     end
 
