@@ -14,7 +14,7 @@ Feature: Buy bonus with cristals from the application
     When I send a POST request to "/v1/conversions" with the following:
       | target | bonus_2 |
     Then the response status should be "201"
-    And the player "nickname" should have "6" available bonus
+    And the player "nickname" should have "8" available bonus
 
   Scenario: The player claims an unknown target
     Given I am an authenticated user: "nickname"

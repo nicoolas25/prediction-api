@@ -4,10 +4,10 @@ module Domain
   module Services
     class Conversion
       VALID_TARGETS = {
-        'bonus_1' => 30,
-        'bonus_2' => 50,
-        'bonus_3' => 70,
-        'bonus_4' => 90
+        'bonus_1' => [50,   4],
+        'bonus_2' => [95,   8],
+        'bonus_3' => [185, 16],
+        'bonus_4' => [360, 32]
       }.freeze
 
       def initialize(player, target)
@@ -27,11 +27,11 @@ module Domain
       [1, 2, 3, 4].each do |count|
         define_method("bonus_#{count}") do
           DB.transaction do
-            @player.decrement_cristals_by!(VALID_TARGETS["bonus_#{count}"])
-            ::Domain::Bonuses.modules.keys.each do |identifier|
-              count.times do
-                ::Domain::Bonus.create(player_id: @player.id, identifier: identifier)
-              end
+            cost, amount = VALID_TARGETS["bonus_#{count}"]
+            @player.decrement_cristals_by!(cost)
+            amount.times do
+              identifier = ::Domain::Bonuses.modules.keys.sample
+              ::Domain::Bonus.create(player_id: @player.id, identifier: identifier)
             end
           end
         end
