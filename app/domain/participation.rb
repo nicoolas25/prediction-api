@@ -11,7 +11,7 @@ module Domain
     many_to_one :question
     one_to_one  :bonus, key: [:player_id, :prediction_id]
 
-    attr_accessor :badges, :earned_bonus
+    attr_accessor :badges, :earned_bonus, :friends
 
     dataset_module do
       def for_question(question)

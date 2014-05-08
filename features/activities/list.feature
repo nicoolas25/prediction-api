@@ -40,7 +40,6 @@ Feature: Display the activity feed
     """
     And I send a GET request to "/v1/activities/fr"
     Then the response status should be "200"
-    And show me the response
     And the JSON response should have 6 "$.[*].*"
     And the JSON response should have "$.[0].kind" with the text "solution"
     And the JSON response should have "$.[0].question.id" with the text "1"
@@ -56,8 +55,8 @@ Feature: Display the activity feed
     And the JSON response should have "$.[4].question.id" with the text "1"
     And the JSON response should have "$.[4].prediction_exists" with the text "true"
     And the JSON response should have "$.[5].kind" with the text "friend"
-    And the JSON response should have "$.[5].player.nickname" with the text "friend_1"
-    And the JSON response should have 6 "$.[*].player.social"
+    And the JSON response should have "$.[5].players[0].nickname" with the text "friend_1"
+    And the JSON response should have 6 "$.[*].players[*].social"
 
   Scenario: The looses aren't displayed
     Given I am an authenticated user: "nickname"
@@ -80,6 +79,7 @@ Feature: Display the activity feed
     """
     And I send a GET request to "/v1/activities/fr"
     Then the response status should be "200"
+    And show me the response
     And the JSON response should have 4 "$.[*].*"
     And the JSON response should have "$.[0].kind" with the text "badge"
     And the JSON response should have "$.[0].identifier" with the text "looser"
@@ -90,5 +90,5 @@ Feature: Display the activity feed
     And the JSON response should have "$.[2].kind" with the text "answer"
     And the JSON response should have "$.[2].question.id" with the text "1"
     And the JSON response should have "$.[3].kind" with the text "friend"
-    And the JSON response should have "$.[3].player.nickname" with the text "friend_1"
-    And the JSON response should have 4 "$.[*].player.social"
+    And the JSON response should have "$.[3].players[*].nickname" with the text "friend_1"
+    And the JSON response should have 4 "$.[*].players[*].social"

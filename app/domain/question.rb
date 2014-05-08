@@ -17,6 +17,8 @@ module Domain
 
     include I18nLabels
 
+    attr_accessor :participants
+
     dataset_module do
       def visible
         where(Sequel.expr(:reveals_at) <= Time.now)
