@@ -30,6 +30,11 @@ def fake_payment(provider, transaction_id, product_id)
   allow_any_instance_of(klass).to receive_messages(messages)
 end
 
+Given /^the percentage of change to get a bonus after a participation is "(\d+)"$/ do |percent|
+  chances = percent.to_i / 100.0
+  stub_const('Domain::Participation::BONUS_CHANCES', chances)
+end
+
 Given /^the "([^"]*)" payment api respond with trasanction "([^"]*)" and product "([^"]*)"$/ do |provider, tid, pid|
   tid = nil if tid == 'nil'
   fake_payment(provider, tid, pid)

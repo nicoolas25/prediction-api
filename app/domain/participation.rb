@@ -4,12 +4,14 @@ module Domain
   class CristalsNeeded < Error ; end
 
   class Participation < ::Sequel::Model
+    BONUS_CHANCES = 0.2
+
     many_to_one :player
     many_to_one :prediction
     many_to_one :question
     one_to_one  :bonus, key: [:player_id, :prediction_id]
 
-    attr_accessor :badges
+    attr_accessor :badges, :earned_bonus
 
     dataset_module do
       def for_question(question)
@@ -28,6 +30,7 @@ module Domain
       super
       prediction.update_with_participation!(self)
       question.update_with_participation!(self)
+      pick_bonus!
     end
 
     def validate
@@ -40,6 +43,15 @@ module Domain
 
     def win?
       winnings && winnings > 0
+    end
+
+    private
+
+    def pick_bonus!
+      if SecureRandom.random_number <= BONUS_CHANCES
+        identifier = Bonuses.modules.keys.sample
+        @earned_bonus = player.add_bonus(identifier: identifier)
+      end
     end
   end
 end
