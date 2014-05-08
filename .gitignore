@@ -5,3 +5,4 @@ config/dropbox.yml
 config/pulpo-sa.p12
 scripts/seed_*
 public/
+tags

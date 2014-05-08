@@ -1,4 +1,4 @@
-Feature: Add and remove local friends
+Feature: Add and remove friendships
 
   Scenario: The user add a local friend
     Given I am an authenticated user
@@ -15,7 +15,7 @@ Feature: Add and remove local friends
     Then the response status should be "403"
     Then the player "nickname" should have "1" friends
 
-  Scenario: The user add an remove a local friend
+  Scenario: The user add an remove a friend (that could also be a social friend)
     Given I am an authenticated user
     And an user "player" is already registered with the id "2"
     When I send a POST request to "/v1/users/2/follow"

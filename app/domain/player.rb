@@ -29,22 +29,22 @@ module Domain
     # A friendship is different depending on the social network
     # it's from. GooglePlus and Twitter are directed edges but
     # facebook have symetric relations.
-    FRIENDSHIPS_EXPR = ->(id){
-      (Sequel.expr(friendships__left_id: id) &
-       Sequel.expr(friendships__right_id: :players__id)) |
-      (Sequel.expr(friendships__right_id: id) &
-       Sequel.expr(friendships__left_id: :players__id) &
+    FRIENDSHIPS_EXPR = ->(lid, rid){
+      (Sequel.expr(friendships__left_id: lid) &
+       Sequel.expr(friendships__right_id: rid)) |
+      (Sequel.expr(friendships__right_id: lid) &
+       Sequel.expr(friendships__left_id: rid) &
        Sequel.expr(friendships__provider: SocialAPI::SYMETRIC_FRIENDSHIP_PROVIDERS))
     }
 
     many_to_many :friends, class: Player, dataset: ->{
-      Player.exclude(players__id: id).join(:friendships, FRIENDSHIPS_EXPR[id])
+      Player.exclude(players__id: id).join(:friendships, FRIENDSHIPS_EXPR[id, :players__id])
     }
 
     # Friends including himself
     def circle_dataset
       Player.
-        join_table(:left, :friendships, FRIENDSHIPS_EXPR[id]).
+        join_table(:left, :friendships, FRIENDSHIPS_EXPR[id, :players__id]).
         where(Sequel.negate(right_id: nil) | Sequel.expr(players__id: id)).
         distinct
     end
@@ -176,12 +176,8 @@ module Domain
       })
     end
 
-    def remove_local_friend(player)
-      DB[:friendships].where({
-        provider: SocialAPI::PROVIDERS.index('local'),
-        left_id: id,
-        right_id: player.id
-      }).delete
+    def remove_friend(player)
+      DB[:friendships].where(FRIENDSHIPS_EXPR[id, player.id]).delete
     end
 
     def update_social_association_tokens(mapping_provider_tokens)

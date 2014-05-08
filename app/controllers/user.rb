@@ -21,7 +21,7 @@ module Controllers
         desc "Un-follow the user described by uid"
         post 'unfollow' do
           fail!(:failed, 403) if player == @user
-          player.remove_local_friend(@user)
+          player.remove_friend(@user)
           {success: true}
         end
 
