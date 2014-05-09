@@ -10,26 +10,28 @@ module Domain
       end
 
       def share(kind, locale, target_id)
-        unless compute_target(kind, target_id)
-          self.error = :unknown_share
-          return false
-        end
+        DB.transaction(isolation: :repeatable) do
+          unless compute_target(kind, target_id)
+            self.error = :unknown_share
+            return false
+          end
 
-        unless can_share?
-          self.error = :already_shared
-          return false
-        end
+          unless can_share?
+            self.error = :already_shared
+            return false
+          end
 
-        msg = compute_message(locale)
-        id = "#{@player.id}-#{kind}-#{target_id}"
+          msg = compute_message(locale)
+          id = "#{@player.id}-#{kind}-#{target_id}"
 
-        @player.social_associations.each_with_object({}) do |assoc, hash|
-          provider_name = SocialAPI.provider(assoc.provider)
-          if assoc.share(locale, msg, id)
-            mark_as_shared!
-            hash[provider_name] = :shared
-          else
-            hash[provider_name] = :not_shared
+          @player.social_associations.each_with_object({}) do |assoc, hash|
+            provider_name = SocialAPI.provider(assoc.provider)
+            if assoc.share(locale, msg, id)
+              mark_as_shared!
+              hash[provider_name] = :shared
+            else
+              hash[provider_name] = :not_shared
+            end
           end
         end
       end
