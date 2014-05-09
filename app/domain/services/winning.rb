@@ -16,6 +16,11 @@ module Domain
         end
       end
 
+      def bonus_for(question)
+        prefetched_infos = question_hash[question.id]
+        prefetched_infos[:bonus]
+      end
+
       def answered?(question)
         prefetched_infos = question_hash[question.id]
         !!prefetched_infos
@@ -43,13 +48,18 @@ module Domain
             :participations__winnings,
             :predictions__amount,
             :predictions__players_count,
-            :predictions__cksum).
+            :predictions__cksum,
+            :bonuses__identifier).
           where(
             participations__question_id: @question_ids,
             participations__player_id: @player.id).
           join(
             :predictions,
-            id: :prediction_id)
+            id: :prediction_id).
+          join_table(:left,
+            :bonuses,
+            prediction_id: :id,
+            player_id: @player.id)
 
         # Puts the response in a Hash for faster access
         participations.each do |p|
@@ -59,7 +69,8 @@ module Domain
             amount:   p.values[:amount],
             stakes:   p.values[:stakes],
             winnings: p.values[:winnings],
-            cksum:    p.values[:cksum]
+            cksum:    p.values[:cksum],
+            bonus:    p.values[:identifier]
           }
         end
 

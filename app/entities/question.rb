@@ -38,6 +38,10 @@ module Entities
       opts[:winning_service].winnings_for(q)
     end
 
+    expose :bonus, if: ->(q, opts){ opts[:winning_service].try(:answered?, q) } do |q, opts|
+      opts[:winning_service].bonus_for(q)
+    end
+
     expose :shared, if: :sharing_service do |q, opts|
       opts[:sharing_service].shared?(q)
     end

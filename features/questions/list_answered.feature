@@ -26,9 +26,12 @@ Feature: Display lists of answered questions
       | nickname | 20 | 2:1 |
       | player1  | 10 | 2:1 |
       | player2  | 10 | 2:0 |
+    And there is the following bonuses for the question "2":
+      | nickname | blind |
     When I send a GET request to "/v1/questions/fr/global/answered"
     Then the response status should be "200"
     And the JSON response should have 1 "$.[*].*"
     And the JSON response should have "$.[0].expires_at"
     And the JSON response should have "$.[0].label" with the text "Qui va marquer ?"
     And the JSON response should have "$.[0].winnings" with the text "26"
+    And the JSON response should have "$.[0].bonus" with the text "blind"
