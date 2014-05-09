@@ -34,6 +34,10 @@ module Domain
             end
           end
         end
+      rescue PG::TRSerializationFailure
+        @player.social_associations.each_with_object({}) do |assoc, hash|
+          hash[SocialAPI.provider(assoc.provider)] = :not_shared
+        end
       end
 
       private
