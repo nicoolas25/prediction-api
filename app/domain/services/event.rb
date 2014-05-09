@@ -92,6 +92,7 @@ module Domain
             select_all(:questions).
             select_append(
               Sequel.function(:string_agg, Sequel.expr(:participations__player_id).cast_string, ' ').as(:participant_ids),
+              Sequel.function(:avg, :participations__winnings).as(:average_winnings),
               :questions__answered___solved).
             join(:participations, question_id: :id, player_id: friends_ids).
             where(questions__answered: true).

@@ -35,6 +35,9 @@ module Entities
       expose :question do |a, opts|
         Question.new(a, opts)
       end
+      expose :winnings do |a, opts|
+        a.values[:average_winnings] || 0.0
+      end
     end
 
     expose :players do |a, opts|
