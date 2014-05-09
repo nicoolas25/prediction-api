@@ -126,7 +126,7 @@ module Domain
           question: question,
           prediction: prediction,
           stakes: stakes,
-          options: bonus.participation_options)
+          options: bonus.try(:participation_options))
         bonus.try(:use_for!, participation)
       end
 

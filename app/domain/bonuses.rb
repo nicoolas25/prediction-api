@@ -62,7 +62,7 @@ module Domain
         end
 
         def participation_options(&block)
-          block ? (@participation_options = block) : @participation_options.call
+          block ? (@participation_options = block) : @participation_optionsi.try(:call)
         end
 
         def when_used(*arguments, &block)
