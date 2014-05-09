@@ -27,6 +27,10 @@ module Domain
       bonus_module.when_used(participation, self) if bonus_module.when_used?
     end
 
+    def participation_options
+      bonus_module.participation_options
+    end
+
     def bonus_module
       @bonus_module ||= Bonuses.modules[identifier]
     end

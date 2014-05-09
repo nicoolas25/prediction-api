@@ -30,6 +30,11 @@ def fake_payment(provider, transaction_id, product_id)
   allow_any_instance_of(klass).to receive_messages(messages)
 end
 
+Given /^the lucky bonus give "(\d+)" percent of chance of getting a bonus$/ do |percent|
+  chances = percent.to_i / 100.0
+  stub_const('Domain::Bonuses::Lucky::BONUS_CHANCES', chances)
+end
+
 Given /^the players with nickname prefix "([^"]*)" have random scores$/ do |nickname_prefix|
   Domain::Services::Ranking.prepare
   player_ids = Domain::Player.where(Sequel.like(:nickname, "#{nickname_prefix}%")).select(:id)

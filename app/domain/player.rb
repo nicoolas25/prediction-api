@@ -125,7 +125,8 @@ module Domain
           player: self,
           question: question,
           prediction: prediction,
-          stakes: stakes)
+          stakes: stakes,
+          options: bonus.participation_options)
         bonus.try(:use_for!, participation)
       end
 

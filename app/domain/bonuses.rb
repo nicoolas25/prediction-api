@@ -4,6 +4,7 @@ require 'active_support/core_ext/module/attribute_accessors'
 module Domain
   module Bonuses
     HOOK_KINDS = [
+      :none,
       :after_solving,
       :after_winning,
       :after_loosing
@@ -60,6 +61,10 @@ module Domain
           @procedure.call(*arguments) if arguments.any?
         end
 
+        def participation_options(&block)
+          block ? (@participation_options = block) : @participation_options.call
+        end
+
         def when_used(*arguments, &block)
           @when_used = block if block
           @when_used.call(*arguments) if arguments.any?
@@ -81,4 +86,5 @@ module Domain
   require './app/domain/bonuses/blind'
   require './app/domain/bonuses/cresus'
   require './app/domain/bonuses/double'
+  require './app/domain/bonuses/lucky'
 end

@@ -13,6 +13,8 @@ module Domain
 
     attr_accessor :badges, :earned_bonus, :friends
 
+    attr_writer :options
+
     dataset_module do
       def for_question(question)
         id = question.respond_to?(:id) ? question.id : question
@@ -30,7 +32,7 @@ module Domain
       super
       prediction.update_with_participation!(self)
       question.update_with_participation!(self)
-      pick_bonus!
+      pick_bonus!(options[:chances])
     end
 
     def validate
@@ -47,8 +49,12 @@ module Domain
 
     private
 
-    def pick_bonus!
-      if SecureRandom.random_number <= BONUS_CHANCES
+    def options
+      @options ||= {}
+    end
+
+    def pick_bonus!(chances=nil)
+      if SecureRandom.random_number <= (chances || BONUS_CHANCES)
         identifier = Bonuses.modules.keys.sample
         @earned_bonus = player.add_bonus(identifier: identifier)
       end
