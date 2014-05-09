@@ -15,16 +15,16 @@ module Controllers
         present players, with: Entities::Ladder, ranking_service: ranking_service
       end
 
+      desc "List the users ordered by the number of cristals they won (top of the ranking)"
+      get 'global/top' do
+        ranking_service = Domain::Services::Ranking.top
+        players = ranking_service.players
+        present players, with: Entities::Ladder, ranking_service: ranking_service
+      end
+
       namespace 'global/:uid' do
         params { requires :uid, type: String }
         before { @user = params[:uid] == 'me' ? player : Domain::Player.first!(id: params[:uid]) }
-
-        desc "List the users ordered by the number of cristals they won (top of the ranking)"
-        get :top do
-          ranking_service = Domain::Services::Ranking.top
-          players = ranking_service.players
-          present players, with: Entities::Ladder, ranking_service: ranking_service
-        end
 
         desc "List the users ordered by the number of cristals they won (after the selected user)"
         get :after do

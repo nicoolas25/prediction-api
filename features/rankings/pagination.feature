@@ -8,7 +8,7 @@ Feature: Display the global ranking
 
   Scenario: The player asks for the top ranking
     Given the player "nickname" has a ranking of "30"
-    When I send a GET request to "/v1/ladders/global/me/top"
+    When I send a GET request to "/v1/ladders/global/top"
     Then the response status should be "200"
     And the JSON response should have 30 "$.[*].*"
     And the JSON response should have "$.[29].nickname" with the text "nickname"
