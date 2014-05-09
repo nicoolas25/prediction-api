@@ -13,4 +13,4 @@ Feature: Buy bonuses from the application
     }
     """
     Then the response status should be "201"
-    And the player "nickname" should have "9" available bonus
+    And the player "nickname" should have "12" available bonus
