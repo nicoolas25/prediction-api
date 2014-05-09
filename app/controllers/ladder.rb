@@ -9,9 +9,13 @@ module Controllers
 
     namespace :ladders do
       desc "List all the users ordered by the number of cristals they won (only friends)"
-      get :friends do
+      params do
+        requires :uid, type: String
+      end
+      get 'friends/:uid' do
+        user = params[:uid] == 'me' ? player : Domain::Player.first!(id: params[:uid])
         ranking_service = Domain::Services::Ranking.new
-        players = ranking_service.friends(player)
+        players = ranking_service.friends(user)
         present players, with: Entities::Ladder, ranking_service: ranking_service
       end
 

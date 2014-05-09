@@ -967,14 +967,18 @@ traits:
                 oauth2TokenFacebook:
                 oauth2TokenGooglePlus:
 /ladders:
-  /{scope}:
+  /friends/{uid}:
     is: [ secured ]
     type: { member: { elementName: "Classement" } }
+    description: Le classement des amis d'un utilisateur
     uriParameters:
-      scope:
-        description: Filtre le classement pour n'afficher que les amis.
+      uid:
+        description: Un identifiant utilisateur
         type: string
-        pattern: friends|global
+        pattern: me|(\d+)
+  /global:
+    is: [ secured ]
+    type: { member: { elementName: "Classement" } }
     /top:
       is: [ secured ]
       type: { member: { elementName: "Classement" } }
@@ -995,13 +999,6 @@ traits:
         is: [ secured ]
         type: { member: { elementName: "Classement" } }
         description: Un extrait du classement après {uid}.
-    /{tag}:
-      is: [ secured ]
-      type: { member: { elementName: "Classement" } }
-      uriParameters:
-        tag:
-          description: Filtre le classement pour ne prendre en compte qu'un tag.
-          type: string
 /questions:
   is: [ secured ]
   post:

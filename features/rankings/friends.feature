@@ -1,13 +1,13 @@
 Feature: Display the friends ranking
 
   Scenario: The user doesn't give a valid auth token
-    When I send a GET request to "/v1/ladders/friends"
+    When I send a GET request to "/v1/ladders/friends/me"
     Then the response status should be "401"
     And the JSON response should have "$.code" with the text "unauthorized"
 
   Scenario: I have no friends
     Given I am an authenticated user
-    When I send a GET request to "/v1/ladders/friends"
+    When I send a GET request to "/v1/ladders/friends/me"
     Then the response status should be "200"
     And the JSON response should have 1 "$.[*].*"
     And the JSON response should have "$.[0].nickname" with the text "nickname"
@@ -30,7 +30,7 @@ Feature: Display the friends ranking
       "1": 0.0
     }
     """
-    When I send a GET request to "/v1/ladders/friends"
+    When I send a GET request to "/v1/ladders/friends/me"
     Then the response status should be "200"
     And the JSON response should have 1 "$.[*].*"
     And the JSON response should have "$.[0].nickname" with the text "nickname"
@@ -55,7 +55,7 @@ Feature: Display the friends ranking
       "1": 0.0
     }
     """
-    When I send a GET request to "/v1/ladders/friends"
+    When I send a GET request to "/v1/ladders/friends/me"
     Then the response status should be "200"
     And the JSON response should have 2 "$.[*].*"
     And the JSON response should have "$.[0].nickname" with the text "nickname"
@@ -81,7 +81,7 @@ Feature: Display the friends ranking
       "1": 0.0
     }
     """
-    When I send a GET request to "/v1/ladders/friends"
+    When I send a GET request to "/v1/ladders/friends/me"
     Then the response status should be "200"
     And the JSON response should have 2 "$.[*].*"
     And the JSON response should have "$.[0].nickname" with the text "nickname"
