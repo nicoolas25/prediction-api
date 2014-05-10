@@ -6,7 +6,7 @@ module SocialAPI
     MAX_FRIENDS     = 2000
 
     CONSUMER_KEY    = '5uCAjbygi4uUAUQSncykGLe72'
-    CONSUMER_SECRET = 'jpGBFLdSnrGA9jZoB0muERPGte1oDKoDbCvrxGsZciHOLUSjr2'
+    CONSUMER_SECRET = 'jPGBFLdSnrGA9jZoB0muERPGte1oDKoDbCvrxGsZciHOLUSjr2'
     ACCOUNT_NAME    = '@PulpoGame'
 
     def first_name
