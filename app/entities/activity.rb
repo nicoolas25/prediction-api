@@ -15,12 +15,12 @@ module Entities
     end
 
     expose :created_at do |a, opts|
-      if a.try(:answered)
-        # Answered question
-        a.solved_at
-      elsif a.values[:last_participation_at].present?
+      if a.values[:last_participation_at].present?
         # Question participation
         a.values[:last_participation_at]
+      elsif a.try(:answered)
+        # Answered question
+        a.solved_at
       else
         a.created_at
       end.to_i
