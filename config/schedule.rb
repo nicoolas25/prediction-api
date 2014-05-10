@@ -1,5 +1,5 @@
 set :environment_variable, 'RACK_ENV'
-set :ruby_v, '2.1.0'
+set :ruby_v, '2.1.1'
 
 job_type :rake,
   "source /etc/profile.d/chruby.sh && chruby :ruby_v && cd :path && :environment_variable=:environment bundle exec rake :task --silent :output"
