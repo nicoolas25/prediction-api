@@ -12,5 +12,3 @@ Feature: Fetch the friends of a new user and link him to the existing player.
       | nickname       | nickname   |
     Then the response status should be "201"
     And the player "nickname" should have "2" friends
-
-

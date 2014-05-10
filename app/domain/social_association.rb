@@ -19,6 +19,7 @@ module Domain
     def after_create
       super
       add_induced_friendships!
+      Workers::FriendExplorer.perform_async(player.id, api.provider_name)
     end
 
     def after_destroy
@@ -51,6 +52,27 @@ module Domain
         remove_induced_friendships!
         add_induced_friendships!
         touch!
+      end
+    end
+
+    def find_and_create_local_symmetries
+      unless api.symetric_friends?
+        friend_with_me = DB[:friendships].
+          where(provider: provider, right_id: player_id).
+          select(:left_id)
+        friend_ids = DB[:friendships].
+          where(provider: provider, left_id: player_id).
+          exclude(right_id: friend_with_me).
+          select(:right_id)
+
+        symmetries = []
+        Player.where(id: friend_ids).eager(:social_associations).each do |p|
+          assoc = p.social_associations.find{ |assoc| assoc.provider == provider }
+          if assoc && assoc.friend_with?(id)
+            symmetries << { provider: provider, left_id: p.id, right_id: player_id }
+          end
+        end
+        DB[:friendships].multi_insert(symmetries)
       end
     end
 
@@ -94,6 +116,11 @@ module Domain
         [:provider, :left_id, :right_id],
         assocs.select(Sequel.expr(provider), Sequel.expr(player_id), :player_id)
       )
+    end
+
+    def friend_with?(social_id)
+      # TODO: Add an interface to the social api lib to have faster queries
+      api.friend_ids.include?(social_id)
     end
 
     def api

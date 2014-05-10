@@ -1,10 +1,18 @@
 DEFAULT_CRISTALS = 20
 
 # Fake the provider response for friends
-def fake_friends(provider, friend_ids=[])
+def fake_friends(provider, *results)
   klass = "SocialAPI::#{provider.camelize}".constantize
-  messages = { friend_ids: friend_ids }
-  allow_any_instance_of(klass).to receive_messages(messages)
+  count = 0
+  allow_any_instance_of(klass).to receive(:friend_ids) do
+    if results.any?
+      result = results[count] || results.last
+      count += 1
+      result
+    else
+      []
+    end
+  end
 end
 
 def fake_social_id(provider, social_id=nil)
@@ -191,6 +199,11 @@ Given /^there are already registered players via "([^"]*)" friends to the id "([
   end
 
   fake_friends(provider, friends.raw.map(&:last))
+end
+
+Given /^there is the following friend_ids results for "([^"]*)" over time:$/ do |provider, friends|
+  lists = friends.raw.group_by(&:first).values.map { |e| e.map(&:last) }
+  fake_friends(provider, *lists)
 end
 
 Given /^the user "([^"]*)" have the following "([^"]*)" friends:$/ do |nickname, provider, friends|

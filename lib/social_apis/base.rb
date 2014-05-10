@@ -12,6 +12,10 @@ module SocialAPI
       @provider
     end
 
+    def provider_name
+      SocialAPI.provider(@provider)
+    end
+
     def symetric_friends?
       SocialAPI::SYMETRIC_FRIENDSHIP_PROVIDERS.include?(@provider)
     end

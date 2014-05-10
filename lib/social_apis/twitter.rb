@@ -5,8 +5,8 @@ module SocialAPI
   class Twitter < Base
     MAX_FRIENDS     = 2000
 
-    CONSUMER_KEY    = 'uxn2mjhUoP9L6htVTOp1ng'
-    CONSUMER_SECRET = 'XDs2otq17LBOV6U6XUow30NQFs7VXIkxnqdWjznCXa4'
+    CONSUMER_KEY    = '5uCAjbygi4uUAUQSncykGLe72'
+    CONSUMER_SECRET = 'jpGBFLdSnrGA9jZoB0muERPGte1oDKoDbCvrxGsZciHOLUSjr2'
     ACCOUNT_NAME    = '@PulpoGame'
 
     def first_name

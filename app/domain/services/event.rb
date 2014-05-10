@@ -33,11 +33,9 @@ module Domain
     private
 
       def friends(ids)
-        result = Domain::Player.where(id: ids).eager(:social_associations).all.each_with_object({}) do |friend, hash|
+        Domain::Player.where(id: ids).eager(:social_associations).all.each_with_object({}) do |friend, hash|
           hash[friend.id] = friend
         end
-        binding.pry if result.size != ids.size
-        result
       end
 
       def friends_ids

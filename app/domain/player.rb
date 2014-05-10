@@ -224,12 +224,10 @@ module Domain
 
       {
         cristals: cristals,
-        predictions: participations_dataset.count,
         friends: friends.count,
         bonus_used: bonuses_dataset.used.count,
         bonus_available: bonuses_dataset.available.count,
         badges: badges_dataset.visible.distinct(:identifier).count,
-        current_ranking: Domain::Services::Ranking.rank(self),
         recent_news: event_service.events_count,
         questions: Question.dataset.open.for(self).count,
         questions_expired: Question.dataset.expired.of(self).count,
@@ -237,7 +235,9 @@ module Domain
         ranking: Services::Ranking.rank(self),
         ranking_friends: Services::Ranking.rank_friends(self),
         # TODO
-        best_ranking: 0
+        # predictions: participations_dataset.count,
+        # current_ranking: Domain::Services::Ranking.rank(self),
+        # best_ranking: 0
       }
     end
 
