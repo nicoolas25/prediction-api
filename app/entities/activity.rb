@@ -35,6 +35,9 @@ module Entities
       expose :question do |a, opts|
         Question.new(a, opts)
       end
+      expose :participants do |a, opts|
+        (a.participants || []).size
+      end
       expose :winnings do |a, opts|
         a.values[:average_winnings] || 0.0
       end
@@ -47,7 +50,10 @@ module Entities
       when ::Domain::Player
         [Author.new(a)]
       when ::Domain::Question
-        (a.participants || []).map { |p| Author.new(p) }
+        # Only send the last 3 users
+        participants = a.participants || []
+        participants = participants[-3..-1] if participants.size > 2
+        participants.map { |p| Author.new(p) }
       end
     end
   end
