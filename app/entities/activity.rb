@@ -39,7 +39,7 @@ module Entities
         (a.participants || []).size
       end
       expose :winnings do |a, opts|
-        a.values[:average_winnings] || 0.0
+        (a.values[:average_winnings] || 0).to_i
       end
     end
 
