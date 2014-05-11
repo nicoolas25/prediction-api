@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Domain
   module Bonuses
     module Double
@@ -24,7 +26,7 @@ module Domain
         player.decrement_cristals_by!(stakes)
       end
 
-      labels fr: "Double", en: "Double"
+      labels fr: "Quitte ou Double", en: "Quit or Double", pt: "Tudo ou nada"
     end
 
     register_bonus Double

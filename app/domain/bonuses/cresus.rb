@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Domain
   module Bonuses
     module Cresus
@@ -12,7 +14,7 @@ module Domain
         participation.player.increment_cristals_by!(20)
       end
 
-      labels fr: "Appelez moi Cresus", en: "Call me Cresus"
+      labels fr: "Crésus", en: "Call me Cresus", pt: "Crésus"
     end
 
     register_bonus Cresus

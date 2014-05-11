@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Domain
   module Badges
     module Visionary
@@ -18,7 +20,7 @@ module Domain
         end
       end
 
-      labels fr: "Visionnaire", en: "Visionary"
+      labels fr: "Visionnaire", en: "Visionary", pt: "Visionário"
     end
 
     register_badge Visionary

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Domain
   module Badges
     module Incredible
@@ -18,7 +20,7 @@ module Domain
         end
       end
 
-      labels fr: "Incroyable", en: "Incredible"
+      labels fr: "Extra-lucide", en: "Incredible", pt: "Clarividente"
     end
 
     register_badge Incredible

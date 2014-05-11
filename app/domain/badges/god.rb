@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Domain
   module Badges
     module God
@@ -18,7 +20,7 @@ module Domain
         end
       end
 
-      labels fr: "Dieu du bonus", en: "God of bonus"
+      labels fr: "God of bonus", en: "God of bonus", pt: "Deus do bônus"
     end
 
     register_badge God

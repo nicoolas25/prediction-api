@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Domain
   module Badges
     module Looser
@@ -14,7 +16,7 @@ module Domain
         [true, [participation.player], participation.question.solved_at]
       end
 
-      labels fr: "Charlatan", en: "Charlatan"
+      labels fr: "KO", en: "KO", pt: "KO"
     end
 
     register_badge Looser

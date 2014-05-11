@@ -85,17 +85,20 @@ module Domain
           text = @target.question.labels[locale]
           case locale
           when :fr, 'fr' then "Je viens de répondre à la question : « #{text} » via Pulpo."
+          when :pt, 'pt' then "Eu apenas respondi a pergunta: \##{text}\# com Pulpo."
           else                "I just answered this question: '#{text}' through Pulpo."
           end
         when ::Domain::Badge
           text = @target.labels[locale]
           case locale
           when :fr, 'fr' then "Je viens de gagner le badge : « #{text} » via Pulpo."
+          when :pt, 'pt' then "Eu só ganhei a emblema: \"#{text}\" com Pulpo."
           else                "I just unlocked this badge: '#{text}' via Pulpo."
           end
         when ::Domain::Player
           case locale
           when :fr, 'fr' then "Rejoins moi sur l'application Pulpo et prédis l'avenir de la Coupe du monde 2014."
+          when :pt, 'pt' then "Venha se juntar a mim no Pulpo aplicativo, e aposte no campeonato do Mundo de 2014."
           else                "Come and join me on the Pulpo application and predict the futur of the World Cup 2014."
           end
         end

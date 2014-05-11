@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Domain
   module Bonuses
     module Blind
@@ -16,7 +18,7 @@ module Domain
         end
       end
 
-      labels fr: "Aveuglément", en: "I'm blind"
+      labels fr: "Lucky loser", en: "Lucky loser", pt: "Lucky loser"
     end
 
     register_bonus Blind

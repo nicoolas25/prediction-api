@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Domain
   module Badges
     module Participation
@@ -14,7 +16,7 @@ module Domain
         [true, [participation.player], participation.created_at]
       end
 
-      labels fr: "Joueur assidu", en: "Persevering player"
+      labels fr: "Joueur", en: "Player", pt: "Jogador"
     end
 
     register_badge Participation

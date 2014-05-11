@@ -13,7 +13,7 @@ module Controllers
 
         desc "List last events for the registered user"
         params do
-          requires :locale, type: String, regexp: /^(fr)|(en)$/
+          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)$/
           optional :before, type: Integer
           optional :after, type: Integer
         end

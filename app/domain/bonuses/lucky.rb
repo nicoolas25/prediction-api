@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module Domain
   module Bonuses
     module Lucky
@@ -11,7 +13,7 @@ module Domain
 
       identifier 'lucky'
 
-      labels fr: "Jour de chance", en: "Feeling lucky"
+      labels fr: "Jour de chance", en: "Feeling lucky", pt: "Dia de sorte"
 
       participation_options do
         { chances: BONUS_CHANCES }

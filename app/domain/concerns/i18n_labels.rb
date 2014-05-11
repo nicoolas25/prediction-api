@@ -1,6 +1,6 @@
 module Domain
   module I18nLabels
-    LOCALES = %w(fr en dev).freeze
+    LOCALES = %w(fr en pt dev).freeze
 
     # Helper to access the labels
     def labels
