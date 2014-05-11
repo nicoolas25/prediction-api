@@ -1,0 +1,14 @@
+test:
+  uri: 'https://sandbox.itunes.apple.com'
+  bundle_id: 'com.garbage.Pulpo'
+
+app:
+  uri: 'https://sandbox.itunes.apple.com'
+  bundle_id: 'com.garbage.Pulpo'
+
+production:
+  uri: 'https://buy.itunes.apple.com'
+  bundle_id: 'com.garbage.Pulpo'
+
+
+

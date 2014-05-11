@@ -2,16 +2,16 @@ require 'httparty'
 
 module PaymentAPI
   class Apple
-    BUNDLE_ID = 'com.garbage.PredictionWC'.freeze
+    def self.config
+      env = ENV['RACK_ENV'] || 'app'
+      @config ||= YAML.load_file('./config/apple.yml')[env]
+    end
 
     include HTTParty
 
     logger LOGGER, :info
 
-    # TODO: Pass this in production mode
-    # base_uri (ENV['RACK_ENV'] == 'production' ? 'https://buy.itunes.apple.com' : 'https://sandbox.itunes.apple.com')
-
-    base_uri 'https://sandbox.itunes.apple.com'
+    base_uri config['uri']
     format :json
 
     attr_reader :provider
@@ -37,7 +37,7 @@ module PaymentAPI
 
       if response.code == 200
         @transaction = response.parsed_response
-        if @transaction['receipt']['bundle_id'] != BUNDLE_ID
+        if @transaction['receipt']['bundle_id'] != self.class.config['bundle_id']
           @transaction = false
         end
       else

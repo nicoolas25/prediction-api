@@ -2,6 +2,7 @@ log/
 coverage/
 config/database.yml
 config/dropbox.yml
+config/apple.yml
 config/pulpo-sa.p12
 scripts/seed_*
 public/

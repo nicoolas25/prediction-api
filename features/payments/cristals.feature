@@ -74,6 +74,7 @@ Feature: Buy cristals from the application
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "existing_transaction"
 
+
   # Scenario: The player send a valid request (real case)
   #   Given I send and accept JSON
   #   And I am an authenticated user: "nickname"
@@ -88,3 +89,17 @@ Feature: Buy cristals from the application
   #   """
   #   Then the response status should be "403"
   #   And the JSON response should have "$.code" with the text "unknown_product_id"
+
+  # Scenario: The player send a valid request (real case)
+  #   Given I send and accept JSON
+  #   And I am an authenticated user: "nickname"
+  #   When I send a POST request to "/v1/payments/apple" with the following:
+  #   """
+  #   {
+  #     "payload": {
+  #       "receipt": ""
+  #     }
+  #   }
+  #   """
+  #   Then the response status should be "201"
+  #   And the player "nickname" should have "2020" cristals
