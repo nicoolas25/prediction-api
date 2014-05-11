@@ -1,7 +1,5 @@
 Sequel.migration do
   up do
-    run 'CREATE EXTENSION hstore'
-
     create_table(:extra_informations) do
       primary_key :id, type: Bignum
       hstore :content
@@ -18,7 +16,5 @@ Sequel.migration do
     end
 
     drop_table(:extra_informations)
-
-    run 'DROP EXTENSION hstore'
   end
 end
