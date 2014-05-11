@@ -100,4 +100,5 @@ module Domain
   require './app/domain/badges/visionary'
   require './app/domain/badges/incredible'
   require './app/domain/badges/god'
+  require './app/domain/badges/chicken'
 end
