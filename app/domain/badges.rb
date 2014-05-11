@@ -95,10 +95,11 @@ module Domain
   end
 
   # Require the available badges here
-  require './app/domain/badges/participation'
+  require './app/domain/badges/chicken'
+  require './app/domain/badges/glutton'
+  require './app/domain/badges/god'
+  require './app/domain/badges/incredible'
   require './app/domain/badges/looser'
   require './app/domain/badges/visionary'
-  require './app/domain/badges/incredible'
-  require './app/domain/badges/god'
-  require './app/domain/badges/chicken'
+  require './app/domain/badges/participation'
 end
