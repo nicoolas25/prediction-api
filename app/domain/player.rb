@@ -96,9 +96,8 @@ module Domain
 
     def authenticate!(api)
       # Update the social association with the last know token, email, and avatar
-      SocialAssociation.dataset.
-        where(player_id: self.id, provider: api.provider_id).
-        update(token: api.token, avatar_url: api.avatar_url, email: api.email)
+      assoc = SocialAssociation.dataset.where(player_id: self.id, provider: api.provider_id).first
+      assoc.update_with_api!(api)
 
       # Update the application token
       DB.transaction(retry_on: [Sequel::ConstraintViolation], num_retries: 30) do

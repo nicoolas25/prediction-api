@@ -31,5 +31,9 @@ module SocialAPI
       end
       !!social_id
     end
+
+    def extra_informations
+      {}
+    end
   end
 end

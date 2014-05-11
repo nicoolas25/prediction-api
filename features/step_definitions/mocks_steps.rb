@@ -15,6 +15,12 @@ def fake_friends(provider, *results)
   end
 end
 
+def fake_informations(provider, infos={})
+  klass = "SocialAPI::#{provider.camelize}".constantize
+  messages = { extra_informations: infos }
+  allow_any_instance_of(klass).to receive_messages(messages)
+end
+
 def fake_social_id(provider, social_id=nil)
   klass = "SocialAPI::#{provider.camelize}".constantize
   messages = { social_id: social_id, email: 'john@do.org', first_name: 'John', last_name: 'Do', avatar_url: 'http://example.org/image.png' }
@@ -36,6 +42,10 @@ def fake_payment(provider, transaction_id, product_id)
   klass = "PaymentAPI::#{provider.camelize}".constantize
   messages = { transaction_id: transaction_id, product_id: product_id }
   allow_any_instance_of(klass).to receive_messages(messages)
+end
+
+Given /^the player informations given by "([^"]*)" are:$/ do |provider, infos|
+  fake_informations(provider, Hash[infos.raw])
 end
 
 Given /^the lucky bonus give "(\d+)" percent of chance of getting a bonus$/ do |percent|

@@ -61,6 +61,10 @@ module SocialAPI
       true
     end
 
+    def extra_informations
+      infos || super
+    end
+
   private
 
     def infos
@@ -69,7 +73,10 @@ module SocialAPI
       response = self.class.get(
         '/plus/v1/people/me',
         headers: {'Authorization' => "Bearer #{@token}"},
-        query: {fields: "id,name(familyName,givenName),image(url),emails"})
+        query: {
+          fields: "id,name(familyName,givenName),image(url),emails,birthday,ageRange,currentLocation,gender,language,occupation,relationshipStatus"
+        }
+      )
 
       if response.code == 200
         @infos = response.parsed_response

@@ -46,6 +46,10 @@ module SocialAPI
       client.update(message) rescue false
     end
 
+    def extra_informations
+      user || super
+    end
+
   private
 
     def client

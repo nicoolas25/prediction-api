@@ -53,6 +53,10 @@ module SocialAPI
       response.code == 200
     end
 
+    def extra_informations
+      infos || super
+    end
+
   private
 
     def infos
@@ -60,7 +64,11 @@ module SocialAPI
 
       response = self.class.get(
         '/me',
-        query: {access_token: @token, fields: 'id,first_name,last_name,email'})
+        query: {
+          access_token: @token,
+          fields: 'id,first_name,last_name,email,age_range,birthday,gender,hometown,locale,location,timezone,religion,relationship_status'
+        }
+      )
 
       if response.code == 200
         @infos = response.parsed_response

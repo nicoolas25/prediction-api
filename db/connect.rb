@@ -16,6 +16,9 @@ url += "&password=#{pass}" if pass
 
 DB = Sequel.connect(url)
 
+# Extensions to this Database object
+DB.extension :pg_hstore
+
 if defined?(LOGGER)
   DB.loggers << LOGGER
   DB.log_warn_duration = 0.2

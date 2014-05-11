@@ -5,6 +5,7 @@ module Domain
     unrestrict_primary_key
 
     many_to_one :player
+    many_to_one :extra_information
 
     def validate
       super
@@ -19,6 +20,7 @@ module Domain
     def after_create
       super
       add_induced_friendships!
+      update_extra_information!
       Workers::FriendExplorer.perform_async(player.id, api.provider_name)
     end
 
@@ -37,6 +39,11 @@ module Domain
 
     def expires_at
       last_updated_at + REFRESH_DELAY
+    end
+
+    def update_with_api!(out_api)
+      update(token: out_api.token, avatar_url: out_api.avatar_url, email: out_api.email)
+      update_extra_information!(out_api)
     end
 
     def touch!
@@ -87,6 +94,16 @@ module Domain
     end
 
   protected
+
+    def update_extra_information!(out_api=nil)
+      content = Sequel.hstore((out_api || api).extra_informations)
+      if extra_information
+        extra_information.update(content: content)
+      else
+        self.extra_information = Domain::ExtraInformation.create(content: content)
+        save_changes
+      end
+    end
 
     def remove_induced_friendships!
       ds = DB[:friendships].where(provider: provider)

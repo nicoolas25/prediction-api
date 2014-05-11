@@ -111,3 +111,12 @@ Then /^the token for the "([^"]*)" social association of "([^"]*)" is "([^"]*)"$
   assoc  = player.social_associations_dataset.where(provider: SocialAPI::PROVIDERS.index(provider)).first
   expect(assoc.token).to eql(token)
 end
+
+Then /^the social association for "([^"]*)" for "([^"]*)" should include those informations:$/ do |provider, nickname, infos|
+  player = Domain::Player.first!(nickname: nickname)
+  assoc = player.social_associations_dataset.where(provider: SocialAPI::PROVIDERS.index(provider)).first
+  extra_infos = assoc.extra_information.content
+  infos.raw.each do |key, value|
+    expect(extra_infos[key]).to eql(value)
+  end
+end

@@ -19,6 +19,8 @@ if ENV['COVERAGE']
   SimpleCov.start do
     # Do not run on spec files
     add_filter 'features'
+    add_filter 'lib/payment_api'
+    add_filter 'lib/social_api'
 
     # Create test groups
     add_group "Domain",     'app/domain'
