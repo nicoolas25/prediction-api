@@ -14,7 +14,7 @@ module Domain
         participation.player.increment_cristals_by!(20)
       end
 
-      labels fr: "Crésus", en: "Call me Cresus", pt: "Crésus"
+      labels fr: "Crésus", en: "Call me Cresus", pt: "Crésus", es: "Cresus"
     end
 
     register_bonus Cresus

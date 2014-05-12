@@ -18,7 +18,7 @@ module Domain
         end
       end
 
-      labels fr: "Lucky loser", en: "Lucky loser", pt: "Lucky loser"
+      labels fr: "Lucky loser", en: "Lucky loser", pt: "Lucky loser", es: "Lucky Loser"
     end
 
     register_bonus Blind

@@ -13,7 +13,7 @@ module Controllers
 
         desc "Share something via a given social network"
         params do
-          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)$/
+          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)$/
           requires :kind, type: String, regexp: /^(participation)|(application)|(badge)$/
           optional :oauth2TokenFacebook, type: String
           optional :oauth2TokenTwitter, type: String

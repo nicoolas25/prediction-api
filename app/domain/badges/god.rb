@@ -20,7 +20,7 @@ module Domain
         end
       end
 
-      labels fr: "God of bonus", en: "God of bonus", pt: "Deus do bônus"
+      labels fr: "God of bonus", en: "God of bonus", pt: "Deus do bônus", es: "God of bonus"
     end
 
     register_badge God

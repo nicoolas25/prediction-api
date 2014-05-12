@@ -20,7 +20,7 @@ module Domain
         end
       end
 
-      labels fr: "Gourmand", en: "Glutton", pt: "Guloso"
+      labels fr: "Gourmand", en: "Glutton", pt: "Guloso", es: "Codicioso"
     end
 
     register_badge Glutton

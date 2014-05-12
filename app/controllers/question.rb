@@ -9,7 +9,7 @@ module Controllers
 
     namespace :questions do
       namespace ':locale' do
-        params { requires :locale, type: String, regexp: /^(fr)|(en)|(pt)$/ }
+        params { requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)$/ }
         before { @locale = params[:locale].to_sym }
 
         desc "List the open questions for a player"
@@ -68,7 +68,7 @@ module Controllers
 
         desc "Show the details of a question"
         params do
-          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)$/
+          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)$/
           requires :id, type: String, regexp: /^\d+$/
         end
         get ':id' do

@@ -13,7 +13,7 @@ module Domain
 
       identifier 'lucky'
 
-      labels fr: "Jour de chance", en: "Feeling lucky", pt: "Dia de sorte"
+      labels fr: "Jour de chance", en: "Feeling lucky", pt: "Dia de sorte", es: "Dia de suerte"
 
       participation_options do
         { chances: BONUS_CHANCES }
