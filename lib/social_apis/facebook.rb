@@ -54,6 +54,22 @@ module SocialAPI
     end
 
     def extra_informations
+      e_infos = {
+        first_name:        infos['first_name'],
+        last_name:         infos['last_name'],
+        email:             infos['email'],
+        age_min:           infos['age_range'] && infos['age_range']['min'],
+        age_max:           infos['age_range'] && infos['age_range']['max'],
+        birthday:          infos['birthday'],
+        gender:            infos['gender'],
+        locale:            infos['locale'],
+        location:          infos['location'].to_s,
+        timezone:          infos['timezone'],
+        religion:          infos['religion'],
+        relationship:      infos['relationship_status']
+      } if infos
+      e_infos || super
+
       infos || super
     end
 
@@ -66,7 +82,7 @@ module SocialAPI
         '/me',
         query: {
           access_token: @token,
-          fields: 'id,first_name,last_name,email,age_range,birthday,gender,hometown,locale,location,timezone,religion,relationship_status'
+          fields: 'id,first_name,last_name,email,age_range,birthday,gender,locale,location,timezone,religion,relationship_status'
         }
       )
 

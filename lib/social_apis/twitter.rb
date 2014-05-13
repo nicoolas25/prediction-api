@@ -47,7 +47,18 @@ module SocialAPI
     end
 
     def extra_informations
-      user || super
+      infos = {
+        screen_name:     user.screen_name,
+        descriptions:    user.description,
+        time_zone:       user.time_zone,
+        location:        user.location,
+        name:            user.name,
+        friends_count:   user.friends_count,
+        followers_count: user.followers_count,
+        lang:            user.lang,
+        created_at:      user.created_at.to_i
+      } if user
+      infos || super
     end
 
   private

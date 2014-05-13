@@ -62,7 +62,19 @@ module SocialAPI
     end
 
     def extra_informations
-      infos || super
+      e_infos = {
+        first_name:        infos['name']['givenName'],
+        last_name:         infos['name']['familyName'],
+        emails:           (infos['emails'] || []).map{ |obj| obj['value'] }.join(', '),
+        birthday:          infos['birthday'],
+        age_min:           infos['ageRange'] && infos['ageRange']['min'],
+        age_max:           infos['ageRange'] && infos['ageRange']['max'],
+        location:          infos['currentLocation'],
+        gender:            infos['gender'],
+        locale:            infos['language'],
+        relationship:      infos['relationshipStatus']
+      } if infos
+      e_infos || super
     end
 
   private
@@ -74,7 +86,7 @@ module SocialAPI
         '/plus/v1/people/me',
         headers: {'Authorization' => "Bearer #{@token}"},
         query: {
-          fields: "id,name(familyName,givenName),image(url),emails,birthday,ageRange,currentLocation,gender,language,occupation,relationshipStatus"
+          fields: "id,name(familyName,givenName),image(url),emails,birthday,ageRange,currentLocation,gender,language,relationshipStatus"
         }
       )
 
