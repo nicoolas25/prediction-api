@@ -50,6 +50,7 @@ module SocialAPI
         '/me/feed',
         query: {access_token: @token, message: message})
 
+      LOGGER.info "Facebook share failed: #{response.try(:parsed_response)}" unless response.code == 200
       response.code == 200
     end
 
