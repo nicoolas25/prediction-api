@@ -67,7 +67,7 @@ module Domain
       def mark_as_shared!
         if @target
           @target.update(shared_at: Time.now)
-          @player.update(cristals: Sequel.expr(:cristals) + earnings)
+          @player.increment_cristals_by!(earnings)
         end
       end
 
