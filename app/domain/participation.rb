@@ -37,7 +37,7 @@ module Domain
 
     def validate
       super
-      if player.cristals < stakes
+      if new? && player.cristals < stakes
         errors.add(:player, 'need cristals')
         raise CristalsNeeded.new(:cristals_needed)
       end

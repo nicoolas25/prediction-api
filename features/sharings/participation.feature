@@ -1,7 +1,7 @@
 Feature: An user can share a participation via a social network
 
   Background:
-    Given I am an authenticated user: "nickname"
+    Given I am an authenticated user: "nickname" with "12" cristals
     And a social account for "facebook" with "fake-id" id is linked to "nickname"
     And a valid OAuth2 token for the "facebook" provider which returns the id "fake-id"
     And the "facebook" provider will share the messages correctly
@@ -36,8 +36,8 @@ Feature: An user can share a participation via a social network
     Then the response status should be "201"
     And the last share should be in "fr" with an id containing "-participation-1"
     And the "shared_at" attr for participation to the question "1" of "nickname" should be defined
-    And the JSON response should have "$.cristals" with the text "12"
-    And the player "nickname" should have "12" cristals
+    And the JSON response should have "$.cristals" with the text "4"
+    And the player "nickname" should have "4" cristals
 
   Scenario: The user share the participation correctly in english
     When I send a POST request to "/v1/shares/en/participation/1" with the following:
