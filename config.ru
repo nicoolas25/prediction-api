@@ -12,7 +12,7 @@ APPLICATION_CONFIG = {
 
 use Rack::Cors do
   allow do
-    origins 'api.predictio.info', 'predictio.info'
+    origins 'api.predictio.info', 'predictio.info', 'api.pulpo.info', 'pulpo.info'
     resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
   end
 end
