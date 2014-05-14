@@ -58,7 +58,7 @@ Feature: An user can share the application via a social network
     Then the response status should be "201"
     And the last share should be in "fr" with an id containing "-application"
     And the "shared_at" attr of "nickname" should be defined
-    Then the JSON response should have "$.cristals" with the text "30"
+    Then the JSON response should have "$.cristals" with the text "70"
 
   Scenario: The user share the application correctly in english
     Given I am an authenticated user: "nickname"
@@ -71,4 +71,4 @@ Feature: An user can share the application via a social network
     Then the response status should be "201"
     And the last share should be in "en" with an id containing "-application"
     And the "shared_at" attr of "nickname" should be defined
-    And the player "nickname" should have "30" cristals
+    And the player "nickname" should have "70" cristals

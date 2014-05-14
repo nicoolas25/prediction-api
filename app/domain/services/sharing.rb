@@ -75,7 +75,7 @@ module Domain
         case @target
         when ::Domain::Participation then 2
         when ::Domain::Badge         then 2
-        when ::Domain::Player        then 10
+        when ::Domain::Player        then 50
         end
       end
 
