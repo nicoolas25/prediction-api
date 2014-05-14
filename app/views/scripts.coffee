@@ -331,6 +331,8 @@ $ ->
   # Set the api URL according to the host.
   if window.location.host is 'predictio.info'
     api_url = 'api.predictio.info'
+  else if window.location.host is 'pulpo.info'
+    api_url = 'api.pulpo.info'
   else
     api_url = window.location.host
 
