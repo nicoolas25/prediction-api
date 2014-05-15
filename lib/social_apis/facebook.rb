@@ -69,8 +69,6 @@ module SocialAPI
         relationship:      infos['relationship_status']
       } if infos
       e_infos || super
-
-      infos || super
     end
 
   private
