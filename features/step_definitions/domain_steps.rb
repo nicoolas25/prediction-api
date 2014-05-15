@@ -112,6 +112,12 @@ Then /^the token for the "([^"]*)" social association of "([^"]*)" is "([^"]*)"$
   expect(assoc.token).to eql(token)
 end
 
+Then /^the id for the "([^"]*)" social association of "([^"]*)" is "([^"]*)"$/ do |provider, nickname, id|
+  player = Domain::Player.first!(nickname: nickname)
+  assoc  = player.social_associations_dataset.where(provider: SocialAPI::PROVIDERS.index(provider)).first
+  expect(assoc.id).to eql(id)
+end
+
 Then /^the social association for "([^"]*)" for "([^"]*)" should include those informations:$/ do |provider, nickname, infos|
   player = Domain::Player.first!(nickname: nickname)
   assoc = player.social_associations_dataset.where(provider: SocialAPI::PROVIDERS.index(provider)).first

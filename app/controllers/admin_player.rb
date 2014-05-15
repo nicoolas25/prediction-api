@@ -27,10 +27,20 @@ module Controllers
         desc "Update player attributes"
         params do
           optional :cristals, type: Integer
+          optional :merge_target, type: String
         end
         put ':nickname' do
           if player = Domain::Player.where(nickname: params[:nickname]).first
-            player.update(cristals: params[:cristals])
+            # Update cristals
+            if cristals = params[:cristals]
+              player.update(cristals: cristals)
+            end
+
+            # Merge players
+            if (target = params[:merge_target]) && !target.blank?
+              target = Domain::Player.first!(nickname: target)
+              player.absorb!(target)
+            end
           else
             fail!(:not_found, 404)
           end

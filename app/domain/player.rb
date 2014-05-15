@@ -68,6 +68,19 @@ module Domain
       Services::Ranking.ensure_player_presence(self)
     end
 
+    def absorb!(other_player)
+      # Merge social association
+      assocs = other_player.social_associations_dataset.where(provider: social_associations.map(&:provider))
+      assocs.each do |assoc|
+        social_associations_dataset.where(provider: assoc.provider).update(id: assoc.id, token: assoc.token)
+      end
+
+      # Delete the othe player
+      other_player.destroy
+
+      true
+    end
+
     def distinct_bonuses
       bonuses_dataset.distinct(:identifier).all
     end
