@@ -212,6 +212,7 @@ detailsPlayersInit = ->
       data: JSON.stringify
         token: token
         cristals: $details.find('input.cristals').val()
+        merge_target: $details.find('input.merge-target').val()
     .done ->
       alert('Done!')
       fetchPlayer()
