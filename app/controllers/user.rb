@@ -54,7 +54,7 @@ module Controllers
         post 'friends/refresh' do
           player.update_social_association_tokens(mapping_provider_tokens)
           player.social_associations.each(&:reload_friendships!)
-          redirect "/v1/users/#{params[:uid]}/friends"
+          {done: true}
         end
       end
     end

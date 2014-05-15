@@ -13,11 +13,11 @@ Feature: Display the friends
 
   Scenario: There is some friends to display
     When I send a POST request to "/v1/users/me/friends/refresh"
-    Then the response status should be "302"
+    Then the response status should be "201"
     And the player "nickname" should have "2" friends
 
   Scenario: The user's token is expired, nothing is done
     Given an invalid OAuth2 token for the "facebook" provider
     When I send a POST request to "/v1/users/me/friends/refresh"
-    Then the response status should be "302"
+    Then the response status should be "201"
     And the player "nickname" should have "1" friends
