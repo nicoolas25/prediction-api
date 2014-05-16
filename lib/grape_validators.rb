@@ -1,6 +1,8 @@
+
 module Validator
   class AuthenticationToken < Grape::Validations::Validator
-    ADMIN_TOKEN = "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB".freeze
+    CONFIG      = YAML.load_file('./config/admin.yml')[ENV['RACK_ENV'] || 'app']
+    ADMIN_TOKEN = CONFIG['key'].freeze
 
     def validate_param!(attr_name, params)
       unless params[attr_name] == ADMIN_TOKEN

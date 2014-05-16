@@ -6,8 +6,6 @@ require './app/domain'
 
 module Prediction
   class Web < Sinatra::Base
-    ADMIN_TOKEN = "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB".freeze
-
     set :views, './app/views'
 
     get '/' do

@@ -16,7 +16,7 @@ ENV['TARGET'] == 'production' ?
   set(:domain, 'predictio.info')    # also known as '146.185.138.74'
 
 set :deploy_to,    '/var/www/api'
-set :shared_paths, ['log', 'pids', 'config/database.yml', 'config/dropbox.yml', 'config/pulpo-sa.p12', 'config/apple.yml']
+set :shared_paths, ['log', 'pids', 'config/database.yml', 'config/dropbox.yml', 'config/pulpo-sa.p12', 'config/apple.yml', 'config/admin.yml']
 
 # Repository configuration
 set :repository,   'git@bitbucket:n25/pr-dictions.git'
@@ -147,6 +147,7 @@ task :setup => :environment do
   queue! %[touch #{deploy_to}/shared/config/database.yml]
   queue! %[touch #{deploy_to}/shared/config/dropbox.yml]
   queue! %[touch #{deploy_to}/shared/config/apple.yml]
+  queue! %[touch #{deploy_to}/shared/config/admin.yml]
 end
 
 #
