@@ -13,7 +13,7 @@ Feature: The user earns 20 cristal after a prediction
       | nickname | cresus |
 
   Scenario: The user looses a prediction
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
@@ -26,7 +26,7 @@ Feature: The user earns 20 cristal after a prediction
     And the player "nickname" should have "30" cristals
 
   Scenario: The user wins a prediction
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",

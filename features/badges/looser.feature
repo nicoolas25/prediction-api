@@ -9,7 +9,7 @@ Feature: The user get a badge when he looses predictions
       | 1 | choices | Chosir la bonne équipe | France,Belgique |
     And there is the following participations for the question "1":
       | nickname | 10 | 1:1 |
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",

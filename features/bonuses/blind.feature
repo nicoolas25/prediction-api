@@ -11,7 +11,7 @@ Feature: The user regains its stakes after a missed prediction
       | nickname | 10 | 1:1 |
     And there is the following bonuses for the question "1":
       | nickname | blind |
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",

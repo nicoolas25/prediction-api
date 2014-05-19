@@ -22,7 +22,7 @@ module Controllers
           question_params = params[:question]
           components_params = question_params.delete(:components)
           components = Domain::QuestionComponent.build_many(components_params)
-          question = Domain::Question.build(question_params)
+          question = Domain::Question.new(question_params)
           question.create_with(components)
           present question, with: Entities::Question, details: true
         end
@@ -33,26 +33,50 @@ module Controllers
           present questions, with: Entities::Question, admin: true
         end
 
-        desc "Show a question"
-        get ':id' do
-          if question = Domain::Question.dataset.where(id: params[:id]).eager(:components).first
-            present question, with: Entities::Question, admin: true, details: true
-          else
-            fail!(:not_found, 404)
+        namespace ':id' do
+          params do
+            requires :id, type: Integer
           end
-        end
 
-        desc "Answer a question"
-        params do
-          requires :components, type: Hash
-        end
-        put ':id' do
-          if question = Domain::Question.find_for_answer(params[:id])
-            components = params[:components]
-            question.validate_answers!(components) # This will raise error unless components are valid.
-            Workers::QuestionAnswerer.perform_async(question.id, components)
-          else
-            fail!(:not_found, 404)
+          desc "Show a question"
+          get do
+            if question = Domain::Question.dataset.where(id: params[:id]).eager(:components).first
+              present question, with: Entities::Question, admin: true, details: true
+            else
+              fail!(:not_found, 404)
+            end
+          end
+
+          desc "Update a question"
+          params do
+            requires :question, type: Hash do
+              requires :expires_at, type: Time
+              requires :reveals_at, type: Time
+              requires :labels,     type: Hash
+              requires :components, type: Array
+            end
+          end
+          put do
+            question = Domain::Question.find_for_update(params[:id])
+            question_params = params[:question]
+            components_params = question_params.delete(:components)
+            question.set(question_params)
+            question.update_components(components_params)
+            present question, with: Entities::Question, details: true
+          end
+
+          desc "Answer a question"
+          params do
+            requires :components, type: Hash
+          end
+          put 'answer' do
+            if question = Domain::Question.find_for_answer(params[:id])
+              components = params[:components]
+              question.validate_answers!(components) # This will raise error unless components are valid.
+              Workers::QuestionAnswerer.perform_async(question.id, components)
+            else
+              fail!(:not_found, 404)
+            end
           end
         end
       end

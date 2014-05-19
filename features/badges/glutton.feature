@@ -15,7 +15,7 @@ Feature: The user get a badge when he looses a prediction with a double bonus
       | nickname | 10 | 1:0 |
     And there is the following bonuses for the question "1":
       | nickname | double |
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
@@ -33,7 +33,7 @@ Feature: The user get a badge when he looses a prediction with a double bonus
       | nickname | 10 | 1:0 |
     And there is the following bonuses for the question "1":
       | nickname | double |
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",

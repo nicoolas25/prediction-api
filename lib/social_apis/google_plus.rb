@@ -57,8 +57,8 @@ module SocialAPI
     end
 
     def share(locale, message, id)
-      # Consider the sharing via google plus successfull
-      true
+      # Consider the sharing via google plus successfull when the association is valid
+      valid?
     end
 
     def extra_informations

@@ -312,7 +312,7 @@ detailsQuestionsInit = ->
       components[id] = answer
 
     $.ajax
-      url: "http://#{api_url}/v1/admin/questions/#{questionId}"
+      url: "http://#{api_url}/v1/admin/questions/#{questionId}/answer"
       type: 'PUT'
       contentType: 'application/json'
       processData: false

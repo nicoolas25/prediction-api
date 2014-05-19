@@ -72,7 +72,7 @@ module Domain
 
     def validate
       super
-      errors.add(:labels, 'are missing') if new? && labels.empty?
+      errors.add(:labels, 'are missing') if labels.empty?
     end
 
     def update_with_participation!(participation)
@@ -80,6 +80,29 @@ module Domain
         amount: Sequel.expr(:amount) + participation.stakes,
         players_count: Sequel.expr(:players_count) + 1
       })
+    end
+
+    def update_components(new_components)
+      raise EmptyQuestion.new(:empty_question) if new_components.nil? || new_components.empty?
+      raise InvalidQuestion.new(:invalid_question) unless valid?
+
+      to_delete = components.reject { |c1| new_components.any? { |c2| c1.id.to_s == c2['id'] }  }
+
+      DB.transaction do
+        save
+
+        to_delete.each(&:destroy)
+
+        new_components.each_with_index do |c1, index|
+          c1.merge(position: index)
+          if c2 = components.find { |c2| c1['id'] == c2.id.to_s }
+            c2.update_attributes(c1)
+            c2.save
+          else
+            add_component(QuestionComponent.build(c1))
+          end
+        end
+      end
     end
 
     def create_with(components)
@@ -146,6 +169,14 @@ module Domain
         question
       end
 
+      def find_for_update(id)
+        unless question = dataset.open.where(id: id).eager(:components).first
+          raise QuestionNotFound.new(:already_expired)
+        end
+
+        question
+      end
+
       def find_for_participation(player, id)
         unless question = dataset.open.for(player).where(id: id).eager(:components).first
           if player.participations_dataset.for_question(id).empty?
@@ -155,10 +186,6 @@ module Domain
           end
         end
         question
-      end
-
-      def build(question_params)
-        Domain::Question.new(question_params)
       end
     end
 

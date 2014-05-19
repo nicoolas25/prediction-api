@@ -18,6 +18,8 @@ module Domain
       LOCALES.each do |locale|
         if (val = hash[locale]).present?
           self.__send__(:"label_#{locale}=", val)
+        else
+          self.__send__(:"label_#{locale}=", nil)
         end
       end
     end

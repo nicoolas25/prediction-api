@@ -36,17 +36,23 @@ module Domain
       kind == 0
     end
 
+    def update_attributes(component_params)
+      self.kind     = component_params[:kind].to_i
+      self.position = component_params[:position].to_i
+      self.labels   = component_params[:labels]
+      self.choices  = component_params[:choices] if have_choices?
+      self
+    end
+
     class << self
       def build_many(components_params)
-        results = components_params.map do |attrs|
-          component         = Domain::QuestionComponent.new
-          component.kind    = attrs[:kind].to_i
-          component.labels  = attrs[:labels]
-          component.choices = attrs[:choices] if component.have_choices?
-          raise InvalidComponentError.new(:invalid_component) unless component.valid?
-          component
-        end
-        results
+        components_params.map { |attrs| build(attrs) }
+      end
+
+      def build(component_params)
+        component = Domain::QuestionComponent.new.update_attributes(component_params)
+        raise InvalidComponentError.new(:invalid_component) unless component.valid?
+        component
       end
     end
 

@@ -46,8 +46,8 @@ module SocialAPI
     end
 
     def share(locale, message, id)
-      # Consider the sharing via facebook successfull
-      true
+      # Consider the sharing via facebook successfull when the association is valid
+      valid?
     end
 
     def extra_informations

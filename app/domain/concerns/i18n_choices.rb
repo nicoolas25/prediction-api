@@ -18,6 +18,8 @@ module Domain
       LOCALES.each do |locale|
         if (val = hash[locale]).present?
           self.__send__(:"choices_#{locale}=", val.split(',').map(&:strip).join(','))
+        else
+          self.__send__(:"choices_#{locale}=", nil)
         end
       end
     end

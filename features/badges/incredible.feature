@@ -14,7 +14,7 @@ Feature: The user get a badge when he wins win 5*stakes predictions
     Given there is the following participations for the question "1":
       | nickname | 10 | 1:0 |
       | player_1 | 40 | 1:1 |
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
@@ -31,7 +31,7 @@ Feature: The user get a badge when he wins win 5*stakes predictions
     Given there is the following participations for the question "1":
       | nickname | 10 | 1:0 |
       | player_1 | 30 | 1:1 |
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",

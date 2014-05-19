@@ -12,7 +12,7 @@ Feature: The distribution of the earnings are done when the question is answered
       | nickname_1 | 10 | 1:0 |
       | nickname_2 | 10 | 1:0 |
       | nickname_3 | 10 | 1:0 |
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
@@ -40,7 +40,7 @@ Feature: The distribution of the earnings are done when the question is answered
       | nickname_1 | 10 | 1:0 |
       | nickname_2 | 10 | 1:0 |
       | nickname_3 | 10 | 1:1 |
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
@@ -66,7 +66,7 @@ Feature: The distribution of the earnings are done when the question is answered
       | nickname_2 | 10 | 1:0 |
       | nickname_3 | 10 | 1:1 |
       | nickname_4 | 10 | 1:1 |
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
@@ -93,7 +93,7 @@ Feature: The distribution of the earnings are done when the question is answered
       | nickname_2 | 10 | 1:0 |
       | nickname_3 | 20 | 1:1 |
       | nickname_4 | 10 | 1:1 |
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",

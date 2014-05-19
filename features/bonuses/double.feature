@@ -27,7 +27,7 @@ Feature: The user double its earnings or he loose it's stakes another time
 
   Scenario: The user looses a prediction but loose nothing more
     Given it is currently next week
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
@@ -41,7 +41,7 @@ Feature: The user double its earnings or he loose it's stakes another time
 
   Scenario: The user wins a prediction and win 2 times
     Given it is currently next week
-    When I send a PUT request to "/v1/admin/questions/1" with the following:
+    When I send a PUT request to "/v1/admin/questions/1/answer" with the following:
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
