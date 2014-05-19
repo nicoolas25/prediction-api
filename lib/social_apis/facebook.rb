@@ -46,11 +46,8 @@ module SocialAPI
     end
 
     def share(locale, message, id)
-      response = self.class.post(
-        '/me/feed',
-        query: {access_token: @token, message: message})
-
-      response.code == 200
+      # Consider the sharing via facebook successfull
+      true
     end
 
     def extra_informations
