@@ -1,6 +1,6 @@
 You have to execute the script in a folder with this structure : 
 - YOURFOLDER/
---- gen_badges.ry
+--- gen_badges.rb
 --- background/
 --- icons/
 --- tmp/
