@@ -24,6 +24,10 @@ module Prediction
       slim :questions_details
     end
 
+    get '/questions/:id/edit' do
+      slim :questions_edit
+    end
+
     get '/players' do
       slim :players_list
     end

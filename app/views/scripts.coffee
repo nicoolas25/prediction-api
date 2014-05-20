@@ -1,6 +1,76 @@
-window.DATE_FORMAT = 'YYYY-MM-DD HH:mm'
+window.DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss +0200'
 
 token = api_url = null
+
+insertLocales = ($root, object, type) ->
+  $root.find("div.#{type}").each (_, block) ->
+    $block = $(block)
+    lang = $block.find('select.locale').val()
+    text = $block.find("input.#{type}").val()
+    object[lang] = text
+
+bindAddRemoveButton = ->
+  $(document).on 'click', 'button.add', (event) ->
+    event.preventDefault()
+    $btn   = $(@)
+    sect   = $btn.data('section')
+    $bloc  = $btn.closest('.row').next("div.#{sect}")
+    $clone = $bloc.clone()
+    $clone.find('input, select').val(null)
+    $clone.insertBefore($bloc)
+
+  $(document).on 'click', 'button.remove', (event) ->
+    event.preventDefault()
+    $btn  = $(@)
+    sect  = $btn.data('section')
+    sel   = "div.#{sect}"
+    $bloc = $btn.closest(sel)
+    if $bloc.prev().is(sel) or $bloc.next().is(sel)
+      $bloc.remove()
+    else
+      alert('Vous devez avoir au moins un element de ce type.')
+
+bindQuestionFormSubmission = (url, type, callback) ->
+  $(document).on 'submit', 'form', (event) ->
+    event.preventDefault()
+
+    params = {labels: {}, components: [], expires_at: null, reveals_at: null}
+    $form = $(@)
+
+    params.expires_at = $form.find('input.expires_at').val()
+
+    params.reveals_at = $form.find('input.reveals_at').val()
+
+    insertLocales($form, params.labels, 'question-label')
+
+    $form.find('.question-component').each (_, component) ->
+      $component = $(component)
+      componentId = $component.find('input.component-id').val()
+      componentHash = {labels: {}}
+      componentHash.id = componentId if componentId? and componentId.length > 0
+      componentHash.kind = $component.find('select.kind').val()
+      insertLocales($component, componentHash.labels, 'component-label')
+
+      if componentHash.kind is '0' # choices
+        componentHash.choices = {}
+        insertLocales($component, componentHash.choices, 'component-choice')
+
+      params.components.push(componentHash)
+
+    $.ajax
+      url: url
+      type: type
+      contentType: 'application/json',
+      processData: false
+      data: JSON.stringify
+        token: $form.find('input.token').val()
+        question: params
+    .then ->
+      alert('Done!')
+      callback() if callback
+    , ->
+      console.log arguments
+      alert('Failed! See the console for more information.')
 
 cropInit = ->
   updateSelection = (crop) ->
@@ -23,82 +93,106 @@ cropInit = ->
     $('#image-crop').prop('src', @value)
     cropImage()
 
-
 addQuestionInit = ->
   return null unless $('#questions-new').length
 
   cropInit()
 
+  bindAddRemoveButton()
+
   $('.input-group.date').datetimepicker
     language: 'fr'
-    format: "YYYY-MM-DD HH:mm:00 +0000"
+    format: "YYYY-MM-DD HH:mm:00 +0200"
 
-  $(document).on 'click', 'button.add', (event) ->
-    event.preventDefault()
-    $btn   = $(@)
-    sect   = $btn.data('section')
-    $bloc  = $btn.closest('.row').next("div.#{sect}")
-    $clone = $bloc.clone()
-    $clone.find('input, select').val(null)
-    $clone.insertBefore($bloc)
+  bindQuestionFormSubmission("http://#{api_url}/v1/admin/questions", 'POST')
 
-  $(document).on 'click', 'button.remove', (event) ->
-    event.preventDefault()
+editQuestionInit = ->
+  $details = $('#questions-edit')
+  return null unless $details.length
 
-    $btn  = $(@)
-    sect  = $btn.data('section')
-    sel   = "div.#{sect}"
-    $bloc = $btn.closest(sel)
-    if $bloc.prev().is(sel) or $bloc.next().is(sel)
-      $bloc.remove()
-    else
-      alert('Vous devez avoir au moins un element de ce type.')
+  cropInit()
 
+  $('.input-group.date').datetimepicker
+    language: 'fr'
+    format: "YYYY-MM-DD HH:mm:00 +0200"
 
-  insertLocales = ($root, object, type) ->
-    $root.find("div.#{type}").each (_, block) ->
-      $block = $(block)
-      lang = $block.find('select.locale').val()
-      text = $block.find("input.#{type}").val()
-      object[lang] = text
+  bindAddRemoveButton()
 
-  $(document).on 'submit', 'form', (event) ->
-    event.preventDefault()
+  questionId = $('meta[name=questionId]').prop('content')
 
-    params = {labels: {}, components: [], expires_at: null, reveals_at: null}
-    $form = $(@)
+  # Fetch templates
+  $labelTemplate           = $details.find('div.question-label').detach()
+  $componentLabelTemplate  = $details.find('div.component-label').detach()
+  $componentChoiceTemplate = $details.find('div.component-choice').detach()
+  $componentTemplate       = $details.find('div.question-component').detach()
 
-    params.expires_at = $form.find('input.expires_at').val()
-
-    params.reveals_at = $form.find('input.reveals_at').val()
-
-    insertLocales($form, params.labels, 'question-label')
-
-    $form.find('.question-component').each (_, component) ->
-      $component = $(component)
-      componentHash = {labels: {}}
-      componentHash.kind = $component.find('select.kind').val()
-      insertLocales($component, componentHash.labels, 'component-label')
-
-      if componentHash.kind is '0' # choices
-        componentHash.choices = {}
-        insertLocales($component, componentHash.choices, 'component-choice')
-
-      params.components.push(componentHash)
-
+  fetchQuestion = ->
     $.ajax
-      url: "http://#{api_url}/v1/admin/questions",
-      type: 'POST'
-      contentType: 'application/json',
-      processData: false
-      data: JSON.stringify
-        token: $form.find('input.token').val()
-        question: params
-    .then ->
-      alert('Done!')
-    , ->
-      console.log arguments
-      alert('Failed! See the console for more information.')
+      url: "http://#{api_url}/v1/admin/questions/#{questionId}"
+      type: 'GET'
+      data: { token: token }
+    .done (question) ->
+      # Set informations
+      $details.find('.reveals_at').val(moment(question.reveals_at * 1000).format(DATE_FORMAT))
+      $details.find('.expires_at').val(moment(question.expires_at * 1000).format(DATE_FORMAT))
+
+      # Set labels
+      $details.find('.question-labels > .question-label').remove()
+      buffer = ''
+      for locale, label of question.labels
+        $clone = $labelTemplate.clone()
+        $clone.find("select.locale option[value=#{locale}]").attr('selected', true)
+        $clone.find('input.question-label').attr('value', label)
+        buffer += $clone[0].outerHTML
+      $details.find('.question-labels').append(buffer)
+
+      # Set components
+      $details.find('.question-components > .question-component').remove()
+      buffer = ''
+      for component in question.components
+        console.log component
+        $clone = $componentTemplate.clone()
+
+        # Set ID field
+        $clone.find('input.component-id').val(component.id)
+
+        # Set type field
+        kind = if component.kind is 'choices' then '0' else '1'
+        $clone.find("select.kind option[value=#{kind}]").attr('selected', true)
+
+        # Set labels
+        labelBuffer = ''
+        for locale, label of component.labels
+          $labelClone = $componentLabelTemplate.clone()
+          $labelClone.find("select.locale option[value=#{locale}]").attr('selected', true)
+          $labelClone.find('input.component-label').attr('value', label)
+          labelBuffer += $labelClone[0].outerHTML
+        $clone.find('.component-labels').append(labelBuffer)
+
+        # Set component's choices
+        if component.choices?
+          groups = {}
+          for choice in component.choices
+            groups[choice.locale] ?= []
+            groups[choice.locale].push(choice)
+
+          choiceBuffer = ''
+          for locale, choices of groups
+            $choiceClone = $componentChoiceTemplate.clone()
+            $choiceClone.find("select.locale option[value=#{locale}]").attr('selected', true)
+            choicesString = $.map(choices, (c) -> c.label).join(',')
+            $choiceClone.find('input.component-choice').attr('value', choicesString)
+            choiceBuffer += $choiceClone[0].outerHTML
+          $clone.find('.component-choices').append(choiceBuffer)
+
+        buffer += $clone[0].outerHTML
+      $details.find('.question-components').append(buffer)
+
+
+  bindQuestionFormSubmission("http://#{api_url}/v1/admin/questions/#{questionId}", 'PUT', fetchQuestion)
+
+  fetchQuestion()
+
 
 listQuestionsInit = ->
   $list = $('#questions-list')
@@ -326,6 +420,9 @@ detailsQuestionsInit = ->
       console.log arguments
       alert('Failed! See the console for more information.')
 
+  $(document).on 'click', '.edit-question', ->
+    window.location = "/questions/#{questionId}/edit?token=#{token}"
+
   fetchQuestion()
 
 $ ->
@@ -342,5 +439,6 @@ $ ->
   addQuestionInit()
   listQuestionsInit()
   detailsQuestionsInit()
+  editQuestionInit()
   listPlayersInit()
   detailsPlayersInit()

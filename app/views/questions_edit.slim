@@ -1,11 +1,12 @@
 doctype html
 html lang="en"
   head
-    title Pulpo - Ajouter une question
+    title Pulpo - Mettre à jour une question
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width, initial-scale=1"
     meta name="token" content="#{params[:token]}"
+    meta name="questionId" content="#{params[:id]}"
 
     /[if lt IE 9]
       script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
@@ -17,11 +18,11 @@ html lang="en"
     link rel="stylesheet" href="//jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.min.css"
 
   body
-    form#questions-new.form-horizontal role="form"
+    form#questions-edit.form-horizontal role="form"
       .container
         .row
           .col-sm-12
-            h1 Ajouter une question
+            h1 Mettre à jour une question
         .row
           .col-sm-8
             .row
@@ -50,7 +51,7 @@ html lang="en"
                     input.form-control.token placeholder="Token d'identification" value="#{params[:token]}"
 
             .row
-              .col-sm-12
+              .col-sm-12.question-labels
                 legend Labels
 
                 .row
@@ -79,18 +80,12 @@ html lang="en"
                             i.glyphicon.glyphicon-remove
 
             .row
-              .col-sm-12
+              .col-sm-12.question-components
                 legend Composants
 
-                .row
-                  .col-sm-12
-                    .form-group
-                      .col-sm-12
-                        button.btn.btn-default.add data-section="question-component"
-                          i.glyphicon.glyphicon-plus>
-                          | Ajouter un nouveau composant
-
                 .question-component
+                  input.component-id type="hidden"
+
                   .row
                     .col-sm-12
                       .form-group
@@ -105,7 +100,7 @@ html lang="en"
                             i.glyphicon.glyphicon-remove
 
                   .row
-                    .col-sm-10.col-sm-offset-1
+                    .col-sm-10.col-sm-offset-1.component-labels
                       h4 Labels du composant
 
                       .row
@@ -134,7 +129,7 @@ html lang="en"
                                   i.glyphicon.glyphicon-remove
 
                   .row
-                    .col-sm-10.col-sm-offset-1
+                    .col-sm-10.col-sm-offset-1.component-choices
                       h4 Choix du composant
 
                       .row
@@ -166,7 +161,7 @@ html lang="en"
               .col-sm-12
                 .form-group
                   .col-sm-12
-                    button.btn.btn-primary.col-sm-12 type="submit" Ajouter
+                    button.btn.btn-primary.col-sm-12 type="submit" Mettre à jour
 
           .col-sm-4#image-selector
             legend Séléction d'une image
