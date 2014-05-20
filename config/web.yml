@@ -1,0 +1,70 @@
+home:
+  title: "Welcome to Pulpo"
+  subtitle: "This is where you learn how to master the art of making predictions."
+  menu:
+    intro: "Introduction"
+    make: "Make predictions"
+    win: "Win cristals"
+    badges: "Badges"
+    bonus: "Bonus"
+  headers:
+    intro: "Your first steps into the game"
+    make: "Start making predictions"
+    win: "Win always more cristals"
+    badges: "Get recognition... and cristals!"
+    bonus: "Pimp your predictions, avoid traps"
+  paragraphs:
+    intro:
+      - "Comming soon"
+    make:
+      - "Comming soon"
+    win:
+      - "Comming soon"
+    badges:
+      - "Comming soon"
+    bonus:
+      - "Comming soon"
+
+badges:
+  chicken:
+    title: "The Chicken badge"
+    legend: "because sometimes... you're a pussy!"
+    criteria: "Win a prediction using a Lucky Looser bonus"
+    descriptions:
+      - ""
+  glutton:
+    title: ""
+    legend: ""
+    criteria: ""
+    descriptions:
+      - ""
+  god:
+    title: ""
+    legend: ""
+    criteria: ""
+    descriptions:
+      - ""
+  incredible:
+    title: ""
+    legend: ""
+    criteria: ""
+    descriptions:
+      - ""
+  looser:
+    title: ""
+    legend: ""
+    criteria: ""
+    descriptions:
+      - ""
+  participation:
+    title: ""
+    legend: ""
+    criteria: ""
+    descriptions:
+      - ""
+  visionary:
+    title: ""
+    legend: ""
+    criteria: ""
+    descriptions:
+      - ""

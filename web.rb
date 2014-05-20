@@ -4,11 +4,15 @@ require 'sinatra/base'
 
 require './app/domain'
 
+WEB_CONFIG = YAML.load_file('./config/web.yml')
+
 module Prediction
   class Web < Sinatra::Base
     set :views, './app/views'
 
     get '/' do
+      @sections = %w(intro make win badges bonus)
+      @t = WEB_CONFIG['home']
       slim :home
     end
 
@@ -34,6 +38,12 @@ module Prediction
 
     get '/players/:nickname' do
       slim :players_details
+    end
+
+    get '/badges/:identifier/:level' do
+      @identifier = params[:identifier]
+      @badge = WEB_CONFIG['badges'][@identifier]
+      slim :badge_details
     end
 
     get '/scripts.js' do

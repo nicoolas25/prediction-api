@@ -1,7 +1,7 @@
 doctype html
 html lang="en"
   head
-    title Pulpo
+    title Pulpo - #{@badge['title']}
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width, initial-scale=1"
@@ -17,24 +17,18 @@ html lang="en"
 
     .container
       .jumbotron
-        h1 = @t['title']
-        p = @t['subtitle']
+        h1 = @badge['title']
+        p = @badge['legend']
 
     .container
       .row
         .col-md-3
-          .sidemenu
-            ul.nav
-              - @sections.each do |skey|
-                li
-                  a href="##{skey}" = @t['menu'][skey]
+          img.img-thumbnail.img-responsive src="http://placekitten.com/300/300"
+          .badge-criteria style="text-align:center;padding-top:1em" = @badge['criteria']
 
         .col-md-9
-          - @sections.each do |skey|
-            section
-              h2 id="#{skey}" = @t['headers'][skey]
-              - @t['paragraphs'][skey].each do |paragraph|
-                p = paragraph
+          - @badge['descriptions'].each do |paragraph|
+            p = paragraph
 
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
     script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
