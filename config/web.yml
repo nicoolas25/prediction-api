@@ -27,44 +27,44 @@ home:
 
 badges:
   chicken:
-    title: "The Chicken badge"
+    title: "The <strong>Chicken</strong> badge"
     legend: "because sometimes... you're a pussy!"
-    criteria: "Win a prediction using a Lucky Looser bonus"
+    criteria: "Win a prediction using a Lucky Looser bonus"
     descriptions:
       - ""
   glutton:
-    title: ""
-    legend: ""
-    criteria: ""
+    title: "The <strong>Glutton</strong> badge"
+    legend: "I bet you didn't see it comming!"
+    criteria: "Loose a prediction using a Quit or Double bonus"
     descriptions:
       - ""
   god:
-    title: ""
-    legend: ""
-    criteria: ""
+    title: "The <strong>God of bonus</strong> badge"
+    legend: "that's proof that you've got the power!"
+    criteria: "Use any bonus while you make a prediction"
     descriptions:
       - ""
   incredible:
-    title: ""
-    legend: ""
-    criteria: ""
+    title: "The <strong>Incredible</strong> badge"
+    legend: "you're awesome... or lucky but who care!"
+    criteria: "Win more than 5 times your stakes"
     descriptions:
       - ""
   looser:
-    title: ""
-    legend: ""
-    criteria: ""
+    title: "The <strong>KO</strong> badge"
+    legend: "be pround... even when you're wrong!"
+    criteria: "Loose a prediction"
     descriptions:
       - ""
   participation:
-    title: ""
-    legend: ""
-    criteria: ""
+    title: "The <strong>Player</strong> badge"
+    legend: "if you're not the best, at least you're trying!"
+    criteria: "Just make a prediction"
     descriptions:
       - ""
   visionary:
-    title: ""
-    legend: ""
-    criteria: ""
+    title: "The <strong>Visionary</strong> badge"
+    legend: "when they're all wrong, you're not!"
+    criteria: "Win more than 3 times your stakes"
     descriptions:
       - ""

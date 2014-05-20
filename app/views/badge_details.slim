@@ -17,8 +17,8 @@ html lang="en"
 
     .container
       .jumbotron
-        h1 = @badge['title']
-        p = @badge['legend']
+        h1 == @badge['title']
+        p == @badge['legend']
 
     .container
       .row
@@ -28,7 +28,7 @@ html lang="en"
 
         .col-md-9
           - @badge['descriptions'].each do |paragraph|
-            p = paragraph
+            p == paragraph
 
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
     script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
