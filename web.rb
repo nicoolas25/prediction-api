@@ -42,6 +42,7 @@ module Prediction
 
     get '/badges/:identifier/:level' do
       @identifier = params[:identifier]
+      @level = params[:level] =~ /[1-5]/ ? params[:level] : 1
       @badge = WEB_CONFIG['badges'][@identifier]
       slim :badge_details
     end
