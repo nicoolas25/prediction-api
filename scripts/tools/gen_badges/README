@@ -1,0 +1,15 @@
+You have to execute the script in a folder with this structure : 
+- YOURFOLDER/
+--- gen_badges.ry
+--- background/
+--- icons/
+--- tmp/
+--- results/
+--- badge_flare.png
+
+put all background badge image in background folder
+put all icon badge image in icons folder
+
+ruby gen_badge.ry
+
+=> All badge are in results folder

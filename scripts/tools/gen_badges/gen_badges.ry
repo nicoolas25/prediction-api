@@ -1,0 +1,24 @@
+#composite -gravity center icons/badge_visionary.png background/badge_lvl1.png  result.png
+
+bg_images = Dir.entries("background").select{|line| !(line =~ /.*\.png/).nil?}
+fg_images = Dir.entries("icons").select{|line| !(line =~ /.*\.png/).nil?}
+
+puts bg_images
+puts fg_images
+
+
+cmds = []
+bg_images.each do |bg_image|
+
+	cmds += ["&&"] if cmds.length > 0
+	cmd = "composite -gravity center badge_flare.png background/#{bg_image} tmp/#{bg_image}"
+	cmds += [cmd]
+
+	fg_images.each do |fg_image|
+		cmds += ["&&"]
+		cmd = "composite -gravity center icons/#{fg_image} tmp/#{bg_image} results/#{fg_image}#{bg_image}.png"
+		cmds += [cmd]
+	end
+end
+
+exec(cmds.join(" "))
