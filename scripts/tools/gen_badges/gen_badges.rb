@@ -7,8 +7,11 @@ bg_images = Dir['background/*.png']
 fg_images = Dir['icons/*.png']
 
 cmds = []
-bg_images.each_with_index do |bg_image, level|
+bg_images.each_with_index do |bg_image|
   bg_name = File.basename(bg_image)
+  bg_name =~ /lvl(\d)/
+  level = $1
+
   cmds << "composite -gravity center badge_flare.png #{bg_image} tmp/#{bg_name}"
 
   fg_images.each do |fg_image|
