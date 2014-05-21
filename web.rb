@@ -3,6 +3,7 @@ require 'coffee-script'
 require 'sinatra/base'
 
 require './app/domain'
+require './lib/locale_middleware'
 
 WEB_CONFIG = YAML.load_file('./config/web.yml')
 
@@ -10,9 +11,15 @@ module Prediction
   class Web < Sinatra::Base
     set :views, './app/views'
 
+    helpers do
+      def locale
+        env['rack.locale']
+      end
+    end
+
     get '/' do
       @sections = %w(intro make win badges bonus)
-      @t = WEB_CONFIG['home']
+      @t = WEB_CONFIG[locale]['home']
       slim :home
     end
 
@@ -43,8 +50,8 @@ module Prediction
     get '/badges/:identifier/:level' do
       @identifier = params[:identifier]
       @level = params[:level] =~ /[1-5]/ ? params[:level] : 1
-      @badge = WEB_CONFIG['badges'][@identifier]
-      @t = WEB_CONFIG['badges']['shared']
+      @badge = WEB_CONFIG[locale]['badges'][@identifier]
+      @t = WEB_CONFIG[locale]['badges']['shared']
       slim :badge_details
     end
 

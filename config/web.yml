@@ -1,81 +1,168 @@
-home:
-  title: "Welcome to Pulpo"
-  subtitle: "This is where you learn how to master the art of making predictions."
-  menu:
-    intro: "Introduction"
-    make: "Make predictions"
-    win: "Win cristals"
-    badges: "Badges"
-    bonus: "Bonus"
-  headers:
-    intro: "Your first steps into the game"
-    make: "Start making predictions"
-    win: "Win always more cristals"
-    badges: "Get recognition... and cristals!"
-    bonus: "Pimp your predictions, avoid traps"
-  paragraphs:
-    intro:
-      - "Comming soon"
-    make:
-      - "Comming soon"
-    win:
-      - "Comming soon"
-    badges:
-      - "Comming soon"
-    bonus:
-      - "Comming soon"
+en: &defaults
+  home:
+    title: "Welcome to Pulpo"
+    subtitle: "This is where you learn how to master the art of making predictions."
+    menu:
+      intro: "Introduction"
+      make: "Make predictions"
+      win: "Win cristals"
+      badges: "Badges"
+      bonus: "Bonus"
+    headers:
+      intro: "Your first steps into the game"
+      make: "Start making predictions"
+      win: "Win always more cristals"
+      badges: "Get recognition... and cristals!"
+      bonus: "Pimp your predictions, avoid traps"
+    paragraphs:
+      intro:
+        - "Comming soon"
+      make:
+        - "Comming soon"
+      win:
+        - "Comming soon"
+      badges:
+        - "Comming soon"
+      bonus:
+        - "Comming soon"
 
-badges:
-  shared:
-    criteria: "<strong>How the get this badge</strong>"
-    level: "<strong>Level</strong>"
+  badges:
+    shared:
+      criteria: "<strong>How the get this badge</strong>"
+      level: "<strong>Level</strong>"
 
-  chicken:
-    name: "Chicken"
-    title: "The <strong>Chicken</strong> badge"
-    legend: "because sometimes... you're a pussy!"
-    criteria: "Win a prediction using a Lucky Looser bonus"
-    descriptions:
-      - ""
-  glutton:
-    name: "Glutton"
-    title: "The <strong>Glutton</strong> badge"
-    legend: "I bet you didn't see it comming!"
-    criteria: "Loose a prediction using a Quit or Double bonus"
-    descriptions:
-      - ""
-  god:
-    name: "God of bonus"
-    title: "The <strong>God of bonus</strong> badge"
-    legend: "that's proof that you've got the power!"
-    criteria: "Use any bonus while you make a prediction"
-    descriptions:
-      - ""
-  incredible:
-    name: "Incredible"
-    title: "The <strong>Incredible</strong> badge"
-    legend: "you're awesome... or lucky but who care!"
-    criteria: "Win more than 5 times your stakes"
-    descriptions:
-      - ""
-  looser:
-    name: "KO"
-    title: "The <strong>KO</strong> badge"
-    legend: "be pround... even when you're wrong!"
-    criteria: "Loose a prediction"
-    descriptions:
-      - ""
-  participation:
-    name: "Player"
-    title: "The <strong>Player</strong> badge"
-    legend: "if you're not the best, at least you're trying!"
-    criteria: "Just make a prediction"
-    descriptions:
-      - ""
-  visionary:
-    name: "Visionary"
-    title: "The <strong>Visionary</strong> badge"
-    legend: "when they're all wrong, you're not!"
-    criteria: "Win more than 3 times your stakes"
-    descriptions:
-      - ""
+    chicken:
+      name: "Chicken"
+      title: "The <strong>Chicken</strong> badge"
+      legend: "because sometimes... you're a pussy!"
+      criteria: "Win a prediction using a Lucky Looser bonus"
+      descriptions:
+        - ""
+    glutton:
+      name: "Glutton"
+      title: "The <strong>Glutton</strong> badge"
+      legend: "I bet you didn't see it comming!"
+      criteria: "Loose a prediction using a Quit or Double bonus"
+      descriptions:
+        - ""
+    god:
+      name: "God of bonus"
+      title: "The <strong>God of bonus</strong> badge"
+      legend: "that's proof that you've got the power!"
+      criteria: "Use any bonus while you make a prediction"
+      descriptions:
+        - ""
+    incredible:
+      name: "Incredible"
+      title: "The <strong>Incredible</strong> badge"
+      legend: "you're awesome... or lucky but who care!"
+      criteria: "Win more than 50 cristals with one prediction"
+      descriptions:
+        - ""
+    looser:
+      name: "KO"
+      title: "The <strong>KO</strong> badge"
+      legend: "be pround... even when you're wrong!"
+      criteria: "Loose a prediction"
+      descriptions:
+        - ""
+    participation:
+      name: "Player"
+      title: "The <strong>Player</strong> badge"
+      legend: "if you're not the best, at least you're trying!"
+      criteria: "Just make a prediction"
+      descriptions:
+        - ""
+    visionary:
+      name: "Visionary"
+      title: "The <strong>Visionary</strong> badge"
+      legend: "when they're all wrong, you're not!"
+      criteria: "Win more than 3 times your stakes"
+      descriptions:
+        - ""
+
+fr:
+  home:
+    title: "Bienvenue sur <strong>Pulpo</strong>"
+    subtitle: "Apprenez à devenir maître dans l'art du pronostique."
+    menu:
+      intro: "Introduction"
+      make: "Faire des prédictions"
+      win: "Gagner des cristaux"
+      badges: "Les badges"
+      bonus: "Les bonus"
+    headers:
+      intro: "Vos premiers pas avec Pulpo"
+      make: "Commencez à prédire"
+      win: "Gagnez toujours plus de cristaux"
+      badges: "Obtenez de la reconnaissance... et des cristaux !"
+      bonus: "Boostez vos préditions, évitez les pièges"
+    paragraphs:
+      intro:
+        - "Bientôt"
+      make:
+        - "Bientôt"
+      win:
+        - "Bientôt"
+      badges:
+        - "Bientôt"
+      bonus:
+        - "Bientôt"
+
+  badges:
+    shared:
+      criteria: "<strong>Comment obtenir ce badge</strong>"
+      level: "<strong>Niveau</strong>"
+
+    chicken:
+      name: "Poule mouillée"
+      title: "Le badge <strong>Poule mouillée</strong>"
+      legend: "parce que parfois... vous êtes un trouillard !"
+      criteria: "Gagnez en utilisant un bonus Lucky Looser"
+      descriptions:
+        - ""
+    glutton:
+      name: "Gourmand"
+      title: "Le badge <strong>Gourmand</strong>"
+      legend: "je parie que vous ne l'aviez pas vu venir !"
+      criteria: "Se tromper en utilisant un bonus Quitte ou Double"
+      descriptions:
+        - ""
+    god:
+      name: "God of bonus"
+      title: "Le badge <strong>God of bonus</strong>"
+      legend: "la preuve que vous avez pris le pouvoir !"
+      criteria: "Utilisez n'importe quel bonus lorsque vous pariez"
+      descriptions:
+        - ""
+    incredible:
+      name: "Extra-lucide"
+      title: "Le badge <strong>Extra-lucide</strong>"
+      legend: "soit vous êtes chanceux... soit vous êtes génial !"
+      criteria: "Gagner plus de 50 cristaux d'un coup"
+      descriptions:
+        - ""
+    looser:
+      name: "KO"
+      title: "The <strong>KO</strong> badge"
+      legend: "restez digne... même quand vous vous plantez !"
+      criteria: "Se tromper lors d'une prédiction"
+      descriptions:
+        - ""
+    participation:
+      name: "Joueur"
+      title: "Le badge <strong>Joueur</strong>"
+      legend: "si vous n'êtes pas le meilleur, au moins vous essayez !"
+      criteria: "Faites juste une prédction"
+      descriptions:
+        - ""
+    visionary:
+      name: "Visionnaire"
+      title: "Le badge <strong>Visionnaire</strong>"
+      legend: "quand ils se trompent tous, vous non !"
+      criteria: "Gagner plus de 30 cristaux d'un coup"
+      descriptions:
+        - ""
+
+pt: *defaults
+es: *defaults

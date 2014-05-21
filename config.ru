@@ -19,4 +19,9 @@ end
 
 use LoggerMiddleware if defined?(LoggerMiddleware)
 
-run Rack::Cascade.new [Prediction::API, Prediction::Web]
+web = Rack::Builder.new do
+  use LocaleMiddleware if defined?(LocaleMiddleware)
+  run Prediction::Web
+end
+
+run Rack::Cascade.new [Prediction::API, web]
