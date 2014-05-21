@@ -44,6 +44,7 @@ module Prediction
       @identifier = params[:identifier]
       @level = params[:level] =~ /[1-5]/ ? params[:level] : 1
       @badge = WEB_CONFIG['badges'][@identifier]
+      @t = WEB_CONFIG['badges']['shared']
       slim :badge_details
     end
 

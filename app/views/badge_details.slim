@@ -1,7 +1,7 @@
 doctype html
 html lang="en"
   head
-    title Pulpo - #{@badge['title']}
+    title Pulpo - #{@badge['name']}
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width, initial-scale=1"
@@ -22,11 +22,19 @@ html lang="en"
 
     .container
       .row
-        .col-md-3
+        .col-md-4
           img.img-thumbnail.img-responsive src="http://static.pulpo.info/badge_#{@identifier}_lvl#{@level}.png"
-          .badge-criteria style="text-align:center;padding-top:1em" = @badge['criteria']
 
-        .col-md-9
+          .well style="margin-top:1em"
+            form style="margin-bottom:0px"
+              .form-group
+                label.control-label == @t['criteria']
+                .badge-info == @badge['criteria']
+              .form-group style="margin-bottom:0px"
+                label.control-label == @t['level']
+                .badge-info == @level
+
+        .col-md-8
           - @badge['descriptions'].each do |paragraph|
             p == paragraph
 

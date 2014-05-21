@@ -26,43 +26,54 @@ home:
       - "Comming soon"
 
 badges:
+  shared:
+    criteria: "<strong>How the get this badge</strong>"
+    level: "<strong>Level</strong>"
+
   chicken:
+    name: "Chicken"
     title: "The <strong>Chicken</strong> badge"
     legend: "because sometimes... you're a pussy!"
     criteria: "Win a prediction using a Lucky Looser bonus"
     descriptions:
       - ""
   glutton:
+    name: "Glutton"
     title: "The <strong>Glutton</strong> badge"
     legend: "I bet you didn't see it comming!"
     criteria: "Loose a prediction using a Quit or Double bonus"
     descriptions:
       - ""
   god:
+    name: "God of bonus"
     title: "The <strong>God of bonus</strong> badge"
     legend: "that's proof that you've got the power!"
     criteria: "Use any bonus while you make a prediction"
     descriptions:
       - ""
   incredible:
+    name: "Incredible"
     title: "The <strong>Incredible</strong> badge"
     legend: "you're awesome... or lucky but who care!"
     criteria: "Win more than 5 times your stakes"
     descriptions:
       - ""
   looser:
+    name: "KO"
     title: "The <strong>KO</strong> badge"
     legend: "be pround... even when you're wrong!"
     criteria: "Loose a prediction"
     descriptions:
       - ""
   participation:
+    name: "Player"
     title: "The <strong>Player</strong> badge"
     legend: "if you're not the best, at least you're trying!"
     criteria: "Just make a prediction"
     descriptions:
       - ""
   visionary:
+    name: "Visionary"
     title: "The <strong>Visionary</strong> badge"
     legend: "when they're all wrong, you're not!"
     criteria: "Win more than 3 times your stakes"
