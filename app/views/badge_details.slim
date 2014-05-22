@@ -22,8 +22,10 @@ html lang="#{locale}"
             h1 == @badge['title']
             p == @badge['legend']
           .col-md-3
-            img.img-responsive src="http://static.pulpo.info/get_app_store.gif"
-            img.img-responsive src="http://static.pulpo.info/get_play_store.png"
+            a href="https://itunes.apple.com/#{locale}/app/pulpo/id816950507"
+              img.img-responsive src="http://static.pulpo.info/get_app_store.gif"
+            a href="https://play.google.com/store/apps/details?id=com.gc.pulpo"
+              img.img-responsive src="http://static.pulpo.info/get_play_store.png"
 
     .container
       .row
