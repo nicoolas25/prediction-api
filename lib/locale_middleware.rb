@@ -29,12 +29,12 @@ class LocaleMiddleware
       l.split(';q=')
     end
 
-    languages = languages.select  { |(locale, _)| locale =~ /^((fr)|(en)|(es)|(pt))(-\w+)?$/ }
+    languages = languages.select  { |(locale, _)| locale =~ /^(fr)|(en)|(es)|(pt)/ }
     languages = languages.sort_by { |(_, qvalue)| qvalue.to_f }
 
     lang = languages.last
     lang = lang ? lang.first : DEFAULT_LOCALE
 
-    lang == '*' ? nil : lang
+    lang == '*' ? nil : lang[0..1]
   end
 end
