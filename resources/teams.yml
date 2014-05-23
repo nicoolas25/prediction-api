@@ -1,123 +1,224 @@
 - code: alg
+  small: dz
   translations:
     fr: Algérie
     en: Algeria
     es: Argelia
     pt: Argélia
 - code: arg
+  small: ar
   translations:
     fr: Argentine
     en: 
     es: 
     pt: 
 - code: aus
+  small: au
   translations:
     fr: Australie
     en: Australia
     es: Austrália
     pt: Australia
 - code: bel
+  small: be
   translations:
     fr: Belgique
     en: Belgium
     es: Bélgica
     pt: Bélgica
 - code: bih
+  small: ba
   translations:
     fr: Bosnie-Herzégovine
     en: Bosnia and Herzegovina
     es: Bosnia-Herzegovina
     pt: Bósnia-Herzegovina
 - code: bra
+  small: br
   translations:
     fr: Brésil
     en: Brazil
     es: Brasil
     pt: Brasil
 - code: chi
+  small: cl
   translations:
     fr: Chili
     en: Chile
     es: Chile
     pt: Chile
 - code: civ
+  small: ci
   translations:
     fr: Côte d'Ivoire
     en: Ivory Coast
     es: Costa de Marfil
     pt: Costa do Marfim
 - code: cmr
+  small: cm
   translations:
     fr: Cameroun
     en: Cameroon
     es: Camerún
     pt: República dos Camarões
 - code: col
+  small: co
   translations:
-    fr: 
+    fr: Colombie
+    en: Colombia
+    es: Colombia
+    pt: Colômbia
 - code: crc
+  small: cr
   translations:
-    fr: 
+    fr: Costa Rica
+    en: Costa Rica
+    es: Costa Rica
+    pt: Costa Rica
 - code: cro
+  small: hr
   translations:
-    fr: 
+    fr: Croatie
+    en: Croatia
+    es: Croacia
+    pt: Croácia
 - code: ecu
+  small: ec
   translations:
-    fr: 
+    fr: Equateur
+    en: Ecuador
+    es: Ecuador
+    pt: Equador
 - code: eng
+  small: en
   translations:
-    fr: 
+    fr: Angleterre
+    en: England
+    es: Inglaterra
+    pt: Inglaterra
 - code: esp
+  small: es
   translations:
-    fr: 
+    fr: Espagne
+    en: Spain
+    es: España
+    pt: Espanha
 - code: fra
+  small: fr
   translations:
-    fr: 
+    fr: France
+    en: France
+    es: Francia
+    pt: França
 - code: ger
+  small: de
   translations:
-    fr: 
+    fr: Allemagne
+    en: Germany
+    es: Alemania
+    pt: Alemanha
 - code: gha
+  small: gh
   translations:
-    fr: 
+    fr: Ghana
+    en: Ghana
+    es: Ghana
+    pt: Gana
 - code: gre
+  small: gr
   translations:
-    fr: 
+    fr: Grèce
+    en: Greece
+    es: Grecia
+    pt: Grécia
 - code: hon
+  small: hn
   translations:
-    fr: 
+    fr: Honduras
+    en: Honduras
+    es: Honduras
+    pt: Honduras
 - code: irn
+  small: ir
   translations:
-    fr: 
+    fr: Iran
+    en: Iran
+    es: Irán
+    pt: Irã
 - code: ita
+  small: it
   translations:
-    fr: 
+    fr: Italie
+    en: Italy
+    es: Italia
+    pt: Itália
 - code: jpn
+  small: jp
   translations:
-    fr: 
+    fr: Japon
+    en: Japan
+    es: Japón
+    pt: Japão
 - code: kor
+  small: kr
   translations:
-    fr: 
+    fr: Corée du Sud
+    en: South Korea
+    es: Corea del Sur
+    pt: Coreia do Sul
 - code: mex
+  small: mx
   translations:
-    fr: 
+    fr: Mexique
+    en: Mexico
+    es: México
+    pt: México
 - code: ned
+  small: nl
   translations:
-    fr: 
+    fr: Pays-Bas
+    en: Netherlands
+    es: Países Bajos
+    pt: Holanda
 - code: nga
+  small: ng
   translations:
-    fr: 
+    fr: Nigéria
+    en: Nigeria
+    es: Nigeria
+    pt: Nigéria
 - code: por
+  small: pt
   translations:
-    fr: 
+    fr: Portugal
+    en: Portugal
+    es: Portugal
+    pt: Portugal
 - code: rus
+  small: ru
   translations:
-    fr: 
+    fr: Russie
+    en: Russia
+    es: Rusia
+    pt: Rússia
 - code: sui
+  small: ch
   translations:
-    fr: 
+    fr: Suisse
+    en: Switzerland
+    es: Suiza
+    pt: Suíça
 - code: uru
+  small: uy
   translations:
-    fr: 
+    fr: Uruguay
+    en: Uruguay
+    es: Uruguay
+    pt: Uruguai
 - code: usa
+  small: us
   translations:
-    fr: 
+    fr: Etats-Unis
+    en: United States
+    es: Estados Unidos
+    pt: Estados Unidos
