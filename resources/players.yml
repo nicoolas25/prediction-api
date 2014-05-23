@@ -478,6 +478,33 @@ fra:
   - name: Karim Benzema
   - name: Olivier Giroud
 ger:
+  - name: Manuel Neuer
+  - name: Roman Weidenfeller
+  - name: Ron-Robert Zieler
+  - name: Jerome Boateng
+  - name: Erik Durm
+  - name: Kevin Grosskreutz
+  - name: Benedikt Höwedes
+  - name: Mats Hummels
+  - name: Philipp Lahm
+  - name: Per Mertesacker
+  - name: Shkodran Mustafi
+  - name: Marcel Schmelzer
+  - name: Lars Bender
+  - name: Julian Draxler
+  - name: Matthias Ginter
+  - name: Mario Götze
+  - name: Sami Khedira
+  - name: Christoph Kramer
+  - name: Toni Kroos
+  - name: Thomas Müller
+  - name: Mesut özil
+  - name: Lukas Podolski
+  - name: Marco Reus
+  - name: Andre Schurrle
+  - name: Bastian Schweinsteiger
+  - name: Miroslav Klose
+  - name: Kevin Volland
 gha:
   - name: Adam Kwarasey
   - name: Fatau Dauda
@@ -783,6 +810,30 @@ por:
   - name: Hélder Postiga
   - name: Hugo Almeida
 rus:
+  - name: Igor Akinfeïev
+  - name: Yuri Lodygin
+  - name: Sergey Ryzhikov
+  - name: Vassili Bérézoutski
+  - name: Sergueï Ignachevitch
+  - name: Georgi Schennikov
+  - name: Vladimir Granat
+  - name: Aleksei Kozlov
+  - name: Andrey Eshchenko
+  - name: Dmitri Kombarov
+  - name: Andrei Semenov
+  - name: Denis Glushakov
+  - name: Iouri Jirkov
+  - name: Igor Denisov
+  - name: Alan Dzagoev
+  - name: Viktor Faïzouline
+  - name: Oleg Shatov
+  - name: Roman Chirokov
+  - name: Pavel Mogilevets
+  - name: Aleksandr Samedov
+  - name: Aleksei Ionov
+  - name: Alexander Kerzhakov
+  - name: Aleksandr Kokorin
+  - name: Maksim Kanunnikov
 sui:
   - name: Diego Benaglio
   - name: Yann Sommer
@@ -817,6 +868,34 @@ sui:
   - name: Marco Wölfli
   - name: Fabian Lustenberger
 uru:
+  - name: Fernando Muslera
+  - name: Martin Silva
+  - name: Rodrigo Munoz
+  - name: Maximiliano
+  - name: Diego Lugano
+  - name: Diego Godin
+  - name: Jose Maria Gimenez
+  - name: Sebastian Coates
+  - name: Martin Caceres
+  - name: Jorge Fucile
+  - name: Alejandro Silva
+  - name: Alvaro Gonzalez
+  - name: Alvaro Pereira
+  - name: Walter Gargano
+  - name: Egidio Arevalo Rios
+  - name: Diego Perez
+  - name: Sebastian Eguren
+  - name: Cristian Rodriguez
+  - name: Gaston Ramirez
+  - name: Nicolas Lodeiro
+  - name: Luis Suarez
+  - name: Edinson Cavani
+  - name: Abel Hernandez
+  - name: Diego Forlan
+  - name: Christian Stuani
+  - name: Andres Scotti
+  - name: Alvaro Fernandez
+  - name: Gonzalo Castro
 usa:
   - name: Tim Howard
   - name: Brad Guzan
