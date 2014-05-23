@@ -12,7 +12,7 @@ module Domain
   class CristalNeeded < Error ; end
 
   class Player < ::Sequel::Model
-    DEFAULT_CRISTALS_COUNT = 30
+    DEFAULT_CRISTALS_COUNT = 200
     DURATION_BETWEEN_AUTO_EARN = 1.hour
     CRISTAL_BY_AUTO_EARN = 2
 
