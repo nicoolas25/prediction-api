@@ -1,32 +1,123 @@
 - code: alg
+  translations:
+    fr: Algérie
+    en: Algeria
+    es: Argelia
+    pt: Argélia
 - code: arg
+  translations:
+    fr: Argentine
+    en: 
+    es: 
+    pt: 
 - code: aus
+  translations:
+    fr: Australie
+    en: Australia
+    es: Austrália
+    pt: Australia
 - code: bel
+  translations:
+    fr: Belgique
+    en: Belgium
+    es: Bélgica
+    pt: Bélgica
 - code: bih
+  translations:
+    fr: Bosnie-Herzégovine
+    en: Bosnia and Herzegovina
+    es: Bosnia-Herzegovina
+    pt: Bósnia-Herzegovina
 - code: bra
+  translations:
+    fr: Brésil
+    en: Brazil
+    es: Brasil
+    pt: Brasil
 - code: chi
+  translations:
+    fr: Chili
+    en: Chile
+    es: Chile
+    pt: Chile
 - code: civ
+  translations:
+    fr: Côte d'Ivoire
+    en: Ivory Coast
+    es: Costa de Marfil
+    pt: Costa do Marfim
 - code: cmr
+  translations:
+    fr: Cameroun
+    en: Cameroon
+    es: Camerún
+    pt: República dos Camarões
 - code: col
+  translations:
+    fr: 
 - code: crc
+  translations:
+    fr: 
 - code: cro
+  translations:
+    fr: 
 - code: ecu
+  translations:
+    fr: 
 - code: eng
+  translations:
+    fr: 
 - code: esp
+  translations:
+    fr: 
 - code: fra
+  translations:
+    fr: 
 - code: ger
+  translations:
+    fr: 
 - code: gha
+  translations:
+    fr: 
 - code: gre
+  translations:
+    fr: 
 - code: hon
+  translations:
+    fr: 
 - code: irn
+  translations:
+    fr: 
 - code: ita
+  translations:
+    fr: 
 - code: jpn
+  translations:
+    fr: 
 - code: kor
+  translations:
+    fr: 
 - code: mex
+  translations:
+    fr: 
 - code: ned
+  translations:
+    fr: 
 - code: nga
+  translations:
+    fr: 
 - code: por
+  translations:
+    fr: 
 - code: rus
+  translations:
+    fr: 
 - code: sui
+  translations:
+    fr: 
 - code: uru
+  translations:
+    fr: 
 - code: usa
+  translations:
+    fr: 
