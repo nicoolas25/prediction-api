@@ -32,33 +32,675 @@ alg:
   - name: Nabil Ghilas
   - name: Ishak Belfodil
 arg:
+  - name: Sergio Romero
+  - name: Mariano Andújar
+  - name: Agustín Orión
+  - name: Martín Demichelis
+  - name: Pablo Zabaleta
+  - name: Federico Fernández
+  - name: Marcos Rojo
+  - name: Ezequiel Garay
+  - name: Nicolás Otamendi
+  - name: Hugo Campagnaro
+  - name: José María Basanta
+  - name: Lisandro Ezequiel López
+  - name: Gabriel Mercado
+  - name: Fabiàn Rinaudo
+  - name: Enzo Pérez
+  - name: Javier Mascherano
+  - name: Maxi Rodríguez
+  - name: Fernando Gago
+  - name: Ángel Di María
+  - name: Éver Banega
+  - name: José Ernesto Sosa
+  - name: Lucas Biglia
+  - name: Augusto Fernández
+  - name: Ricardo Álvarez
+  - name: Lionel Messi
+  - name: Sergio Agüero
+  - name: Gonzalo Higuaín
+  - name: Ezequiel Lavezzi
+  - name: Rodrigo Palacio
+  - name: Franco Di Santo
+  - name: Alejandro Sabella
 aus:
+  - name: Eugene Galeković
+  - name: Mathew Ryan
+  - name: Mitchell Langerak
+  - name: Mark Birighitti
+  - name: Luke Wilkshire
+  - name: Matthew Špiranović
+  - name: Ryan McGowan
+  - name: Ivan Franjić
+  - name: Jason Davidson
+  - name: Curtis Good
+  - name: Alex Wilkinson
+  - name: Bailey Wright
+  - name: Mark Bresciano
+  - name: Matt McKay
+  - name: Mile Jedinak
+  - name: Mark Milligan
+  - name: Dario Vidošić
+  - name: Tommy Oar
+  - name: James Holland
+  - name: James Troisi
+  - name: Tom Rogić
+  - name: Adam Sarota
+  - name: Oliver Bozanic
+  - name: Joshua Brillante
+  - name: Massimo Luongo
+  - name: Ben Halloran
+  - name: Tim Cahill
+  - name: Joshua Kennedy
+  - name: Mathew Leckie
+  - name: Adam Taggart
+  - name: Ange Postecoglou
 bel:
+  - name: Thibaut Courtois
+  - name: Simon Mignolet
+  - name: Sammy Bossut
+  - name: Koen Casteels
+  - name: Daniel Van Buyten
+  - name: Vincent Kompany
+  - name: Jan Vertonghen
+  - name: Thomas Vermaelen
+  - name: Toby Alderweireld
+  - name: Nicolas Lombaerts
+  - name: Anthony Vanden Borre
+  - name: Laurent Ciman
+  - name: Moussa Dembélé
+  - name: Marouane Fellaini
+  - name: Axel Witsel
+  - name: Kevin Mirallas
+  - name: Eden Hazard
+  - name: Steven Defour
+  - name: Kevin De Bruyne
+  - name: Nacer Chadli
+  - name: Adnan Januzaj
+  - name: Romelu Lukaku
+  - name: Dries Mertens
+  - name: Divock Origi
+  - name: Marc Wilmots
 bih:
+  - name: Asmir Begović
+  - name: Asmir Avdukić
+  - name: Jasmin Fejzić
+  - name: Dejan Bandović
+  - name: Emir Spahić
+  - name: Mensur Mujdža
+  - name: Avdija Vršajević
+  - name: Ognjen Vranješ
+  - name: Ermin Bičakčić
+  - name: Ervin Zukanović
+  - name: Toni Šunjić
+  - name: Sead Kolašinac
+  - name: Zvjezdan Misimović
+  - name: Miralem Pjanić
+  - name: Senijad Ibričić
+  - name: Sejad Salihović
+  - name: Haris Medunjanin
+  - name: Senad Lulić
+  - name: Adnan Zahirović
+  - name: Miroslav Stevanović
+  - name: Muhamed Bešić
+  - name: Izet Hajrović
+  - name: Zoran Kvržić
+  - name: Anel Hadžić
+  - name: Tino-Sven Sušić
+  - name: Srđan Stanić
+  - name: Edin Džeko
+  - name: Vedad Ibišević
+  - name: Ermin Zeć
+  - name: Edin Višća
+  - name: Safet Sušić
 bra:
 chi:
+  - name: Claudio Bravo
+  - name: Johnny Herrera
+  - name: Cristopher Toselli
+  - name: Paulo Garcés
+  - name: Gonzalo Jara
+  - name: Gary Medel
+  - name: Mauricio Isla
+  - name: Marcos González
+  - name: Eugenio Mena
+  - name: José Rojas
+  - name: Miiko Albornoz
+  - name: Matías Fernández
+  - name: Jean Beausejour
+  - name: Jorge Valdivia
+  - name: Arturo Vidal
+  - name: Carlos Carmona
+  - name: Rodrigo Millar
+  - name: José Pedro Fuenzalida
+  - name: Charles Aránguiz
+  - name: Marcelo Díaz
+  - name: Felipe Gutiérrez
+  - name: Francisco Silva
+  - name: Pablo Hernández
+  - name: Alexis Sánchez
+  - name: Eduardo Vargas
+  - name: Mauricio Pinilla
+  - name: Fabián Orellana
+  - name: Jorge Sampaoli
 civ:
+  - name: Boubacar Barry
+  - name: Sayouba Mandé
+  - name: Badra Ali Sangaré
+  - name: Sylvain Gbohouo
+  - name: Didier Zokora
+  - name: Kolo Touré
+  - name: Arthur Boka
+  - name: Sol Bamba
+  - name: Benjamin Angoua
+  - name: Serge Aurier
+  - name: Ousmane Viera
+  - name: Constant Djakpa
+  - name: Jean-Daniel Akpa-Akpro
+  - name: Brice Dja Djédjé
+  - name: Yaya Touré
+  - name: Cheik Tioté
+  - name: Didier Ya Konan
+  - name: Max Gradel
+  - name: Serey Die
+  - name: Mathis Bolly
+  - name: Ismaël Diomandé
+  - name: Didier Drogba
+  - name: Salomon Kalou
+  - name: Gervinho
+  - name: Wilfried Bony
+  - name: Seydou Doumbia
+  - name: Lacina Traoré
+  - name: Giovanni Sio
+  - name: Sabri Lamouchi
 cmr:
+  - name: Guy Roland Ndy Assembe
+  - name: Charles Itandje
+  - name: Sammy N'Djock
+  - name: Loïc Feudjou
+  - name: Nicolas Nkoulou
+  - name: Aurélien Chedjou
+  - name: Henri Bedimo
+  - name: Benoît Assou-Ekotto
+  - name: Dany Nounkeu
+  - name: Gaëtan Bong
+  - name: Allan Nyom
+  - name: Jean-Armel Kana-Biyik
+  - name: Cédric Djeugoué
+  - name: Jean Makoun
+  - name: Stéphane Mbia
+  - name: Alexandre Song
+  - name: Landry N'Guemo
+  - name: Eyong Enoh
+  - name: Joël Matip
+  - name: Edgar Salli
+  - name: Raoul Loé
+  - name: Samuel Eto'o
+  - name: Pierre Webó
+  - name: Mohammadou Idrissou
+  - name: Eric-Maxim Choupo-Moting
+  - name: Vincent Aboubakar
+  - name: Benjamin Moukandjo
+  - name: Fabrice Olinga
+  - name: Volker Finke
 col:
+  - name: Faryd Mondragón
+  - name: David Ospina
+  - name: Camilo Vargas
+  - name: Mario Yepes
+  - name: Luis Amaranto Perea
+  - name: Juan Camilo Zúñiga
+  - name: Pablo Armero
+  - name: Aquivaldo Mosquera
+  - name: Cristián Zapata
+  - name: Santiago Arias
+  - name: Éder Álvarez Balanta
+  - name: Carlos Valdés
+  - name: Fredy Guarín
+  - name: Abel Aguilar
+  - name: Carlos Sánchez
+  - name: Macnelly Torres
+  - name: Aldo Leão Ramírez
+  - name: Juan Guillermo Cuadrado
+  - name: Elkin Soto
+  - name: James Rodríguez
+  - name: Edwin Valencia
+  - name: Alexander Mejía
+  - name: Juan Fernando Quintero
+  - name: Radamel Falcao
+  - name: Teófilo Gutiérrez
+  - name: Jackson Martínez
+  - name: Adrián Ramos
+  - name: Carlos Bacca
+  - name: Victor Ibarbo
+  - name: Luis Muriel
+  - name: José Pékerman
 crc:
+  - name: Keylor Navas
+  - name: Patrick Pemberton
+  - name: Daniel Cambronero
+  - name: Esteban Alvarado
+  - name: Michael Umaña
+  - name: Júnior Díaz
+  - name: Roy Miller
+  - name: Giancarlo González
+  - name: Johnny Acosta
+  - name: Cristian Gamboa
+  - name: Óscar Duarte
+  - name: Heiner Mora
+  - name: Kendall Waston
+  - name: Waylon Francis
+  - name: Celso Borges
+  - name: Christian Bolaños
+  - name: Michael Barrantes
+  - name: Carlos Hernández
+  - name: José Miguel Cubero
+  - name: Yeltsin Tejeda
+  - name: Ariel Rodríguez
+  - name: Esteban Granados
+  - name: Diego Calvo
+  - name: Hansell Araúz
+  - name: Álvaro Saborío
+  - name: Bryan Ruiz
+  - name: Randall Brenes
+  - name: Joel Campbell
+  - name: Marco Ureña
+  - name: Jairo Arrieta
+  - name: Jorge Luis Pinto
 cro:
+  - name: Stipe Pletikosa
+  - name: Danijel Subašić
+  - name: Oliver Zelenika
+  - name: Darijo Srna
+  - name: Vedran Ćorluka
+  - name: Danijel Pranjić
+  - name: Ivan Strinić
+  - name: Dejan Lovren
+  - name: Domagoj Vida
+  - name: Gordon Schildenfeld
+  - name: Šime Vrsaljko
+  - name: Igor Bubnjić
+  - name: Niko Kranjčar
+  - name: Luka Modrić
+  - name: Ivan Rakitić
+  - name: Ognjen Vukojević
+  - name: Ivan Perišić
+  - name: Milan Badelj
+  - name: Ivo Iličević
+  - name: Mateo Kovačić
+  - name: Sammir
+  - name: Marcelo Brozović
+  - name: Ivan Močinić
+  - name: Mario Pašalić
+  - name: Ivica Olić
+  - name: Eduardo
+  - name: Mario Mandžukić
+  - name: Nikica Jelavić
+  - name: Ante Rebić
+  - name: Duje Čop
+  - name: Niko Kovač
 ecu:
+  - name: Máximo Banguera
+  - name: Alexander Domínguez
+  - name: Adrián Bone
+  - name: Walter Ayoví
+  - name: Jorge Guagua
+  - name: Juan Carlos Paredes
+  - name: Frickson Erazo
+  - name: Gabriel Achilier
+  - name: Óscar Bagüí
+  - name: Cristian Ramírez
+  - name: John Narváez
+  - name: Édison Méndez
+  - name: Segundo Castillo
+  - name: Antonio Valencia
+  - name: Luis Saritama
+  - name: Christian Noboa
+  - name: Jefferson Montero
+  - name: Joao Rojas
+  - name: Michael Arroyo
+  - name: Oswaldo Minda
+  - name: Renato Ibarra
+  - name: Pedro Quiñónez
+  - name: Fidel Martínez
+  - name: Carlos Gruezo
+  - name: Ángel Mena
+  - name: Cristian Penilla
+  - name: Felipe Caicedo
+  - name: Jaime Ayoví
+  - name: Enner Valencia
+  - name: Armando Wila
+  - name: Reinaldo Rueda
 eng:
+  - name: Joe Hart
+  - name: Ben Foster
+  - name: Fraser Forster
+  - name: Glen Johnson
+  - name: Leighton Baines
+  - name: Gary Cahill
+  - name: Phil Jagielka
+  - name: Chris Smalling
+  - name: Phil Jones
+  - name: Luke Shaw
+  - name: Steven Gerrard
+  - name: Jack Wilshere
+  - name: Frank Lampard
+  - name: Jordan Henderson
+  - name: Alex Oxlade-Chamberlain
+  - name: James Milner
+  - name: Raheem Sterling
+  - name: Adam Lallana
+  - name: Ross Barkley
+  - name: Daniel Sturridge
+  - name: Wayne Rooney
+  - name: Danny Welbeck
+  - name: Rickie Lambert
+  - name: Roy Hodgson
+  - name: John Ruddy
+  - name: Jon Flanagan
+  - name: John Stones
+  - name: Michael Carrick
+  - name: Tom Cleverley
+  - name: Andy Carroll
+  - name: Jermain Defoe
+  - name: Kyle Walker
+  - name: Andros Townsend
+  - name: Theo Walcott
+  - name: Jay Rodriguez
 esp:
 fra:
 ger:
 gha:
+  - name: Adam Kwarasey
+  - name: Fatau Dauda
+  - name: Steven Adams
+  - name: Samuel Inkoom
+  - name: Harrison Afful
+  - name: John Boye
+  - name: Jonathan Mensah
+  - name: Daniel Opare
+  - name: Jerry Akaminko
+  - name: Rashid Sumaila
+  - name: Jeff Schlupp
+  - name: Sulley Muntari
+  - name: Kwadwo Asamoah
+  - name: Michael Essien
+  - name: Emmanuel Agyemang-Badu
+  - name: André Ayew
+  - name: Christian Atsu
+  - name: Wakaso Mubarak
+  - name: Mohammed Rabiu
+  - name: Albert Adomah
+  - name: Kevin-Prince Boateng
+  - name: Afriyie Acquah
+  - name: Asamoah Gyan
+  - name: Majeed Waris
+  - name: Jordan Ayew
+  - name: David Accam
+  - name: James Kwesi Appiah
 gre:
+  - name: Oréstis Karnézis
+  - name: Stéfanos Kapíno
+  - name: Panagiotis Glikos
+  - name: Vasílis Torosídis
+  - name: Loukás Výntra
+  - name: Sokrátis Papastathópoulos
+  - name: Ioánnis Maniátis
+  - name: José Holebas
+  - name: Vangélis Móras
+  - name: Yióryos Tzavellas
+  - name: Kostas Manolas
+  - name: Yórgos Karagoúnis
+  - name: Kóstas Katsouránis
+  - name: Aléxandros Tziólis
+  - name: Ioánnis Fetfatzídis
+  - name: Lázaros Christodoulópoulos
+  - name: Panayótis Koné
+  - name: Panagiotis Tachtsidis
+  - name: Andreas Samaris
+  - name: Dimítris Salpingídis
+  - name: Yeóryos Samarás
+  - name: Theofánis Gekas
+  - name: Kóstas Mítroglou
+  - name: Fernando Santos
 hon:
+  - name: Noel Valladares
+  - name: Donis Escober
+  - name: Luis López
+  - name: Maynor Figueroa
+  - name: Víctor Bernárdez
+  - name: Emilio Izaguirre
+  - name: Osman Chávez
+  - name: Juan Carlos García
+  - name: Brayan Beckeles
+  - name: Juan Pablo Montes
+  - name: Wilson Palacios
+  - name: Óscar García
+  - name: Jorge Claros
+  - name: Marvin Chávez
+  - name: Roger Espinoza
+  - name: Mario Martínez
+  - name: Arnold Peralta
+  - name: Luis Garrido
+  - name: Andy Najar
+  - name: Carlo Costly
+  - name: Jerry Bengtson
+  - name: Jerry Palacios
+  - name: Rony Martínez
+  - name: Luis Fernando Suarez
 irn:
+  - name: Rahman Ahmadi
+  - name: Alireza Haghighi
+  - name: Daniel Davari
+  - name: Sosha Makani
+  - name: Alireza Beiranvand
+  - name: Jalal Hosseini
+  - name: Ehsan Hajsafi
+  - name: Khosro Heydari
+  - name: Pejman Montazeri
+  - name: Hossein Mahini
+  - name: Mehrdad Pouladi
+  - name: Hashem Beikzadeh
+  - name: Amir Hossein Sadeghi
+  - name: Ahmad Alenemeh
+  - name: Mohammad Reza Khanzadeh
+  - name: Steven Beitashour
+  - name: Javad Nekounam
+  - name: Andranik Teymourian
+  - name: Mohammad Reza Khalatbari
+  - name: Masoud Shojaei
+  - name: Ghasem Haddadifar
+  - name: Ashkan Dejagah
+  - name: Reza Haghighi
+  - name: Alireza Jahanbakhsh
+  - name: Bakhtiar Rahmani
+  - name: Karim Ansarifard
+  - name: Mehdi Sharifi
+  - name: Reza Ghoochannejhad
+  - name: Reza Norouzi
+  - name: Sardar Azmoun
+  - name: Carlos Queiroz
 ita:
+  - name: Gianluigi Buffon
+  - name: Salvatore Sirigu
+  - name: Mattia Perin
+  - name: Giorgio Chiellini
+  - name: Andrea Barzagli
+  - name: Leonardo Bonucci
+  - name: Christian Maggio
+  - name: Andrea Ranocchia
+  - name: Ignazio Abate
+  - name: Mattia De Sciglio
+  - name: Manuel Pasqual
+  - name: Gabriel Paletta
+  - name: Matteo Darmian
+  - name: Andrea Pirlo
+  - name: Daniele De Rossi
+  - name: Riccardo Montolivo
+  - name: Claudio Marchisio
+  - name: Alberto Aquilani
+  - name: Thiago Motta
+  - name: Antonio Candreva
+  - name: Marco Verratti
+  - name: Marco Parolo
+  - name: Rômulo
+  - name: Antonio Cassano
+  - name: Mario Balotelli
+  - name: Giuseppe Rossi
+  - name: Alessio Cerci
+  - name: Mattia Destro
+  - name: Lorenzo Insigne
+  - name: Ciro Immobile
+  - name: Cesare Prandelli
 jpn:
+  - name: Eiji Kawashima
+  - name: Shūsaku Nishikawa
+  - name: Shūichi Gonda
+  - name: Yasuyuki Konno
+  - name: Yūto Nagatomo
+  - name: Atsuto Uchida
+  - name: Maya Yoshida
+  - name: Masahiko Inoha
+  - name: Hiroki Sakai
+  - name: Gōtoku Sakai
+  - name: Masato Morishige
+  - name: Yasuhito Endō
+  - name: Makoto Hasebe
+  - name: Shinji Kagawa
+  - name: Keisuke Honda
+  - name: Hiroshi Kiyotake
+  - name: Hotaru Yamaguchi
+  - name: Toshihiro Aoyama
+  - name: Shinji Okazaki
+  - name: Yoshito Ōkubo
+  - name: Yoichiro Kakitani
+  - name: Yuya Osako
+  - name: Manabu Saito
+  - name: Alberto Zaccheroni
 kor:
+  - name: Jung Sung-ryong
+  - name: Kim Seung-gyu
+  - name: Lee Bum-young
+  - name: Kwak Tae-hwi
+  - name: Hong Jeong-ho
+  - name: Kim Young-gwon
+  - name: Lee Yong
+  - name: Kim Jin-su
+  - name: Kim Chang-soo
+  - name: Hwang Seok-ho
+  - name: Yun Suk-young
+  - name: Ki Sung-yueng
+  - name: Lee Chung-yong
+  - name: Koo Ja-cheol
+  - name: Kim Bo-kyung
+  - name: Ha Dae-sung
+  - name: Park Jong-woo
+  - name: Han Kook-young
+  - name: Park Chu-young
+  - name: Lee Keun-ho
+  - name: Kim Shin-wook
+  - name: Ji Dong-won
+  - name: Son Heung-min
+  - name: Hong Myung-bo
 mex:
 ned:
+  - name: Michel Vorm
+  - name: Jasper Cillessen
+  - name: Tim Krul
+  - name: Jeroen Zoet
+  - name: Ron Vlaar
+  - name: Daryl Janmaat
+  - name: Bruno Martins Indi
+  - name: Stefan de Vrij
+  - name: Patrick van Aanholt
+  - name: Karim Rekik
+  - name: Joël Veltman
+  - name: Paul Verhaegh
+  - name: Terence Kongolo
+  - name: Rafael van der Vaart
+  - name: Wesley Sneijder
+  - name: Nigel de Jong
+  - name: Daley Blind
+  - name: Jonathan de Guzmán
+  - name: Jordy Clasie
+  - name: Leroy Fer
+  - name: Georginio Wijnaldum
+  - name: Tonny Vilhena
+  - name: Dirk Kuyt
+  - name: Robin van Persie
+  - name: Arjen Robben
+  - name: Klaas-Jan Huntelaar
+  - name: Jeremain Lens
+  - name: Memphis Depay
+  - name: Jean-Paul Boëtius
+  - name: Quincy Promes
+  - name: Louis van Gaal
 nga:
+  - name: Vincent Enyeama
+  - name: Austin Ejide
+  - name: Chigozie Agbim
+  - name: Daniel Akpeyi
+  - name: Joseph Yobo
+  - name: Elderson Echiejile
+  - name: Efe Ambrose
+  - name: Godfrey Oboabona
+  - name: Azubuike Egwuekwe
+  - name: Kenneth Omeruo
+  - name: Juwon Oshaniwa
+  - name: Kunle Odunlami
+  - name: John Obi Mikel
+  - name: Ahmed Musa
+  - name: Sunday Mba
+  - name: Ejike Uzoenyi
+  - name: Ogenyi Onazi
+  - name: Victor Moses
+  - name: Nnamdi Oduamadi
+  - name: Joel Obi
+  - name: Nosa Igiebor
+  - name: Reuben Gabriel
+  - name: Ramon Azeez
+  - name: Peter Odemwingie
+  - name: Victor Obinna
+  - name: Emmanuel Emenike
+  - name: Shola Ameobi
+  - name: Uche Nwofor
+  - name: Michel Babatunde
+  - name: Michael Uchebo
+  - name: Stephen Keshi
 por:
 rus:
 sui:
 uru:
 usa:
+  - name: Tim Howard
+  - name: Brad Guzan
+  - name: Nick Rimando
+  - name: DaMarcus Beasley
+  - name: Geoff Cameron
+  - name: Fabian Johnson
+  - name: Omar Gonzalez
+  - name: Timothy Chandler
+  - name: John Brooks
+  - name: DeAndre Yedlin
+  - name: Michael Bradley
+  - name: Jermaine Jones
+  - name: Kyle Beckerman
+  - name: Alejandro Bedoya
+  - name: Graham Zusi
+  - name: Mikkel Diskerud
+  - name: Brad Davis
+  - name: Julian Green
+  - name: Clint Dempsey
+  - name: Jozy Altidore
+  - name: Chris Wondolowski
+  - name: Aron Jóhannsson
+  - name: Jürgen Klinsmann
+  - name: Brad Evans
+  - name: Clarence Goodson
+  - name: Michael Parkhurst
+  - name: Joe Corona
+  - name: Maurice Edu
+  - name: Terrence Boyd
+  - name: Landon Donovan
+
+
