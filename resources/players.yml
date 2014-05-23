@@ -154,6 +154,29 @@ bih:
   - name: Edin Višća
   - name: Safet Sušić
 bra:
+  - name: Júlio César
+  - name: Jefferson
+  - name: Victor
+  - name: Dani Alves
+  - name: Maicon
+  - name: Thiago Silva
+  - name: David Luiz
+  - name: Marcelo
+  - name: Dante
+  - name: Maxwell
+  - name: Henrique
+  - name: Ramires
+  - name: Oscar
+  - name: Paulinho
+  - name: Hernanes
+  - name: Luiz Gustavo
+  - name: Bernard
+  - name: Fernandinho
+  - name: Willian
+  - name: Neymar
+  - name: Hulk
+  - name: Fred
+  - name: Jô
 chi:
   - name: Claudio Bravo
   - name: Johnny Herrera
@@ -408,7 +431,52 @@ eng:
   - name: Theo Walcott
   - name: Jay Rodriguez
 esp:
+  - name: Iker Casillas
+  - name: Víctor Valdés
+  - name: Pepe Reina
+  - name: Raúl Albiol
+  - name: Íñigo Martínez
+  - name: Juanfran
+  - name: Marc Bartra
+  - name: Sergio Ramos
+  - name: Álvaro Arbeloa
+  - name: Alberto Moreno
+  - name: Nacho Monreal
+  - name: Javi Martínez
+  - name: Andrés Iniesta
+  - name: Koke
+  - name: Juan Mata
+  - name: Xabi Alonso
+  - name: Sergio Busquets
+  - name: Santi Cazorla
+  - name: Jesús Navas
+  - name: David Villa
+  - name: Diego Costa
+  - name: Pedro Rodríguez
 fra:
+  - name: Hugo Lloris
+  - name: Mickaël Landreau
+  - name: Stéphane Ruffier
+  - name: Bacary Sagna
+  - name: Mathieu Debuchy
+  - name: Mamadou Sakho
+  - name: Laurent Koscielny
+  - name: Raphaël Varane
+  - name: Eliaquim Mangala
+  - name: Patrice Évra
+  - name: Lucas Digne
+  - name: Yohan Cabaye
+  - name: Blaise Matuidi
+  - name: Moussa Sissoko
+  - name: Rio Mavuba
+  - name: Paul Pogba
+  - name: Clément Grenier
+  - name: Mathieu Valbuena
+  - name: Loïc Rémy
+  - name: Franck Ribéry
+  - name: Antoine Griezmann
+  - name: Karim Benzema
+  - name: Olivier Giroud
 ger:
 gha:
   - name: Adam Kwarasey
@@ -603,6 +671,29 @@ kor:
   - name: Son Heung-min
   - name: Hong Myung-bo
 mex:
+  - name: Guillermo Ochoa
+  - name: José de Jesús Corona
+  - name: Moisés Muñoz
+  - name: Francisco Javier Rodríguez
+  - name: Rafael Márquez
+  - name: Enrique Pérez
+  - name: Juan Carlos Valenzuela
+  - name: Diego Reyes
+  - name: Héctor Moreno
+  - name: Miguel Ponce
+  - name: Paul Aguilar
+  - name: Héctor Herrera
+  - name: Luis Montes
+  - name: Javier Aquino
+  - name: José Juan Vázquez
+  - name: Andrés Guardado
+  - name: Isaác Brizuela
+  - name: Juan Carlos Medina
+  - name: Carlos Peña
+  - name: Alan Pulido
+  - name: Javier Hernández
+  - name: Oribe Peralta
+  - name: Raúl Jiménez
 ned:
   - name: Michel Vorm
   - name: Jasper Cillessen
@@ -668,8 +759,63 @@ nga:
   - name: Michael Uchebo
   - name: Stephen Keshi
 por:
+  - name: Eduardo
+  - name: Rui Patrício
+  - name: Beto
+  - name: Bruno Alves
+  - name: Pepe
+  - name: Fábio Coentrão
+  - name: Ricardo Costa
+  - name: Luís Neto
+  - name: João Pereira
+  - name: André Almeida
+  - name: Miguel Veloso
+  - name: William Carvalho
+  - name: João Moutinho
+  - name: Raul Meireles
+  - name: Rúben Amorim
+  - name: Cristiano Ronaldo
+  - name: Éder
+  - name: Varela
+  - name: Rafa
+  - name: Vieirinha
+  - name: Nani
+  - name: Hélder Postiga
+  - name: Hugo Almeida
 rus:
 sui:
+  - name: Diego Benaglio
+  - name: Yann Sommer
+  - name: Roman Bürki
+  - name: Stephan Lichtsteiner
+  - name: Reto Ziegler
+  - name: Philippe Senderos
+  - name: Steve von Bergen
+  - name: Michael Lang
+  - name: Ricardo Rodríguez
+  - name: Johan Djourou
+  - name: Fabian Schär
+  - name: Tranquillo Barnetta
+  - name: Gökhan Inler
+  - name: Granit Xhaka
+  - name: Valon Behrami
+  - name: Valentin Stocker
+  - name: Blerim Džemaili
+  - name: Gelson Fernandes
+  - name: Xherdan Shaqiri
+  - name: Haris Seferović
+  - name: Mario Gavranović
+  - name: Admir Mehmedi
+  - name: Josip Drmić
+  - name: Ottmar Hitzfeld
+  - name: Marwin Hitz
+  - name: Silvan Widmer
+  - name: Timm Klose
+  - name: Pirmin Schwegler
+  - name: Pajtim Kasami
+  - name: Eren Derdiyok
+  - name: Marco Wölfli
+  - name: Fabian Lustenberger
 uru:
 usa:
   - name: Tim Howard
@@ -702,5 +848,3 @@ usa:
   - name: Maurice Edu
   - name: Terrence Boyd
   - name: Landon Donovan
-
-
