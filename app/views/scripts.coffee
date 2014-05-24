@@ -219,7 +219,7 @@ listQuestionsInit = ->
       $cristals = $clone.find('.cristals')
 
       $title.html(question.labels.fr ? question.labels.en)
-      $title.prop('href', "/questions/#{question.id}?token=#{token}")
+      $title.prop('href', "/admin/questions/#{question.id}?token=#{token}")
       revealsAt = moment(question.reveals_at * 1000)
       expiresAt = moment(question.expires_at * 1000)
       eventAt = moment(question.event_at * 1000) if question.event_at
@@ -258,7 +258,7 @@ listPlayersInit = ->
 
       $id.html(player.id)
       $nick.html(player.nickname)
-      $nick.prop('href', "/players/#{player.nickname}?token=#{token}")
+      $nick.prop('href', "/admin/players/#{player.nickname}?token=#{token}")
       $cristals.html(player.cristals)
       $auth.html(moment(player.last_authentication_at * 1000).format(DATE_FORMAT))
 
@@ -426,7 +426,7 @@ detailsQuestionsInit = ->
       alert('Failed! See the console for more information.')
 
   $(document).on 'click', '.edit-question', ->
-    window.location = "/questions/#{questionId}/edit?token=#{token}"
+    window.location = "/admin/questions/#{questionId}/edit?token=#{token}"
 
   fetchQuestion()
 

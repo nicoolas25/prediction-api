@@ -5,7 +5,9 @@ require 'sinatra/base'
 require './app/domain'
 require './lib/locale_middleware'
 
-WEB_CONFIG = YAML.load_file('./config/web.yml')
+WEB_CONFIG  = YAML.load_file('./config/web.yml')
+CONFIG      = YAML.load_file('./config/admin.yml')[ENV['RACK_ENV'] || 'app']
+ADMIN_TOKEN = CONFIG['key'].freeze
 
 module Prediction
   class Web < Sinatra::Base
@@ -23,30 +25,6 @@ module Prediction
       slim :home
     end
 
-    get '/questions/new' do
-      slim :questions_new
-    end
-
-    get '/questions' do
-      slim :questions_list
-    end
-
-    get '/questions/:id' do
-      slim :questions_details
-    end
-
-    get '/questions/:id/edit' do
-      slim :questions_edit
-    end
-
-    get '/players' do
-      slim :players_list
-    end
-
-    get '/players/:nickname' do
-      slim :players_details
-    end
-
     get '/badges/:identifier/:level' do
       @identifier = params[:identifier]
       @level = params[:level] =~ /[1-5]/ ? params[:level] : 1
@@ -55,7 +33,35 @@ module Prediction
       slim :badge_details
     end
 
-    get '/scripts.js' do
+    before '/admin/*' do
+      halt 401 unless params[:token] == ADMIN_TOKEN
+    end
+
+    get '/admin/questions/new' do
+      slim :questions_new
+    end
+
+    get '/admin/questions' do
+      slim :questions_list
+    end
+
+    get '/admin/questions/:id' do
+      slim :questions_details
+    end
+
+    get '/admin/questions/:id/edit' do
+      slim :questions_edit
+    end
+
+    get '/admin/players' do
+      slim :players_list
+    end
+
+    get '/admin/players/:nickname' do
+      slim :players_details
+    end
+
+    get '/admin/scripts.js' do
       content_type "text/javascript"
       coffee :scripts
     end
