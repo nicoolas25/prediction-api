@@ -1,0 +1,139 @@
+- template: country
+  labels:
+    fr: Quel sera l'écart de but à la mi-temps ?
+    en: What is the difference in goal halftime?
+    es: ¿Cuál es la diferencia en el medio tiempo objetivo?
+    pt: Qual é a diferença no gol do intervalo?
+  components:
+    - kind: choice
+      choices:
+        fr: 0,1,2,3,4,5,6	
+        en: 0,1,2,3,4,5,6	
+        es: 0,1,2,3,4,5,6	
+        pt: 0,1,2,3,4,5,6	
+
+- template: country
+  labels:
+    fr: Quel sera l'écart de but à la fin du match ?
+    en: What is the difference in goal at the end of the game?
+    es: ¿Cuál es la diferencia de gol al final del partido?
+    pt: Qual é a diferença no gol no final do jogo?
+  components:
+    - kind: choice
+      choices:
+        fr: 0,1,2,3,4,5,6	
+        en: 0,1,2,3,4,5,6	
+        es: 0,1,2,3,4,5,6	
+        pt: 0,1,2,3,4,5,6	
+
+- template: country
+  labels:
+    fr: Quelle équipe sera le vainqueur du match ?
+    en: Which team will win the match?
+    es: ¿Qué equipo ganará el partido?
+    pt: Qual time vai ganhar o jogo?
+  components:
+    - kind: choice
+      choices:
+        fr: __C1__,match nul,__C2__
+        en: __C1__,draw,__C2__
+        es: __C1__,TODO,__C2__
+        pt: __C1__,TODO,__C2__
+
+- template: country
+  labels:
+    fr: Quelle équipe marquera en premier ?
+    en: Which team will score first?
+    es: ¿Qué equipo marcará primero?
+    pt: Que equipa vai marcar primeiro?
+  components:
+    - kind: choice
+      choices:
+        fr: __C1__,__C2__,aucun
+        en: __C1__,__C2__,none
+        es: __C1__,__C2__,TODO
+        pt: __C1__,__C2__,TODO
+
+- template: country
+  labels:
+    fr: Quelle équipe fera le plus de faute ?
+    en: Which team will make the most foul?
+    es: ¿Qué equipo será aprovechar al máximo la falta?
+    pt: Que equipa vai aproveitar ao máximo la falta?
+  components:
+    - kind: choice
+      choices:
+        fr: __C1__,__C2__,même nombre
+        en: __C1__,__C2__,same amount
+        es: __C1__,__C2__,TODO
+        pt: __C1__,__C2__,TODO
+
+- template: country
+  labels:
+    fr: Quelle équipe aura le plus de corners ?
+    en: Which team will have the most corners?
+    es: ¿Qué equipo efectuará más saques de esquina?
+    pt: Que equipa vai ter mais escanteio?
+  components:
+    - kind: choice
+      choices:
+        fr: __C1__,__C2__,même nombre
+        en: __C1__,__C2__,same amount
+        es: __C1__,__C2__,TODO
+        pt: __C1__,__C2__,TODO
+
+- template: country
+  labels:
+    fr: Quelle équipe aura le premier carton jaune ?
+    en: Which team will be the first yellow card?
+    es: ¿Qué equipo será el primero tarjeta amarilla?
+    pt: Qual time vai ser o primeiro cartão amarelo?
+  components:
+    - kind: choice
+      choices:
+        fr: __C1__,__C2__,aucun
+        en: __C1__,__C2__,none
+        es: __C1__,__C2__,TODO
+        pt: __C1__,__C2__,TODO
+
+- template: country
+  labels:
+    fr: Quelle équipe aura le premier carton rouge ?
+    en: Which team will be the first red card?
+    es: ¿Qué equipo será el primero tarjeta roja?
+    pt: Qual time vai ser o primeiro cartão vermelho?
+  components:
+    - kind: choice
+      choices:
+        fr: __C1__,__C2__,aucun
+        en: __C1__,__C2__,none
+        es: __C1__,__C2__,TODO
+        pt: __C1__,__C2__,TODO
+
+- template: country
+  labels:
+    fr: Quelle équipe aura le premier coup franc ?
+    en: Which team will have the first kick?
+    es: ¿Qué equipo será el primero patada?
+    pt: Que equipa vai ter o primeiro chute?
+  components:
+    - kind: choice
+      choices:
+        fr: __C1__,__C2__,aucun
+        en: __C1__,__C2__,none
+        es: __C1__,__C2__,TODO
+        pt: __C1__,__C2__,TODO
+
+- template: country
+  labels:
+    fr: Quelle équipe aura la possession ?
+    en: Which team will have possession?
+    es: ¿Qué equipo tiene la posesión?
+    pt: Que equipa vai ter a posse?
+  components:
+    - kind: choice
+      choices:
+        fr: __C1__,__C2__,même nombre
+        en: __C1__,__C2__,same amount
+        es: __C1__,__C2__,TODO
+        pt: __C1__,__C2__,TODO
