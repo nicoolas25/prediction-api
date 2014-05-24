@@ -30,8 +30,8 @@
   labels:
     fr: Quelle équipe sera le vainqueur du match ?
     en: Which team will win the match?
-    es: ¿Qué equipo ganará el partido?
-    pt: Qual time vai ganhar o jogo?
+    es: ¿Cuál equipo ganará el partido?
+    pt: Qual equipa vai ganhar o jogo?
   components:
     - kind: choice
       choices:
@@ -44,8 +44,8 @@
   labels:
     fr: Quelle équipe marquera en premier ?
     en: Which team will score first?
-    es: ¿Qué equipo marcará primero?
-    pt: Que equipa vai marcar primeiro?
+    es: ¿Cuál equipo marcará primero?
+    pt: Qual equipa vai marcar primeiro?
   components:
     - kind: choice
       choices:
@@ -58,8 +58,8 @@
   labels:
     fr: Quelle équipe fera le plus de faute ?
     en: Which team will make the most foul?
-    es: ¿Qué equipo será aprovechar al máximo la falta?
-    pt: Que equipa vai aproveitar ao máximo la falta?
+    es: ¿Cuál equipo aprovechará al máximo la falta?
+    pt: Qual equipa vai aproveitar ao máximo a falta?
   components:
     - kind: choice
       choices:
@@ -73,7 +73,7 @@
     fr: Quelle équipe aura le plus de corners ?
     en: Which team will have the most corners?
     es: ¿Qué equipo efectuará más saques de esquina?
-    pt: Que equipa vai ter mais escanteio?
+    pt: Qual equipa vai ter mais escanteios?
   components:
     - kind: choice
       choices:
@@ -86,8 +86,8 @@
   labels:
     fr: Quelle équipe aura le premier carton jaune ?
     en: Which team will be the first yellow card?
-    es: ¿Qué equipo será el primero tarjeta amarilla?
-    pt: Qual time vai ser o primeiro cartão amarelo?
+    es: ¿Cuál equipo tendrá la primera tarjeta amarilla?
+    pt: Qual vai ser o primeiro cartão amarelo?
   components:
     - kind: choice
       choices:
@@ -100,8 +100,8 @@
   labels:
     fr: Quelle équipe aura le premier carton rouge ?
     en: Which team will be the first red card?
-    es: ¿Qué equipo será el primero tarjeta roja?
-    pt: Qual time vai ser o primeiro cartão vermelho?
+    es: ¿Cuál equipo tendrá la primera tarjeta roja?
+    pt: Qual equipa vai ter o primeiro cartão vermelho?
   components:
     - kind: choice
       choices:
@@ -114,8 +114,8 @@
   labels:
     fr: Quelle équipe aura le premier coup franc ?
     en: Which team will have the first kick?
-    es: ¿Qué equipo será el primero patada?
-    pt: Que equipa vai ter o primeiro chute?
+    es: ¿Cuál equipo tendrá el primero patada?
+    pt: Qual equipa vai ter o primeiro chute?
   components:
     - kind: choice
       choices:
@@ -128,8 +128,8 @@
   labels:
     fr: Quelle équipe aura la possession ?
     en: Which team will have possession?
-    es: ¿Qué equipo tiene la posesión?
-    pt: Que equipa vai ter a posse?
+    es: ¿Cuál equipo tiene la posesión?
+    pt: Qual equipa vai ter a posse?
   components:
     - kind: choice
       choices:
@@ -141,9 +141,9 @@
 - template: player
   labels:
     fr: Quel joueur sera l'homme du match ?
-    en: 
-    es: 
-    pt: 
+    en: Which player will be the man of the match?
+    es: ¿Cuál jugador será el mejor jugador del partido?
+    pt: Qual jogador será o homem do jogo?
   components:
     - kind: choice
       choices:
@@ -154,10 +154,10 @@
 
 - template: player
   labels:
-    fr: Qui marquera en premier ?
-    en: 
-    es: 
-    pt: 
+    fr: Quel joueur prendra le permier carton jaune ?
+    en: Which player will the first to get a yellow card?
+    es: ¿Cuál jugador tendrá la primera tarjeta amarilla?
+    pt: Qual jogador vai ter o primeiro cartão amarelo?
   components:
     - kind: choice
       choices:
@@ -168,10 +168,10 @@
 
 - template: player
   labels:
-    fr: Quel joueur prendra le permier carton jaune ?
-    en: 
-    es: 
-    pt: 
+    fr: Qui marquera en premier ?
+    en: Who will score first?
+    es: ¿Quién marcará primero?
+    pt: Quem vai marcar primeiro?
   components:
     - kind: choice
       choices:
@@ -183,9 +183,9 @@
 - template: player
   labels:
     fr: Quel joueur prendra le permier carton rouge ?
-    en: 
-    es: 
-    pt: 
+    en: Which player will the first to get a red card?
+    es: ¿Cuál jugador tendrá la primera tarjeta roja?
+    pt: Qual jogador vai ter o primeiro cartão vermelho?
   components:
     - kind: choice
       choices:
@@ -197,9 +197,9 @@
 - template: player
   labels:
     fr: Quel joueur fera la première faute ?
-    en: 
-    es: 
-    pt: 
+    en: Which player will make the first foul?
+    es: ¿Cuál jugador hará la primera falta?
+    pt: Qual jogador vai fazer a primeira falta?
   components:
     - kind: choice
       choices:
@@ -207,5 +207,4 @@
         en: Other player,None
         es: Otro jugador,No
         pt: Outro jogador,Não
-
 
