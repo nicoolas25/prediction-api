@@ -39,6 +39,7 @@
         en: __C1__,Draw,__C2__
         es: __C1__,Dibujar,__C2__
         pt: __C1__,Empate,__C2__
+        dev: __C1__,s/draw,__C2__
 
 - template: country
   labels:
@@ -53,6 +54,7 @@
         en: __C1__,__C2__,None
         es: __C1__,__C2__,No
         pt: __C1__,__C2__,Não
+        dev: __C1__,__C2__,s/none
 
 - template: country
   labels:
@@ -67,6 +69,7 @@
         en: __C1__,__C2__,Same amount
         es: __C1__,__C2__,Mismo número
         pt: __C1__,__C2__,Mesmo número
+        dev: __C1__,__C2__,s/same
 
 - template: country
   labels:
@@ -81,6 +84,7 @@
         en: __C1__,__C2__,Same amount
         es: __C1__,__C2__,Mismo número
         pt: __C1__,__C2__,Mesmo número
+        dev: __C1__,__C2__,s/same
 
 - template: country
   labels:
@@ -95,6 +99,7 @@
         en: __C1__,__C2__,None
         es: __C1__,__C2__,No
         pt: __C1__,__C2__,Não
+        dev: __C1__,__C2__,s/none
 
 - template: country
   labels:
@@ -109,6 +114,7 @@
         en: __C1__,__C2__,None
         es: __C1__,__C2__,No
         pt: __C1__,__C2__,Não
+        dev: __C1__,__C2__,s/none
 
 - template: country
   labels:
@@ -123,6 +129,7 @@
         en: __C1__,__C2__,None
         es: __C1__,__C2__,No
         pt: __C1__,__C2__,Não
+        dev: __C1__,__C2__,s/none
 
 - template: country
   labels:
@@ -137,6 +144,7 @@
         en: __C1__,__C2__,Same amount
         es: __C1__,__C2__,Mismo número
         pt: __C1__,__C2__,Mesmo número
+        dev: __C1__,__C2__,s/same
 
 - template: player
   labels:
@@ -151,6 +159,7 @@
         en: Other player
         es: Otro jugador
         pt: Outro jogador
+        dev: s/other
 
 - template: player
   labels:
@@ -165,6 +174,7 @@
         en: Other player,None
         es: Otro jugador,No
         pt: Outro jogador,Não
+        dev: s/other,s/none
 
 - template: player
   labels:
@@ -179,6 +189,7 @@
         en: Other player,None
         es: Otro jugador,No
         pt: Outro jogador,Não
+        dev: s/other,s/none
 
 - template: player
   labels:
@@ -193,6 +204,7 @@
         en: Other player,None
         es: Otro jugador,No
         pt: Outro jogador,Não
+        dev: s/other,s/none
 
 - template: player
   labels:
@@ -207,4 +219,5 @@
         en: Other player,None
         es: Otro jugador,No
         pt: Outro jogador,Não
+        dev: s/other,s/none
 
