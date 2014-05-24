@@ -1,0 +1,288 @@
+- group: A
+  date: 2014/06/12
+  time: 22:00
+  teams:
+    - br
+    - hr
+- group: A
+  date: 2014/06/13
+  time: 18:00
+  teams:
+    - mx
+    - cm
+- group: A
+  date: 2014/06/17
+  time: 21:00
+  teams:
+    - br
+    - mx
+- group: A
+  date: 2014/06/18
+  time: 21:00
+  teams:
+    - cm
+    - hr
+- group: A
+  date: 2014/06/23
+  time: 22:00
+  teams:
+    - cm
+    - br
+- group: A
+  date: 2014/06/23
+  time: 22:00
+  teams:
+    - hr
+    - mx
+- group: B
+  date: 2014/06/13
+  time: 21:00
+  teams:
+    - es
+    - nl
+- group: B
+  date: 2014/06/14
+  time: 0:00
+  teams:
+    - cl
+    - au
+- group: B
+  date: 2014/06/19
+  time: 0:00
+  teams:
+    - es
+    - cl
+- group: B
+  date: 2014/06/18
+  time: 18:00
+  teams:
+    - au
+    - nl
+- group: B
+  date: 2014/06/23
+  time: 18:00
+  teams:
+    - au
+    - es
+- group: B
+  date: 2014/06/23
+  time: 18:00
+  teams:
+    - nl
+    - cl
+- group: C
+  date: 2014/06/14
+  time: 18:00
+  teams:
+    - co
+    - gr
+- group: C
+  date: 2014/06/15
+  time: 0:00
+  teams:
+    - ci
+    - jp
+- group: C
+  date: 2014/06/19
+  time: 18:00
+  teams:
+    - co
+    - ci
+- group: C
+  date: 2014/06/20
+  time: 0:00
+  teams:
+    - jp
+    - gr
+- group: C
+  date: 2014/06/24
+  time: 22:00
+  teams:
+    - jp
+    - co
+- group: C
+  date: 2014/06/24
+  time: 22:00
+  teams:
+    - gr
+    - ci
+- group: D
+  date: 2014/06/14
+  time: 21:00
+  teams:
+    - uy
+    - cr
+- group: D
+  date: 2014/06/15
+  time: 3:00
+  teams:
+    - en
+    - it
+- group: D
+  date: 2014/06/19
+  time: 21:00
+  teams:
+    - uy
+    - en
+- group: D
+  date: 2014/06/20
+  time: 18:00
+  teams:
+    - it
+    - cr
+- group: D
+  date: 2014/06/24
+  time: 18:00
+  teams:
+    - it
+    - uy
+- group: D
+  date: 2014/06/24
+  time: 18:00
+  teams:
+    - cr
+    - en
+- group: E
+  date: 2014/06/15
+  time: 18:00
+  teams:
+    - ch
+    - ec
+- group: E
+  date: 2014/06/15
+  time: 21:00
+  teams:
+    - fr
+    - hn
+- group: E
+  date: 2014/06/20
+  time: 21:00
+  teams:
+    - ch
+    - fr
+- group: E
+  date: 2014/06/21
+  time: 0:00
+  teams:
+    - hn
+    - ec
+- group: E
+  date: 2014/06/25
+  time: 22:00
+  teams:
+    - hn
+    - ch
+- group: E
+  date: 2014/06/25
+  time: 22:00
+  teams:
+    - ec
+    - fr
+- group: F
+  date: 2014/06/16
+  time: 0:00
+  teams:
+    - ar
+    - ba
+- group: F
+  date: 2014/06/16
+  time: 21:00
+  teams:
+    - ir
+    - ng
+- group: F
+  date: 2014/06/21
+  time: 18:00
+  teams:
+    - ar
+    - ir
+- group: F
+  date: 2014/06/22
+  time: 0:00
+  teams:
+    - ng
+    - ba
+- group: F
+  date: 2014/06/25
+  time: 18:00
+  teams:
+    - ng
+    - ar
+- group: F
+  date: 2014/06/25
+  time: 18:00
+  teams:
+    - ba
+    - ir
+- group: G
+  date: 2014/06/16
+  time: 18:00
+  teams:
+    - de
+    - pt
+- group: G
+  date: 2014/06/17
+  time: 0:00
+  teams:
+    - gh
+    - us
+- group: G
+  date: 2014/06/21
+  time: 21:00
+  teams:
+    - de
+    - gh
+- group: G
+  date: 2014/06/22
+  time: 21:00
+  teams:
+    - us
+    - pt
+- group: G
+  date: 2014/06/26
+  time: 18:00
+  teams:
+    - us
+    - de
+- group: G
+  date: 2014/06/26
+  time: 18:00
+  teams:
+    - pt
+    - gh
+- group: H
+  date: 2014/06/17
+  time: 18:00
+  teams:
+    - be
+    - dz
+- group: H
+  date: 2014/06/18
+  time: 0:00
+  teams:
+    - ru
+    - kr
+- group: H
+  date: 2014/06/23
+  time: 0:00
+  teams:
+    - be
+    - ru
+- group: H
+  date: 2014/06/22
+  time: 18:00
+  teams:
+    - kr
+    - dz
+- group: H
+  date: 2014/06/26
+  time: 22:00
+  teams:
+    - kr
+    - be
+- group: H
+  date: 2014/06/26
+  time: 22:00
+  teams:
+    - dz
+    - ru
