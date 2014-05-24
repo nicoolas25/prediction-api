@@ -109,6 +109,7 @@ Feature: Add a new question
       "question": {
         "expires_at": "2014-01-26 20:00:00 +0000",
         "reveals_at": "2014-01-26 19:00:00 +0000",
+        "event_at":   "2014-01-26 19:30:00 +0000",
         "labels": {
           "fr": "Qui sera le vainceur ?",
           "en": "Who will be the winner?"

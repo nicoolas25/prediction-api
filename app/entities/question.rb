@@ -8,6 +8,10 @@ module Entities
     expose :reveals_at, format_with: :timestamp
     expose :expires_at, format_with: :timestamp
 
+    expose :event_at do |q, opts|
+      q.event_at.try(:to_i) || nil
+    end
+
     expose :labels, if: :admin
     expose :label, if: :locale do |q, opts|
       q.labels[opts[:locale]]

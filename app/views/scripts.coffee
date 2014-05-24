@@ -34,12 +34,13 @@ bindQuestionFormSubmission = (url, type, callback) ->
   $(document).on 'submit', 'form', (event) ->
     event.preventDefault()
 
-    params = {labels: {}, components: [], expires_at: null, reveals_at: null}
+    params = {labels: {}, components: [], expires_at: null, reveals_at: null, event_at: null}
     $form = $(@)
 
     params.expires_at = $form.find('input.expires_at').val()
-
     params.reveals_at = $form.find('input.reveals_at').val()
+    params.event_at   = $form.find('input.event_at').val()
+    params.event_at   = null unless params.event_at? and params.event_at.length > 0
 
     insertLocales($form, params.labels, 'question-label')
 
@@ -135,6 +136,7 @@ editQuestionInit = ->
       # Set informations
       $details.find('.reveals_at').val(moment(question.reveals_at * 1000).format(DATE_FORMAT))
       $details.find('.expires_at').val(moment(question.expires_at * 1000).format(DATE_FORMAT))
+      $details.find('.event_at').val(moment(question.event_at * 1000).format(DATE_FORMAT)) if question.event_at
 
       # Set labels
       $details.find('.question-labels > .question-label').remove()
@@ -213,16 +215,18 @@ listQuestionsInit = ->
       $title    = $clone.find('a.title')
       $reveals  = $clone.find('.reveals_at')
       $expires  = $clone.find('.expires_at')
+      $event    = $clone.find('.event_at')
       $cristals = $clone.find('.cristals')
 
       $title.html(question.labels.fr ? question.labels.en)
       $title.prop('href', "/questions/#{question.id}?token=#{token}")
       revealsAt = moment(question.reveals_at * 1000)
       expiresAt = moment(question.expires_at * 1000)
+      eventAt = moment(question.event_at * 1000) if question.event_at
       $reveals.html(revealsAt.format(DATE_FORMAT))
       $expires.html(expiresAt.format(DATE_FORMAT))
+      $event.html(eventAt.format(DATE_FORMAT)) if question.event_at
       $cristals.html(question.statistics.total)
-
 
       if expiresAt.isBefore(moment()) and not question.answered
         $clone.addClass('warning')
@@ -334,6 +338,7 @@ detailsQuestionsInit = ->
       # Set informations
       $details.find('.reveals_at').val(moment(question.reveals_at * 1000).format(DATE_FORMAT))
       $details.find('.expires_at').val(moment(question.expires_at * 1000).format(DATE_FORMAT))
+      $details.find('.event_at').val(moment(question.event_at * 1000).format(DATE_FORMAT)) if question.event_at
 
       # Set labels
       $details.find('.question-labels > .question-label').remove()

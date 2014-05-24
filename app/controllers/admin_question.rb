@@ -14,6 +14,7 @@ module Controllers
           requires :question, type: Hash do
             requires :expires_at, type: Time
             requires :reveals_at, type: Time
+            optional :event_at,   type: Time
             requires :labels,     type: Hash
             requires :components, type: Array
           end
@@ -52,6 +53,7 @@ module Controllers
             requires :question, type: Hash do
               requires :expires_at, type: Time
               requires :reveals_at, type: Time
+              optional :event_at,   type: Time
               requires :labels,     type: Hash
               requires :components, type: Array
             end
