@@ -35,10 +35,10 @@
   components:
     - kind: choice
       choices:
-        fr: __C1__,match nul,__C2__
-        en: __C1__,draw,__C2__
-        es: __C1__,TODO,__C2__
-        pt: __C1__,TODO,__C2__
+        fr: __C1__,Match nul,__C2__
+        en: __C1__,Draw,__C2__
+        es: __C1__,Dibujar,__C2__
+        pt: __C1__,Empate,__C2__
 
 - template: country
   labels:
@@ -49,10 +49,10 @@
   components:
     - kind: choice
       choices:
-        fr: __C1__,__C2__,aucun
-        en: __C1__,__C2__,none
-        es: __C1__,__C2__,TODO
-        pt: __C1__,__C2__,TODO
+        fr: __C1__,__C2__,Aucun
+        en: __C1__,__C2__,None
+        es: __C1__,__C2__,No
+        pt: __C1__,__C2__,Não
 
 - template: country
   labels:
@@ -63,10 +63,10 @@
   components:
     - kind: choice
       choices:
-        fr: __C1__,__C2__,même nombre
-        en: __C1__,__C2__,same amount
-        es: __C1__,__C2__,TODO
-        pt: __C1__,__C2__,TODO
+        fr: __C1__,__C2__,Même nombre
+        en: __C1__,__C2__,Same amount
+        es: __C1__,__C2__,Mismo número
+        pt: __C1__,__C2__,Mesmo número
 
 - template: country
   labels:
@@ -77,10 +77,10 @@
   components:
     - kind: choice
       choices:
-        fr: __C1__,__C2__,même nombre
-        en: __C1__,__C2__,same amount
-        es: __C1__,__C2__,TODO
-        pt: __C1__,__C2__,TODO
+        fr: __C1__,__C2__,Même nombre
+        en: __C1__,__C2__,Same amount
+        es: __C1__,__C2__,Mismo número
+        pt: __C1__,__C2__,Mesmo número
 
 - template: country
   labels:
@@ -91,10 +91,10 @@
   components:
     - kind: choice
       choices:
-        fr: __C1__,__C2__,aucun
-        en: __C1__,__C2__,none
-        es: __C1__,__C2__,TODO
-        pt: __C1__,__C2__,TODO
+        fr: __C1__,__C2__,Aucun
+        en: __C1__,__C2__,None
+        es: __C1__,__C2__,No
+        pt: __C1__,__C2__,Não
 
 - template: country
   labels:
@@ -105,10 +105,10 @@
   components:
     - kind: choice
       choices:
-        fr: __C1__,__C2__,aucun
-        en: __C1__,__C2__,none
-        es: __C1__,__C2__,TODO
-        pt: __C1__,__C2__,TODO
+        fr: __C1__,__C2__,Aucun
+        en: __C1__,__C2__,None
+        es: __C1__,__C2__,No
+        pt: __C1__,__C2__,Não
 
 - template: country
   labels:
@@ -119,10 +119,10 @@
   components:
     - kind: choice
       choices:
-        fr: __C1__,__C2__,aucun
-        en: __C1__,__C2__,none
-        es: __C1__,__C2__,TODO
-        pt: __C1__,__C2__,TODO
+        fr: __C1__,__C2__,Aucun
+        en: __C1__,__C2__,None
+        es: __C1__,__C2__,No
+        pt: __C1__,__C2__,Não
 
 - template: country
   labels:
@@ -133,7 +133,79 @@
   components:
     - kind: choice
       choices:
-        fr: __C1__,__C2__,même nombre
-        en: __C1__,__C2__,same amount
-        es: __C1__,__C2__,TODO
-        pt: __C1__,__C2__,TODO
+        fr: __C1__,__C2__,Même nombre
+        en: __C1__,__C2__,Same amount
+        es: __C1__,__C2__,Mismo número
+        pt: __C1__,__C2__,Mesmo número
+
+- template: player
+  labels:
+    fr: Quel joueur sera l'homme du match ?
+    en: 
+    es: 
+    pt: 
+  components:
+    - kind: choice
+      choices:
+        fr: Autre joueur
+        en: Other player
+        es: Otro jugador
+        pt: Outro jogador
+
+- template: player
+  labels:
+    fr: Qui marquera en premier ?
+    en: 
+    es: 
+    pt: 
+  components:
+    - kind: choice
+      choices:
+        fr: Autre joueur,Aucun
+        en: Other player,None
+        es: Otro jugador,No
+        pt: Outro jogador,Não
+
+- template: player
+  labels:
+    fr: Quel joueur prendra le permier carton jaune ?
+    en: 
+    es: 
+    pt: 
+  components:
+    - kind: choice
+      choices:
+        fr: Autre joueur,Aucun
+        en: Other player,None
+        es: Otro jugador,No
+        pt: Outro jogador,Não
+
+- template: player
+  labels:
+    fr: Quel joueur prendra le permier carton rouge ?
+    en: 
+    es: 
+    pt: 
+  components:
+    - kind: choice
+      choices:
+        fr: Autre joueur,Aucun
+        en: Other player,None
+        es: Otro jugador,No
+        pt: Outro jogador,Não
+
+- template: player
+  labels:
+    fr: Quel joueur fera la première faute ?
+    en: 
+    es: 
+    pt: 
+  components:
+    - kind: choice
+      choices:
+        fr: Autre joueur,Aucun
+        en: Other player,None
+        es: Otro jugador,No
+        pt: Outro jogador,Não
+
+
