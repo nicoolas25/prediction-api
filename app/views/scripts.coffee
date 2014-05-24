@@ -73,31 +73,41 @@ bindQuestionFormSubmission = (url, type, callback) ->
       console.log arguments
       alert('Failed! See the console for more information.')
 
-cropInit = ->
-  updateSelection = (crop) ->
-    url = $('#image-url').val()
-    label = "#{url}!#{crop.w}!#{crop.x}!#{crop.y}!#{crop.x2}!#{crop.y2}"
-    $('#image-label').html(label)
+playerSelectorInit = ->
+  $area = $('#player-selector')
+  return null unless $area.length
 
-  jCropApi = null
+  $country = $area.find('select.country')
+  $player  = $area.find('select.player')
 
-  cropImage = ->
-    $('#image-crop').Jcrop({
-      onChange: updateSelection,
-      onSelect: updateSelection,
-      aspectRatio: 1}, -> jCropApi = this)
+  buffer = "<option>---</option>"
+  for country in countries
+    buffer += "<option value='#{country.code}'>#{country.translations.fr}</option>"
+  $country.html(buffer)
 
-  cropImage()
+  $country.on 'change', ->
+    buffer = ""
+    for country in countries
+      if country.code is $country.val()
+        for player in country.players
+          buffer += "<option value='#{player.image}'>#{player.name}</option>"
+    $player.html(buffer)
 
-  $('#image-url').on 'change', ->
-    jCropApi.destroy()
-    $('#image-crop').prop('src', @value)
-    cropImage()
+  $area.on 'click', 'button', ->
+    dev = $player.val()
+    name = $player.find('option:selected').html()
+
+    if dev and name
+      $('.component-choices:first .component-choice').each ->
+        $choice = $(@)
+        $input = $choice.find('input')
+        prefix = if $choice.find('select').val() is 'dev' then dev else name
+        $input.val("#{prefix},#{$input.val()}")
 
 addQuestionInit = ->
   return null unless $('#questions-new').length
 
-  cropInit()
+  playerSelectorInit()
 
   bindAddRemoveButton()
 
@@ -111,7 +121,7 @@ editQuestionInit = ->
   $details = $('#questions-edit')
   return null unless $details.length
 
-  cropInit()
+  playerSelectorInit()
 
   $('.input-group.date').datetimepicker
     language: 'fr'

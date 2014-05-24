@@ -65,6 +65,11 @@ module Prediction
       content_type "text/javascript"
       coffee :scripts
     end
+
+    get '/admin/players.js' do
+      cache_control :public, max_age: 36000
+      coffee :players
+    end
   end
 end
 

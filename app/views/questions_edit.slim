@@ -171,25 +171,25 @@ html lang="en"
                   .col-sm-12
                     button.btn.btn-primary.col-sm-12 type="submit" Mettre à jour
 
-          .col-sm-4#image-selector
-            legend Séléction d'une image
+          .col-sm-4#player-selector
+            legend Séléction d'un joueur
 
             .form-group
-              label.control-label.col-sm-2 Url
-              .col-sm-10
-                input#image-url.form-control type="text"
+              label.control-label.col-sm-4 Pays
+              .col-sm-8
+                select.country.form-control type="text"
 
             .form-group
-              .col-sm-12
-                img#image-crop src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Zlatan_Ibrahimovi%C4%87_Euro_2012_vs_Ukraine.JPG/275px-Zlatan_Ibrahimovi%C4%87_Euro_2012_vs_Ukraine.JPG"
+              label.control-label.col-sm-4 Joueur
+              .col-sm-8
+                select.player.form-control type="text"
 
-            label#image-label
-
+            button.btn.btn-primary.col-sm-12.add-player type="button" Ajouter
 
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
     script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
     script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"
     script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"
     script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/2.1.30/js/locales/bootstrap-datetimepicker.fr.js"
-    script src="//jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"
+    script src="/admin/players.js?token=#{params[:token]}"
     script src="/admin/scripts.js?token=#{params[:token]}"
