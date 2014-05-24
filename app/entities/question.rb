@@ -49,5 +49,9 @@ module Entities
     expose :components, using: Component, if: :details
 
     expose :predictions, using: Prediction, if: :details
+
+    expose :tags, if: :details do |q, opts|
+      q.tags.map(&:keyword)
+    end
   end
 end

@@ -14,6 +14,7 @@ module Domain
     one_to_many  :predictions
     one_to_many  :participations
     many_to_many :players, join_table: :participations
+    many_to_many :tags, join_table: :questions_tags
 
     include I18nLabels
 

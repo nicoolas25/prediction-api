@@ -34,6 +34,7 @@ module Domain
   autoload :QuestionComponentExact,   './app/domain/question_component'
   autoload :Services,                 './app/domain/services'
   autoload :SocialAssociation,        './app/domain/social_association'
+  autoload :Tag,                      './app/domain/tag'
 
   autoload :I18nLabels,               './app/domain/concerns/i18n_labels'
   autoload :I18nChoices,              './app/domain/concerns/i18n_choices'

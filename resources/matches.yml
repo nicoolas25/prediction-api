@@ -1,3 +1,5 @@
+# The date and time are GMT + 2
+
 - group: A
   date: 2014/06/12
   time: 22:00

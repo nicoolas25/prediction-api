@@ -143,6 +143,16 @@ Given /^existing (expired )?questions:$/ do |expired, questions|
   end
 end
 
+Given /^existing tags:$/ do |tags|
+  tags.raw.each do |question_id, keyword|
+    question = question_id.present? && Domain::Question.first(id: question_id)
+    tag = Domain::Tag.first(keyword: keyword) || Domain::Tag.create(keyword: keyword)
+    question.add_tag(tag) if question
+  end
+end
+
+
+
 Given /^existing components for the question "([^"]*)":$/ do |question_id, components|
   components.raw.each_with_index do |(id, kind, label, *extra), position|
     attrs = {}
