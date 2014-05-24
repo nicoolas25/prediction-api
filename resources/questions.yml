@@ -7,10 +7,10 @@
   components:
     - kind: choice
       choices:
-        fr: 0,1,2,3,4,5,6	
-        en: 0,1,2,3,4,5,6	
-        es: 0,1,2,3,4,5,6	
-        pt: 0,1,2,3,4,5,6	
+        fr: 0,1,2,3,4,5,6
+        en: 0,1,2,3,4,5,6
+        es: 0,1,2,3,4,5,6
+        pt: 0,1,2,3,4,5,6
 
 - template: country
   labels:
@@ -21,10 +21,10 @@
   components:
     - kind: choice
       choices:
-        fr: 0,1,2,3,4,5,6	
-        en: 0,1,2,3,4,5,6	
-        es: 0,1,2,3,4,5,6	
-        pt: 0,1,2,3,4,5,6	
+        fr: 0,1,2,3,4,5,6
+        en: 0,1,2,3,4,5,6
+        es: 0,1,2,3,4,5,6
+        pt: 0,1,2,3,4,5,6
 
 - template: country
   labels:
