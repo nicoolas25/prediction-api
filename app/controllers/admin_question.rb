@@ -62,7 +62,7 @@ module Controllers
             question = Domain::Question.find_for_update(params[:id])
             question_params = params[:question]
             components_params = question_params.delete(:components)
-            question.set(question_params)
+            question.set(question_params.merge(pending: false))
             question.update_components(components_params)
             present question, with: Entities::Question, details: true
           end

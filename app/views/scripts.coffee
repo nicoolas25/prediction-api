@@ -238,8 +238,8 @@ listQuestionsInit = ->
       $event.html(eventAt.format(DATE_FORMAT)) if question.event_at
       $cristals.html(question.statistics.total)
 
-      if expiresAt.isBefore(moment()) and not question.answered
-        $clone.addClass('warning')
+      $clone.addClass('warning') if expiresAt.isBefore(moment()) and not question.answered
+      $clone.addClass('danger') if question.pending
 
       buffer += $clone[0].outerHTML
 

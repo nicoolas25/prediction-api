@@ -57,5 +57,7 @@ module Entities
     expose :tags, if: :details do |q, opts|
       q.tags.map(&:keyword)
     end
+
+    expose :pending, if: :admin
   end
 end
