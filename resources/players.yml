@@ -5,7 +5,6 @@ alg:
 - name: Azzedine Doukha
   url: http://cdn.soccerwiki.org/images/player/61772.jpg
 - name: Amine Zemmamouche
-  url: missing
 - name: Carl Medjani
   url: http://cdn.soccerwiki.org/images/player/988.jpg
 - name: Mehdi Mostefa
@@ -47,7 +46,6 @@ alg:
 - name: Yacine Brahimi
   url: http://cdn.soccerwiki.org/images/player/41334.jpg
 - name: Hamza Koudri
-  url: missing
 - name: Saphir Taïder
   url: http://cdn.soccerwiki.org/images/player/46042.jpg
 - name: Abdelmoumene Djabou
@@ -112,7 +110,6 @@ arg:
 - name: Augusto Fernández
   url: http://cdn.soccerwiki.org/images/player/10640.jpg
 - name: Ricardo Alvarez
-  url: missing
 - name: Lionel Messi
   url: http://cdn.soccerwiki.org/images/player/2772.jpg
 - name: Sergio Agüero
@@ -126,7 +123,6 @@ arg:
 - name: Franco Di Santo
   url: http://cdn.soccerwiki.org/images/player/19739.jpg
 - name: Alejandro Sabella
-  url: missing
 aus:
 - name: Eugene Galeković
   url: http://cdn.soccerwiki.org/images/player/11663.jpg
@@ -189,7 +185,6 @@ aus:
 - name: Adam Taggart
   url: http://cdn.soccerwiki.org/images/player/48416.jpg
 - name: Ange Postecoglou
-  url: missing
 bel:
 - name: Thibaut Courtois
   url: http://cdn.soccerwiki.org/images/player/38848.jpg
@@ -240,7 +235,6 @@ bel:
 - name: Divock Origi
   url: http://cdn.soccerwiki.org/images/player/62361.jpg
 - name: Marc Wilmots
-  url: missing
 bih:
 - name: Asmir Begović
   url: http://cdn.soccerwiki.org/images/player/12288.jpg
@@ -303,7 +297,6 @@ bih:
 - name: Edin Višća
   url: http://cdn.soccerwiki.org/images/player/44446.jpg
 - name: Safet Sušić
-  url: missing
 bra:
 - name: Júlio César
   url: http://cdn.soccerwiki.org/images/player/2334.jpg
@@ -407,14 +400,12 @@ chi:
 - name: Fabián Orellana
   url: http://cdn.soccerwiki.org/images/player/19732.jpg
 - name: Jorge Sampaoli
-  url: missing
 civ:
 - name: Boubacar Barry
   url: http://upload.wikimedia.org/wikipedia/commons/d/db/Boubacar_Barry_2007.jpg
 - name: Mandé Sayouba
   url: http://cdn.soccerwiki.org/images/player/56605.jpg
 - name: Badra Ali Sangaré
-  url: missing
 - name: Sylvain Gbohouo
   url: http://cdn.soccerwiki.org/images/player/
 - name: Didier Zokora
@@ -466,7 +457,6 @@ civ:
 - name: Giovanni Sio
   url: http://cdn.soccerwiki.org/images/player/42316.jpg
 - name: Sabri Lamouchi
-  url: missing
 cmr:
 - name: Guy Roland Ndy Assembe
   url: http://cdn.soccerwiki.org/images/player/32985.jpg
@@ -525,7 +515,6 @@ cmr:
 - name: Fabrice Olinga
   url: http://cdn.soccerwiki.org/images/player/59003.jpg
 - name: Volker Finke
-  url: missing
 col:
 - name: Faryd Mondragón
   url: http://cdn.soccerwiki.org/images/player/6262_1295594471.jpg
@@ -588,7 +577,6 @@ col:
 - name: Luis Muriel
   url: http://cdn.soccerwiki.org/images/player/44304.jpg
 - name: José Pékerman
-  url: missing
 crc:
 - name: Keylor Navas
   url: http://cdn.soccerwiki.org/images/player/25010.jpg
@@ -597,7 +585,6 @@ crc:
 - name: Daniel Cambronero
   url: http://cdn.soccerwiki.org/images/player/61470_1356466898.jpg
 - name: Esteban Alvarado
-  url: missing
 - name: Michael Umaña
   url: http://cdn.soccerwiki.org/images/player/24940_1300581075.jpg
 - name: Júnior Díaz
@@ -651,7 +638,6 @@ crc:
 - name: Jairo Arrieta
   url: http://cdn.soccerwiki.org/images/player/24978.jpg
 - name: Jorge Luis Pinto
-  url: missing
 cro:
 - name: Stipe Pletikosa
   url: http://cdn.soccerwiki.org/images/player/4158_1354981239.jpg
@@ -714,7 +700,6 @@ cro:
 - name: Duje Cop
   url: http://cdn.soccerwiki.org/images/player/28247.jpg
 - name: Niko Kovač
-  url: missing
 ecu:
 - name: Máximo Banguera
   url: http://cdn.soccerwiki.org/images/player/34004_1350766017.jpg
@@ -727,7 +712,6 @@ ecu:
 - name: Jorge Guagua
   url: http://cdn.soccerwiki.org/images/player/13114.jpg
 - name: Juan Carlos Paredes
-  url: missing
 - name: Frickson Erazo
   url: http://cdn.soccerwiki.org/images/player/51942.jpg
 - name: Gabriel Achilier
@@ -777,7 +761,6 @@ ecu:
 - name: Armando Wila
   url: http://cdn.soccerwiki.org/images/player/40747_1350851459.jpg
 - name: Reinaldo Rueda
-  url: missing
 eng:
 - name: Joe Hart
   url: http://cdn.soccerwiki.org/images/player/8047.jpg
@@ -826,7 +809,6 @@ eng:
 - name: Rickie Lambert
   url: http://cdn.soccerwiki.org/images/player/7466.jpg
 - name: Roy Hodgson
-  url: missing
 - name: John Ruddy
   url: http://cdn.soccerwiki.org/images/player/680.jpg
 - name: Jon Flanagan
@@ -893,7 +875,6 @@ esp:
 - name: Diego Costa
   url: http://cdn.soccerwiki.org/images/player/21674.jpg
 - name: Pedro Rodríguez
-  url: missing
 fra:
 - name: Hugo Lloris
   url: http://cdn.soccerwiki.org/images/player/13340.jpg
@@ -1002,7 +983,6 @@ gha:
 - name: Fatau Dauda
   url: http://cdn.soccerwiki.org/images/player/36991.jpg
 - name: Steven Adams
-  url: missing
 - name: Samuel Inkoom
   url: http://cdn.soccerwiki.org/images/player/37450.jpg
 - name: Harrison Afful
@@ -1050,7 +1030,6 @@ gha:
 - name: David Accam
   url: http://cdn.soccerwiki.org/images/player/58916.jpg
 - name: James Kwesi Appiah
-  url: missing
 gre:
 - name: Oréstis Karnézis
   url: http://cdn.soccerwiki.org/images/player/29473.jpg
@@ -1099,7 +1078,6 @@ gre:
 - name: Kóstas Mítroglou
   url: http://cdn.soccerwiki.org/images/player/27922.jpg
 - name: Fernando Santos
-  url: missing
 hon:
 - name: Noel Valladares
   url: http://cdn.soccerwiki.org/images/player/49227_1325782101.jpg
@@ -1148,7 +1126,6 @@ hon:
 - name: Rony Martínez
   url: http://cdn.soccerwiki.org/images/player/69730.jpg
 - name: Luis Fernando Suarez
-  url: missing
 irn:
 - name: Rahman Ahmadi
   url: http://cdn.soccerwiki.org/images/player/32654.jpg
@@ -1159,7 +1136,6 @@ irn:
 - name: Sosha Makani
   url: http://cdn.soccerwiki.org/images/player/72363.jpg
 - name: Alireza Beiranvand
-  url: missing
 - name: Jalal Hosseini
   url: http://cdn.soccerwiki.org/images/player/31812.jpg
 - name: Ehsan Hajsafi
@@ -1207,11 +1183,9 @@ irn:
 - name: Reza Ghoochannejhad
   url: http://cdn.soccerwiki.org/images/player/40079.jpg
 - name: Reza Norouzi
-  url: missing
 - name: Sardar Azmoun
   url: http://cdn.soccerwiki.org/images/player/69087.jpg
 - name: Carlos Queiroz
-  url: missing
 ita:
 - name: Gianluigi Buffon
   url: http://cdn.soccerwiki.org/images/player/2363.jpg
@@ -1274,7 +1248,6 @@ ita:
 - name: Ciro Immobile
   url: http://cdn.soccerwiki.org/images/player/43289.jpg
 - name: Cesare Prandelli
-  url: missing
 jpn:
 - name: Eiji Kawashima
   url: http://cdn.soccerwiki.org/images/player/10971.jpg
@@ -1323,14 +1296,12 @@ jpn:
 - name: Manabu Saito
   url: http://cdn.soccerwiki.org/images/player/40096.jpg
 - name: Alberto Zaccheroni
-  url: missing
 kor:
 - name: Jung Sung-ryong
   url: http://cdn.soccerwiki.org/images/player/23572.jpg
 - name: Kim Seung-gyu
   url: http://cdn.soccerwiki.org/images/player/48208.jpg
 - name: Lee Bum-young
-  url: missing
 - name: Kwak Tae-hwi
   url: http://cdn.soccerwiki.org/images/player/23547.jpg
 - name: Hong Jeong-ho
@@ -1340,7 +1311,6 @@ kor:
 - name: Lee Yong
   url: http://cdn.soccerwiki.org/images/player/44354.jpg
 - name: Kim Jin-su
-  url: missing
 - name: Kim Chang-soo
   url: http://cdn.soccerwiki.org/images/player/23687.jpg
 - name: Hwang Seok-ho
@@ -1372,16 +1342,15 @@ kor:
 - name: Son Heung-min
   url: http://cdn.soccerwiki.org/images/player/45279.jpg
 - name: Hong Myung-bo
-  url: missing
 mex:
 - name: Guillermo Ochoa
   url: http://cdn.soccerwiki.org/images/player/8733.jpg
 - name: José de Jesús Corona
-  url: missing
+  url: http://cdn.soccerwiki.org/images/player/9044.jpg
 - name: Moisés Muñoz
   url: http://cdn.soccerwiki.org/images/player/10084.jpg
 - name: Francisco Javier Rodríguez
-  url: missing
+  url: http://cache.images.globalsportsmedia.com/soccer/players/150x150/420.png
 - name: Rafael Márquez
   url: http://cdn.soccerwiki.org/images/player/2759.jpg
 - name: Enrique Pérez
@@ -1403,7 +1372,6 @@ mex:
 - name: Javier Aquino
   url: http://cdn.soccerwiki.org/images/player/46051.jpg
 - name: José Juan Vázquez
-  url: missing
 - name: Andrés Guardado
   url: http://cdn.soccerwiki.org/images/player/9983.jpg
 - name: Isaác Brizuela
@@ -1482,20 +1450,19 @@ ned:
 - name: Quincy Promes
   url: http://cdn.soccerwiki.org/images/player/58787.jpg
 - name: Louis van Gaal
-  url: missing
 nga:
 - name: Vincent Enyeama
   url: http://cdn.soccerwiki.org/images/player/12368.jpg
 - name: Austin Ejide
   url: http://cdn.soccerwiki.org/images/player/11795.jpg
 - name: Chigozie Agbim
-  url: missing
+  url: http://cdn.soccerwiki.org/images/player/73514.jpg
 - name: Daniel Akpeyi
   url: http://cdn.soccerwiki.org/images/player/
 - name: Joseph Yobo
   url: http://cdn.soccerwiki.org/images/player/683.jpg
 - name: Elderson Echiejile
-  url: missing
+  url: http://cdn.soccerwiki.org/images/player/31759.jpg
 - name: Efe Ambrose
   url: http://cdn.soccerwiki.org/images/player/41080.jpg
 - name: Godfrey Oboabona
@@ -1507,7 +1474,6 @@ nga:
 - name: Juwon Oshaniwa
   url: http://cdn.soccerwiki.org/images/player/63652_1358226915.jpg
 - name: Kunle Odunlami
-  url: missing
 - name: John Obi Mikel
   url: http://cdn.soccerwiki.org/images/player/7242.jpg
 - name: Ahmed Musa
@@ -1545,10 +1511,9 @@ nga:
 - name: Michael Uchebo
   url: http://cdn.soccerwiki.org/images/player/44537.jpg
 - name: Stephen Keshi
-  url: missing
 por:
 - name: Eduardo
-  url: missing
+  url: http://cdn.soccerwiki.org/images/player/25265.jpg
 - name: Rui Patrício
   url: http://cdn.soccerwiki.org/images/player/18649.jpg
 - name: Beto
@@ -1690,7 +1655,6 @@ sui:
 - name: Josip Drmić
   url: http://cdn.soccerwiki.org/images/player/52793.jpg
 - name: Ottmar Hitzfeld
-  url: missing
 - name: Marwin Hitz
   url: http://cdn.soccerwiki.org/images/player/35144.jpg
 - name: Silvan Widmer
@@ -1810,7 +1774,6 @@ usa:
 - name: Aron Jóhannsson
   url: http://cdn.soccerwiki.org/images/player/55063.jpg
 - name: Jürgen Klinsmann
-  url: missing
 - name: Brad Evans
   url: http://cdn.soccerwiki.org/images/player/23078_1209755861.jpg
 - name: Clarence Goodson
