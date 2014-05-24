@@ -22,7 +22,6 @@ alg:
 - name: Ali Rial
   url: http://cdn.soccerwiki.org/images/player/48923_1340236564.jpg
 - name: Nacereddine Khoualed
-  url: http://cdn.soccerwiki.org/images/player/
 - name: Aïssa Mandi
   url: http://cdn.soccerwiki.org/images/player/51323.jpg
 - name: Madjid Bougherra
@@ -407,7 +406,6 @@ civ:
   url: http://cdn.soccerwiki.org/images/player/56605.jpg
 - name: Badra Ali Sangaré
 - name: Sylvain Gbohouo
-  url: http://cdn.soccerwiki.org/images/player/
 - name: Didier Zokora
   url: http://cdn.soccerwiki.org/images/player/5624.jpg
 - name: Kolo Touré
@@ -465,7 +463,6 @@ cmr:
 - name: Sammy N'Djock
   url: http://cdn.soccerwiki.org/images/player/46836.jpg
 - name: Loïc Feudjou
-  url: http://cdn.soccerwiki.org/images/player/
 - name: Nicolas Nkoulou
   url: http://img.chronofoot.com/om/nicolas-nkoulou_40536_w250.jpg
 - name: Aurélien Chedjou
@@ -483,7 +480,6 @@ cmr:
 - name: Jean-Armel Kana-Biyik
   url: http://cdn.soccerwiki.org/images/player/32984.jpg
 - name: Cédric Djeugoué
-  url: http://cdn.soccerwiki.org/images/player/
 - name: Jean Makoun
   url: http://cdn.soccerwiki.org/images/player/5578_1353255321.jpg
 - name: Stéphane Mbia
@@ -1084,7 +1080,6 @@ hon:
 - name: Donis Escober
   url: http://cdn.soccerwiki.org/images/player/51642.jpg
 - name: Luis López
-  url: http://cdn.soccerwiki.org/images/player/
 - name: Maynor Figueroa
   url: http://cdn.soccerwiki.org/images/player/31907_1343954615.jpg
 - name: Víctor Bernárdez
@@ -1096,9 +1091,7 @@ hon:
 - name: Juan Carlos García
   url: http://cdn.soccerwiki.org/images/player/30495.jpg
 - name: Brayan Beckeles
-  url: http://cdn.soccerwiki.org/images/player/
 - name: Juan Pablo Montes
-  url: http://cdn.soccerwiki.org/images/player/
 - name: Wilson Palacios
   url: http://cdn.soccerwiki.org/images/player/29419_1277155735.jpg
 - name: Oscar García
@@ -1458,7 +1451,6 @@ nga:
 - name: Chigozie Agbim
   url: http://cdn.soccerwiki.org/images/player/73514.jpg
 - name: Daniel Akpeyi
-  url: http://cdn.soccerwiki.org/images/player/
 - name: Joseph Yobo
   url: http://cdn.soccerwiki.org/images/player/683.jpg
 - name: Elderson Echiejile
