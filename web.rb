@@ -20,7 +20,6 @@ module Prediction
     end
 
     get '/' do
-      @sections = %w(intro make win badges bonus)
       @t = WEB_CONFIG[locale]['home']
       slim :home
     end

@@ -34,16 +34,15 @@ html lang="#{locale}"
         .col-md-3
           .sidemenu
             ul.nav
-              - @sections.each do |skey|
+              - @t['questions'].each_with_index do |question, index|
                 li
-                  a href="##{skey}" == @t['menu'][skey]
+                  a href="#faq#{index}" == question['q']
 
         .col-md-9
-          - @sections.each do |skey|
-            section
-              h2 id="#{skey}" == @t['headers'][skey]
-              - @t['paragraphs'][skey].each do |paragraph|
-                p == paragraph
+          - @t['questions'].each_with_index do |question, index|
+            section.question
+              h4 id="faq#{index}" == question['q']
+              p == question['a']
 
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
     script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"

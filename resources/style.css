@@ -22,3 +22,12 @@ body > .container:last-of-type {
   margin-bottom: 15px;
   border-top: none;
 }
+
+section.question {
+  margin-bottom: 1em;
+  border-bottom: 1px solid #FF6600;
+}
+
+section.question:last-of-type {
+  border-bottom: none;
+}

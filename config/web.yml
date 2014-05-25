@@ -2,29 +2,42 @@ en: &defaults
   home:
     title: "Welcome to Pulpo"
     subtitle: "This is where you learn how to master the art of making predictions."
-    menu:
-      intro: "Introduction"
-      make: "Make predictions"
-      win: "Win cristals"
-      badges: "Badges"
-      bonus: "Bonus"
-    headers:
-      intro: "Your first steps into the game"
-      make: "Start making predictions"
-      win: "Win always more cristals"
-      badges: "Get recognition... and cristals!"
-      bonus: "Pimp your predictions, avoid traps"
-    paragraphs:
-      intro:
-        - "Comming soon"
-      make:
-        - "Comming soon"
-      win:
-        - "Comming soon"
-      badges:
-        - "Comming soon"
-      bonus:
-        - "Comming soon"
+    questions:
+      - q: "Qu'est-ce que Pulpo ?"
+        a: "C'est un jeu mobile qui va vous permettre de suivre la coupe du monde de football 2014 de manière ludique et entre amis."
+
+      - q: "Quel est le but du jeu ?"
+        a: "L'objectif est d'être le meilleurs pronostiqueur parmi vos amis et le reste du mode. Pour celà il vous faudra répondre correctement à nos questions."
+
+      - q: "Combien ça coute ?"
+        a: "Rien ! Pulpo est entièrement gratuit. Les mises nécessaires pour parier se font en cristaux, une devise propre à Pulpo."
+
+      - q: "Puis-je commencer à parier dès le moment ou je lance l'application ?"
+        a: "Pour pouvoir parier, les cristaux sont indispensables ! Heureusement lors de votre première connexion vous en aurez déjà 200, de quoi voir venir..."
+
+      - q: "Où se trouvent les questions auxquelles je peux répondre ?"
+        a: "Vous trouverez la liste des questions disponibles sous le menu latéral <em>Questions</em> de l'application."
+
+      - q: "Combien faut-il de cristaux pour parier sur une question ?"
+        a: "Chaque pari vous coutera 10 cristaux. Partagez un question via votre réseaux social favori et nous vous offrirons 2 cristaux."
+
+      - q: "Une fois que j'ai répondu à une question, que se passe-t-il ?"
+        a: "Une fois que vous avez répondu à une question, celle-ci passe dans la liste <em>En cours</em>. Pour récupérer vos gains, il faudra attendre la fin du match."
+
+      - q: "Le match est terminé et certaines de ses questions sont encore en cours ?"
+        a: "Pas de panique, laissez-nous le temps de saisir les réponses ! Nous ne vous oublierons pas."
+
+      - q: "Puis-je voir la liste des questions terminées ?"
+        a: "Bien sûr, c'est ce que nous appellons l'<em>Historique</em>. Accedez y depuis le menu latéral."
+
+      - q: "Comment installer l'application ?"
+        a: "Installez l'application depuis votre store habituel. Utilisez un des liens en haut de cette page pour vous y rendre plus rapidement."
+
+      - q: "Suis-je obligé d'utiliser Facebook, Twitter ou Google pour jouer ?"
+        a: "Oui, grâce à ça vous pourrez inviter et retrouver facilement vos amis sur Pulpo. Nous n'utilisons pas vos données pour quoi que ce soit d'autre."
+
+      - q: "Est-il possible de modifier mon identifiant ?"
+        a: "Pour le moment ce n'est pas possible. Si toutefois vous voulez vraiment le changer, contactez nous via l'application."
 
   badges:
     shared:
@@ -85,29 +98,42 @@ fr:
   home:
     title: "Bienvenue sur <strong>Pulpo</strong>"
     subtitle: "Apprenez à devenir maître dans l'art du pronostique."
-    menu:
-      intro: "Introduction"
-      make: "Faire des prédictions"
-      win: "Gagner des cristaux"
-      badges: "Les badges"
-      bonus: "Les bonus"
-    headers:
-      intro: "Vos premiers pas avec Pulpo"
-      make: "Commencez à prédire"
-      win: "Gagnez toujours plus de cristaux"
-      badges: "Obtenez de la reconnaissance... et des cristaux !"
-      bonus: "Boostez vos préditions, évitez les pièges"
-    paragraphs:
-      intro:
-        - "Bientôt"
-      make:
-        - "Bientôt"
-      win:
-        - "Bientôt"
-      badges:
-        - "Bientôt"
-      bonus:
-        - "Bientôt"
+    questions:
+      - q: "Qu'est-ce que Pulpo ?"
+        a: "C'est un jeu mobile qui va vous permettre de suivre la coupe du monde de football 2014 de manière ludique et entre amis."
+
+      - q: "Quel est le but du jeu ?"
+        a: "L'objectif est d'être le meilleurs pronostiqueur parmi vos amis et le reste du mode. Pour celà il vous faudra répondre correctement à nos questions."
+
+      - q: "Combien ça coute ?"
+        a: "Rien ! Pulpo est entièrement gratuit. Les mises nécessaires pour parier se font en cristaux, une devise propre à Pulpo."
+
+      - q: "Puis-je commencer à parier dès le moment ou je lance l'application ?"
+        a: "Pour pouvoir parier, les cristaux sont indispensables ! Heureusement lors de votre première connexion vous en aurez déjà 200, de quoi voir venir..."
+
+      - q: "Où se trouvent les questions auxquelles je peux répondre ?"
+        a: "Vous trouverez la liste des questions disponibles sous le menu latéral <em>Questions</em> de l'application."
+
+      - q: "Combien faut-il de cristaux pour parier sur une question ?"
+        a: "Chaque pari vous coutera 10 cristaux. Partagez un question via votre réseaux social favori et nous vous offrirons 2 cristaux."
+
+      - q: "Une fois que j'ai répondu à une question, que se passe-t-il ?"
+        a: "Une fois que vous avez répondu à une question, celle-ci passe dans la liste <em>En cours</em>. Pour récupérer vos gains, il faudra attendre la fin du match."
+
+      - q: "Le match est terminé et certaines de ses questions sont encore en cours ?"
+        a: "Pas de panique, laissez-nous le temps de saisir les réponses ! Nous ne vous oublierons pas."
+
+      - q: "Puis-je voir la liste des questions terminées ?"
+        a: "Bien sûr, c'est ce que nous appellons l'<em>Historique</em>. Accedez y depuis le menu latéral."
+
+      - q: "Comment installer l'application ?"
+        a: "Installez l'application depuis votre store habituel. Utilisez un des liens en haut de cette page pour vous y rendre plus rapidement."
+
+      - q: "Suis-je obligé d'utiliser Facebook, Twitter ou Google pour jouer ?"
+        a: "Oui, grâce à ça vous pourrez inviter et retrouver facilement vos amis sur Pulpo. Nous n'utilisons pas vos données pour quoi que ce soit d'autre."
+
+      - q: "Est-il possible de modifier mon identifiant ?"
+        a: "Pour le moment ce n'est pas possible. Si toutefois vous voulez vraiment le changer, contactez nous via l'application."
 
   badges:
     shared:
