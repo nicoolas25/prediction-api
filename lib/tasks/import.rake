@@ -1,4 +1,3 @@
-require 'pry'
 require 'active_support'
 require 'active_support/core_ext'
 
@@ -52,14 +51,7 @@ def create_question(question_params, tags, teams, template)
     c
   end
 
-  begin
-    q.update_components(components)
-  rescue
-    binding.pry
-    exit 1
-  end
-
-  q
+  q.update_components(components)
 end
 
 namespace :import do
