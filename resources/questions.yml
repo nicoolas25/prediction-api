@@ -5,12 +5,12 @@
     es: ¿Cuál es la diferencia en el medio tiempo objetivo?
     pt: Qual é a diferença no gol do intervalo?
   components:
-    - kind: choice
+    - kind: choices
       choices:
-        fr: 0,1,2,3,4,5,6
-        en: 0,1,2,3,4,5,6
-        es: 0,1,2,3,4,5,6
-        pt: 0,1,2,3,4,5,6
+        fr: "0,1,2,3,4,5,6"
+        en: "0,1,2,3,4,5,6"
+        es: "0,1,2,3,4,5,6"
+        pt: "0,1,2,3,4,5,6"
 
 - template: country
   labels:
@@ -19,12 +19,12 @@
     es: ¿Cuál es la diferencia de gol al final del partido?
     pt: Qual é a diferença no gol no final do jogo?
   components:
-    - kind: choice
+    - kind: choices
       choices:
-        fr: 0,1,2,3,4,5,6
-        en: 0,1,2,3,4,5,6
-        es: 0,1,2,3,4,5,6
-        pt: 0,1,2,3,4,5,6
+        fr: "0,1,2,3,4,5,6"
+        en: "0,1,2,3,4,5,6"
+        es: "0,1,2,3,4,5,6"
+        pt: "0,1,2,3,4,5,6"
 
 - template: country
   labels:
@@ -48,7 +48,7 @@
     es: ¿Cuál equipo marcará primero?
     pt: Qual equipa vai marcar primeiro?
   components:
-    - kind: choice
+    - kind: choices
       choices:
         fr: __C1__,__C2__,Aucun
         en: __C1__,__C2__,None
@@ -63,7 +63,7 @@
     es: ¿Cuál equipo aprovechará al máximo la falta?
     pt: Qual equipa vai aproveitar ao máximo a falta?
   components:
-    - kind: choice
+    - kind: choices
       choices:
         fr: __C1__,__C2__,Même nombre
         en: __C1__,__C2__,Same amount
@@ -78,7 +78,7 @@
     es: ¿Qué equipo efectuará más saques de esquina?
     pt: Qual equipa vai ter mais escanteios?
   components:
-    - kind: choice
+    - kind: choices
       choices:
         fr: __C1__,__C2__,Même nombre
         en: __C1__,__C2__,Same amount
@@ -93,7 +93,7 @@
     es: ¿Cuál equipo tendrá la primera tarjeta amarilla?
     pt: Qual vai ser o primeiro cartão amarelo?
   components:
-    - kind: choice
+    - kind: choices
       choices:
         fr: __C1__,__C2__,Aucun
         en: __C1__,__C2__,None
@@ -108,7 +108,7 @@
     es: ¿Cuál equipo tendrá la primera tarjeta roja?
     pt: Qual equipa vai ter o primeiro cartão vermelho?
   components:
-    - kind: choice
+    - kind: choices
       choices:
         fr: __C1__,__C2__,Aucun
         en: __C1__,__C2__,None
@@ -123,7 +123,7 @@
     es: ¿Cuál equipo tendrá el primero patada?
     pt: Qual equipa vai ter o primeiro chute?
   components:
-    - kind: choice
+    - kind: choices
       choices:
         fr: __C1__,__C2__,Aucun
         en: __C1__,__C2__,None
@@ -138,7 +138,7 @@
     es: ¿Cuál equipo tiene la posesión?
     pt: Qual equipa vai ter a posse?
   components:
-    - kind: choice
+    - kind: choices
       choices:
         fr: __C1__,__C2__,Même nombre
         en: __C1__,__C2__,Same amount
@@ -153,7 +153,7 @@
     es: ¿Cuál jugador será el mejor jugador del partido?
     pt: Qual jogador será o homem do jogo?
   components:
-    - kind: choice
+    - kind: choices
       choices:
         fr: Autre joueur
         en: Other player
@@ -168,7 +168,7 @@
     es: ¿Cuál jugador tendrá la primera tarjeta amarilla?
     pt: Qual jogador vai ter o primeiro cartão amarelo?
   components:
-    - kind: choice
+    - kind: choices
       choices:
         fr: Autre joueur,Aucun
         en: Other player,None
@@ -183,7 +183,7 @@
     es: ¿Quién marcará primero?
     pt: Quem vai marcar primeiro?
   components:
-    - kind: choice
+    - kind: choices
       choices:
         fr: Autre joueur,Aucun
         en: Other player,None
@@ -198,7 +198,7 @@
     es: ¿Cuál jugador tendrá la primera tarjeta roja?
     pt: Qual jogador vai ter o primeiro cartão vermelho?
   components:
-    - kind: choice
+    - kind: choices
       choices:
         fr: Autre joueur,Aucun
         en: Other player,None
@@ -213,7 +213,7 @@
     es: ¿Cuál jugador hará la primera falta?
     pt: Qual jogador vai fazer a primeira falta?
   components:
-    - kind: choice
+    - kind: choices
       choices:
         fr: Autre joueur,Aucun
         en: Other player,None
