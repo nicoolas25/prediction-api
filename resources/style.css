@@ -39,10 +39,18 @@ section.question h4 {
   color: rgb(51, 51, 51);
 }
 
-.screenshots img {
+.screenshots div {
   margin-top: 1em;
 }
 
-.screenshots img:first-of-type {
+.screenshots div:first-of-type {
   margin-top: 0px;
+}
+
+.screenshots .legend {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-style: italic;
+  color: grey;
 }

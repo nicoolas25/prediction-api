@@ -2,6 +2,13 @@ en: &defaults
   home:
     title: "Welcome to Pulpo"
     subtitle: "This is where you learn how to master the art of making predictions."
+    screenshots:
+      - title: Signup screen
+        image: login-android.png
+      - title: Side menu
+        image: menu-android.png
+      - title: Friend ranking
+        image: ranking-android.png
     questions:
       - q: "Qu'est-ce que Pulpo ?"
         a: "C'est un jeu mobile qui va vous permettre de suivre la coupe du monde de football 2014 de manière ludique et entre amis."
@@ -113,6 +120,13 @@ fr:
   home:
     title: "Bienvenue sur <strong>Pulpo</strong>"
     subtitle: "Apprenez à devenir maître dans l'art du pronostique."
+    screenshots:
+      - title: Écran d'inscription
+        image: login-android.png
+      - title: Menu latéral
+        image: menu-android.png
+      - title: Classement entre amis
+        image: ranking-android.png
     questions:
       - q: "Qu'est-ce que Pulpo ?"
         a: "C'est un jeu mobile qui va vous permettre de suivre la coupe du monde de football 2014 de manière ludique et entre amis."
