@@ -51,10 +51,21 @@ html lang="#{locale}"
               p == question['a']
 
         .col-md-4.screenshots
-          - @t['screenshots'].each do |screenshot|
-            div
-              span.legend == screenshot['title']
-              img.img-thumbnail.img-responsive src="http://static.pulpo.info/#{screenshot['image']}"
+          .row
+            .col-md-12
+              legend == @t['legends']['statistics']
+              - @statistics.each do |key, value|
+                .row
+                  label.col-md-10 == @t['statistics'][key]
+                  .col-md-2 == value
+
+          .row
+            .col-md-12
+              legend == @t['legends']['screenshots']
+              - @t['screenshots'].each do |screenshot|
+                div
+                  span.legend == screenshot['title']
+                  img.img-thumbnail.img-responsive src="http://static.pulpo.info/#{screenshot['image']}"
 
     script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
     script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"

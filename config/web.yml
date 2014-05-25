@@ -2,6 +2,16 @@ en: &defaults
   home:
     title: "Welcome to Pulpo"
     subtitle: "This is where you learn how to master the art of making predictions."
+    legends:
+      screenshots: Screenshots
+      statistics: Statistics
+    statistics:
+      players: "# of players"
+      won_cristals: "# of won cristals"
+      participations: "# of bets"
+      past_questions: "# of past questions"
+      open_questions: "# of active questions"
+      next_questions: "# of future questions"
     screenshots:
       - title: Signup screen
         image: login-android.png
@@ -120,6 +130,16 @@ fr:
   home:
     title: "Bienvenue sur <strong>Pulpo</strong>"
     subtitle: "Apprenez à devenir maître dans l'art du pronostique."
+    legends:
+      screenshots: Captures d'écran
+      statistics: Chiffres clés
+    statistics:
+      players: "Joueurs"
+      won_cristals: "Cristaux gagnés"
+      participations: "Paris effectués"
+      past_questions: "Questions terminées"
+      open_questions: "Questions ouvertes"
+      next_questions: "Questions à venir"
     screenshots:
       - title: Écran d'inscription
         image: login-android.png
