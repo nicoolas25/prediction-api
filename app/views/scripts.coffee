@@ -1,4 +1,5 @@
 window.DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss +0200'
+window.DATE_FORMAT_SHORT = 'MM-DD HH:mm'
 
 token = api_url = null
 
@@ -223,6 +224,7 @@ listQuestionsInit = ->
     for question in questions
       $clone    = $template.clone()
       $title    = $clone.find('a.title')
+      $tags     = $clone.find('.tags')
       $reveals  = $clone.find('.reveals_at')
       $expires  = $clone.find('.expires_at')
       $event    = $clone.find('.event_at')
@@ -233,10 +235,11 @@ listQuestionsInit = ->
       revealsAt = moment(question.reveals_at * 1000)
       expiresAt = moment(question.expires_at * 1000)
       eventAt = moment(question.event_at * 1000) if question.event_at
-      $reveals.html(revealsAt.format(DATE_FORMAT))
-      $expires.html(expiresAt.format(DATE_FORMAT))
-      $event.html(eventAt.format(DATE_FORMAT)) if question.event_at
+      $reveals.html(revealsAt.format(DATE_FORMAT_SHORT))
+      $expires.html(expiresAt.format(DATE_FORMAT_SHORT))
+      $event.html(eventAt.format(DATE_FORMAT_SHORT)) if question.event_at
       $cristals.html(question.statistics.total)
+      $tags.html(question.tags.join(', '))
 
       $clone.addClass('warning') if expiresAt.isBefore(moment()) and not question.answered
       $clone.addClass('danger') if question.pending
