@@ -7,7 +7,7 @@ en: &defaults
         a: "C'est un jeu mobile qui va vous permettre de suivre la coupe du monde de football 2014 de manière ludique et entre amis."
 
       - q: "Quel est le but du jeu ?"
-        a: "L'objectif est d'être le meilleurs pronostiqueur parmi vos amis et le reste du mode. Pour celà il vous faudra répondre correctement à nos questions."
+        a: "L'objectif est d'être le meilleur pronostiqueur parmi vos amis et le reste du monde. Pour celà il vous faudra répondre correctement à nos questions."
 
       - q: "Combien ça coute ?"
         a: "Rien ! Pulpo est entièrement gratuit. Les mises nécessaires pour parier se font en cristaux, une devise propre à Pulpo."
@@ -19,12 +19,12 @@ en: &defaults
         a: "Vous trouverez la liste des questions disponibles sous le menu latéral <em>Questions</em> de l'application."
 
       - q: "Combien faut-il de cristaux pour parier sur une question ?"
-        a: "Chaque pari vous coutera 10 cristaux. Partagez un question via votre réseaux social favori et nous vous offrirons 2 cristaux."
+        a: "Chaque pari vous coutera 10 cristaux. Partagez un question via votre réseau social favori et nous vous offrirons 2 cristaux."
 
       - q: "Une fois que j'ai répondu à une question, que se passe-t-il ?"
         a: "Une fois que vous avez répondu à une question, celle-ci passe dans la liste <em>En cours</em>. Pour récupérer vos gains, il faudra attendre la fin du match."
 
-      - q: "Le match est terminé et certaines de ses questions sont encore en cours ?"
+      - q: "Le match est déjà termine mais les questions correspondantes sont encore dans la rubrique en cours ?"
         a: "Pas de panique, laissez-nous le temps à notre équipe de saisir les réponses ! Nous ne vous oublierons pas."
 
       - q: "Puis-je voir la liste des questions terminées ?"
@@ -34,16 +34,16 @@ en: &defaults
         a: "C'est simple, ceux qui ont trouvé la bonne réponse se partagent l'ensemble des mises. Si un tiers des joueurs ont donné la bonne réponse alors chacun d'eux remportera 30 cristaux."
 
       - q: "Comment sont classés les joueurs ?"
-        a: "Le joueurs sont classés en fonctions du nombres de cristaux remportés lors de leurs prédictions. Plus les chances sont contre vous, et plus vous risquez de gagner gros et de monter dans le classement."
+        a: "Les joueurs sont classés en fonctions du nombres de cristaux remportés lors de leurs paris. Plus les chances sont contre vous, et plus vous risquez de gagner gros et de monter dans le classement."
 
       - q: "Est-ce qu'il y a une astuce pour augmenter son nombre de cristaux ?"
         a: "Figurez-vous que oui ! En utilisant régulièrement Pulpo, vous pourrez gagner jusqu'à 2 cristaux cristaux par heure."
 
-      - q: "Est-ce qu'il y a un aute moyen pour obtenir des cristaux ?"
+      - q: "Est-ce qu'il y a un autre moyen pour obtenir des cristaux ?"
         a: "Rendez vous sur notre <em>Boutique</em>, dans le menu latéral. Vous y trouverez des packs de cristaux."
 
       - q: "Les gains liés aux bonus me permettent-ils d'améliorer mon classement ?"
-        a: "Non, le classement ne prends pas en compte ces gains. L'objectif est de trouver la bonne réponse avant tout."
+        a: "Non, le classement ne prend pas en compte ces gains. L'objectif est de trouver la bonne réponse avant tout."
 
       - q: "Comment installer l'application ?"
         a: "Installez l'application depuis votre store habituel. Utilisez un des liens en haut de cette page pour vous y rendre plus rapidement."
@@ -118,7 +118,7 @@ fr:
         a: "C'est un jeu mobile qui va vous permettre de suivre la coupe du monde de football 2014 de manière ludique et entre amis."
 
       - q: "Quel est le but du jeu ?"
-        a: "L'objectif est d'être le meilleurs pronostiqueur parmi vos amis et le reste du mode. Pour celà il vous faudra répondre correctement à nos questions."
+        a: "L'objectif est d'être le meilleur pronostiqueur parmi vos amis et le reste du monde. Pour celà il vous faudra répondre correctement à nos questions."
 
       - q: "Combien ça coute ?"
         a: "Rien ! Pulpo est entièrement gratuit. Les mises nécessaires pour parier se font en cristaux, une devise propre à Pulpo."
@@ -130,7 +130,7 @@ fr:
         a: "Vous trouverez la liste des questions disponibles sous le menu latéral <em>Questions</em> de l'application."
 
       - q: "Combien faut-il de cristaux pour parier sur une question ?"
-        a: "Chaque pari vous coutera 10 cristaux. Partagez un question via votre réseaux social favori et nous vous offrirons 2 cristaux."
+        a: "Chaque pari vous coutera 10 cristaux. Partagez un question via votre réseau social favori et nous vous offrirons 2 cristaux."
 
       - q: "Une fois que j'ai répondu à une question, que se passe-t-il ?"
         a: "Une fois que vous avez répondu à une question, celle-ci passe dans la liste <em>En cours</em>. Pour récupérer vos gains, il faudra attendre la fin du match."
@@ -145,16 +145,16 @@ fr:
         a: "C'est simple, ceux qui ont trouvé la bonne réponse se partagent l'ensemble des mises. Si un tiers des joueurs ont donné la bonne réponse alors chacun d'eux remportera 30 cristaux."
 
       - q: "Comment sont classés les joueurs ?"
-        a: "Le joueurs sont classés en fonctions du nombres de cristaux remportés lors de leurs prédictions. Plus les chances sont contre vous, et plus vous risquez de gagner gros et de monter dans le classement."
+        a: "Les joueurs sont classés en fonctions du nombres de cristaux remportés lors de leurs paris. Plus les chances sont contre vous, et plus vous risquez de gagner gros et de monter dans le classement."
 
       - q: "Est-ce qu'il y a une astuce pour augmenter son nombre de cristaux ?"
         a: "Figurez-vous que oui ! En utilisant régulièrement Pulpo, vous pourrez gagner jusqu'à 2 cristaux cristaux par heure."
 
-      - q: "Est-ce qu'il y a un aute moyen pour obtenir des cristaux ?"
+      - q: "Est-ce qu'il y a un autre moyen pour obtenir des cristaux ?"
         a: "Rendez vous sur notre <em>Boutique</em>, dans le menu latéral. Vous y trouverez des packs de cristaux."
 
       - q: "Les gains liés aux bonus me permettent-ils d'améliorer mon classement ?"
-        a: "Non, le classement ne prends pas en compte ces gains. L'objectif est de trouver la bonne réponse avant tout."
+        a: "Non, le classement ne prend pas en compte ces gains. L'objectif est de trouver la bonne réponse avant tout."
 
       - q: "Comment installer l'application ?"
         a: "Installez l'application depuis votre store habituel. Utilisez un des liens en haut de cette page pour vous y rendre plus rapidement."
@@ -202,7 +202,7 @@ fr:
       name: "KO"
       title: "The <strong>KO</strong> badge"
       legend: "restez digne... même quand vous vous plantez !"
-      criteria: "Se tromper lors d'une prédiction"
+      criteria: "Se tromper lors d'un pari"
       descriptions:
         - ""
     participation:

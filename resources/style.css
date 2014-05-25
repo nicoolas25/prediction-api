@@ -1,6 +1,6 @@
 html, body {
   height: 100%;
-  background: #2B72BA;
+  background: #2F7CBF;
 }
 
 .jumbotron {
@@ -15,16 +15,14 @@ body > .container {
   padding-top: 15px;
   padding-bottom: 15px;
   background: #FBFBFB;
-  border: 5px solid #70C71A;
 }
 
 body > .container:first-of-type {
-    border-bottom: none;
+  margin-top: 15px;
 }
 
 body > .container:last-of-type {
   margin-bottom: 15px;
-  border-top: none;
 }
 
 section.question {
