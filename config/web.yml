@@ -25,10 +25,25 @@ en: &defaults
         a: "Une fois que vous avez répondu à une question, celle-ci passe dans la liste <em>En cours</em>. Pour récupérer vos gains, il faudra attendre la fin du match."
 
       - q: "Le match est terminé et certaines de ses questions sont encore en cours ?"
-        a: "Pas de panique, laissez-nous le temps de saisir les réponses ! Nous ne vous oublierons pas."
+        a: "Pas de panique, laissez-nous le temps à notre équipe de saisir les réponses ! Nous ne vous oublierons pas."
 
       - q: "Puis-je voir la liste des questions terminées ?"
         a: "Bien sûr, c'est ce que nous appellons l'<em>Historique</em>. Accedez y depuis le menu latéral."
+
+      - q: "Comment sont répartit les gains ?"
+        a: "C'est simple, ceux qui ont trouvé la bonne réponse se partagent l'ensemble des mises. Si un tiers des joueurs ont donné la bonne réponse alors chacun d'eux remportera 30 cristaux."
+
+      - q: "Comment sont classés les joueurs ?"
+        a: "Le joueurs sont classés en fonctions du nombres de cristaux remportés lors de leurs prédictions. Plus les chances sont contre vous, et plus vous risquez de gagner gros et de monter dans le classement."
+
+      - q: "Est-ce qu'il y a une astuce pour augmenter son nombre de cristaux ?"
+        a: "Figurez-vous que oui ! En utilisant régulièrement Pulpo, vous pourrez gagner jusqu'à 2 cristaux cristaux par heure."
+
+      - q: "Est-ce qu'il y a un aute moyen pour obtenir des cristaux ?"
+        a: "Rendez vous sur notre <em>Boutique</em>, dans le menu latéral. Vous y trouverez des packs de cristaux."
+
+      - q: "Les gains liés aux bonus me permettent-ils d'améliorer mon classement ?"
+        a: "Non, le classement ne prends pas en compte ces gains. L'objectif est de trouver la bonne réponse avant tout."
 
       - q: "Comment installer l'application ?"
         a: "Installez l'application depuis votre store habituel. Utilisez un des liens en haut de cette page pour vous y rendre plus rapidement."
@@ -121,10 +136,25 @@ fr:
         a: "Une fois que vous avez répondu à une question, celle-ci passe dans la liste <em>En cours</em>. Pour récupérer vos gains, il faudra attendre la fin du match."
 
       - q: "Le match est terminé et certaines de ses questions sont encore en cours ?"
-        a: "Pas de panique, laissez-nous le temps de saisir les réponses ! Nous ne vous oublierons pas."
+        a: "Pas de panique, laissez-nous le temps à notre équipe de saisir les réponses ! Nous ne vous oublierons pas."
 
       - q: "Puis-je voir la liste des questions terminées ?"
         a: "Bien sûr, c'est ce que nous appellons l'<em>Historique</em>. Accedez y depuis le menu latéral."
+
+      - q: "Comment sont répartit les gains ?"
+        a: "C'est simple, ceux qui ont trouvé la bonne réponse se partagent l'ensemble des mises. Si un tiers des joueurs ont donné la bonne réponse alors chacun d'eux remportera 30 cristaux."
+
+      - q: "Comment sont classés les joueurs ?"
+        a: "Le joueurs sont classés en fonctions du nombres de cristaux remportés lors de leurs prédictions. Plus les chances sont contre vous, et plus vous risquez de gagner gros et de monter dans le classement."
+
+      - q: "Est-ce qu'il y a une astuce pour augmenter son nombre de cristaux ?"
+        a: "Figurez-vous que oui ! En utilisant régulièrement Pulpo, vous pourrez gagner jusqu'à 2 cristaux cristaux par heure."
+
+      - q: "Est-ce qu'il y a un aute moyen pour obtenir des cristaux ?"
+        a: "Rendez vous sur notre <em>Boutique</em>, dans le menu latéral. Vous y trouverez des packs de cristaux."
+
+      - q: "Les gains liés aux bonus me permettent-ils d'améliorer mon classement ?"
+        a: "Non, le classement ne prends pas en compte ces gains. L'objectif est de trouver la bonne réponse avant tout."
 
       - q: "Comment installer l'application ?"
         a: "Installez l'application depuis votre store habituel. Utilisez un des liens en haut de cette page pour vous y rendre plus rapidement."
