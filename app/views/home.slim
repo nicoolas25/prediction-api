@@ -6,6 +6,15 @@ html lang="#{locale}"
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width, initial-scale=1"
 
+    meta property="og:locale"    content="#{locale}"
+    meta property="og:site_name" content="Pulpo"
+    meta property="og:title"     content="#{@badge['name']}"
+    meta property="og:image"     content="http://static.pulpo.info/logo.png"
+    meta property="fb:app_id"    content="409294242546110"
+
+    link rel="icon" href="http://static.pulpo.info/favicon.ico" sizes="16x16 24x24 32x32 64x64" type="image/vnd.microsoft.icon"
+    link rel="apple-touch-icon" href="http://static.pulpo.info/apple-touch-icon.png"
+
     /[if lt IE 9]
       script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
       script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"
