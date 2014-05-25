@@ -31,14 +31,14 @@ html lang="#{locale}"
 
     .container
       .row
-        .col-md-3
+        .col-md-4
           .sidemenu
             ul.nav
               - @t['questions'].each_with_index do |question, index|
                 li
                   a href="#faq#{index}" == question['q']
 
-        .col-md-9
+        .col-md-8
           - @t['questions'].each_with_index do |question, index|
             section.question
               h4 id="faq#{index}" == question['q']
