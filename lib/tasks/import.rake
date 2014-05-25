@@ -31,27 +31,22 @@ def create_question(question_params, tags, teams, template)
 
     c[:labels] = ct['choices'].each_with_object({}) do |(lang, _), h|
       unless lang == 'dev'
-        h[lang] = teams.map { |t| t['translations'][lang] }.join(' - ')
+        h[lang] = teams.map { |t| "c/#{t['small']}" }.join(' - ')
       end
     end
 
     c[:choices] = ct['choices'].each_with_object({}) do |(lang, choice), h|
-      h[lang] =
-        if lang == 'dev'
-          choice.
-            gsub("__C1__", "c/#{teams.first['small']}").
-            gsub("__C2__", "c/#{teams.last['small']}")
-        else
-          choice.
-            gsub("__C1__", teams.first['translations'][lang]).
-            gsub("__C2__", teams.last['translations'][lang])
-        end
+      h[lang] = choice.gsub("__C1__", "c/#{teams.first['small']}").gsub("__C2__", "c/#{teams.last['small']}")
     end
 
     c
   end
 
   q.update_components(components)
+
+  # Set the tags
+  q.remove_all_tags
+  tags.each { |t| q.add_tag(t) }
 end
 
 namespace :import do
@@ -59,14 +54,9 @@ namespace :import do
   task :question do
     require './api'
 
-    teams_path     = ENV['TEAMS']
-    questions_path = ENV['QUESTIONS']
-    matches_path   = ENV['MATCHES']
-
-    unless teams_path && questions_path && matches_path
-      puts "The task is expecting the following environment variables: TEAMS QUESTIONS MATCHES"
-      exit 1
-    end
+    teams_path     = ENV['TEAMS']     || './resources/teams.yml'
+    questions_path = ENV['QUESTIONS'] || './resources/questions.yml'
+    matches_path   = ENV['MATCHES']   || './resources/matches.yml'
 
     teams = parse_teams(teams_path)
     questions = parse_questions(questions_path)
