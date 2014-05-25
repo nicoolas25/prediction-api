@@ -51,7 +51,7 @@ end
 
 namespace :import do
   desc "Import questions"
-  task :question do
+  task :questions do
     require './api'
 
     teams_path     = ENV['TEAMS']     || './resources/teams.yml'

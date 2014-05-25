@@ -164,3 +164,18 @@ namespace :fixing do
     }
   end
 end
+
+#
+# Import
+#
+
+namespace :import do
+  desc "Import the questions"
+  task :questions => :environment do
+    queue %{
+      echo "-----> Import questions" &&
+      #{echo_cmd %[cd #{deploy_to}/current]}
+      #{echo_cmd %[RACK_ENV=#{rack_env} bundle exec rake import:questions]}
+    }
+  end
+end
