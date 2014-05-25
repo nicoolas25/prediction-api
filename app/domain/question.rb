@@ -171,8 +171,8 @@ module Domain
       end
 
       def find_for_update(id)
-        unless question = dataset.open.where(id: id).eager(:components).first
-          raise QuestionNotFound.new(:already_expired)
+        unless question = dataset.where(id: id).eager(:components).first
+          raise QuestionNotFound.new(:question_not_found)
         end
 
         question
