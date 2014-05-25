@@ -3,8 +3,10 @@ html, body {
   background: #2F7CBF;
 }
 
-.jumbotron {
+.container .jumbotron {
   margin: 0px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .sidemenu ul.nav li a {

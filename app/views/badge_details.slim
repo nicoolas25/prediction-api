@@ -28,21 +28,28 @@ html lang="#{locale}"
     .container
       .jumbotron
         .row
-          .col-md-9
+          .col-md-2
+            img.img-thumbnail.img-responsive style="max-height: 150px;" src="http://static.pulpo.info/logo-medium.png" alt="Pulpo"
+          .col-md-10
             h1 == @badge['title']
             p == @badge['legend']
-          .col-md-3
+
+        .row
+          .col-md-8
+          .col-md-2
             a href="https://itunes.apple.com/#{locale}/app/pulpo/id816950507"
               img.img-responsive src="http://static.pulpo.info/get_app_store.gif"
+          .col-md-2
             a href="https://play.google.com/store/apps/details?id=com.gc.pulpo"
               img.img-responsive src="http://static.pulpo.info/get_play_store.png"
 
     .container
       .row
-        .col-md-4
+        .col-md-3
           img.img-thumbnail.img-responsive src="http://static.pulpo.info/badge_#{@identifier}_lvl#{@level}.png"
 
-          .well style="margin-top:1em"
+        .col-md-9
+          .well
             form style="margin-bottom:0px"
               .form-group
                 label.control-label == @t['criteria']
@@ -51,7 +58,6 @@ html lang="#{locale}"
                 label.control-label == @t['level']
                 .badge-info == @level
 
-        .col-md-8
           - @badge['descriptions'].each do |paragraph|
             p == paragraph
 
