@@ -30,7 +30,7 @@ en: &defaults
       - q: "Puis-je voir la liste des questions terminées ?"
         a: "Bien sûr, c'est ce que nous appellons l'<em>Historique</em>. Accedez y depuis le menu latéral."
 
-      - q: "Comment sont répartit les gains ?"
+      - q: "Comment sont répartis les gains ?"
         a: "C'est simple, ceux qui ont trouvé la bonne réponse se partagent l'ensemble des mises. Si un tiers des joueurs ont donné la bonne réponse alors chacun d'eux remportera 30 cristaux."
 
       - q: "Comment sont classés les joueurs ?"
@@ -141,7 +141,7 @@ fr:
       - q: "Puis-je voir la liste des questions terminées ?"
         a: "Bien sûr, c'est ce que nous appellons l'<em>Historique</em>. Accedez y depuis le menu latéral."
 
-      - q: "Comment sont répartit les gains ?"
+      - q: "Comment sont répartis les gains ?"
         a: "C'est simple, ceux qui ont trouvé la bonne réponse se partagent l'ensemble des mises. Si un tiers des joueurs ont donné la bonne réponse alors chacun d'eux remportera 30 cristaux."
 
       - q: "Comment sont classés les joueurs ?"
