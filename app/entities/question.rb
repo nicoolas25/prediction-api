@@ -54,7 +54,7 @@ module Entities
 
     expose :predictions, using: Prediction, if: :details
 
-    expose :tags, if: :details do |q, opts|
+    expose :tags do |q, opts|
       q.tags.map(&:keyword)
     end
 

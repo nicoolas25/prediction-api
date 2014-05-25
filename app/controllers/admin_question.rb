@@ -30,7 +30,7 @@ module Controllers
 
         desc "List the questions"
         get do
-          questions = Domain::Question.dataset.ordered(:desc).all
+          questions = Domain::Question.dataset.ordered(:desc).eager(:tags).all
           present questions, with: Entities::Question, admin: true
         end
 
@@ -41,7 +41,7 @@ module Controllers
 
           desc "Show a question"
           get do
-            if question = Domain::Question.dataset.where(id: params[:id]).eager(:components).first
+            if question = Domain::Question.dataset.where(id: params[:id]).first
               present question, with: Entities::Question, admin: true, details: true
             else
               fail!(:not_found, 404)

@@ -60,8 +60,12 @@ module Domain
         exclude(:"label_#{locale}" => nil)
       end
 
-      def ordered(order=:asc)
-        order(Sequel.__send__(order, :expires_at))
+      def ordered(order=:asc, field=:expires_at)
+        order(Sequel.__send__(order, field))
+      end
+
+      def with_tags
+        eager(:tags)
       end
     end
 
