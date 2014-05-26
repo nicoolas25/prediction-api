@@ -12,7 +12,6 @@ en: &defaults
       participations: "# of bets"
       past_questions: "# of past questions"
       open_questions: "# of active questions"
-      next_questions: "# of future questions"
     screenshots:
       - title: Signup screen
         image: android-login.jpg
@@ -144,7 +143,6 @@ fr:
       participations: "Paris effectués"
       past_questions: "Questions terminées"
       open_questions: "Questions en cours"
-      next_questions: "Questions à venir"
     screenshots:
       - title: Écran d'inscription
         image: android-login.jpg

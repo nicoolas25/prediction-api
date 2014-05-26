@@ -23,11 +23,10 @@ module Prediction
       @t = WEB_CONFIG[locale]['home']
       @statistics = {
         'players'        => Domain::Player.dataset.count,
-        'won_cristals'   => Domain::Participation.dataset.select(Sequel.function(:sum, :winnings).as(:winnings)).first.values[:winnings],
+        'won_cristals'   => Domain::Participation.dataset.select(Sequel.function(:sum, :winnings).as(:winnings)).first.values[:winnings] || 0,
         'participations' => Domain::Participation.dataset.count,
         'past_questions' => Domain::Question.dataset.expired.count,
-        'open_questions' => Domain::Question.dataset.open.count,
-        'next_questions' => Domain::Question.dataset.where(Sequel.expr(:reveals_at) > Time.now).count
+        'open_questions' => Domain::Question.dataset.open.count
       }
       slim :home
     end
