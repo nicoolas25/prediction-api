@@ -2,6 +2,7 @@ en: &defaults
   home:
     title: "Welcome to Pulpo"
     subtitle: "This is where you learn how to master the art of making predictions."
+    description: "Pulpo is an app to bet with your friends during the World Cup 2014."
     legends:
       screenshots: Screenshots
       statistics: Statistics
@@ -75,6 +76,7 @@ en: &defaults
 
   badges:
     shared:
+      description: "Pulpo is an app to bet with your friends during the World Cup 2014."
       criteria: "<strong>How the get this badge</strong>"
       level: "<strong>Level</strong>"
 
@@ -132,6 +134,7 @@ fr:
   home:
     title: "Bienvenue sur <strong>Pulpo</strong>"
     subtitle: "Apprenez à devenir maître dans l'art du pronostic."
+    description: "Pulpo est un jeu mobile qui va vous permettre de suivre entre amis la coupe du monde de football 2014 de manière ludique."
     legends:
       screenshots: Captures d'écran
       statistics: Chiffres clés
@@ -205,6 +208,7 @@ fr:
 
   badges:
     shared:
+      description: "Pulpo est un jeu mobile qui va vous permettre de suivre entre amis la coupe du monde de football 2014 de manière ludique."
       criteria: "<strong>Comment obtenir ce badge</strong>"
       level: "<strong>Niveau</strong>"
 
