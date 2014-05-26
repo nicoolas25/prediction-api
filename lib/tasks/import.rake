@@ -63,11 +63,12 @@ namespace :import do
     matches = parse_matches(matches_path)
 
     matches.each do |match|
-      # Timestamps
+      # Timestamps, show all the imported questions
+      reveals_at = Time.parse('2014/05/26 12:00:00')
       event_at = Time.parse("#{match['date']} #{match['time']}")
       question_params = {
         event_at: event_at,
-        reveals_at: event_at - 7.days,
+        reveals_at: reveals_at,
         expires_at: event_at
       }
 
