@@ -23,10 +23,19 @@ module Entities
         participations: q.players_count
       }
 
-      # Expose the number of friends that answered the question
+      # Expose the friends that answered the question
       if friend_service = opts[:friend_service]
-        friends = friend_service.friends_that_answered(q)
-        hash[:friends] = friends
+        friends = friend_service.friends_that_answered(q) || []
+
+        # Expose the size of friends
+        hash[:friends_count] = friends.size
+
+        # Expose list of friends (only the end to save bandwidth)
+        if !opts[:details] && friends.size > 2
+          hash[:friends] = friends[-3..-1]
+        else
+          hash[:friends] = friends
+        end
       end
 
       hash

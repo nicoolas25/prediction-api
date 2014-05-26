@@ -106,45 +106,6 @@ Feature: Add a new question
     Then the response status should be "403"
     And the JSON response should have "$.code" with the text "invalid_question"
 
-  Scenario: The question is expired
-    Given existing expired questions:
-      | 2 | Qui va gagner ? |
-    And existing components for the question "2":
-      | 2 | choices | Chosir la bonne équipe | France,Belgique |
-    And I send and accept JSON
-    When I send a PUT request to "/v1/admin/questions/2" with the following:
-    """
-    {
-      "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
-      "question": {
-        "expires_at": "2014-01-26 20:00:00 +0000",
-        "reveals_at": "2014-01-26 19:00:00 +0000",
-        "labels": {
-          "fr": "Qui va gagner ?",
-          "en": "Who will be the winner?"
-        },
-        "components": [
-          {
-            "id": "2",
-            "kind": "0",
-            "labels": {
-              "fr": "Choisir la bonne équipe",
-              "en": "Pick the right team"
-            },
-            "choices": {
-              "fr": "France,Belgique",
-              "en": "France,Belgium"
-            }
-          }
-        ]
-      }
-    }
-    """
-    Then the response status should be "403"
-    And the JSON response should have "$.code" with the text "already_expired"
-
-
-
   Scenario: A locale is added to the question
     Given I send and accept JSON
     When I send a PUT request to "/v1/admin/questions/1" with the following:
