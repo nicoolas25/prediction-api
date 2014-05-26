@@ -323,6 +323,7 @@ detailsPlayersInit = ->
       data: JSON.stringify
         token: token
         cristals: $details.find('input.cristals').val()
+        new_nickname: $details.find('input.nickname').val()
         merge_target: $details.find('input.merge-target').val()
     .done ->
       alert('Done!')

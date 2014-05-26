@@ -28,6 +28,7 @@ module Controllers
         params do
           optional :cristals, type: Integer
           optional :merge_target, type: String
+          optional :new_nickname, type: String
         end
         put ':nickname' do
           if player = Domain::Player.where(nickname: params[:nickname]).first
@@ -40,6 +41,11 @@ module Controllers
             if (target = params[:merge_target]) && !target.blank?
               target = Domain::Player.first!(nickname: target)
               player.absorb!(target)
+            end
+
+            # Update nickname
+            if (new_nickname = params[:new_nickname]) && !new_nickname.blank? && new_nickname != player.nickname
+              player.update(nickname: new_nickname)
             end
           else
             fail!(:not_found, 404)
