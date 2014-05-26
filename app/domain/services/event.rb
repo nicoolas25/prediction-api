@@ -12,10 +12,10 @@ module Domain
       def events
         return @events if @events
 
-        results  = participations_creation_grouped.map{ |q| [q.values[:last_participation_at], q]}
+        results  = badges_creation.eager(player: :social_associations).all.map{ |b| [b.created_at, b] }
         results += participations_solving_grouped.map{ |q| [q.solved_at, q]}
+        results += participations_creation_grouped.map{ |q| [q.values[:last_participation_at], q]}
         results += friends_creation.eager(:social_associations).all.map{ |f| [f.created_at, f] }
-        results += badges_creation.eager(player: :social_associations).all.map{ |b| [b.created_at, b] }
         @events  = results.sort_by!(&:first).map!(&:last).reverse!
       end
 
@@ -113,7 +113,7 @@ module Domain
 
       # Doing the ORM job here
       def inject_participants(dataset)
-        questions = dataset.all
+        questions = dataset.eager(:tags).all
         ids = extract_participant_ids(questions).to_a
         candidates = friends(ids)
         questions.each do |question|
