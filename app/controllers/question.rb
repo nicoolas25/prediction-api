@@ -1,7 +1,5 @@
 module Controllers
   class Question < Grape::API
-    DISPLAY_LIMIT = 30
-
     include Common
 
     version 'v1'
@@ -16,7 +14,7 @@ module Controllers
 
         desc "List the open questions for a player"
         get 'global/open' do
-          questions = Domain::Question.global.open.for(player).with_locale(@locale).ordered.with_tags.limit(DISPLAY_LIMIT).all
+          questions = Domain::Question.global.open.for(player).with_locale(@locale).ordered.with_tags.all
           friend_service = Domain::Services::FriendQuestion.new(player, questions.map(&:id))
           present questions,
             with: Entities::Question,
@@ -59,7 +57,7 @@ module Controllers
 
         desc "List the open questions for a player where a friend participate"
         get 'friends/open' do
-          questions = Domain::Question.global.open.for(player).answered_by_friends(player).with_locale(@locale).ordered.with_tags.limit(DISPLAY_LIMIT).all
+          questions = Domain::Question.global.open.for(player).answered_by_friends(player).with_locale(@locale).ordered.with_tags.all
           friend_service = Domain::Services::FriendQuestion.new(player, questions.map(&:id))
           present questions,
             with: Entities::Question,

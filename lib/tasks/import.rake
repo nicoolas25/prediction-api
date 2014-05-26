@@ -39,6 +39,10 @@ def create_question(question_params, tags, teams, template)
       h[lang] = choice.gsub("__C1__", "c/#{teams.first['small']}").gsub("__C2__", "c/#{teams.last['small']}")
     end
 
+    if qc = q.components.find { |qc| qc.label_fr == c[:labels]['fr'] }
+      c[:id] = qc.id
+    end
+
     c
   end
 
@@ -64,11 +68,10 @@ namespace :import do
 
     matches.each do |match|
       # Timestamps, show all the imported questions
-      reveals_at = Time.parse('2014/05/26 12:00:00')
       event_at = Time.parse("#{match['date']} #{match['time']}")
       question_params = {
         event_at: event_at,
-        reveals_at: reveals_at,
+        reveals_at: event_at - 2.days,
         expires_at: event_at
       }
 

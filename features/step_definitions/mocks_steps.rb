@@ -44,10 +44,6 @@ def fake_payment(provider, transaction_id, product_id)
   allow_any_instance_of(klass).to receive_messages(messages)
 end
 
-Given /the maximum question displayed is "(\d+)"/ do |limit|
-  stub_const('Controllers::Question::DISPLAY_LIMIT', limit.to_i)
-end
-
 Given /^the player informations given by "([^"]*)" are:$/ do |provider, infos|
   fake_informations(provider, Hash[infos.raw])
 end
