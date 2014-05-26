@@ -131,7 +131,7 @@ en: &defaults
 fr:
   home:
     title: "Bienvenue sur <strong>Pulpo</strong>"
-    subtitle: "Apprenez à devenir maître dans l'art du pronostique."
+    subtitle: "Apprenez à devenir maître dans l'art du pronostic."
     legends:
       screenshots: Captures d'écran
       statistics: Chiffres clés
