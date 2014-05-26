@@ -22,7 +22,8 @@ module Domain
 
     dataset_module do
       def visible
-        where(Sequel.expr(:reveals_at) <= Time.now)
+        where(Sequel.expr(:reveals_at) <= Time.now).
+        where(pending: false)
       end
 
       def global
