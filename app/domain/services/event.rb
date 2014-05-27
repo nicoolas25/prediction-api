@@ -39,7 +39,11 @@ module Domain
       end
 
       def friends_ids
-        @friends_ids ||= (@player.friends_dataset.select(:id).all.map(&:id) << @player.id)
+        @friends_ids ||= @player.friends_dataset.select(:id).all.map(&:id)
+      end
+
+      def friends_and_player_ids
+        @friends_and_player_ids ||= friends_ids.dup + [@player.id]
       end
 
       def filter_dataset(attribute, dataset)
@@ -58,7 +62,7 @@ module Domain
         filter_dataset(:players__created_at, @player.friends_dataset)
       end
 
-      # Questions answered by player or by its friends
+      # Questions answered by its friends only
       # The question have two extra attributes:
       #   - last_participation_at: the date of the last participation
       #   - participant_ids: the list of participant for this question
@@ -92,7 +96,7 @@ module Domain
               Sequel.function(:string_agg, Sequel.expr(:participations__player_id).cast_string, ' ').as(:participant_ids),
               Sequel.function(:avg, :participations__winnings).as(:average_winnings),
               :questions__answered___solved).
-            join(:participations, question_id: :id, player_id: friends_ids).
+            join(:participations, question_id: :id, player_id: friends_and_player_ids).
             where(questions__answered: true).
             where(Sequel.expr(:participations__winnings) > 0).
             group(:questions__id)
@@ -100,7 +104,7 @@ module Domain
       end
 
       def badges_creation
-        filter_dataset(:badges__created_at, ::Domain::Badge.dataset.visible.where(player_id: friends_ids))
+        filter_dataset(:badges__created_at, ::Domain::Badge.dataset.visible.where(player_id: friends_and_player_ids))
       end
 
       def participations_creation_grouped
