@@ -1,135 +1,3 @@
-en: &defaults
-  home:
-    title: "Welcome to Pulpo"
-    subtitle: "This is where you learn how to master the art of making predictions."
-    description: "Pulpo is an app to bet with your friends during the World Cup 2014."
-    legends:
-      screenshots: Screenshots
-      statistics: Statistics
-    statistics:
-      players: "# of players"
-      won_cristals: "# of won cristals"
-      participations: "# of bets"
-      past_questions: "# of past questions"
-      open_questions: "# of active questions"
-      next_questions: "# of future questions"
-    screenshots:
-      - title: Signup screen
-        image: android-login.jpg
-      - title: Side menu
-        image: android-menu.jpg
-      - title: Questions list
-        image: android-questions.jpg
-      - title: Friend ranking
-        image: android-ranking.jpg
-    questions:
-      - q: "Qu'est-ce que Pulpo ?"
-        a: "C'est un jeu mobile qui va vous permettre de suivre la coupe du monde de football 2014 de manière ludique et entre amis."
-
-      - q: "Quel est le but du jeu ?"
-        a: "L'objectif est d'être le meilleur pronostiqueur parmi vos amis et le reste du monde. Pour celà il vous faudra répondre correctement à nos questions."
-
-      - q: "Combien ça coute ?"
-        a: "Rien ! Pulpo est entièrement gratuit. Les mises nécessaires pour parier se font en cristaux, une devise propre à Pulpo."
-
-      - q: "Puis-je commencer à parier dès le moment ou je lance l'application ?"
-        a: "Pour pouvoir parier, les cristaux sont indispensables ! Heureusement lors de votre première connexion vous en aurez déjà 200, de quoi voir venir..."
-
-      - q: "Où se trouvent les questions auxquelles je peux répondre ?"
-        a: "Elles se trouve dans le menu latéral <em>Questions</em> de l'application."
-
-      - q: "Combien faut-il de cristaux pour parier sur une question ?"
-        a: "Chaque pari vous coutera 10 cristaux. Partagez un question via votre réseau social favori et nous vous offrirons 2 cristaux."
-
-      - q: "Une fois que j'ai répondu à une question, que se passe-t-il ?"
-        a: "Une fois que vous avez répondu à une question, celle-ci passe dans la liste <em>En cours</em>. Pour récupérer vos gains, il faudra attendre la fin du match."
-
-      - q: "Le match est déjà termine mais les questions correspondantes sont encore dans la rubrique en cours ?"
-        a: "Pas de panique, laissez-nous le temps à notre équipe de saisir les réponses ! Nous ne vous oublierons pas."
-
-      - q: "Puis-je voir la liste des questions terminées ?"
-        a: "Bien sûr, c'est ce que nous appellons l'<em>Historique</em>. Accedez y depuis le menu latéral."
-
-      - q: "Comment sont répartis les gains ?"
-        a: "C'est simple, ceux qui ont trouvé la bonne réponse se partagent l'ensemble des mises. Si un tiers des joueurs ont donné la bonne réponse alors chacun d'eux remportera 30 cristaux."
-
-      - q: "Comment sont classés les joueurs ?"
-        a: "Les joueurs sont classés en fonctions du nombres de cristaux remportés lors de leurs paris. Plus les chances sont contre vous, et plus vous risquez de gagner gros et de monter dans le classement."
-
-      - q: "Est-ce qu'il y a une astuce pour augmenter son nombre de cristaux ?"
-        a: "Figurez-vous que oui ! En utilisant régulièrement Pulpo, vous pourrez gagner jusqu'à 2 cristaux par heure."
-
-      - q: "Est-ce qu'il y a un autre moyen pour obtenir des cristaux ?"
-        a: "Rendez vous sur notre <em>Boutique</em>, dans le menu latéral. Vous y trouverez des packs de cristaux."
-
-      - q: "Les gains liés aux bonus me permettent-ils d'améliorer mon classement ?"
-        a: "Non, le classement ne prend pas en compte ces gains. L'objectif est de trouver la bonne réponse avant tout."
-
-      - q: "Comment installer l'application ?"
-        a: "Installez l'application depuis votre store habituel. Utilisez un des liens en haut de cette page pour vous y rendre plus rapidement."
-
-      - q: "Suis-je obligé d'utiliser Facebook, Twitter ou Google pour jouer ?"
-        a: "Oui, grâce à ça vous pourrez inviter et retrouver facilement vos amis sur Pulpo. Nous n'utilisons pas vos données pour quoi que ce soit d'autre."
-
-      - q: "Est-il possible de modifier mon identifiant ?"
-        a: "Pour le moment ce n'est pas possible. Si toutefois vous voulez vraiment le changer, contactez nous via l'application."
-
-  badges:
-    shared:
-      description: "Pulpo is an app to bet with your friends during the World Cup 2014."
-      criteria: "<strong>How the get this badge</strong>"
-      level: "<strong>Level</strong>"
-
-    chicken:
-      name: "Chicken"
-      title: "The <strong>Chicken</strong> badge"
-      legend: "because sometimes... you're a pussy!"
-      criteria: "Win a prediction using a Lucky Looser bonus"
-      descriptions:
-        - ""
-    glutton:
-      name: "Glutton"
-      title: "The <strong>Glutton</strong> badge"
-      legend: "I bet you didn't see it comming!"
-      criteria: "Loose a prediction using a Quit or Double bonus"
-      descriptions:
-        - ""
-    god:
-      name: "God of bonus"
-      title: "The <strong>God of bonus</strong> badge"
-      legend: "that's proof that you've got the power!"
-      criteria: "Use any bonus while you make a prediction"
-      descriptions:
-        - ""
-    incredible:
-      name: "Incredible"
-      title: "The <strong>Incredible</strong> badge"
-      legend: "you're awesome... or lucky but who care!"
-      criteria: "Win more than 50 cristals with one prediction"
-      descriptions:
-        - ""
-    looser:
-      name: "KO"
-      title: "The <strong>KO</strong> badge"
-      legend: "be pround... even when you're wrong!"
-      criteria: "Loose a prediction"
-      descriptions:
-        - ""
-    participation:
-      name: "Player"
-      title: "The <strong>Player</strong> badge"
-      legend: "if you're not the best, at least you're trying!"
-      criteria: "Just make a prediction"
-      descriptions:
-        - ""
-    visionary:
-      name: "Visionary"
-      title: "The <strong>Visionary</strong> badge"
-      legend: "when they're all wrong, you're not!"
-      criteria: "Win more than 3 times your stakes"
-      descriptions:
-        - ""
-
 fr:
   home:
     title: "Bienvenue sur <strong>Pulpo</strong>"
@@ -154,7 +22,7 @@ fr:
         image: android-questions.jpg
       - title: Classement entre amis
         image: android-ranking.jpg
-    questions:
+    questions: &questions_fr
       - q: "Qu'est-ce que Pulpo ?"
         a: "C'est un jeu mobile qui va vous permettre de suivre la coupe du monde de football 2014 de manière ludique et entre amis."
 
@@ -170,11 +38,17 @@ fr:
       - q: "Où se trouvent les questions auxquelles je peux répondre ?"
         a: "Elles se trouve dans le menu latéral <em>Questions</em> de l'application."
 
+      - q: "Que signifie le nombre de cristaux présent à coté de chaque question de la liste ?"
+        a: "Il s'agit du nombre de cristaux total misé par les joueurs. Cela donne un ordre d'idée de la popularité de la question."
+
       - q: "Combien faut-il de cristaux pour parier sur une question ?"
         a: "Chaque pari vous coutera 10 cristaux. Partagez un question via votre réseau social favori et nous vous offrirons 2 cristaux."
 
       - q: "Une fois que j'ai répondu à une question, que se passe-t-il ?"
         a: "Une fois que vous avez répondu à une question, celle-ci passe dans la liste <em>En cours</em>. Pour récupérer vos gains, il faudra attendre la fin du match."
+
+      - q: "Puis-je modifier une de mes prédiction ?"
+        a: "Non, ce n'est pas possible. Une fois joué, plus possible de modifier son choix ni le bonus utilisé."
 
       - q: "Le match est terminé et certaines de ses questions sont encore en cours ?"
         a: "Pas de panique, laissez-nous le temps à notre équipe de saisir les réponses ! Nous ne vous oublierons pas."
@@ -259,6 +133,88 @@ fr:
       title: "Le badge <strong>Visionnaire</strong>"
       legend: "quand ils se trompent tous, vous non !"
       criteria: "Gagner plus de 30 cristaux d'un coup"
+      descriptions:
+        - ""
+
+en: &defaults
+  home:
+    title: "Welcome to Pulpo"
+    subtitle: "This is where you learn how to master the art of making predictions."
+    description: "Pulpo is an app to bet with your friends during the World Cup 2014."
+    legends:
+      screenshots: Screenshots
+      statistics: Statistics
+    statistics:
+      players: "# of players"
+      won_cristals: "# of won cristals"
+      participations: "# of bets"
+      past_questions: "# of past questions"
+      open_questions: "# of active questions"
+      next_questions: "# of future questions"
+    screenshots:
+      - title: Signup screen
+        image: android-login.jpg
+      - title: Side menu
+        image: android-menu.jpg
+      - title: Questions list
+        image: android-questions.jpg
+      - title: Friend ranking
+        image: android-ranking.jpg
+    questions: *questions_fr
+
+  badges:
+    shared:
+      description: "Pulpo is an app to bet with your friends during the World Cup 2014."
+      criteria: "<strong>How the get this badge</strong>"
+      level: "<strong>Level</strong>"
+
+    chicken:
+      name: "Chicken"
+      title: "The <strong>Chicken</strong> badge"
+      legend: "because sometimes... you're a pussy!"
+      criteria: "Win a prediction using a Lucky Looser bonus"
+      descriptions:
+        - ""
+    glutton:
+      name: "Glutton"
+      title: "The <strong>Glutton</strong> badge"
+      legend: "I bet you didn't see it comming!"
+      criteria: "Loose a prediction using a Quit or Double bonus"
+      descriptions:
+        - ""
+    god:
+      name: "God of bonus"
+      title: "The <strong>God of bonus</strong> badge"
+      legend: "that's proof that you've got the power!"
+      criteria: "Use any bonus while you make a prediction"
+      descriptions:
+        - ""
+    incredible:
+      name: "Incredible"
+      title: "The <strong>Incredible</strong> badge"
+      legend: "you're awesome... or lucky but who care!"
+      criteria: "Win more than 50 cristals with one prediction"
+      descriptions:
+        - ""
+    looser:
+      name: "KO"
+      title: "The <strong>KO</strong> badge"
+      legend: "be pround... even when you're wrong!"
+      criteria: "Loose a prediction"
+      descriptions:
+        - ""
+    participation:
+      name: "Player"
+      title: "The <strong>Player</strong> badge"
+      legend: "if you're not the best, at least you're trying!"
+      criteria: "Just make a prediction"
+      descriptions:
+        - ""
+    visionary:
+      name: "Visionary"
+      title: "The <strong>Visionary</strong> badge"
+      legend: "when they're all wrong, you're not!"
+      criteria: "Win more than 3 times your stakes"
       descriptions:
         - ""
 
