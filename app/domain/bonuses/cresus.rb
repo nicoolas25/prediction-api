@@ -14,6 +14,10 @@ module Domain
         participation.player.increment_cristals_by!(20)
       end
 
+      expected_winnings do |stakes, actual_winnings|
+        20
+      end
+
       labels fr: "Crésus", en: "Call me Cresus", pt: "Crésus", es: "Cresus"
     end
 

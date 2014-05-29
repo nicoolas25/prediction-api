@@ -74,6 +74,11 @@ module Domain
           !!@when_used
         end
 
+        def expected_winnings(*arguments, &block)
+          @expected_winnings = block if block
+          @expected_winnings.call(*arguments) if arguments.any?
+        end
+
         def labels(hash=nil)
           return @labels unless hash
           @labels = hash

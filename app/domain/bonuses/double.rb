@@ -19,6 +19,10 @@ module Domain
         end
       end
 
+      expected_winnings do |stakes, actual_winnings|
+        actual_winnings
+      end
+
       when_used do |participation, bonus|
         player = participation.player
         stakes = participation.stakes

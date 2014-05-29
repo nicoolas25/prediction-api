@@ -18,6 +18,10 @@ module Domain
         end
       end
 
+      expected_winnings do |stakes, actual_winnings|
+        actual_winnings == 0 ? stakes : 0
+      end
+
       labels fr: "Lucky loser", en: "Lucky loser", pt: "Lucky loser", es: "Lucky Loser"
     end
 

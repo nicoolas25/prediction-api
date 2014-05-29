@@ -7,10 +7,19 @@ module Domain
       end
 
       def winnings_for(question)
-        prefetched_infos = question_hash[question.id]
+        if prefetched_infos = question_hash[question.id]
+          prefetched_infos[:winnings] = Earning.new(question).earning_for(prefetched_infos)
+        else
+          nil
+        end
+      end
 
-        if prefetched_infos
-          Earning.new(question).earning_for(prefetched_infos)
+      def bonus_winnings_for(question)
+        if (prefetched_infos = question_hash[question.id]) && (identifier = prefetched_infos[:bonus])
+          Domain::Bonuses.modules[identifier].expected_winnings(
+            prefetched_infos[:stakes],
+            winnings_for(question)
+          )
         else
           nil
         end

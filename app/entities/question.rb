@@ -51,6 +51,10 @@ module Entities
       opts[:winning_service].winnings_for(q)
     end
 
+    expose :bonus_winnings, if: :winning_service do |q, opts|
+      opts[:winning_service].bonus_winnings_for(q)
+    end
+
     expose :bonus, if: ->(q, opts){ opts[:winning_service].try(:answered?, q) } do |q, opts|
       opts[:winning_service].bonus_for(q)
     end

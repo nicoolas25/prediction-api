@@ -13,6 +13,10 @@ module Domain
 
       identifier 'lucky'
 
+      expected_winnings do |stakes, actual_winnings|
+        0
+      end
+
       labels fr: "Jour de chance", en: "Feeling lucky", pt: "Dia de sorte", es: "Dia de suerte"
 
       participation_options do
