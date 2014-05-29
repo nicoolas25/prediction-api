@@ -151,8 +151,6 @@ Given /^existing tags:$/ do |tags|
   end
 end
 
-
-
 Given /^existing components for the question "([^"]*)":$/ do |question_id, components|
   components.raw.each_with_index do |(id, kind, label, *extra), position|
     attrs = {}

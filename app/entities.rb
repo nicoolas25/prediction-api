@@ -25,4 +25,5 @@ module Entities
   autoload :Prediction,        './app/entities/prediction'
   autoload :Question,          './app/entities/question'
   autoload :SocialAssociation, './app/entities/social_association'
+  autoload :Tag,               './app/entities/tag'
 end

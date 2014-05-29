@@ -82,5 +82,6 @@ module Controllers
   autoload :Registration,  './app/controllers/registration'
   autoload :Session,       './app/controllers/session'
   autoload :Share,         './app/controllers/share'
+  autoload :Tag,           './app/controllers/tag'
   autoload :User,          './app/controllers/user'
 end

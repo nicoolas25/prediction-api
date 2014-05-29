@@ -10,6 +10,7 @@ module Domain
     autoload :Ranking,         './app/domain/services/ranking'
     autoload :Sharing,         './app/domain/services/sharing'
     autoload :SharingQuestion, './app/domain/services/sharing_question'
+    autoload :Tag,             './app/domain/services/tag'
     autoload :Winning,         './app/domain/services/winning'
   end
 end

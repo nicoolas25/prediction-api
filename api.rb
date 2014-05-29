@@ -16,6 +16,7 @@ module Prediction
     mount Controllers::Registration
     mount Controllers::Session
     mount Controllers::Share
+    mount Controllers::Tag
     mount Controllers::User
   end
 end
