@@ -1036,11 +1036,11 @@ traits:
           description: Filtre les questions pour n'afficher que les question dans un certain état.
           type: string
           pattern: outdated|answered|open
-      /{tag}:
+      /tags/{tag_id}:
         is: [ secured ]
         type: { collection: { elementName: "Question" } }
         uriParameters:
-          tag:
+          tag_id:
             description: Filtre les questions pour n'afficher qu'un certain tag.
             type: string
 /participations:

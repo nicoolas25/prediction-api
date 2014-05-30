@@ -23,6 +23,25 @@ module Controllers
             made_prediction: false
         end
 
+        desc "List the open questions for a player matching a given tag"
+        params do
+          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)$/
+          requires :tag_id, type: Integer
+        end
+        get 'global/open/tags/:tag_id' do
+          if tag = Domain::Tag.first(id: params[:tag_id])
+            questions = Domain::Question.global.open.for(player).with_locale(@locale).ordered.tagged_with(tag).with_tags.all
+            friend_service = Domain::Services::FriendQuestion.new(player, questions.map(&:id))
+            present questions,
+              with: Entities::Question,
+              locale: @locale,
+              friend_service: friend_service,
+              made_prediction: false
+          else
+            fail!(:tag_not_found , 404)
+          end
+        end
+
         desc "List the answered questions of a player"
         get 'global/answered' do
           questions = Domain::Question.global.open.answered_by(player).with_locale(@locale).ordered.with_tags.all

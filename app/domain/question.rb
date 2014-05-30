@@ -68,6 +68,10 @@ module Domain
       def with_tags
         eager(:tags)
       end
+
+      def tagged_with(tag)
+        join(:questions_tags, question_id: :id, tag_id: tag.id)
+      end
     end
 
     def before_create
