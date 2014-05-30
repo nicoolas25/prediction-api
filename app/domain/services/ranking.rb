@@ -3,10 +3,9 @@ module Domain
     class Ranking
       PAGE_SIZE = 30
 
-      def initialize(rank=nil, player=nil, limit=nil)
+      def initialize(rank=nil, limit=nil)
         @rank = rank
         @limit = limit
-        @player = player
       end
 
       def players
@@ -50,24 +49,24 @@ module Domain
 
       class << self
         def top
-          after(player_at(1))
+          new(1)
         end
 
         def arround(player)
           limit = rank(player)
           rank = [limit - (PAGE_SIZE / 2), 1].max
-          new(rank, player)
+          new(rank)
         end
 
         def before(player)
-          limit = rank(player)
+          limit = rank(player) - 1
           rank = [limit - PAGE_SIZE, 1].max
-          new(rank, player, limit)
+          new(rank, limit)
         end
 
         def after(player)
           prepare
-          new(rank(player), player)
+          new(rank(player) + 1)
         end
 
         def rank(player)
