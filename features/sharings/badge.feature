@@ -38,3 +38,17 @@ Feature: An user can share a badge via a social network
     Then the response status should be "201"
     And the last share should be in "en" with an id containing "-badge-participation-1"
     And the "shared_at" attr for badge "participation" with level "1" of "nickname" should be defined
+
+  Scenario: The user share the badge correctly in portuguese
+    When I send a POST request to "/v1/shares/pt/badge/participation-1" with the following:
+      | oauth2TokenFacebook    | test-token |
+    Then the response status should be "201"
+    And the last share should be in "pt" with an id containing "-badge-participation-1"
+    And the "shared_at" attr for badge "participation" with level "1" of "nickname" should be defined
+
+  Scenario: The user share the badge correctly in spannish
+    When I send a POST request to "/v1/shares/es/badge/participation-1" with the following:
+      | oauth2TokenFacebook    | test-token |
+    Then the response status should be "201"
+    And the last share should be in "es" with an id containing "-badge-participation-1"
+    And the "shared_at" attr for badge "participation" with level "1" of "nickname" should be defined

@@ -53,6 +53,10 @@ Given /^the lucky bonus give "(\d+)" percent of chance of getting a bonus$/ do |
   stub_const('Domain::Bonuses::Lucky::BONUS_CHANCES', chances)
 end
 
+Given /^the ranking page size is "(\d+)"$/ do |page_size|
+  stub_const('Domain::Services::Ranking::PAGE_SIZE', page_size.to_i)
+end
+
 Given /^the players with nickname prefix "([^"]*)" have random scores$/ do |nickname_prefix|
   Domain::Services::Ranking.prepare
   player_ids = Domain::Player.where(Sequel.like(:nickname, "#{nickname_prefix}%")).select(:id)

@@ -5,6 +5,7 @@ Feature: Display the global ranking
     And I am an authenticated user: "nickname"
     And "100" registered users with "player" as nickname prefix
     And the players with nickname prefix "player" have random scores
+    And the ranking page size is "30"
 
   Scenario: The player asks for the top ranking
     Given the player "nickname" has a ranking of "30"

@@ -78,11 +78,6 @@ module Domain
             try{ |r| r[:rank] }
         end
 
-        def player_at(rank)
-          player_ids = DB[:rankings].where(rank: rank).select(:player_id)
-          Domain::Player.where(id: player_ids).first
-        end
-
         def rank_friends(player)
           prepare
           rank = rank(player)

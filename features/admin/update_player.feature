@@ -26,8 +26,9 @@ Feature: The administrator can update the cristals of a given player
     """
     {
       "token": "xVgDSZt0yidgzVkzWZ7sWAevUehZgqeB",
-      "cristals": 400
+      "cristals": 400,
+      "new_nickname": "nickname_1"
     }
     """
     Then the response status should be "200"
-    And the player "nickname" should have "400" cristals
+    And the player "nickname_1" should have "400" cristals

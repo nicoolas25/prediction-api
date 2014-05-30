@@ -72,3 +72,29 @@ Feature: An user can share the application via a social network
     And the last share should be in "en" with an id containing "-application"
     And the "shared_at" attr of "nickname" should be defined
     And the player "nickname" should have "70" cristals
+
+  Scenario: The user share the application correctly in portugese
+    Given I am an authenticated user: "nickname"
+    And a social account for "facebook" with "fake-id" id is linked to "nickname"
+    And a valid OAuth2 token for the "facebook" provider which returns the id "fake-id"
+    And the "facebook" provider will share the messages correctly
+    And I accept JSON
+    When I send a POST request to "/v1/shares/pt/application/0" with the following:
+      | oauth2TokenFacebook    | test-token |
+    Then the response status should be "201"
+    And the last share should be in "pt" with an id containing "-application"
+    And the "shared_at" attr of "nickname" should be defined
+    And the player "nickname" should have "70" cristals
+
+  Scenario: The user share the application correctly in spannish
+    Given I am an authenticated user: "nickname"
+    And a social account for "facebook" with "fake-id" id is linked to "nickname"
+    And a valid OAuth2 token for the "facebook" provider which returns the id "fake-id"
+    And the "facebook" provider will share the messages correctly
+    And I accept JSON
+    When I send a POST request to "/v1/shares/es/application/0" with the following:
+      | oauth2TokenFacebook    | test-token |
+    Then the response status should be "201"
+    And the last share should be in "es" with an id containing "-application"
+    And the "shared_at" attr of "nickname" should be defined
+    And the player "nickname" should have "70" cristals
