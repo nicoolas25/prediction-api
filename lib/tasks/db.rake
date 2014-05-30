@@ -1,6 +1,4 @@
 namespace :db do
-  ROOT_PATH = File.dirname(__FILE__)
-  MIGRATION_DIR = File.join(ROOT_PATH, '..', '..', 'db', 'migrations')
 
   require './db/connect'
 
@@ -15,12 +13,12 @@ namespace :db do
     args.with_defaults(target: nil)
 
     Sequel.extension :migration
-    if Sequel::Migrator.is_current?(DB, MIGRATION_DIR) && !args.target
+    if Sequel::Migrator.is_current?(DB, SEQUEL_MIGRATION_DIR) && !args.target
       puts "Migrations are good, nothing to do here."
     else
       puts "Migrating to #{args.target || 'the lastest version'}..."
       options = args.target ? {target: args.target.to_i} : {}
-      Sequel::Migrator.run(DB, MIGRATION_DIR, options)
+      Sequel::Migrator.run(DB, SEQUEL_MIGRATION_DIR, options)
     end
 
     Rake::Task['db:version'].execute
