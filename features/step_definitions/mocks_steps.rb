@@ -146,7 +146,9 @@ end
 Given /^existing tags:$/ do |tags|
   tags.raw.each do |question_id, keyword, tag_id|
     question = question_id.present? && Domain::Question.first(id: question_id)
-    tag = Domain::Tag.first(keyword: keyword, id: tag_id) || Domain::Tag.create(keyword: keyword, id: tag_id)
+    params = {keyword: keyword}
+    params = params.merge(id: tag_id) if tag_id.present?
+    tag = Domain::Tag.first(params) || Domain::Tag.create(params)
     question.add_tag(tag) if question
   end
 end

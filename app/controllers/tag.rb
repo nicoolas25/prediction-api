@@ -10,7 +10,7 @@ module Controllers
     namespace :tags do
       desc "List the tags"
       get do
-        tag_service = Domain::Services::Tag.new
+        tag_service = Domain::Services::Tag.new(player)
         present Domain::Tag.all, with: Entities::Tag, tag_service: tag_service
       end
     end
