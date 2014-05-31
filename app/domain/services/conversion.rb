@@ -6,7 +6,7 @@ module Domain
       VALID_TARGETS = {
         'bonus_1' => [50,   4],
         'bonus_2' => [95,   8],
-        'bonus_3' => [185, 16],
+        'bonus_3' => [180, 16],
         'bonus_4' => [360, 32]
       }.freeze
 
