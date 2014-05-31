@@ -38,15 +38,14 @@ module Domain
     }
 
     many_to_many :friends, class: Player, dataset: ->{
-      Player.exclude(players__id: id).join(:friendships, FRIENDSHIPS_EXPR[id, :players__id])
+      Player.exclude(players__id: id).join(:friendships, FRIENDSHIPS_EXPR[id, :players__id]).distinct
     }
 
     # Friends including himself
     def circle_dataset
       Player.
         join_table(:left, :friendships, FRIENDSHIPS_EXPR[id, :players__id]).
-        where(Sequel.negate(right_id: nil) | Sequel.expr(players__id: id)).
-        distinct
+        where(Sequel.negate(right_id: nil) | Sequel.expr(players__id: id))
     end
 
     def validate

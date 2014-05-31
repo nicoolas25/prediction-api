@@ -29,9 +29,10 @@ module Domain
         @friends ||= player.circle_dataset.
           select_append(:s__score, :s__player_id, :r__rank, :r__delta).
           join(:scorings___s, player_id: :players__id).
-          join(:rankings___r, player_id: :player_id).
+          join(:rankings___r, player_id: :players__id).
           order(Sequel.desc(:s__score), Sequel.asc(:s__player_id)).
           eager(:social_associations).
+          distinct(:s__score, :s__player_id).
           all
       end
 
