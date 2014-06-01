@@ -1,7 +1,7 @@
 module Domain
   module Services
     class Ranking
-      PAGE_SIZE = 10
+      PAGE_SIZE = 40
 
       def initialize(rank=nil, limit=nil)
         @rank = rank
