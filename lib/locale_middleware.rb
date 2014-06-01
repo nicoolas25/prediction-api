@@ -36,5 +36,7 @@ class LocaleMiddleware
     lang = lang ? lang.first : DEFAULT_LOCALE
 
     lang == '*' ? nil : lang[0..1]
+  rescue
+    nil
   end
 end
