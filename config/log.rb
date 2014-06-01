@@ -5,7 +5,7 @@ env = ENV['RACK_ENV'] || 'app'
 
 # Keep 5 x 100 MB of logs
 LOGGER ||= Logger.new("./log/#{env}.log", 5, 100.megabytes)
-LOGGER.level = env == production ? Logger::INFO : Logger::DEBUG
+LOGGER.level = env == 'production' ? Logger::INFO : Logger::DEBUG
 
 class LoggerMiddleware
   FORMAT_BGN         = %{Receive %s "%s%s" from %s\nBody: %s}
