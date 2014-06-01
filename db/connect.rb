@@ -40,5 +40,6 @@ DB.extension :pg_hstore
 
 if defined?(LOGGER)
   DB.loggers << LOGGER
+  DB.sql_log_level = :debug
   DB.log_warn_duration = 0.2
 end

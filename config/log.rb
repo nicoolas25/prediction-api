@@ -5,6 +5,7 @@ env = ENV['RACK_ENV'] || 'app'
 
 # Keep 5 x 100 MB of logs
 LOGGER ||= Logger.new("./log/#{env}.log", 5, 100.megabytes)
+LOGGER.level = env == production ? Logger::INFO : Logger::DEBUG
 
 class LoggerMiddleware
   FORMAT_BGN         = %{Receive %s "%s%s" from %s\nBody: %s}
@@ -50,16 +51,18 @@ class LoggerMiddleware
   def log_end(status, header, began_at, body)
     args = [ status.to_s[0..3], Time.now - began_at ]
 
-    if header['Content-Type'] =~ /json/
-      body = body.instance_eval{ @body } if body.kind_of?(Rack::BodyProxy)
-      body = body.body                   if body.kind_of?(Rack::Response)
-      body = body.first                  if body.kind_of?(Array)
-      args << body
-      msg  = FORMAT_END % args
-    else
-      msg = FORMAT_END_WO_BODY % args
-    end
+    # Keep this for complex debugging
+    # if header['Content-Type'] =~ /json/
+    #   body = body.instance_eval{ @body } if body.kind_of?(Rack::BodyProxy)
+    #   body = body.body                   if body.kind_of?(Rack::Response)
+    #   body = body.first                  if body.kind_of?(Array)
+    #   args << body
+    #   msg  = FORMAT_END % args
+    # else
+    #   msg = FORMAT_END_WO_BODY % args
+    # end
 
+    msg = FORMAT_END_WO_BODY % args
     LOGGER.info(msg)
   end
 end
