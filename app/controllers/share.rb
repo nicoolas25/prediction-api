@@ -9,11 +9,11 @@ module Controllers
 
     namespace :shares do
       namespace ':locale' do
-        before { @locale = params[:locale].to_sym }
+        before { @locale = params[:locale] == 'ru' ? :en : params[:locale].to_sym }
 
         desc "Share something via a given social network"
         params do
-          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)$/
+          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)|(ru)$/
           requires :kind, type: String, regexp: /^(participation)|(application)|(badge)$/
           optional :oauth2TokenFacebook, type: String
           optional :oauth2TokenTwitter, type: String

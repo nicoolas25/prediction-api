@@ -9,8 +9,8 @@ module Controllers
 
     namespace :questions do
       namespace ':locale' do
-        params { requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)$/ }
-        before { @locale = params[:locale].to_sym }
+        params { requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)|(ru)$/ }
+        before { @locale = params[:locale] == 'ru' ? :en : params[:locale].to_sym }
 
         desc "List the open questions for a player"
         get 'global/open' do
@@ -87,7 +87,7 @@ module Controllers
 
         desc "List the open questions for a player where a friend participate"
         params do
-          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)$/
+          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)|(ru)$/
           requires :tag_id, type: Integer
         end
         get 'friends/open/tags/:tag_id' do
@@ -106,7 +106,7 @@ module Controllers
 
         desc "Show the details of a question"
         params do
-          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)$/
+          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)|(ru)$/
           requires :id, type: String, regexp: /^\d+$/
         end
         get ':id' do
