@@ -58,7 +58,7 @@
 
 - template: country
   labels:
-    fr: Quelle équipe fera le plus de faute ?
+    fr: Quelle équipe fera le plus de fautes ?
     en: Which team will make the most foul?
     es: ¿Cuál equipo aprovechará al máximo la falta?
     pt: Qual equipa vai aproveitar ao máximo a falta?
@@ -163,7 +163,7 @@
 
 - template: player
   labels:
-    fr: Quel joueur prendra le permier carton jaune ?
+    fr: Quel joueur prendra le premier carton jaune ?
     en: Which player will the first to receive a yellow card?
     es: ¿Cuál jugador tendrá la primera tarjeta amarilla?
     pt: Qual jogador vai ter o primeiro cartão amarelo?
@@ -193,7 +193,7 @@
 
 - template: player
   labels:
-    fr: Quel joueur prendra le permier carton rouge ?
+    fr: Quel joueur prendra le premier carton rouge ?
     en: Which player will the first to receive a red card?
     es: ¿Cuál jugador tendrá la primera tarjeta roja?
     pt: Qual jogador vai ter o primeiro cartão vermelho?
