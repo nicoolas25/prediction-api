@@ -23,9 +23,9 @@ def find_question(params, tags)
       DB[:questions_tags].
         where(question_id: :questions__id).
         where(tag_id: tags.map(&:id)).
-        group(:question_id).
         select(Sequel.function(:count, '*').as(:count)).
-        having(count: tags.size).
+        where(count: tags.size).
+        group(:question_id).
         exists
     ).first
   q ||= Domain::Question.new
