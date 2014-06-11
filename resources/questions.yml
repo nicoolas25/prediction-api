@@ -58,7 +58,7 @@
 
 - template: country
   labels:
-    fr: Quelle équipe fera le plus de fautes ?
+    fr: Quelle équipe fera le plus de faute ?
     en: Which team will make the most foul?
     es: ¿Cuál equipo aprovechará al máximo la falta?
     pt: Qual equipa vai aproveitar ao máximo a falta?
