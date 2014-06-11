@@ -1,7 +1,7 @@
 - template: country
   labels:
     fr: Quel sera l'écart de but à la mi-temps ?
-    en: What is the difference in goal halftime?
+    en: What will be the goal difference at halftime?
     es: ¿Cuál es la diferencia en el medio tiempo objetivo?
     pt: Qual é a diferença no gol do intervalo?
   components:
@@ -15,7 +15,7 @@
 - template: country
   labels:
     fr: Quel sera l'écart de but à la fin du match ?
-    en: What is the difference in goal at the end of the game?
+    en: What will be the goal difference at the end of the game?
     es: ¿Cuál es la diferencia de gol al final del partido?
     pt: Qual é a diferença no gol no final do jogo?
   components:
@@ -58,7 +58,7 @@
 
 - template: country
   labels:
-    fr: Quelle équipe fera le plus de faute ?
+    fr: Quelle équipe fera le plus de fautes ?
     en: Which team will make the most foul?
     es: ¿Cuál equipo aprovechará al máximo la falta?
     pt: Qual equipa vai aproveitar ao máximo a falta?
@@ -89,7 +89,7 @@
 - template: country
   labels:
     fr: Quelle équipe aura le premier carton jaune ?
-    en: Which team will be the first yellow card?
+    en: Which team will receive the first yellow card?
     es: ¿Cuál equipo tendrá la primera tarjeta amarilla?
     pt: Qual vai ser o primeiro cartão amarelo?
   components:
@@ -104,7 +104,7 @@
 - template: country
   labels:
     fr: Quelle équipe aura le premier carton rouge ?
-    en: Which team will be the first red card?
+    en: Which team will receive the first red card?
     es: ¿Cuál equipo tendrá la primera tarjeta roja?
     pt: Qual equipa vai ter o primeiro cartão vermelho?
   components:
@@ -164,7 +164,7 @@
 - template: player
   labels:
     fr: Quel joueur prendra le permier carton jaune ?
-    en: Which player will the first to get a yellow card?
+    en: Which player will the first to receive a yellow card?
     es: ¿Cuál jugador tendrá la primera tarjeta amarilla?
     pt: Qual jogador vai ter o primeiro cartão amarelo?
   components:
@@ -194,7 +194,7 @@
 - template: player
   labels:
     fr: Quel joueur prendra le permier carton rouge ?
-    en: Which player will the first to get a red card?
+    en: Which player will the first to receive a red card?
     es: ¿Cuál jugador tendrá la primera tarjeta roja?
     pt: Qual jogador vai ter o primeiro cartão vermelho?
   components:

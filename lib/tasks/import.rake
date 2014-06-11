@@ -38,33 +38,36 @@ def create_question(question_params, tags, teams, template)
   q = find_question(question_params, tags)
   q.set(question_params)
 
-  components = template['components'].map do |ct|
-    c = {}
+  if q.new?
+    components = template['components'].map do |ct|
+      c = {}
 
-    c[:kind] = Domain::QuestionComponent::KINDS.index(ct['kind']).to_s
+      c[:kind] = Domain::QuestionComponent::KINDS.index(ct['kind']).to_s
 
-    c[:labels] = ct['choices'].each_with_object({}) do |(lang, _), h|
-      unless lang == 'dev'
-        h[lang] = teams.map { |t| "c/#{t['small']}" }.join(' - ')
+      c[:labels] = ct['choices'].each_with_object({}) do |(lang, _), h|
+        unless lang == 'dev'
+          h[lang] = teams.map { |t| "c/#{t['small']}" }.join(' - ')
+        end
       end
+
+      c[:choices] = ct['choices'].each_with_object({}) do |(lang, choice), h|
+        h[lang] = choice.gsub("__C1__", "c/#{teams.first['small']}").gsub("__C2__", "c/#{teams.last['small']}")
+      end
+
+      if qc = q.components.find { |qc| qc.label_fr == c[:labels]['fr'] }
+        c[:id] = qc.id
+      end
+
+      c
     end
 
-    c[:choices] = ct['choices'].each_with_object({}) do |(lang, choice), h|
-      h[lang] = choice.gsub("__C1__", "c/#{teams.first['small']}").gsub("__C2__", "c/#{teams.last['small']}")
-    end
+    q.update_components(components)
 
-    if qc = q.components.find { |qc| qc.label_fr == c[:labels]['fr'] }
-      c[:id] = qc.id
-    end
-
-    c
+    # Set the tags
+    tags.each { |t| q.add_tag(t) }
+  else
+    q.save
   end
-
-  q.update_components(components)
-
-  # Set the tags
-  q.remove_all_tags
-  tags.each { |t| q.add_tag(t) }
 end
 
 namespace :import do
