@@ -16,12 +16,26 @@ def parse_matches(path)
   YAML.load_file(path)
 end
 
+def find_question(params, tags)
+  q = Domain::Question.
+    where(event_at: params[:event_at]).
+    where(
+      DB[:questions_tags].
+        where(question_id: :questions__id).
+        where(tag_id: tags.map(&:id)).
+        group(:question_id).
+        select(Sequel.function(:count, '*').as(:count)).
+        having(count: tags.size).
+        exists
+    ).first
+  q ||= Domain::Question.new
+end
+
 def create_question(question_params, tags, teams, template)
   question_params = question_params.merge(pending: true) if template['template'] == 'player'
   question_params = question_params.merge(labels: template['labels'])
 
-  q   = Domain::Question.first(event_at: question_params[:event_at], label_fr: question_params[:labels]['fr'])
-  q ||= Domain::Question.new
+  q = find_question(question_params, tags)
   q.set(question_params)
 
   components = template['components'].map do |ct|
