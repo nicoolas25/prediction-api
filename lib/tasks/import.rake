@@ -90,7 +90,7 @@ namespace :import do
       event_at = Time.parse("#{match['date']} #{match['time']}")
       question_params = {
         event_at: event_at,
-        reveals_at: event_at - 2.days,
+        reveals_at: event_at - 7.days,
         expires_at: event_at
       }
 
