@@ -33,9 +33,9 @@ def create_question(question_params, tags, teams, template, ref_lang)
   question_params = question_params.merge(labels: template['labels'])
 
   q = find_question(question_params, tags, ref_lang)
-  q.set(question_params)
 
   if q.new?
+    q.set(question_params)
     components = template['components'].map do |ct|
       c = {}
 
@@ -63,6 +63,10 @@ def create_question(question_params, tags, teams, template, ref_lang)
     # Set the tags
     tags.each { |t| q.add_tag(t) }
   else
+    # Existing questions keep their pending status
+    question_params.delete(:pending)
+
+    q.set(question_params)
     q.save
   end
 end
