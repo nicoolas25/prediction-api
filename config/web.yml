@@ -36,7 +36,7 @@ fr:
         a: "Pour pouvoir parier, les cristaux sont indispensables ! Heureusement lors de votre première connexion vous en aurez déjà 200, de quoi voir venir..."
 
       - q: "Où se trouvent les questions auxquelles je peux répondre ?"
-        a: "Elles se trouve dans le menu latéral <em>Questions</em> de l'application."
+        a: "Elles se trouvent dans le menu latéral <em>Questions</em> de l'application."
 
       - q: "Que signifie le nombre de cristaux présent à coté de chaque question de la liste ?"
         a: "Il s'agit du nombre de cristaux total misé par les joueurs. Cela donne un ordre d'idée de la popularité de la question."
