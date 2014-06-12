@@ -30,3 +30,14 @@ Feature: Add local friendships using nicknames
     Then the response status should be "403"
     And the player "nickname" should have "0" friends
     And the JSON response should have "$.code" with the text "failed"
+
+  Scenario: The user add a friend that is already a friend
+    Given the user "nickname" have the following "local" friends:
+      | player |
+    When I send a POST request to "/v1/users/find_friend" with the following:
+    """
+    { "nickname": "player" }
+    """
+    Then the response status should be "403"
+    And the player "nickname" should have "1" friends
+    And the JSON response should have "$.code" with the text "failed"
