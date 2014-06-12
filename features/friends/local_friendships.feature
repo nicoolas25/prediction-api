@@ -22,3 +22,4 @@ Feature: Add and remove friendships
     When I send a POST request to "/v1/users/2/unfollow"
     Then the response status should be "201"
     Then the player "nickname" should have "0" friends
+

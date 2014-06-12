@@ -12,7 +12,7 @@ module Controllers
       params do
         requires :nickname, type: String
       end
-      get 'find_friend' do
+      post 'find_friend' do
         user = Domain::Player.where(nickname: params[:nickname]).first
         fail!(:player_not_found, 403) unless user
         fail!(:failed, 403) if player == user
