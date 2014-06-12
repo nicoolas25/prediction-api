@@ -8,6 +8,18 @@ module Controllers
     before { check_auth! }
 
     namespace :users do
+      desc "Tells if an user is in the application"
+      params do
+        requires :nickname, type: String
+      end
+      get 'find_friend' do
+        user = Domain::Player.where(nickname: params[:nickname]).first
+        fail!(:player_not_found, 403) unless user
+        fail!(:failed, 403) if player == user
+        player.add_local_friend(user) rescue fail!(:failed, 403)
+        {success: true}
+      end
+
       namespace ':uid' do
         params { requires :uid, type: String }
         before { @user = params[:uid] == 'me' ? player : Domain::Player.first!(id: params[:uid]) }
