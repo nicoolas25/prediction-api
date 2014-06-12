@@ -52,7 +52,7 @@ module Domain
       super
       errors.add(:nickname, 'doesn\'t match')   if new? && !(nickname =~ /^[a-z0-9_]*$/i)
       errors.add(:nickname, 'is too short')     if new? && nickname.size < 4
-      errors.add(:nickname, 'is already taken') if new? && Player.where(nickname: nickname).count > 0
+      errors.add(:nickname, 'is already taken') if new? && Player.where(Sequel.function(:lower, :nickname) => nickname.downcase).count > 0
     end
 
     def before_create
@@ -262,6 +262,12 @@ module Domain
           first
         raise SessionError.new(:social_account_unknown) unless player
         [player, api]
+      end
+
+      def find_by_nickname(nickname)
+        nickname = nickname.gsub(/[^a-z0-9_]/i, '').downcase
+        return nil if nickname.size < 3
+        where(Sequel.function(:lower, :nickname) => nickname).first
       end
 
       def register(provider_name, token, nickname)

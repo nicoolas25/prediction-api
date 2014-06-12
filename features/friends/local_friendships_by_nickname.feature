@@ -13,6 +13,14 @@ Feature: Add local friendships using nicknames
     Then the response status should be "201"
     And the player "nickname" should have "1" friends
 
+  Scenario: The user add a friend is case insensitive
+    When I send a POST request to "/v1/users/find_friend" with the following:
+    """
+    { "nickname": "Player" }
+    """
+    Then the response status should be "201"
+    And the player "nickname" should have "1" friends
+
   Scenario: The user add a friend by its nickname but it is not found
     When I send a POST request to "/v1/users/find_friend" with the following:
     """

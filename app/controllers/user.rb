@@ -13,7 +13,7 @@ module Controllers
         requires :nickname, type: String
       end
       post 'find_friend' do
-        user = Domain::Player.where(nickname: params[:nickname]).first
+        user = Domain::Player.find_by_nickname(params[:nickname])
         fail!(:player_not_found, 403) unless user
         fail!(:failed, 403) if player == user
         player.add_local_friend(user) rescue fail!(:failed, 403)
