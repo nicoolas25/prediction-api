@@ -1,4 +1,4 @@
-Feature: The player earns cristals at each connection
+Feature: The player earns 10 cristals at each connection (2 hours)
 
   Background:
     Given I accept JSON
@@ -12,14 +12,12 @@ Feature: The player earns cristals at each connection
       | oauth2Provider | facebook   |
       | oauth2Token    | test-token |
     Then the response status should be "201"
-    And the JSON response should have "$.statistics.cristals" with the text "22"
+    And the JSON response should have "$.statistics.cristals" with the text "30"
 
   Scenario: The user can't do the same too soon
-    Given the last auto-earned cristals for "nickname" are "5 minutes" from now
+    Given the last auto-earned cristals for "nickname" are "75 minutes" from now
     When I send a POST request to "/v1/sessions" with the following:
       | oauth2Provider | facebook   |
       | oauth2Token    | test-token |
     Then the response status should be "201"
     And the JSON response should have "$.statistics.cristals" with the text "20"
-
-

@@ -13,8 +13,8 @@ module Domain
 
   class Player < ::Sequel::Model
     DEFAULT_CRISTALS_COUNT = 200
-    DURATION_BETWEEN_AUTO_EARN = 1.hour
-    CRISTAL_BY_AUTO_EARN = 2
+    DURATION_BETWEEN_AUTO_EARN = 2.hour
+    CRISTAL_BY_AUTO_EARN = 10
 
     unrestrict_primary_key
 

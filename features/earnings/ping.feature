@@ -10,7 +10,7 @@ Feature: The player earns cristals when he pings
       | oauth2Provider | facebook   |
       | oauth2Token    | test-token |
     Then the response status should be "200"
-    And the JSON response should have "$.statistics.cristals" with the text "22"
+    And the JSON response should have "$.statistics.cristals" with the text "30"
     And the JSON response should have 1 "$.config"
 
   Scenario: The user can't do the same too soon
