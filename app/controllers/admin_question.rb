@@ -30,7 +30,7 @@ module Controllers
 
         desc "List the questions"
         get do
-          questions = Domain::Question.dataset.ordered(:desc).eager(:tags).all
+          questions = Domain::Question.dataset.administrable.ordered(:asc).eager(:tags).all
           present questions, with: Entities::Question, admin: true
         end
 

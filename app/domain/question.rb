@@ -21,6 +21,10 @@ module Domain
     attr_accessor :participants
 
     dataset_module do
+      def administrable
+        where(Sequel.expr(:expires_at) > Time.now).or(pending: true).or(answered: false)
+      end
+
       def visible
         where(Sequel.expr(:reveals_at) <= Time.now).
         where(pending: false)
