@@ -24,6 +24,18 @@ Feature: List all the matches depending on the question and their tags
     Then the response status should be "200"
     And the JSON response should have 0 "$.[*].*"
 
+ Scenario: There some expired question with tags, there is no matches
+    Given I am an authenticated user
+    And existing expired questions:
+      | 1 | Qui va gagner ? |
+    And existing components for the question "1":
+      | 1 | choices | Chosir la bonne équipe | France,Belgique |
+    And existing tags:
+      | 1 | tag1 | 1 |
+    When I send a GET request to "/v1/matches"
+    Then the response status should be "200"
+    And the JSON response should have 0 "$.[*].*"
+
   Scenario: There some question with tags, there is matches
     Given I am an authenticated user
     And existing questions:

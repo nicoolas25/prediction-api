@@ -9,6 +9,8 @@ module Domain
           as(:t1)).
       select(:event_at, :tags).
       group(:event_at, :tags).
+      where(Sequel.expr(:event_at) > Time.now).
+      order(:event_at).
       all
     end
   end
