@@ -3,7 +3,7 @@ module Domain
     def self.all
       DB.from(
         Question.dataset.
-          select(:id, :event_at, Sequel.function(:string_agg, Sequel.cast_string(:questions_tags__tag_id), ',').as(:tags)).
+          select(:id, :event_at, Sequel.lit(%Q{string_agg(cast(tag_id as varchar), ',' order by tag_id) as tags})).
           join(:questions_tags, question_id: :id).
           group(:id).
           as(:t1)).
