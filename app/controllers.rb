@@ -27,7 +27,7 @@ module Controllers
           Rack::Response.new({code: exception.code}.to_json, exception.status)
         when ::Domain::Error
           LOGGER.error("Error: #{exception.message} code returned.")
-          Rack::Response.new({code: exception.message}.to_json, 403)
+          Rack::Response.new({code: exception.message}.to_json, exception.code)
         else
           if ENV['RACK_ENV'] == 'test'
             raise exception

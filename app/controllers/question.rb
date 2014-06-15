@@ -26,20 +26,17 @@ module Controllers
         desc "List the open questions for a player matching a given tag"
         params do
           requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)$/
-          requires :tag_id, type: Integer
+          requires :tag_ids, type: String, regexp: /^\d+(,\d+)*$/
         end
-        get 'global/open/tags/:tag_id' do
-          if tag = Domain::Tag.first(id: params[:tag_id])
-            questions = Domain::Question.global.open.for(player).with_locale(@locale).ordered.tagged_with(tag).with_tags.all
-            friend_service = Domain::Services::FriendQuestion.new(player, questions.map(&:id))
-            present questions,
-              with: Entities::Question,
-              locale: @locale,
-              friend_service: friend_service,
-              made_prediction: false
-          else
-            fail!(:tag_not_found , 404)
-          end
+        get 'global/open/tags/:tag_ids' do
+          tags = Domain::Tag.matching_ids(params[:tag_ids].split(',').uniq)
+          questions = Domain::Question.global.open.for(player).with_locale(@locale).ordered.tagged_with(tags).with_tags.all
+          friend_service = Domain::Services::FriendQuestion.new(player, questions.map(&:id))
+          present questions,
+            with: Entities::Question,
+            locale: @locale,
+            friend_service: friend_service,
+            made_prediction: false
         end
 
         desc "List the answered questions of a player"
@@ -88,20 +85,17 @@ module Controllers
         desc "List the open questions for a player where a friend participate"
         params do
           requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)|(ru)$/
-          requires :tag_id, type: Integer
+          requires :tag_ids, type: String, regexp: /^\d+(,\d+)*$/
         end
-        get 'friends/open/tags/:tag_id' do
-          if tag = Domain::Tag.first(id: params[:tag_id])
-            questions = Domain::Question.global.open.for(player).answered_by_friends(player).with_locale(@locale).ordered.tagged_with(tag).with_tags.all
-            friend_service = Domain::Services::FriendQuestion.new(player, questions.map(&:id))
-            present questions,
-              with: Entities::Question,
-              locale: @locale,
-              friend_service: friend_service,
-              made_prediction: false
-          else
-            fail!(:tag_not_found , 404)
-          end
+        get 'friends/open/tags/:tag_ids' do
+          tags = Domain::Tag.matching_ids(params[:tag_ids].split(',').uniq)
+          questions = Domain::Question.global.open.for(player).answered_by_friends(player).with_locale(@locale).ordered.tagged_with(tags).with_tags.all
+          friend_service = Domain::Services::FriendQuestion.new(player, questions.map(&:id))
+          present questions,
+            with: Entities::Question,
+            locale: @locale,
+            friend_service: friend_service,
+            made_prediction: false
         end
 
         desc "Show the details of a question"

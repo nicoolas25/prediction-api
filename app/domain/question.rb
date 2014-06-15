@@ -73,8 +73,11 @@ module Domain
         eager(:tags)
       end
 
-      def tagged_with(tag)
-        join(:questions_tags, question_id: :id, tag_id: tag.id)
+      def tagged_with(tags)
+        select_all(:questions).
+          join(:questions_tags, question_id: :id, tag_id: tags.map(&:id)).
+          group(:questions__id).
+          having(Sequel.function(:count, '*') => tags.size)
       end
     end
 

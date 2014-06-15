@@ -12,7 +12,14 @@ ActiveSupport::Inflector.inflections do |inflect| inflect.irregular('bonus', 'bo
 Sequel.inflections                   do |inflect| inflect.irregular('bonus', 'bonuses') end
 
 module Domain
-  class Error < StandardError ; end
+  class Error < StandardError
+    attr_reader :code
+
+    def initialize(message, code=403)
+      super(message)
+      @code = code
+    end
+  end
 
   autoload :Badge,                    './app/domain/badge'
   autoload :Badges,                   './app/domain/badges'
