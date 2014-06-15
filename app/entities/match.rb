@@ -10,5 +10,13 @@ module Entities
       tag_ids = o[:tags].split(',')
       opts[:match_service].tags(tag_ids).map{ |tag| Tag.new(tag) }
     end
+
+    expose :total do |o, opts|
+      o[:total]
+    end
+
+    expose :remaining do |o, opts|
+      o[:remaining]
+    end
   end
 end

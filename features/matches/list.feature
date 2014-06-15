@@ -67,7 +67,6 @@ Feature: List all the matches depending on the question and their tags
     When I send a GET request to "/v1/matches"
     Then the response status should be "200"
     And the JSON response should have 1 "$.[*].*"
-    And show me the response
 
   Scenario: There more than one question occuring a different time with the same tags, there is multiple matches
     Given I am an authenticated user
@@ -86,4 +85,3 @@ Feature: List all the matches depending on the question and their tags
     When I send a GET request to "/v1/matches"
     Then the response status should be "200"
     And the JSON response should have 2 "$.[*].*"
-    And show me the response

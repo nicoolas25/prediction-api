@@ -10,7 +10,7 @@ module Controllers
     desc "List the next matches"
     get :matches do
       match_service = Domain::Services::Match.new
-      present Domain::Match.all, with: Entities::Match, match_service: match_service
+      present Domain::Match.all(player), with: Entities::Match, match_service: match_service
     end
   end
 end
