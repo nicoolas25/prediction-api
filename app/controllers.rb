@@ -76,6 +76,7 @@ module Controllers
   autoload :Bonus,         './app/controllers/bonus'
   autoload :Conversion,    './app/controllers/conversion'
   autoload :Ladder,        './app/controllers/ladder'
+  autoload :Match,         './app/controllers/match'
   autoload :Participation, './app/controllers/participation'
   autoload :Payment,       './app/controllers/payment'
   autoload :Question,      './app/controllers/question'

@@ -20,6 +20,7 @@ module Entities
   autoload :Cristal,           './app/entities/cristal'
   autoload :Friend,            './app/entities/friend'
   autoload :Ladder,            './app/entities/ladder'
+  autoload :Match,             './app/entities/match'
   autoload :Participation,     './app/entities/participation'
   autoload :Player,            './app/entities/player'
   autoload :Prediction,        './app/entities/prediction'

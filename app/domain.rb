@@ -26,6 +26,7 @@ module Domain
   autoload :Bonus,                    './app/domain/bonus'
   autoload :Bonuses,                  './app/domain/bonuses'
   autoload :ExtraInformation,         './app/domain/extra_information'
+  autoload :Match,                    './app/domain/match'
   autoload :Participation,            './app/domain/participation'
   autoload :Payment,                  './app/domain/payment'
   autoload :Player,                   './app/domain/player'

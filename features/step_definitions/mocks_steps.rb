@@ -143,6 +143,7 @@ Given /^existing (expired )?questions:$/ do |expired, questions|
   questions.rows_hash.each do |id, label|
     attrs = {id: id.to_i, label_fr: label}
     attrs[:expires_at] = expired.present? ? (Time.now - 3.day) : (Time.now + 3.day)
+    attrs[:event_at] = attrs[:expires_at]
     Domain::Question.create(attrs)
   end
 end
