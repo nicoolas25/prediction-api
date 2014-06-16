@@ -9,7 +9,7 @@ module Domain
 
       identifier 'chicken'
 
-      steps 1, 10, 50, 100, 200, 500, 1000
+      steps 1, 10, 50, 100, 500, 1000, 2000
 
       # Matches participations won with a blind bonus
       matches? do |participation|
