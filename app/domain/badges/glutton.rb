@@ -9,7 +9,7 @@ module Domain
 
       identifier 'glutton'
 
-      steps 1, 10, 50, 100, 500, 1000, 2000
+      steps 1, 10, 50, 100, 200, 1000, 2000
 
       # Matches participations loosed with a double bonus
       matches? do |participation|
