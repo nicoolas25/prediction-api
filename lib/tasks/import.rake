@@ -44,7 +44,7 @@ end
 
 def build_components(ref_lang, teams, question, components)
   components.map do |ct|
-    c = {}
+    c = {}.with_indifferent_access
 
     c[:kind] = Domain::QuestionComponent::KINDS.index(ct['kind']).to_s
 

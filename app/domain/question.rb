@@ -113,7 +113,7 @@ module Domain
         new_components.each_with_index do |c1, index|
           c1.merge(position: index)
           if c2 = components.find { |c2| c1['id'] == c2.id.to_s }
-            c2.update_attributes(c1)
+            c2.update_attributes(c1.except('id'))
             c2.save
           else
             add_component(QuestionComponent.build(c1))
