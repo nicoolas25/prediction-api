@@ -16,7 +16,7 @@ module Domain
         [true, [participation.player], participation.question.solved_at]
       end
 
-      labels fr: "KO", en: "KO", pt: "KO", es: "KO"
+      labels fr: "KO", en: "KO", pt: "KO", es: "KO", ru: "KO"
     end
 
     register_badge Looser

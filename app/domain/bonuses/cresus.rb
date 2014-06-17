@@ -18,7 +18,7 @@ module Domain
         20
       end
 
-      labels fr: "Crésus", en: "Call me Cresus", pt: "Crésus", es: "Cresus"
+      labels fr: "Crésus", en: "Call me Cresus", pt: "Crésus", es: "Cresus", ru: "Call me Cresus"
     end
 
     register_bonus Cresus

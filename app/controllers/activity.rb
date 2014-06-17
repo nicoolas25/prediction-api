@@ -9,7 +9,7 @@ module Controllers
 
     namespace :activities do
       namespace ':locale' do
-        before { @locale = params[:locale] == 'ru' ? :en : params[:locale].to_sym }
+        before { @locale = params[:locale].to_sym }
 
         desc "List last events for the registered user"
         params do

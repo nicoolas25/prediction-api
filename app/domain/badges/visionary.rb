@@ -20,7 +20,7 @@ module Domain
         end
       end
 
-      labels fr: "Visionnaire", en: "Visionary", pt: "Visionário", es: "Visionario"
+      labels fr: "Visionnaire", en: "Visionary", pt: "Visionário", es: "Visionario", ru: "Visionary"
     end
 
     register_badge Visionary

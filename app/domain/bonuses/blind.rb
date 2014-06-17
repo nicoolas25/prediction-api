@@ -22,7 +22,7 @@ module Domain
         actual_winnings == 0 ? stakes : 0
       end
 
-      labels fr: "Lucky loser", en: "Lucky loser", pt: "Lucky loser", es: "Lucky Loser"
+      labels fr: "Lucky loser", en: "Lucky loser", pt: "Lucky loser", es: "Lucky Loser", ru: "Lucky loser"
     end
 
     register_bonus Blind

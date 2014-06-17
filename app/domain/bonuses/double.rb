@@ -30,7 +30,7 @@ module Domain
         player.decrement_cristals_by!(stakes)
       end
 
-      labels fr: "Quitte ou Double", en: "Quit or Double", pt: "Tudo ou nada", es: "Salir o Doble"
+      labels fr: "Quitte ou Double", en: "Quit or Double", pt: "Tudo ou nada", es: "Salir o Doble", ru: "Quit or Double"
     end
 
     register_bonus Double

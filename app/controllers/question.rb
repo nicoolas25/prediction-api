@@ -10,7 +10,7 @@ module Controllers
     namespace :questions do
       namespace ':locale' do
         params { requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)|(ru)$/ }
-        before { @locale = params[:locale] == 'ru' ? :en : params[:locale].to_sym }
+        before { @locale = params[:locale].to_sym }
 
         desc "List the open questions for a player"
         get 'global/open' do

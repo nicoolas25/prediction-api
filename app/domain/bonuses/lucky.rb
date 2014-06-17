@@ -17,7 +17,7 @@ module Domain
         0
       end
 
-      labels fr: "Jour de chance", en: "Feeling lucky", pt: "Dia de sorte", es: "Dia de suerte"
+      labels fr: "Jour de chance", en: "Feeling lucky", pt: "Dia de sorte", es: "Dia de suerte", ru: "Feeling lucky"
 
       participation_options do
         { chances: BONUS_CHANCES }

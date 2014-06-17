@@ -20,7 +20,7 @@ module Domain
         end
       end
 
-      labels fr: "Extra-lucide", en: "Incredible", pt: "Clarividente", es: "Extra lucido"
+      labels fr: "Extra-lucide", en: "Incredible", pt: "Clarividente", es: "Extra lucido", ru: "Incredible"
     end
 
     register_badge Incredible

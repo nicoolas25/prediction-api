@@ -9,7 +9,7 @@ module Controllers
 
     namespace :shares do
       namespace ':locale' do
-        before { @locale = params[:locale] == 'ru' ? :en : params[:locale].to_sym }
+        before { @locale = params[:locale].to_sym }
 
         desc "Share something via a given social network"
         params do

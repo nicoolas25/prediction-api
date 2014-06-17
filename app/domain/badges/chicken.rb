@@ -20,7 +20,7 @@ module Domain
         end
       end
 
-      labels fr: "Poule mouillée", en: "Chicken", pt: "Chicken", es: "Cobarde"
+      labels fr: "Poule mouillée", en: "Chicken", pt: "Chicken", es: "Cobarde", ru: "Chicken"
     end
 
     register_badge Chicken

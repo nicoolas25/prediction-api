@@ -16,7 +16,7 @@ module Domain
         [true, [participation.player], participation.created_at]
       end
 
-      labels fr: "Joueur", en: "Player", pt: "Jogador", es: "Jugar"
+      labels fr: "Joueur", en: "Player", pt: "Jogador", es: "Jugar", ru: "Player"
     end
 
     register_badge Participation
