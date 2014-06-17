@@ -4,6 +4,7 @@
     en: What will be the goal difference at halftime?
     es: ¿Cuál es la diferencia en el medio tiempo objetivo?
     pt: Qual é a diferença no gol do intervalo?
+    ru: Какая будет разница в счете (кол-ве голов) в перерыве между таймами?
   components:
     - kind: choices
       choices:
@@ -11,6 +12,7 @@
         en: "0,1,2,3,4,5,6"
         es: "0,1,2,3,4,5,6"
         pt: "0,1,2,3,4,5,6"
+        ru: "0,1,2,3,4,5,6"
 
 - template: country
   labels:
@@ -18,6 +20,7 @@
     en: What will be the goal difference at the end of the game?
     es: ¿Cuál es la diferencia de gol al final del partido?
     pt: Qual é a diferença no gol no final do jogo?
+    ru: Какая будет разница в счете (кол-ве голов) в конце игры?
   components:
     - kind: choices
       choices:
@@ -25,6 +28,7 @@
         en: "0,1,2,3,4,5,6"
         es: "0,1,2,3,4,5,6"
         pt: "0,1,2,3,4,5,6"
+        ru: "0,1,2,3,4,5,6"
 
 - template: country
   labels:
@@ -32,6 +36,7 @@
     en: Which team will win the match?
     es: ¿Cuál equipo ganará el partido?
     pt: Qual equipa vai ganhar o jogo?
+    ru: Какая команда выиграет матч?
   components:
     - kind: choice
       choices:
@@ -39,6 +44,7 @@
         en: __C1__,Draw,__C2__
         es: __C1__,Dibujar,__C2__
         pt: __C1__,Empate,__C2__
+        ru: __C1__,Ничья,__C2__
         dev: __C1__,s/draw,__C2__
 
 - template: country
@@ -47,6 +53,7 @@
     en: Which team will score first?
     es: ¿Cuál equipo marcará primero?
     pt: Qual equipa vai marcar primeiro?
+    ru: Какая команда забьет первый гол?
   components:
     - kind: choices
       choices:
@@ -54,6 +61,7 @@
         en: __C1__,__C2__,None
         es: __C1__,__C2__,No
         pt: __C1__,__C2__,Não
+        ru: __C1__,__C2__,Никакая(ой)
         dev: __C1__,__C2__,s/none
 
 - template: country
@@ -62,6 +70,7 @@
     en: Which team will make the most foul?
     es: ¿Cuál equipo aprovechará al máximo la falta?
     pt: Qual equipa vai aproveitar ao máximo a falta?
+    ru: Какая команда сделает наибольшее количество фоллов вне игры?
   components:
     - kind: choices
       choices:
@@ -69,6 +78,7 @@
         en: __C1__,__C2__,Same amount
         es: __C1__,__C2__,Mismo número
         pt: __C1__,__C2__,Mesmo número
+        ru: __C1__,__C2__,Одинаково
         dev: __C1__,__C2__,s/same
 
 - template: country
@@ -77,6 +87,7 @@
     en: Which team will have the most corners?
     es: ¿Qué equipo efectuará más saques de esquina?
     pt: Qual equipa vai ter mais escanteios?
+    ru: У какой команды будет наибольшее количество угловых ударов?
   components:
     - kind: choices
       choices:
@@ -84,6 +95,7 @@
         en: __C1__,__C2__,Same amount
         es: __C1__,__C2__,Mismo número
         pt: __C1__,__C2__,Mesmo número
+        ru: __C1__,__C2__,Одинаково
         dev: __C1__,__C2__,s/same
 
 - template: country
@@ -92,6 +104,7 @@
     en: Which team will receive the first yellow card?
     es: ¿Cuál equipo tendrá la primera tarjeta amarilla?
     pt: Qual vai ser o primeiro cartão amarelo?
+    ru: Какая команда получит первую желтую карточку?
   components:
     - kind: choices
       choices:
@@ -99,6 +112,7 @@
         en: __C1__,__C2__,None
         es: __C1__,__C2__,No
         pt: __C1__,__C2__,Não
+        ru: __C1__,__C2__,Никакая(ой)
         dev: __C1__,__C2__,s/none
 
 - template: country
@@ -107,6 +121,7 @@
     en: Which team will receive the first red card?
     es: ¿Cuál equipo tendrá la primera tarjeta roja?
     pt: Qual equipa vai ter o primeiro cartão vermelho?
+    ru: Какая команда получит первую красную карточку?
   components:
     - kind: choices
       choices:
@@ -114,6 +129,7 @@
         en: __C1__,__C2__,None
         es: __C1__,__C2__,No
         pt: __C1__,__C2__,Não
+        ru: __C1__,__C2__,Никакая(ой)
         dev: __C1__,__C2__,s/none
 
 - template: country
@@ -122,6 +138,7 @@
     en: Which team will have the first kick?
     es: ¿Cuál equipo tendrá el primero patada?
     pt: Qual equipa vai ter o primeiro chute?
+    ru: Какая команда получит первый штрафной?
   components:
     - kind: choices
       choices:
@@ -129,6 +146,7 @@
         en: __C1__,__C2__,None
         es: __C1__,__C2__,No
         pt: __C1__,__C2__,Não
+        ru: __C1__,__C2__,Никакая(ой)
         dev: __C1__,__C2__,s/none
 
 - template: country
@@ -137,6 +155,7 @@
     en: Which team will have possession?
     es: ¿Cuál equipo tiene la posesión?
     pt: Qual equipa vai ter a posse?
+    ru: Какая команда будет владеть мячом?
   components:
     - kind: choices
       choices:
@@ -144,6 +163,7 @@
         en: __C1__,__C2__,Same amount
         es: __C1__,__C2__,Mismo número
         pt: __C1__,__C2__,Mesmo número
+        ru: __C1__,__C2__,Одинаково
         dev: __C1__,__C2__,s/same
 
 - template: player
@@ -152,6 +172,7 @@
     en: Which player will be the man of the match?
     es: ¿Cuál jugador será el mejor jugador del partido?
     pt: Qual jogador será o homem do jogo?
+    ru: Какой игрок станет звездой матча?
   components:
     - kind: choices
       choices:
@@ -159,6 +180,7 @@
         en: Other player
         es: Otro jugador
         pt: Outro jogador
+        ru: Другой игрок
         dev: s/other
 
 - template: player
@@ -167,6 +189,7 @@
     en: Which player will the first to receive a yellow card?
     es: ¿Cuál jugador tendrá la primera tarjeta amarilla?
     pt: Qual jogador vai ter o primeiro cartão amarelo?
+    ru: Какой игрок первым получит желтую карточку?
   components:
     - kind: choices
       choices:
@@ -174,6 +197,7 @@
         en: Other player,None
         es: Otro jugador,No
         pt: Outro jogador,Não
+        ru: Другой игрок,Никакая(ой)
         dev: s/other,s/none
 
 - template: player
@@ -182,6 +206,7 @@
     en: Who will score first?
     es: ¿Quién marcará primero?
     pt: Quem vai marcar primeiro?
+    ru: Кто забьет первым?
   components:
     - kind: choices
       choices:
@@ -189,6 +214,7 @@
         en: Other player,None
         es: Otro jugador,No
         pt: Outro jogador,Não
+        ru: Другой игрок,Никакая(ой)
         dev: s/other,s/none
 
 - template: player
@@ -197,6 +223,7 @@
     en: Which player will the first to receive a red card?
     es: ¿Cuál jugador tendrá la primera tarjeta roja?
     pt: Qual jogador vai ter o primeiro cartão vermelho?
+    ru: Какой игрок первым получит красную карточку?
   components:
     - kind: choices
       choices:
@@ -204,6 +231,7 @@
         en: Other player,None
         es: Otro jugador,No
         pt: Outro jogador,Não
+        ru: Другой игрок,Никакая(ой)
         dev: s/other,s/none
 
 - template: player
@@ -212,6 +240,7 @@
     en: Which player will make the first foul?
     es: ¿Cuál jugador hará la primera falta?
     pt: Qual jogador vai fazer a primeira falta?
+    ru: Какой игрок сделает первую ошибку?
   components:
     - kind: choices
       choices:
@@ -219,5 +248,6 @@
         en: Other player,None
         es: Otro jugador,No
         pt: Outro jogador,Não
+        ru: Другой игрок,Никакая(ой)
         dev: s/other,s/none
 
