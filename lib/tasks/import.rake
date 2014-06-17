@@ -55,7 +55,7 @@ def build_components(ref_lang, teams, question, components)
     end
 
     if qc = question.components.find { |qc| qc.labels[ref_lang] == c[:labels][ref_lang] }
-      c[:id] = qc.id
+      c[:id] = qc.id.to_s
     end
 
     c[:choices] = ct['choices'].each_with_object({}) do |(lang, choice), h|
