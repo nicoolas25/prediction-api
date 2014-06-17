@@ -25,12 +25,12 @@ def find_question(params, tags, ref_lang)
     where(questions_tags__tag_id: tags.map(&:id)).
     group(:questions__id).
     having(Sequel.function(:count, '*') => tags.size)
-  query.eager(:components).first || Domain::Question.new
+  query.eager(:components, :tags).first || Domain::Question.new
 end
 
 def compute_choice(ref_lang, component, choice, lang)
   if component
-    if existing_choices = component.choices[lang])
+    if existing_choices = component.choices[lang]
       existing_choices.join(',')
     else
       choices = choice.split(',')
@@ -54,7 +54,7 @@ def build_components(ref_lang, teams, question, components)
       end
     end
 
-    if qc = q.components.find { |qc| qc.labels[ref_lang] == c[:labels][ref_lang] }
+    if qc = question.components.find { |qc| qc.labels[ref_lang] == c[:labels][ref_lang] }
       c[:id] = qc.id
     end
 
@@ -84,7 +84,7 @@ def create_question(question_params, tags, teams, template, ref_lang)
   q.update_components(components)
 
   # Set the tags
-  tags.each { |t| q.add_tag(t) }
+  tags.each { |t| q.add_tag(t) unless q.tags.include?(t) }
 end
 
 namespace :import do

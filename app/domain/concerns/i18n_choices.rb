@@ -1,6 +1,6 @@
 module Domain
   module I18nChoices
-    LOCALES = %w(fr en pt es dev).freeze
+    LOCALES = %w(fr en pt es ru dev).freeze
 
     # Helper to access the choices
     def choices
