@@ -25,7 +25,46 @@ def find_question(params, tags, ref_lang)
     where(questions_tags__tag_id: tags.map(&:id)).
     group(:questions__id).
     having(Sequel.function(:count, '*') => tags.size)
-  query.first || Domain::Question.new
+  query.eager(:components).first || Domain::Question.new
+end
+
+def compute_choice(ref_lang, component, choice, lang)
+  if component
+    if existing_choices = component.choices[lang])
+      existing_choices.join(',')
+    else
+      choices = choice.split(',')
+      reference_choices = component.choices[ref_lang]
+      (reference_choices.reverse.drop(choices.size).reverse + choices).join(',')
+    end
+  else
+    choice
+  end
+end
+
+def build_components(ref_lang, teams, question, components)
+  components.map do |ct|
+    c = {}
+
+    c[:kind] = Domain::QuestionComponent::KINDS.index(ct['kind']).to_s
+
+    c[:labels] = ct['choices'].each_with_object({}) do |(lang, _), h|
+      unless lang == 'dev'
+        h[lang] = teams.map { |t| "c/#{t['small']}" }.join(' - ')
+      end
+    end
+
+    if qc = q.components.find { |qc| qc.labels[ref_lang] == c[:labels][ref_lang] }
+      c[:id] = qc.id
+    end
+
+    c[:choices] = ct['choices'].each_with_object({}) do |(lang, choice), h|
+      choice = choice.gsub("__C1__", "c/#{teams.first['small']}").gsub("__C2__", "c/#{teams.last['small']}")
+      h[lang] = compute_choice(ref_lang, qc, choice, lang)
+    end
+
+    c
+  end
 end
 
 def create_question(question_params, tags, teams, template, ref_lang)
@@ -34,41 +73,18 @@ def create_question(question_params, tags, teams, template, ref_lang)
 
   q = find_question(question_params, tags, ref_lang)
 
-  if q.new?
-    q.set(question_params)
-    components = template['components'].map do |ct|
-      c = {}
-
-      c[:kind] = Domain::QuestionComponent::KINDS.index(ct['kind']).to_s
-
-      c[:labels] = ct['choices'].each_with_object({}) do |(lang, _), h|
-        unless lang == 'dev'
-          h[lang] = teams.map { |t| "c/#{t['small']}" }.join(' - ')
-        end
-      end
-
-      c[:choices] = ct['choices'].each_with_object({}) do |(lang, choice), h|
-        h[lang] = choice.gsub("__C1__", "c/#{teams.first['small']}").gsub("__C2__", "c/#{teams.last['small']}")
-      end
-
-      if qc = q.components.find { |qc| qc.label_fr == c[:labels]['fr'] }
-        c[:id] = qc.id
-      end
-
-      c
-    end
-
-    q.update_components(components)
-
-    # Set the tags
-    tags.each { |t| q.add_tag(t) }
-  else
+  unless q.new?
     # Existing questions keep their pending status
     question_params.delete(:pending)
-
-    q.set(question_params)
-    q.save
   end
+
+  q.set(question_params)
+
+  components = build_components(ref_lang, teams, q, template['components'])
+  q.update_components(components)
+
+  # Set the tags
+  tags.each { |t| q.add_tag(t) }
 end
 
 namespace :import do
