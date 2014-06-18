@@ -25,7 +25,7 @@ module Controllers
 
         desc "List the open questions for a player matching a given tag"
         params do
-          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)$/
+          requires :locale, type: String, regexp: /^(fr)|(en)|(pt)|(es)|(ru)$/
           requires :tag_ids, type: String, regexp: /^\d+(,\d+)*$/
         end
         get 'global/open/tags/:tag_ids' do
