@@ -19,8 +19,8 @@
     - br
     - mx
 - group: A
-  date: 2014/06/18
-  time: "21:00"
+  date: 2014/06/19
+  time: "00:00"
   teams:
     - cm
     - hr
@@ -49,8 +49,8 @@
     - cl
     - au
 - group: B
-  date: 2014/06/19
-  time: "00:00"
+  date: 2014/06/18
+  time: "21:00"
   teams:
     - es
     - cl
@@ -80,7 +80,7 @@
     - gr
 - group: C
   date: 2014/06/15
-  time: "00:00"
+  time: "03:00"
   teams:
     - ci
     - jp
@@ -116,7 +116,7 @@
     - cr
 - group: D
   date: 2014/06/15
-  time: "03:00"
+  time: "00:00"
   teams:
     - en
     - it
