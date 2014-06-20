@@ -220,3 +220,4 @@ en: &defaults
 
 pt: *defaults
 es: *defaults
+ru: *defaults

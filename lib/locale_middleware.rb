@@ -29,7 +29,7 @@ class LocaleMiddleware
       l.split(';q=')
     end
 
-    languages = languages.select  { |(locale, _)| locale =~ /^(fr)|(en)|(es)|(pt)/ }
+    languages = languages.select  { |(locale, _)| locale =~ /^(fr)|(en)|(es)|(pt)|(ru)/ }
     languages = languages.sort_by { |(_, qvalue)| qvalue.to_f }
 
     lang = languages.last
