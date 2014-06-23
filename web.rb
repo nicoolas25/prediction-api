@@ -20,7 +20,13 @@ module Prediction
     end
 
     get '/' do
-      @t = WEB_CONFIG[locale]['home']
+      begin
+        @t = WEB_CONFIG[locale]['home']
+      rescue
+        LOGGER.error "locale: #{locale} leads to #{$!.class} - #{$!.message}"
+        @t = WEB_CONFIG['en']['home']
+      end
+
       @statistics = {
         'players'        => Domain::Player.dataset.count,
         'won_cristals'   => Domain::Participation.dataset.select(Sequel.function(:sum, :winnings).as(:winnings)).first.values[:winnings] || 0,
