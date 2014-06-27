@@ -16,6 +16,16 @@ def parse_matches(path)
   YAML.load_file(path)
 end
 
+def match_tag_for(match)
+  group = match['group'].to_s
+
+  if group =~ /[A-Z]/
+    "r/#{group}"
+  else
+    "f/#{group}"
+  end
+end
+
 def find_question(params, tags, ref_lang)
   query = Domain::Question.
     select_all(:questions).
@@ -114,7 +124,8 @@ namespace :import do
       current_teams = match['teams'].map { |small| teams[small] }
 
       # Tags
-      tags = ["r/#{match['group']}"] + current_teams.map { |t| "c/#{t['small']}" }
+      match_tag = match_tag_for(match)
+      tags = [match_tag] + current_teams.map { |t| "c/#{t['small']}" }
       tags = tags.map { |kw| Domain::Tag.first(keyword: kw) || Domain::Tag.create(keyword: kw) }
 
       questions.each do |template|

@@ -1,0 +1,50 @@
+# The date and time are GMT + 2
+
+- group: 8
+  date: 2014/06/28
+  time: "18:00"
+  teams:
+    - br
+    - cl
+- group: 8
+  date: 2014/06/28
+  time: "22:00"
+  teams:
+    - co
+    - uy
+- group: 8
+  date: 2014/06/29
+  time: "18:00"
+  teams:
+    - nl
+    - mx
+- group: 8
+  date: 2014/06/29
+  time: "22:00"
+  teams:
+    - cr
+    - gr
+- group: 8
+  date: 2014/06/30
+  time: "18:00"
+  teams:
+    - fr
+    - ng
+- group: 8
+  date: 2014/06/30
+  time: "22:00"
+  teams:
+    - de
+    - dz
+- group: 8
+  date: 2014/07/01
+  time: "18:00"
+  teams:
+    - ar
+    - ch
+- group: 8
+  date: 2014/07/01
+  time: "22:00"
+  teams:
+    - be
+    - us
