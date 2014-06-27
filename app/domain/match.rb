@@ -5,7 +5,7 @@ module Domain
         select(
           :id,
           :event_at,
-          Sequel.lit(%Q{string_agg(cast(tag_id as varchar), ',' order by tag_id) as tags}),
+          Sequel.lit(%Q{string_agg(cast(tag_id as varchar), ',') as tags}),
           Sequel.case([[{participations__question_id: nil}, 1]], 0).as(:remains)).
         join(:questions_tags, question_id: :id).
         join_table(:left, :participations, question_id: :questions__id, player_id: player.id).
