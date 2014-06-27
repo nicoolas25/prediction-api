@@ -68,7 +68,8 @@ module Entities
     expose :predictions, using: Prediction, if: :details
 
     expose :tags do |q, opts|
-      q.tags.map(&:keyword)
+      # TODO: Handle this client side
+      q.tags.map(&:keyword).sort_by { |kw| kw.start_with?('c/') ? 1 : 0 }
     end
 
     expose :pending, if: :admin
