@@ -17,7 +17,7 @@
 - template: country
   labels:
     fr: Quel sera l'écart de but à la fin du temps réglementaire ?
-    en: What will be the goal difference at the end of the game?
+    en: What will be the goal difference at the end of the normal playing-time?
     es: ¿Cuál es la diferencia de gol al final del partido?
     pt: Qual é a diferença no gol no final do jogo?
     ru: Какая будет разница в счете (кол-ве голов) в конце игры?
