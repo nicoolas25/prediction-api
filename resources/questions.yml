@@ -16,8 +16,24 @@
 
 - template: country
   labels:
-    fr: Quel sera l'écart de but à la fin du match ?
+    fr: Quel sera l'écart de but à la fin du temps réglementaire ?
     en: What will be the goal difference at the end of the game?
+    es: ¿Cuál es la diferencia de gol al final del partido?
+    pt: Qual é a diferença no gol no final do jogo?
+    ru: Какая будет разница в счете (кол-ве голов) в конце игры?
+  components:
+    - kind: choices
+      choices:
+        fr: "0,1,2,3,4,5,6"
+        en: "0,1,2,3,4,5,6"
+        es: "0,1,2,3,4,5,6"
+        pt: "0,1,2,3,4,5,6"
+        ru: "0,1,2,3,4,5,6"
+
+- template: country
+  labels:
+    fr: Quel sera l'écart de but à la fin des prolongations ?
+    en: What will be the goal difference at the end of the extra time?
     es: ¿Cuál es la diferencia de gol al final del partido?
     pt: Qual é a diferença no gol no final do jogo?
     ru: Какая будет разница в счете (кол-ве голов) в конце игры?
