@@ -18,9 +18,9 @@
   labels:
     fr: Quel sera l'écart de but à la fin du temps réglementaire ?
     en: What will be the goal difference at the end of the normal playing-time?
-    es: ¿Cuál es la diferencia de gol al final del partido?
-    pt: Qual é a diferença no gol no final do jogo?
-    ru: Какая будет разница в счете (кол-ве голов) в конце игры?
+    es: ¿Cuál es la diferencia de gol al final del partido (normal playing-time)?
+    pt: Qual é a diferença no gol no final do jogo (normal playing-time)?
+    ru: Какая будет разница в счете (кол-ве голов) в конце игры (normal playing-time)?
   components:
     - kind: choices
       choices:
@@ -34,9 +34,9 @@
   labels:
     fr: Quel sera l'écart de but à la fin des prolongations ?
     en: What will be the goal difference at the end of the extra time?
-    es: ¿Cuál es la diferencia de gol al final del partido?
-    pt: Qual é a diferença no gol no final do jogo?
-    ru: Какая будет разница в счете (кол-ве голов) в конце игры?
+    es: ¿Cuál es la diferencia de gol al final del partido (extra time)?
+    pt: Qual é a diferença no gol no final do jogo (extra time)?
+    ru: Какая будет разница в счете (кол-ве голов) в конце игры (extra time)?
   components:
     - kind: choices
       choices:
@@ -48,11 +48,11 @@
 
 - template: country
   labels:
-    fr: Quelle équipe sera le vainqueur du match ?
+    fr: Quelle équipe sera le vainqueur du match à l'issue du temps réglementaire ?
     en: Which team will win the match?
-    es: ¿Cuál equipo ganará el partido?
-    pt: Qual equipa vai ganhar o jogo?
-    ru: Какая команда выиграет матч?
+    es: ¿Cuál equipo ganará el partido (normal playing-time)?
+    pt: Qual equipa vai ganhar o jogo (normal playing-time)?
+    ru: Какая команда выиграет матч (normal playing-time)?
   components:
     - kind: choice
       choices:
@@ -65,11 +65,79 @@
 
 - template: country
   labels:
-    fr: Quelle équipe marquera en premier ?
+    fr: Quelle équipe sera le vainqueur du match à l'issue des prolongations ?
+    en: Which team will win the match after the extra time?
+    es: ¿Cuál equipo ganará el partido (extra time)?
+    pt: Qual equipa vai ganhar o jogo (extra time)?
+    ru: Какая команда выиграет матч (extra time)?
+  components:
+    - kind: choice
+      choices:
+        fr: __C1__,Match nul,__C2__,Aucun
+        en: __C1__,Draw,__C2__,None
+        es: __C1__,Dibujar,__C2__,No
+        pt: __C1__,Empate,__C2__,Não
+        ru: __C1__,Ничья,__C2__,Никакая
+        dev: __C1__,s/draw,__C2__,s/none
+
+- template: country
+  labels:
+    fr: Quelle équipe sera le vainqueur du match à l'issue des tirs au but ?
+    en: Which team will win the match after the goal scoring phase?
+    es: ¿Cuál equipo ganará el partido (extra time)?
+    pt: Qual equipa vai ganhar o jogo (extra time)?
+    ru: Какая команда выиграет матч (extra time)?
+  components:
+    - kind: choice
+      choices:
+        fr: __C1__,Match nul,__C2__,Aucun
+        en: __C1__,Draw,__C2__,None
+        es: __C1__,Dibujar,__C2__,No
+        pt: __C1__,Empate,__C2__,Não
+        ru: __C1__,Ничья,__C2__,Никакая
+        dev: __C1__,s/draw,__C2__,s/none
+
+- template: country
+  labels:
+    fr: Quelle équipe marquera en premier pendant le temps réglementaire ?
     en: Which team will score first?
-    es: ¿Cuál equipo marcará primero?
-    pt: Qual equipa vai marcar primeiro?
-    ru: Какая команда забьет первый гол?
+    es: ¿Cuál equipo marcará primero (normal playing-time)?
+    pt: Qual equipa vai marcar primeiro (normal playing-time)?
+    ru: Какая команда забьет первый гол (normal playing-time)?
+  components:
+    - kind: choices
+      choices:
+        fr: __C1__,__C2__,Aucun
+        en: __C1__,__C2__,None
+        es: __C1__,__C2__,No
+        pt: __C1__,__C2__,Não
+        ru: __C1__,__C2__,Никакая(ой)
+        dev: __C1__,__C2__,s/none
+
+- template: country
+  labels:
+    fr: Quelle équipe marquera en premier pendant les prolongations ?
+    en: Which team will score first during the extra time?
+    es: ¿Cuál equipo marcará primero (extra-time)?
+    pt: Qual equipa vai marcar primeiro (extra-time)?
+    ru: Какая команда забьет первый гол (extra-time)?
+  components:
+    - kind: choices
+      choices:
+        fr: __C1__,__C2__,Aucun
+        en: __C1__,__C2__,None
+        es: __C1__,__C2__,No
+        pt: __C1__,__C2__,Não
+        ru: __C1__,__C2__,Никакая(ой)
+        dev: __C1__,__C2__,s/none
+
+- template: country
+  labels:
+    fr: Quelle équipe marquera en premier pendant les tirs au but ?
+    en: Which team will score first during the goal scoring phase?
+    es: ¿Cuál equipo marcará primero (goal scoring phase)?
+    pt: Qual equipa vai marcar primeiro (goal scoring phase)?
+    ru: Какая команда забьет первый гол (goal scoring phase)?
   components:
     - kind: choices
       choices:
