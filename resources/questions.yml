@@ -49,7 +49,7 @@
 - template: country
   labels:
     fr: Quelle équipe sera le vainqueur du match à l'issue du temps réglementaire ?
-    en: Which team will win the match?
+    en: Which team will win the match after the normal playing-time?
     es: ¿Cuál equipo ganará el partido (normal playing-time)?
     pt: Qual equipa vai ganhar o jogo (normal playing-time)?
     ru: Какая команда выиграет матч (normal playing-time)?
@@ -100,7 +100,7 @@
 - template: country
   labels:
     fr: Quelle équipe marquera en premier pendant le temps réglementaire ?
-    en: Which team will score first?
+    en: Which team will score first during the normal playing-time?
     es: ¿Cuál equipo marcará primero (normal playing-time)?
     pt: Qual equipa vai marcar primeiro (normal playing-time)?
     ru: Какая команда забьет первый гол (normal playing-time)?
