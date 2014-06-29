@@ -62,6 +62,7 @@ module Domain
       end
 
       def with_locale(locale)
+        order(Sequel.asc(:"label_#{locale}")).
         exclude(:"label_#{locale}" => nil)
       end
 
