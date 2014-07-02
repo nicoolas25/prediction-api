@@ -1,4 +1,5 @@
 - template: country
+  qid: diff-mid
   labels:
     fr: Quel sera l'écart de but à la mi-temps ?
     en: What will be the goal difference at halftime?
@@ -15,6 +16,7 @@
         ru: "0,1,2,3,4,5,6"
 
 - template: country
+  qid: diff-end
   labels:
     fr: Quel sera l'écart de but à la fin du temps réglementaire ?
     en: What will be the goal difference at the end of the normal playing-time?
@@ -31,6 +33,7 @@
         ru: "0,1,2,3,4,5,6"
 
 - template: country
+  qid: diff-pro
   labels:
     fr: Quel sera l'écart de but à la fin des prolongations ?
     en: What will be the goal difference at the end of the extra time?
@@ -47,6 +50,7 @@
         ru: "0,1,2,3,4,5,6"
 
 - template: country
+  qid: win-end
   labels:
     fr: Quelle équipe sera le vainqueur du match à l'issue du temps réglementaire ?
     en: Which team will win the match after the normal playing-time?
@@ -64,6 +68,7 @@
         dev: __C1__,s/draw,__C2__
 
 - template: country
+  qid: win-pro
   labels:
     fr: Quelle équipe sera le vainqueur du match à l'issue des prolongations ?
     en: Which team will win the match after the extra time?
@@ -81,6 +86,7 @@
         dev: __C1__,s/draw,__C2__,s/none
 
 - template: country
+  qid: win-goal
   labels:
     fr: Quelle équipe sera le vainqueur du match à l'issue des tirs au but ?
     en: Which team will win the match after the goal scoring phase?
@@ -98,6 +104,7 @@
         dev: __C1__,s/draw,__C2__,s/none
 
 - template: country
+  qid: first-end
   labels:
     fr: Quelle équipe marquera en premier pendant le temps réglementaire ?
     en: Which team will score first during the normal playing-time?
@@ -115,6 +122,7 @@
         dev: __C1__,__C2__,s/none
 
 - template: country
+  qid: first-pro
   labels:
     fr: Quelle équipe marquera en premier pendant les prolongations ?
     en: Which team will score first during the extra time?
@@ -132,6 +140,7 @@
         dev: __C1__,__C2__,s/none
 
 - template: country
+  qid: first-goal
   labels:
     fr: Quelle équipe marquera en premier pendant les tirs au but ?
     en: Which team will score first during the goal scoring phase?
@@ -149,6 +158,7 @@
         dev: __C1__,__C2__,s/none
 
 - template: country
+  qid: max-foul
   labels:
     fr: Quelle équipe fera le plus de fautes ?
     en: Which team will make the most foul?
@@ -166,6 +176,7 @@
         dev: __C1__,__C2__,s/same
 
 - template: country
+  qid: max-corner
   labels:
     fr: Quelle équipe aura le plus de corners ?
     en: Which team will have the most corners?
@@ -183,6 +194,7 @@
         dev: __C1__,__C2__,s/same
 
 - template: country
+  qid: card-yellow
   labels:
     fr: Quelle équipe aura le premier carton jaune ?
     en: Which team will receive the first yellow card?
@@ -200,6 +212,7 @@
         dev: __C1__,__C2__,s/none
 
 - template: country
+  qid: card-red
   labels:
     fr: Quelle équipe aura le premier carton rouge ?
     en: Which team will receive the first red card?
@@ -217,6 +230,7 @@
         dev: __C1__,__C2__,s/none
 
 - template: country
+  qid: first-kick
   labels:
     fr: Quelle équipe aura le premier coup franc ?
     en: Which team will have the first kick?
@@ -234,6 +248,7 @@
         dev: __C1__,__C2__,s/none
 
 - template: country
+  qid: possession
   labels:
     fr: Quelle équipe aura la possession ?
     en: Which team will have possession?
@@ -251,6 +266,7 @@
         dev: __C1__,__C2__,s/same
 
 - template: player
+  qid: player-man
   labels:
     fr: Quel joueur sera l'homme du match ?
     en: Which player will be the man of the match?
@@ -268,6 +284,7 @@
         dev: s/other
 
 - template: player
+  qid: player-card-yellow
   labels:
     fr: Quel joueur prendra le premier carton jaune ?
     en: Which player will the first to receive a yellow card?
@@ -285,23 +302,7 @@
         dev: s/other,s/none
 
 - template: player
-  labels:
-    fr: Qui marquera en premier ?
-    en: Who will score first?
-    es: ¿Quién marcará primero?
-    pt: Quem vai marcar primeiro?
-    ru: Кто забьет первым?
-  components:
-    - kind: choices
-      choices:
-        fr: Autre joueur,Aucun
-        en: Other player,None
-        es: Otro jugador,No
-        pt: Outro jogador,Não
-        ru: Другой игрок,Никакая(ой)
-        dev: s/other,s/none
-
-- template: player
+  qid: player-card-red
   labels:
     fr: Quel joueur prendra le premier carton rouge ?
     en: Which player will the first to receive a red card?
@@ -319,6 +320,26 @@
         dev: s/other,s/none
 
 - template: player
+  qid: player-first-goal
+  labels:
+    fr: Qui marquera en premier ?
+    en: Who will score first?
+    es: ¿Quién marcará primero?
+    pt: Quem vai marcar primeiro?
+    ru: Кто забьет первым?
+  components:
+    - kind: choices
+      choices:
+        fr: Autre joueur,Aucun
+        en: Other player,None
+        es: Otro jugador,No
+        pt: Outro jogador,Não
+        ru: Другой игрок,Никакая(ой)
+        dev: s/other,s/none
+
+
+- template: player
+  qid: player-first-foul
   labels:
     fr: Quel joueur fera la première faute ?
     en: Which player will make the first foul?
