@@ -1,5 +1,6 @@
 - template: country
   qid: diff-mid
+  order: b1
   labels:
     fr: Quel sera l'écart de but à la mi-temps ?
     en: What will be the goal difference at halftime?
@@ -17,6 +18,7 @@
 
 - template: country
   qid: diff-end
+  order: b2
   labels:
     fr: Quel sera l'écart de but à la fin du temps réglementaire ?
     en: What will be the goal difference at the end of the normal playing-time?
@@ -34,6 +36,7 @@
 
 - template: country
   qid: diff-pro
+  order: b3
   labels:
     fr: Quel sera l'écart de but à la fin des prolongations ?
     en: What will be the goal difference at the end of the extra time?
@@ -51,6 +54,7 @@
 
 - template: country
   qid: win-end
+  order: a1
   labels:
     fr: Quelle équipe sera le vainqueur du match à l'issue du temps réglementaire ?
     en: Which team will win the match after the normal playing-time?
@@ -69,6 +73,7 @@
 
 - template: country
   qid: win-pro
+  order: a2
   labels:
     fr: Quelle équipe sera le vainqueur du match à l'issue des prolongations ?
     en: Which team will win the match after the extra time?
@@ -87,6 +92,7 @@
 
 - template: country
   qid: win-goal
+  order: a3
   labels:
     fr: Quelle équipe sera le vainqueur du match à l'issue des tirs au but ?
     en: Which team will win the match after the goal scoring phase?
@@ -105,6 +111,7 @@
 
 - template: country
   qid: first-end
+  order: c1
   labels:
     fr: Quelle équipe marquera en premier pendant le temps réglementaire ?
     en: Which team will score first during the normal playing-time?
@@ -123,6 +130,7 @@
 
 - template: country
   qid: first-pro
+  order: c2
   labels:
     fr: Quelle équipe marquera en premier pendant les prolongations ?
     en: Which team will score first during the extra time?
@@ -141,6 +149,7 @@
 
 - template: country
   qid: first-goal
+  order: c3
   labels:
     fr: Quelle équipe marquera en premier pendant les tirs au but ?
     en: Which team will score first during the goal scoring phase?
@@ -159,6 +168,7 @@
 
 - template: country
   qid: max-foul
+  order: g1
   labels:
     fr: Quelle équipe fera le plus de fautes ?
     en: Which team will make the most foul?
@@ -177,6 +187,7 @@
 
 - template: country
   qid: max-corner
+  order: g2
   labels:
     fr: Quelle équipe aura le plus de corners ?
     en: Which team will have the most corners?
@@ -195,6 +206,7 @@
 
 - template: country
   qid: card-yellow
+  order: h3
   labels:
     fr: Quelle équipe aura le premier carton jaune ?
     en: Which team will receive the first yellow card?
@@ -213,6 +225,7 @@
 
 - template: country
   qid: card-red
+  order: h5
   labels:
     fr: Quelle équipe aura le premier carton rouge ?
     en: Which team will receive the first red card?
@@ -231,6 +244,7 @@
 
 - template: country
   qid: first-kick
+  order: h1
   labels:
     fr: Quelle équipe aura le premier coup franc ?
     en: Which team will have the first kick?
@@ -249,6 +263,7 @@
 
 - template: country
   qid: possession
+  order: d1
   labels:
     fr: Quelle équipe aura la possession ?
     en: Which team will have possession?
@@ -267,6 +282,7 @@
 
 - template: player
   qid: player-man
+  order: e
   labels:
     fr: Quel joueur sera l'homme du match ?
     en: Which player will be the man of the match?
@@ -285,6 +301,7 @@
 
 - template: player
   qid: player-card-yellow
+  order: h4
   labels:
     fr: Quel joueur prendra le premier carton jaune ?
     en: Which player will the first to receive a yellow card?
@@ -303,6 +320,7 @@
 
 - template: player
   qid: player-card-red
+  order: h6
   labels:
     fr: Quel joueur prendra le premier carton rouge ?
     en: Which player will the first to receive a red card?
@@ -321,6 +339,7 @@
 
 - template: player
   qid: player-first-goal
+  order: c4
   labels:
     fr: Qui marquera en premier ?
     en: Who will score first?
@@ -340,6 +359,7 @@
 
 - template: player
   qid: player-first-foul
+  order: h2
   labels:
     fr: Quel joueur fera la première faute ?
     en: Which player will make the first foul?
