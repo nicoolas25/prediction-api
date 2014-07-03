@@ -31,7 +31,9 @@ def find_question(params, tags, ref_lang)
     select_all(:questions).
     join(:questions_tags, question_id: :id).
     where(event_at: params[:event_at]).
-    where(:"label_#{ref_lang}" => params[:labels][ref_lang]).
+    # where(:"label_#{ref_lang}" => params[:labels][ref_lang]).
+    # Use the qid parameter instead of the language
+    where(identifier: params[:identifier]).
     where(questions_tags__tag_id: tags.map(&:id)).
     group(:questions__id).
     having(Sequel.function(:count, '*') => tags.size)
@@ -79,7 +81,7 @@ end
 
 def create_question(question_params, tags, teams, template, ref_lang)
   question_params = question_params.merge(pending: true) if template['template'] == 'player'
-  question_params = question_params.merge(labels: template['labels'])
+  question_params = question_params.merge(labels: template['labels'], identifier: template['qid'], order: template['order'])
 
   q = find_question(question_params, tags, ref_lang)
 
@@ -117,7 +119,7 @@ namespace :import do
       question_params = {
         event_at: event_at,
         reveals_at: event_at - 7.days,
-        expires_at: event_at
+        expires_at: event_at,
       }
 
       # Teams

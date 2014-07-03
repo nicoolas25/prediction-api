@@ -62,12 +62,13 @@ module Domain
       end
 
       def with_locale(locale)
-        order(Sequel.asc(:"label_#{locale}")).
+        order_append(Sequel.asc(:"label_#{locale}")).
         exclude(:"label_#{locale}" => nil)
       end
 
       def ordered(order=:asc, field=:expires_at)
-        order(Sequel.__send__(order, field))
+        order(Sequel.__send__(order, field)).
+        order_append(Sequel.asc(:order))
       end
 
       def with_tags
