@@ -1,0 +1,14 @@
+# The date and time are GMT + 2
+
+- group: 2
+  date: 2014/07/08
+  time: "22:00"
+  teams:
+    - br
+    - de
+- group: 2
+  date: 2014/07/09
+  time: "22:00"
+  teams:
+    - nl
+    - ar
